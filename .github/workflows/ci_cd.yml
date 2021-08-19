@@ -2,7 +2,7 @@ name: ci_cd
 on:
   push:
     branches:
-      - master
+      - main
 env:
   SSH_HOST: ${{secrets.SSH_HOST}}
   SSH_USERNAME: ${{secrets.SSH_USERNAME}}
