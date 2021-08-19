@@ -1,0 +1,4 @@
+src/**/*.d.ts
+dist
+docs
+vue.config.js

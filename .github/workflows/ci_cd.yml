@@ -1,0 +1,72 @@
+name: ci_cd
+on:
+  push:
+    branches:
+      - master
+env:
+  SSH_HOST: ${{secrets.SSH_HOST}}
+  SSH_USERNAME: ${{secrets.SSH_USERNAME}}
+  DEPLOY_DIR: ${{secrets.DEPLOY_DIR}}
+  SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@v2
+      with:
+        node-version: '12.x'
+    
+    - name: Cache node modules
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-node-modules
+      with:
+        # npm cache files are stored in `~/.npm` on Linux/macOS
+        path: ~/.npm
+        # 缓存命中
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        # 存储key
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - name: Install Dependency
+      run: |
+        yarn config set registry https://registry.npm.taobao.org
+        yarn
+
+    - name: Build
+      run: yarn build
+
+    - name: Archive production artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        #产物名称
+        name: artifact
+        #产物路径
+        path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download production artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: artifact
+          path: dist
+
+      - name: SSH Auth && Deploy To the Server
+        run: |
+          eval $(ssh-agent -s)
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
+          ls dist
+          scp -r dist/* $SSH_USERNAME@$SSH_HOST:$DEPLOY_DIR
