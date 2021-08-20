@@ -49,7 +49,7 @@
                             />
                         </a-col>
                         <a-col :span="12">
-                            <section class="md-preview" v-html="cleanContent"></section>
+                            <section class="md-preview" v-html="purifiedContent"></section>
                         </a-col>
                     </a-row>
                 </a-form-item>
@@ -200,7 +200,7 @@ export default defineComponent({
                 // 渲染markdown
                 if (formModel.articleText) {
                     const markedContent = marked(formModel.articleText);
-                    cleanContent.value = DOMPurify.sanitize(markedContent);
+                    purifiedContent.value = DOMPurify.sanitize(markedContent);
                 }
 
                 // 处理标签
@@ -259,12 +259,12 @@ export default defineComponent({
 
         initMarked();
 
-        const cleanContent = ref("");
+        const purifiedContent = ref("");
 
         const handleRender = ({ target }: { target: HTMLTextAreaElement }) => {
             const content = target.value;
             const markedContent = marked(content);
-            cleanContent.value = DOMPurify.sanitize(markedContent);
+            purifiedContent.value = DOMPurify.sanitize(markedContent);
         };
 
         const onMdContentChange = throttle(handleRender, 300);
@@ -444,7 +444,7 @@ export default defineComponent({
             rules,
             onClickPublish,
             onMdContentChange,
-            cleanContent,
+            purifiedContent,
             isPublishLoading,
             isRelationVisible,
             relFormModel,

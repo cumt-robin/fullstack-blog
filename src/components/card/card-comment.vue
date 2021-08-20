@@ -64,6 +64,7 @@ import { computed, defineComponent, nextTick, PropType, reactive, ref } from "vu
 import dayjs from "dayjs";
 import { useStore } from "vuex";
 import { Input, message, Modal } from "ant-design-vue";
+import DOMPurify from "dompurify";
 import { CommentDTO, ReplyDTO } from "@/bean/dto";
 import { format } from "@/utils/date-utils";
 import { key } from "@/store";
@@ -124,6 +125,12 @@ export default defineComponent({
                 message.warning("您还未输入任何内容！");
                 return;
             }
+            const purifiedContent = DOMPurify.sanitize(replyRootContent.value);
+            if (!purifiedContent) {
+                // 输入了非法的内容
+                message.warning("您的输入内容无效，请重新输入合法内容！");
+                return;
+            }
             await replyService.add({
                 // 回复的评论id
                 comment_id: props.comment.id,
@@ -136,7 +143,7 @@ export default defineComponent({
                 // 文章id
                 article_id: props.comment.article_id,
                 // 回复内容
-                content: replyRootContent.value,
+                content: purifiedContent,
                 // 用户信息
                 ...store.state.commentUserInfo,
             });
@@ -192,6 +199,12 @@ export default defineComponent({
                 message.warning("您还未输入任何内容！");
                 return;
             }
+            const purifiedContent = DOMPurify.sanitize(subReplyForm.content);
+            if (!purifiedContent) {
+                // 输入了非法的内容
+                message.warning("您的输入内容无效，请重新输入合法内容！");
+                return;
+            }
             await replyService.add({
                 // 回复的评论id
                 comment_id: props.comment.id,
@@ -204,7 +217,7 @@ export default defineComponent({
                 // 文章id
                 article_id: props.comment.article_id,
                 // 回复内容
-                content: subReplyForm.content,
+                content: purifiedContent,
                 // 用户信息
                 ...store.state.commentUserInfo,
             });

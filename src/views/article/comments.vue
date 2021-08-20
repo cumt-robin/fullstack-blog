@@ -54,14 +54,15 @@ import { ElInfiniteScroll } from "element-plus";
 import { computed, defineComponent, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import { Input, message, Modal } from "ant-design-vue";
+import DOMPurify from "dompurify";
 import CommentUserInfo from "./comment-user-info.vue";
 import { commentService } from "@/services/comment";
 import { CommentDTO } from "@/bean/dto";
 import CardComment from "@/components/card/card-comment.vue";
 import { useAsyncLoading } from "@/hooks/async";
 import { key } from "@/store";
-
 import { app } from "@/main";
+
 app.use(ElInfiniteScroll);
 
 export default defineComponent({
@@ -166,12 +167,18 @@ export default defineComponent({
                 message.warning("您还未输入任何内容！");
                 return;
             }
+            const purifiedContent = DOMPurify.sanitize(content.value);
+            if (!purifiedContent) {
+                // 输入了非法的内容
+                message.warning("您的输入内容无效，请重新输入合法内容！");
+                return;
+            }
 
             // 提交评论
             const params = {
                 article_id: props.articleId,
                 // 用article_id来区分是留言板还是文章评论，留言是没有文章id的，而文章评论是有的
-                content: content.value,
+                content: purifiedContent,
                 // 默认是未审核状态
                 approved: 0,
                 // 回访url

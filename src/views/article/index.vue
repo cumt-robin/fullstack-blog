@@ -23,7 +23,7 @@
                         <h2>
                             {{ article.article_name }}
                         </h2>
-                        <section class="md-preview" v-html="transformedContent"></section>
+                        <section class="md-preview" v-html="purifiedContent"></section>
                     </main>
 
                     <div class="copyright">
@@ -144,7 +144,7 @@ export default defineComponent({
 
         const formattedTime = computed(() => article.value && format(article.value.create_time, "YYYY年M月D日"));
 
-        const transformedContent = ref("");
+        const purifiedContent = ref("");
 
         let reportTimer = null;
 
@@ -156,7 +156,7 @@ export default defineComponent({
             const markedContent = marked(res.data.article_text);
 
             // 防XSS
-            transformedContent.value = DOMPurify.sanitize(markedContent);
+            purifiedContent.value = DOMPurify.sanitize(markedContent);
 
             startReportTimer();
         };
@@ -255,7 +255,7 @@ export default defineComponent({
             isLogined,
             article,
             articleId,
-            transformedContent,
+            purifiedContent,
             loading,
             formattedTime,
             prevArticle,
