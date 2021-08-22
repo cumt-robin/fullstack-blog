@@ -35,9 +35,9 @@
             <p class="article__summary">{{ article.summary }}</p>
         </section>
         <div class="article__footer">
-            <router-link class="read-more" :to="`/article/${article.id}`"
-                ><span class="read-more__text">继续阅读</span><icon-svg icon="read" class="align-middle"
-            /></router-link>
+            <router-link class="read-more" :to="`/article/${article.id}`">
+                <span class="read-more__text">继续阅读</span><icon-svg icon="read" class="align-middle" />
+            </router-link>
         </div>
     </article>
 </template>
