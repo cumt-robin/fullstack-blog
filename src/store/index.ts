@@ -36,6 +36,9 @@ const store = createStore<RootState>({
         commentUserInfo,
         userInfo,
     },
+    getters: {
+        isAuthed: (state) => !!state.userInfo,
+    },
     mutations: {
         [SET_IS_MENU_VISIBLE](state: RootState, payload: boolean): void {
             state.isMenuVisible = payload;

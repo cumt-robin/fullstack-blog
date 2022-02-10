@@ -81,7 +81,7 @@
         </template>
 
         <template #aside>
-            <icon-svg class="icon--aside" icon="edit" @click="goToEdit" v-if="isLogined"></icon-svg>
+            <icon-svg class="icon--aside" icon="edit" @click="goToEdit" v-if="isAuthed"></icon-svg>
             <icon-svg class="icon--aside icon-message" icon="leave-message" @click="isCommentVisible = true"></icon-svg>
         </template>
     </base-layout>
@@ -132,7 +132,7 @@ export default defineComponent({
     setup() {
         // vuex
         const store = useStore(key);
-        const isLogined = computed(() => !!store.state.userInfo);
+        const isAuthed = computed(() => !!store.getters.isAuthed);
 
         // route
         const route = useRoute();
@@ -252,7 +252,7 @@ export default defineComponent({
         };
 
         return {
-            isLogined,
+            isAuthed,
             article,
             articleId,
             purifiedContent,

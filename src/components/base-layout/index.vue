@@ -12,7 +12,7 @@
             <h3>一个坚持原创的前端分享驿站</h3>
             <div class="icons-wrapper">
                 <icon-svg class="menu-toggle" icon="menu" title="打开菜单" @click="onToggleMenu" />
-                <router-link to="/backend" class="adm-entry" title="进入后台">
+                <router-link v-if="isAuthed" to="/backend" class="adm-entry" title="进入后台">
                     <icon-svg icon="admin" />
                 </router-link>
             </div>
@@ -58,6 +58,8 @@ export default defineComponent({
     setup() {
         // vuex
         const store = useStore(key);
+
+        const isAuthed = computed(() => !!store.getters.isAuthed);
 
         // 菜单部分
         const isMenuVisible = computed(() => store.state.isMenuVisible);
@@ -140,6 +142,7 @@ export default defineComponent({
         });
 
         return {
+            isAuthed,
             isMenuVisible,
             isAnimationEnabled,
             onToggleMenu,
