@@ -155,7 +155,7 @@ export default defineComponent({
     setup() {
         // vuex
         const store = useStore(key);
-        const userInfo = computed(() => store.state.userInfo as UserDTO);
+        const userInfo = computed<UserDTO | null>(() => store.state.userInfo);
 
         // router
         const route = useRoute();

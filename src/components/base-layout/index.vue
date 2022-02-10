@@ -10,7 +10,12 @@
                 <img src="@/assets/img/logo.png" />
             </router-link>
             <h3>一个坚持原创的前端分享驿站</h3>
-            <icon-svg class="menu-toggle" icon="menu" title="打开菜单" @click="onToggleMenu" />
+            <div class="icons-wrapper">
+                <icon-svg class="menu-toggle" icon="menu" title="打开菜单" @click="onToggleMenu" />
+                <router-link to="/backend" class="adm-entry" title="进入后台">
+                    <icon-svg icon="admin" />
+                </router-link>
+            </div>
         </header>
 
         <main class="base-layout__main">
@@ -169,13 +174,19 @@ export default defineComponent({
     display: inline-block;
 }
 
-.menu-toggle {
+.icons-wrapper {
     position: absolute;
     top: 20px;
     left: 12px;
-    font-size: 24px;
-    color: #fff;
-    cursor: pointer;
+    .icon-svg {
+        font-size: 24px;
+        color: #fff;
+        cursor: pointer;
+    }
+}
+
+.adm-entry {
+    margin-left: 8px;
 }
 
 .mask {

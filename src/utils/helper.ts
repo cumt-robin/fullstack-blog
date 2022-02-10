@@ -13,7 +13,7 @@ export function requestParamsFilter(obj: PlainObject, isArrayToString = false): 
     } else if (getType(obj) !== "object") {
         return {};
     }
-    const newObj = {} as PlainObject;
+    const newObj: PlainObject = {};
     Object.keys(obj).forEach((key) => {
         const element = obj[key];
         if (Array.isArray(element)) {
