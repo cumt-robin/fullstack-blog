@@ -6,6 +6,9 @@
                 <p>
                     Tusi博客，专注于前端技术分享。除特殊说明外，本站内文章均为博主原创，转载前请联系博主授权，授权后方可转载！转载时，请在显眼位置注明原文出处，谢谢合作！
                 </p>
+            </section>
+            <section class="footer-column">
+                <h3>GitHub开源</h3>
                 <p>
                     博客代码已开源，欢迎 star 支持！<br />
                     <a target="_blank" href="https://github.com/cumt-robin/vue3-ts-blog-frontend">前端：vue3-ts-blog-frontend</a><br />
