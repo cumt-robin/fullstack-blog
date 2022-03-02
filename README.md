@@ -30,7 +30,7 @@
 
 从技术选型来看，我还是选择了一些比较接地气的框架和技术。
 
-其实对于博客这种 SEO 要求高的网站，优选的方案还是 SSR，但我还是选择了前后端分离的方案（毕竟是个人项目，怎么舒服怎么来），后续时间充裕的情况下再考虑下 SEO 优化。
+其实对于博客这种 SEO 要求高的网站，优选的方案还是 SSR，但我还是选择了 CSR 的方案（毕竟是个人项目，怎么舒服怎么来），后续时间充裕的情况下再考虑下 SEO 优化。
 
 Web 端这块，我是直接选择了 [Vue3](https://v3.cn.vuejs.org/) + [TS](https://www.typescriptlang.org/docs/) 作为一个开发骨架。作为一个代码洁癖选手，我还是非常倾向于使用 TS 的。
 
@@ -86,8 +86,8 @@ UI 方面，我选择了 AntDesign 为主、ElementPlus 为辅的这样一个组
 
 **Vue3+TS+Node打造个人博客**系列文章如下，持续更新，欢迎阅读！点赞关注不迷路！😍
 
-- [Vue3+TS+Node打造个人博客（总览篇）](https://blog.wbjiang.cn/article/232)
-- [Vue3+TS+Node打造个人博客（数据库设计）]()
+- [Vue3+TS+Node打造个人博客（总览篇）](https://juejin.cn/post/7066966456638013477)
+- [Vue3+TS+Node打造个人博客（数据库设计）](https://juejin.cn/post/7070001585199251487)
 - [Vue3+TS+Node打造个人博客（后端架构）]()
 - [Vue3+TS+Node打造个人博客（前端架构）]()
 - [Vue3+TS+Node打造个人博客（分页模型和滚动加载）]()
