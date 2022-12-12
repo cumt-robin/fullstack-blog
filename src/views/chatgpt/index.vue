@@ -8,6 +8,16 @@
             <a-card class="card-chat" hoverable>
                 <template #title>
                     <span>我是一个基于OpenAI的对话机器人...</span>
+                    <a-button
+                        class="btn-send"
+                        style="margin-left: 20px"
+                        ghost
+                        type="primary"
+                        size="small"
+                        :loading="isChangeTopicLoading"
+                        @click="onClickChangeTopic"
+                        >换个话题</a-button
+                    >
                 </template>
                 <ul class="msg-box" ref="msgBoxRef">
                     <li v-for="(msg, index) in msgList" :key="index" :class="msg.customClass">
@@ -79,6 +89,7 @@ import { Card, Dropdown, Form, Input, Menu, message, Radio } from "ant-design-vu
 import { format } from "@/utils/date-utils";
 import { setScrollTop } from "@/utils/dom";
 import { chatgptService } from "@/services/chatgpt";
+import { useAsyncLoading } from "@/hooks/async";
 
 export default defineComponent({
     components: {
@@ -99,7 +110,8 @@ export default defineComponent({
             {
                 time: format(new Date(), "HH:mm:ss"),
                 user: "Chat AI",
-                content: "hello，你有什么想问我的吗？",
+                content:
+                    "hello，你有什么想问我的吗？我可以回答很多问题，但是有使用频率限制，不要测试我的上限哦。同一个话题我最多和您交流十次，聊得太深入怕迷失自我。",
                 type: "others",
                 customClass: "others",
             },
@@ -203,6 +215,22 @@ export default defineComponent({
             }
         };
 
+        const handleChangeTopic = async () => {
+            await chatgptService.changeTopic();
+            msgList.value = [
+                {
+                    time: format(new Date(), "HH:mm:ss"),
+                    user: "Chat AI",
+                    content: "好的，你想聊什么新的话题？",
+                    type: "others",
+                    customClass: "others",
+                },
+            ];
+            chatForm.chatContent = "";
+        };
+
+        const { trigger: onClickChangeTopic, loading: isChangeTopicLoading } = useAsyncLoading(handleChangeTopic);
+
         return {
             msgBoxRef,
             chatFormRef,
@@ -213,6 +241,8 @@ export default defineComponent({
             loading,
             sendChatContent,
             onKeydownChat,
+            onClickChangeTopic,
+            isChangeTopicLoading,
         };
     },
 });
