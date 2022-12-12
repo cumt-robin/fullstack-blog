@@ -256,6 +256,15 @@ export default defineComponent({
         background: #daf1ef;
     }
 
+    .ant-card-head-title {
+        display: flex;
+        align-items: center;
+        white-space: normal;
+        > span {
+            flex: 1;
+        }
+    }
+
     .ant-card-body {
         padding: 10px;
     }

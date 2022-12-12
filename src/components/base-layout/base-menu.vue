@@ -46,6 +46,9 @@
                 <router-link to="/messages"><icon-svg icon="leave-message" />留言</router-link>
             </li>
             <li class="menu__item">
+                <router-link to="/chatgpt"><icon-svg icon="chat" />ChatGPT体验</router-link>
+            </li>
+            <li class="menu__item">
                 <router-link to="/chat"><icon-svg icon="chat" />在线交流</router-link>
             </li>
             <li class="menu__item">
