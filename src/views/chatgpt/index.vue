@@ -78,7 +78,6 @@ import { DownOutlined } from "@ant-design/icons-vue";
 import { Card, Dropdown, Form, Input, Menu, message, Radio } from "ant-design-vue";
 import { format } from "@/utils/date-utils";
 import { setScrollTop } from "@/utils/dom";
-import { useAsyncLoading } from "@/hooks/async";
 import { chatgptService } from "@/services/chatgpt";
 
 export default defineComponent({
@@ -137,8 +136,11 @@ export default defineComponent({
             { deep: true }
         );
 
-        const handleSendRequest = async () => {
+        const loading = ref(false);
+
+        const sendChatContent = async () => {
             await chatFormRef.value.validate();
+            loading.value = true;
             msgList.value.push({
                 time: format(new Date(), "HH:mm:ss"),
                 user: "我说",
@@ -154,6 +156,7 @@ export default defineComponent({
             es.onerror = (e) => {
                 console.error(e);
                 message.error("AI忙不过来了，请稍后重试");
+                loading.value = false;
             };
 
             es.onmessage = (e) => {
@@ -161,6 +164,7 @@ export default defineComponent({
                     // 数据结束，反馈给服务器
                     chatgptService.feedback(content);
                     es.close();
+                    loading.value = false;
                     return;
                 }
                 const text = JSON.parse(e.data).choices[0].text;
@@ -187,8 +191,6 @@ export default defineComponent({
                 chatFormRef.value.resetFields();
             };
         };
-
-        const { trigger: sendChatContent, loading } = useAsyncLoading(handleSendRequest);
 
         const onKeydownChat = (e) => {
             if (loading.value) {
