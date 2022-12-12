@@ -109,6 +109,15 @@ const routes: Array<RouteRecordRaw> = [
             title: "登录",
         },
     },
+    {
+        path: "/chatgpt",
+        name: "ChatGpt",
+        component: () => import(/* webpackChunkName: "chatgpt" */ "@/views/chatgpt/index.vue"),
+        meta: {
+            auth: false,
+            title: "ChatGpt AI对话",
+        },
+    },
     backendRoute,
     NOT_FOUND_ROUTE,
     FALLBACK_ROUTE,
