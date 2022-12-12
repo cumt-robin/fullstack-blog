@@ -117,6 +117,16 @@ export default defineComponent({
             },
         ]);
 
+        setTimeout(() => {
+            msgList.value.push({
+                time: format(new Date(), "HH:mm:ss"),
+                user: "Chat AI",
+                content: "您输入的内容及产生的对话必须遵守中华人民共和国相关法律法规，否则后果自负！",
+                type: "others",
+                customClass: "others",
+            });
+        }, 1000);
+
         const chatForm = reactive({
             chatContent: "",
         });
