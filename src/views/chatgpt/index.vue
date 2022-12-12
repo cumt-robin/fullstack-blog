@@ -111,7 +111,7 @@ export default defineComponent({
                 time: format(new Date(), "HH:mm:ss"),
                 user: "Chat AI",
                 content:
-                    "hello，你有什么想问我的吗？我可以回答很多问题，但是有使用频率限制，不要测试我的上限哦。同一个话题我最多和您交流十次，聊得太深入怕迷失自我。",
+                    'hello，你有什么想问我的吗？我可以回答很多问题，但是有使用频率限制，不要测试我的上限哦。同一个话题我最多和您交流十次，聊得太深入怕迷失自我。如果我没说完，你可以输入"继续"。',
                 type: "others",
                 customClass: "others",
             },
