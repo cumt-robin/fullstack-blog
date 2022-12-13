@@ -218,6 +218,30 @@ export default defineComponent({
             };
         };
 
+        const sendChatContentV1 = async () => {
+            msgList.value.push({
+                time: format(new Date(), "HH:mm:ss"),
+                user: "我说",
+                content: chatForm.chatContent,
+                type: "mine",
+                customClass: "mine",
+            });
+            loading.value = true;
+            try {
+                const { result } = await chatgptService.chatV1({ wd: chatForm.chatContent });
+                msgList.value.push({
+                    time: format(new Date(), "HH:mm:ss"),
+                    user: "Chat AI",
+                    content: result,
+                    type: "others",
+                    customClass: "others",
+                });
+            } finally {
+                loading.value = false;
+                chatFormRef.value.resetFields();
+            }
+        };
+
         const onKeydownChat = (e) => {
             if (loading.value) {
                 message.info("机器人正在思考中，请稍候");
@@ -226,6 +250,7 @@ export default defineComponent({
             if ((triggerType.value === 1 && e.keyCode === 13) || (triggerType.value === 2 && e.ctrlKey && e.keyCode === 13)) {
                 e.preventDefault();
                 sendChatContent();
+                // sendChatContentV1();
             }
         };
 
