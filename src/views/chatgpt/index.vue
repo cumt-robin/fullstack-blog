@@ -142,20 +142,23 @@ export default defineComponent({
 
         const chatFormRef = ref();
 
-        watch(
-            msgList,
-            () => {
-                nextTick(() => {
-                    const el = msgBoxRef.value;
-                    const scrollTop = el.scrollHeight - el.clientHeight;
-                    setScrollTop({
-                        target: el,
-                        useAnimation: true,
-                        targetValue: scrollTop,
-                    });
+        const updateScrollTop = () => {
+            nextTick(() => {
+                const el = msgBoxRef.value;
+                const scrollTop = el.scrollHeight - el.clientHeight;
+                setScrollTop({
+                    target: el,
+                    useAnimation: true,
+                    targetValue: scrollTop,
                 });
-            },
-            { deep: true }
+            });
+        };
+
+        watch(
+            () => msgList.value.length,
+            () => {
+                updateScrollTop();
+            }
         );
 
         const loading = ref(false);
@@ -187,6 +190,7 @@ export default defineComponent({
                     chatgptService.feedback(content);
                     es.close();
                     loading.value = false;
+                    updateScrollTop();
                     return;
                 }
                 const text = JSON.parse(e.data).choices[0].text;

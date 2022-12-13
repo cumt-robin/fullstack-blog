@@ -76,7 +76,7 @@ interface SetScrollTopOptions {
 }
 
 function getEleScrollTop(target = document.body): number {
-    if (target === document.body || document.documentElement) {
+    if (target === document.body || target === document.documentElement) {
         return document.body.scrollTop || document.documentElement.scrollTop;
     } else {
         return target.scrollTop;
