@@ -164,6 +164,12 @@ export default defineComponent({
         const loading = ref(false);
 
         const sendChatContent = async () => {
+            if (chatForm.chatContent.length <= 1) {
+                return message.warn("你说得太少，我不明白");
+            }
+            if (chatForm.chatContent.length >= 60) {
+                return message.warn("我的脑容量不够了，可以少说点吗？");
+            }
             await chatFormRef.value.validate();
             loading.value = true;
             msgList.value.push({
