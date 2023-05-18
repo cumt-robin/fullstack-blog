@@ -111,7 +111,7 @@ export default defineComponent({
                 time: format(new Date(), "HH:mm:ss"),
                 user: "Chat AI",
                 content:
-                    'hello，你有什么想问我的吗？我可以回答很多问题，但是有使用频率限制，不要测试我的上限哦。同一个话题我最多和您交流十次，聊得太深入怕迷失自我。如果我没说完，你可以输入"继续"。',
+                    "感谢大家的支持，我Open AI个人账户的免费额度已经用尽，非常抱歉，请大家自行按照源码搭建体验吧，或者使用我付费搭建的产品 https://chat.wbjiang.cn/",
                 type: "others",
                 customClass: "others",
             },
@@ -121,7 +121,8 @@ export default defineComponent({
             msgList.value.push({
                 time: format(new Date(), "HH:mm:ss"),
                 user: "Chat AI",
-                content: "您输入的内容及产生的对话必须遵守中华人民共和国相关法律法规，否则后果自负！",
+                content:
+                    "源码地址如下，前端：https://github.com/cumt-robin/vue3-ts-blog-frontend，后端：https://github.com/cumt-robin/express-blog-backend",
                 type: "others",
                 customClass: "others",
             });

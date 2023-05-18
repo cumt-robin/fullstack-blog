@@ -59,7 +59,10 @@
                 <h3>友情推荐</h3>
                 <a-row :gutter="12">
                     <a-col :span="12">
-                        <a target="_blank" href="http://www.wbjiang.cn">Tusi个人主页</a>
+                        <a target="_blank" href="https://chat.wbjiang.cn">随心聊Chat</a>
+                    </a-col>
+                    <a-col :span="12">
+                        <a target="_blank" href="https://www.wbjiang.cn">Tusi个人主页</a>
                     </a-col>
                     <a-col :span="12">
                         <a target="_blank" href="http://hexo.wbjiang.cn">Tusi博客(Hexo版)</a>

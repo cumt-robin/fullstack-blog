@@ -23,11 +23,11 @@
     },
     "homepage": "https://blog.wbjiang.cn/",
     "dependencies": {
-        "ant-design-vue": "^2.1.6",
+        "ant-design-vue": "~2.1.6",
         "axios": "^0.21.1",
         "bezier-easing": "^2.1.0",
         "core-js": "^3.6.5",
-        "dayjs": "^1.10.5",
+        "dayjs": "~1.10.5",
         "dompurify": "^2.2.9",
         "element-plus": "^1.0.2-beta.48",
         "highlight.js": "^11.0.1",
@@ -37,9 +37,9 @@
         "marked": "^2.1.3",
         "qs": "^6.10.1",
         "socket.io-client": "^2.1.1",
-        "vue": "^3.0.0",
-        "vue-router": "^4.0.0-0",
-        "vuex": "^4.0.0-0"
+        "vue": "~3.0.11",
+        "vue-router": "~4.0.8",
+        "vuex": "~4.0.1"
     },
     "devDependencies": {
         "@commitlint/cli": "^13.1.0",
@@ -58,7 +58,7 @@
         "@vue/cli-plugin-unit-jest": "~4.5.0",
         "@vue/cli-plugin-vuex": "~4.5.0",
         "@vue/cli-service": "~4.5.0",
-        "@vue/compiler-sfc": "^3.0.0",
+        "@vue/compiler-sfc": "~3.0.11",
         "@vue/eslint-config-prettier": "^6.0.0",
         "@vue/eslint-config-typescript": "^7.0.0",
         "@vue/test-utils": "^2.0.0-0",

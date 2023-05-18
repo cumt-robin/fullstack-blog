@@ -46,6 +46,9 @@
                 <router-link to="/messages"><icon-svg icon="leave-message" />留言</router-link>
             </li>
             <li class="menu__item">
+                <a href="https://chat.wbjiang.cn" target="_blank"><icon-svg icon="chat" />随心聊Chat</a>
+            </li>
+            <li class="menu__item">
                 <router-link to="/chatgpt"><icon-svg icon="chat" />ChatGPT体验</router-link>
             </li>
             <li class="menu__item">
