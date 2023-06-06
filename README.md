@@ -1,3 +1,9 @@
+# 联系我
+
+[加我好友交流](https://qncdn.wbjiang.cn/%E5%85%AC%E4%BC%97%E5%8F%B7/qrcode_bin.jpg)
+
+# 背景
+
 从 Vue3 正式发布到现在，也快过去一年了（写这行文字的时候是2021年09月08日，拖延症...）。
 
 ![](https://qncdn.wbjiang.cn/vue3%E5%8F%91%E5%B8%83.png)
@@ -80,7 +86,7 @@ UI 方面，我选择了 AntDesign 为主、ElementPlus 为辅的这样一个组
 >
 > 后端工程：[express-blog-backend](https://github.com/cumt-robin/express-blog-backend)
 >
-> 数据库初始化脚本：关注公众号[前端司南](https://qncdn.wbjiang.cn/%E5%89%8D%E7%AB%AF%E5%8F%B8%E5%8D%97%E5%90%8D%E7%89%87%E5%B8%A6%E5%BE%AE%E4%BF%A1.png)，回复关键字“博客数据库脚本”，即可获取。
+> 数据库初始化脚本：关注公众号[bin不懂二进制](https://qncdn.wbjiang.cn/%E5%85%AC%E4%BC%97%E5%8F%B7/qrcode_bin.jpg)，回复关键字“博客数据库脚本”，即可获取。
 
 # 系列文章
 

@@ -20,7 +20,7 @@
                 <div class="wechat-qrcodes">
                     <el-image
                         :src="publicAccoutQrcode"
-                        title="公众号-大前端技术沙龙"
+                        title="公众号-bin不懂二进制"
                         class="qrcode"
                         lazy
                         :preview-src-list="[publicAccoutQrcode, mpQrcode]"
@@ -39,11 +39,7 @@
                 <ul class="social-list">
                     <li>
                         <icon-svg title="微信号" icon="wechat" />
-                        <a
-                            target="_blank"
-                            href="https://qncdn.wbjiang.cn/%E5%BE%AE%E4%BF%A1%E4%BA%8C%E7%BB%B4%E7%A0%81%E5%90%8D%E7%89%87.jpg"
-                            >laobaife</a
-                        >
+                        <a target="_blank" href="https://qncdn.wbjiang.cn/%E5%85%AC%E4%BC%97%E5%8F%B7/qrcode_bin.jpg">加我微信</a>
                     </li>
                     <li>
                         <icon-svg title="我的邮箱" icon="email" />
@@ -89,7 +85,7 @@ export default defineComponent({
     name: "BaseFooter",
     setup() {
         return {
-            publicAccoutQrcode: "https://qncdn.wbjiang.cn/qrcode.jpg",
+            publicAccoutQrcode: "https://qncdn.wbjiang.cn/%E5%85%AC%E4%BC%97%E5%8F%B7/qrcode_bin.jpg",
             mpQrcode: "https://qncdn.wbjiang.cn/Tusi%E5%8D%9A%E5%AE%A2.jpg",
         };
     },
