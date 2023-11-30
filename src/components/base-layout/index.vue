@@ -69,12 +69,21 @@ export default defineComponent({
             if (isAnimationEnabled.value === false) {
                 isAnimationEnabled.value = true;
             }
-            store.commit(SET_IS_MENU_VISIBLE, !isMenuVisible.value);
+            if (isMenuVisible.value) {
+                // 走统一的关闭逻辑
+                hideMenu();
+            } else {
+                store.commit(SET_IS_MENU_VISIBLE, true);
+                // 在弹出菜单时保证禁用滚动
+                document.body.style.overflow = "hidden";
+            }
         };
 
         const onAnimationEnd = () => {
             if (isMenuVisible.value === false) {
                 isAnimationEnabled.value = false;
+                // 解禁滚动
+                document.body.style.overflow = "";
             }
         };
 

@@ -42,11 +42,6 @@ const store = createStore<RootState>({
     mutations: {
         [SET_IS_MENU_VISIBLE](state: RootState, payload: boolean): void {
             state.isMenuVisible = payload;
-            if (payload) {
-                document.body.style.overflow = "hidden";
-            } else {
-                document.body.style.overflow = "";
-            }
         },
         [SET_COMMENT_USER_INFO](state: RootState, payload: CommentUserInfo): void {
             if (payload) {
