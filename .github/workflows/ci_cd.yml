@@ -64,7 +64,7 @@ jobs:
         run: |
           ssh -V
           eval $(ssh-agent -s)
-          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
           echo "PubkeyAcceptedKeyTypes +ssh-rsa" > ~/.ssh/config
