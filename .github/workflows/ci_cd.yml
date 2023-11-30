@@ -67,7 +67,10 @@ jobs:
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
+          echo "PubkeyAcceptedKeyTypes +ssh-rsa" > ~/.ssh/config
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts
+          cat ~/.ssh/config
           ls dist
           scp -r dist/* $SSH_USERNAME@$SSH_HOST:$DEPLOY_DIR
