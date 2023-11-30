@@ -63,7 +63,6 @@ jobs:
       - name: SSH Auth && Deploy To the Server
         run: |
           ssh -V
-          cat ~/.ssh/config
           eval $(ssh-agent -s)
           echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
           mkdir -p ~/.ssh
