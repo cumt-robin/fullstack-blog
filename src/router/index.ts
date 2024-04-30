@@ -3,7 +3,6 @@
  * @description: 路由配置
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import Cookies from "js-cookie";
 import { backendRoute } from "./backend";
 import { FALLBACK_ROUTE, NOT_FOUND_ROUTE } from "./not-found";
 import store from "@/store";

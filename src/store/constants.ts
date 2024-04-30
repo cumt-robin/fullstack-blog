@@ -15,3 +15,5 @@ export const SET_USER_TOKEN = "setUserToken";
 export const LOGIN_ACTION = "loginAction";
 
 export const LOGOUT_ACTION = "logoutAction";
+
+export const CLEAR_USER_SESSION = "clearUserSession";

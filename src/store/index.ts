@@ -3,8 +3,16 @@
  * @description: 状态管理
  */
 import { InjectionKey } from "vue";
-import { createStore, Store, ActionContext } from "vuex";
-import { SET_IS_MENU_VISIBLE, SET_COMMENT_USER_INFO, SET_USER_INFO, SET_USER_TOKEN, LOGIN_ACTION, LOGOUT_ACTION } from "./constants";
+import { createStore, Store, ActionContext, useStore } from "vuex";
+import {
+    SET_IS_MENU_VISIBLE,
+    SET_COMMENT_USER_INFO,
+    SET_USER_INFO,
+    SET_USER_TOKEN,
+    LOGIN_ACTION,
+    LOGOUT_ACTION,
+    CLEAR_USER_SESSION,
+} from "./constants";
 import { CommentUserInfo, UserDTO } from "@/bean/dto";
 import { userService } from "@/services/user";
 import { LoginModel } from "@/bean/xhr";
@@ -84,8 +92,11 @@ const store = createStore<RootState>({
             return userInfo;
         },
         // 用户登出
-        async [LOGOUT_ACTION]({ commit }: ActionContext<RootState, RootState>): Promise<void> {
+        async [LOGOUT_ACTION]({ dispatch }: ActionContext<RootState, RootState>): Promise<void> {
             await userService.logout();
+            dispatch(CLEAR_USER_SESSION);
+        },
+        async [CLEAR_USER_SESSION]({ commit }: ActionContext<RootState, RootState>): Promise<void> {
             commit(SET_USER_TOKEN, null);
             commit(SET_USER_INFO, null);
         },
@@ -93,3 +104,5 @@ const store = createStore<RootState>({
 });
 
 export default store;
+
+export const useBaseStore = (): Store<RootState> => useStore(key);

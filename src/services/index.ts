@@ -7,6 +7,7 @@ import { CommonResponse } from "@/bean/xhr";
 import { PlainObject } from "@/bean/base";
 import { requestParamsFilter } from "@/utils/helper";
 import router from "@/router";
+import { eventBus } from "@/utils/eventbus";
 
 enum InnerCode {
     Unauthorized = "000001",
@@ -47,6 +48,7 @@ api.interceptors.response.use(
                 case InnerCode.Unauthorized:
                 case InnerCode.TokenExpired:
                 case InnerCode.Forbidden:
+                    eventBus.emit("sessionInvalid");
                     router.push("/login");
                     break;
             }

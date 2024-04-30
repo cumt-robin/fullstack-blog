@@ -12,21 +12,30 @@
 
 <script lang="ts">
 import { computed, defineComponent } from "vue";
-import { useStore } from "vuex";
 import zhCN from "ant-design-vue/es/locale/zh_CN";
 import { useRoute } from "vue-router";
 import { ConfigProvider } from "ant-design-vue";
-import { key } from "@/store";
+import { eventBus } from "./utils/eventbus";
+import { useBaseStore } from "@/store";
+import { CLEAR_USER_SESSION } from "@/store/constants";
 
 export default defineComponent({
     components: {
-        [ConfigProvider.name]: ConfigProvider,
+        [ConfigProvider.name as string]: ConfigProvider,
     },
     setup() {
         // vuex
-        const store = useStore(key);
+        const store = useBaseStore();
         // route
         const route = useRoute();
+
+        const handleEvents = () => {
+            eventBus.on("sessionInvalid", () => {
+                store.dispatch(CLEAR_USER_SESSION);
+            });
+        };
+
+        handleEvents();
 
         const isAdmin = computed(() => route.meta.isAdmin as boolean);
 
