@@ -1,3 +1,12 @@
+## [2.0.3](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/v2.0.1...v2.0.3) (2024-04-30)
+
+
+### Bug Fixes
+
+* 退出登录状态清理 ([9cd1c89](https://github.com/cumt-robin/vue3-ts-blog-frontend/commit/9cd1c8997b1f1ac997d872ab309d8a96b41c093d))
+
+
+
 ## 1.0.1 (2021-08-22)
 
 ### Performance Improvements
