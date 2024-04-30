@@ -9,6 +9,8 @@ export const SET_COMMENT_USER_INFO = "setCommentUserInfo";
 
 export const SET_USER_INFO = "setUserInfo";
 
+export const SET_USER_TOKEN = "setUserToken";
+
 // Root Actions
 export const LOGIN_ACTION = "loginAction";
 

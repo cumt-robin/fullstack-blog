@@ -18,11 +18,11 @@ module.exports = {
         open: true,
         proxy: {
             "/api": {
-                target: "https://blog.wbjiang.cn",
+                target: "http://localhost:8002",
                 changeOrigin: true,
-                // pathRewrite: {
-                //     "^/api": "",
-                // },
+                pathRewrite: {
+                    "^/api": "",
+                },
             },
         },
     },

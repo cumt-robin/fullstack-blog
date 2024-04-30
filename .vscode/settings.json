@@ -13,8 +13,8 @@
     "editor.formatOnSave": false,
     // 代码保存动作
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true,
-        "source.fixAll.stylelint": true
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
     },
     "fileheader.customMade": {
         "author": "Tusi", // 换成自己名字

@@ -142,10 +142,10 @@ const clearUserInfo = () => {
 router.beforeEach((to, from, next) => {
     // 基本校验
     if (to.meta.auth) {
-        // 需要鉴权的页面，进行前端检查，主要检查cookie中有没有标志位islogined
+        // 需要鉴权的页面，进行前端检查，主要检查token有没有
         // 后端依旧需要对需要鉴权的接口访问做校验，不能依赖前端的判定
-        const isLogined = Cookies.get("islogined");
-        if (isLogined === "1") {
+        const token = localStorage.getItem("token");
+        if (token) {
             next();
         } else {
             clearUserInfo();
