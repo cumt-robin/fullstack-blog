@@ -11,7 +11,9 @@
         "webpack-output": "vue inspect > output.js",
         "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
         "postinstall": "husky install",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "create-release": "release-it --ci",
+        "sync-remote-tags": "git tag -l | xargs git tag -d && git pull --tags"
     },
     "repository": {
         "type": "git",
@@ -45,6 +47,7 @@
     "devDependencies": {
         "@commitlint/cli": "^13.1.0",
         "@commitlint/config-conventional": "^13.1.0",
+        "@release-it/conventional-changelog": "7.0.2",
         "@types/dompurify": "^2.2.2",
         "@types/jest": "^24.0.19",
         "@types/js-cookie": "^2.2.6",
@@ -77,6 +80,7 @@
         "less-loader": "^7.3.0",
         "lint-staged": "^9.5.0",
         "prettier": "^2.2.1",
+        "release-it": "16.3.0",
         "sass": "^1.26.5",
         "sass-loader": "^8.0.2",
         "sass-resources-loader": "^2.2.1",
