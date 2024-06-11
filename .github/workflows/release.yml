@@ -49,4 +49,6 @@ jobs:
         
       - name: Create Release
         run: |
+          git config --global user.email "cumtrobin@163.com"
+          git config --global user.name "cumt-robin"
           yarn create-release
