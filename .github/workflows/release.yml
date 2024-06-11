@@ -16,6 +16,9 @@ on:
         # Input has to be provided for the workflow to run
         required: true
 
+env:
+  GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   trigger-release:
@@ -27,9 +30,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 16
+
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v4
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      
+      - name: Install Dependency
+        run: |
+          yarn
         
       - name: Create Release
         run: |
-          yarn install
           yarn create-release
-

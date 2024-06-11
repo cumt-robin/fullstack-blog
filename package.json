@@ -9,7 +9,6 @@
         "lint": "vue-cli-service lint",
         "vue-ui": "vue ui",
         "webpack-output": "vue inspect > output.js",
-        "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md",
         "postinstall": "husky install",
         "prepare": "husky install",
         "create-release": "release-it --ci",
