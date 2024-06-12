@@ -93,6 +93,7 @@ export default defineComponent({
                 width: "160px",
                 dataIndex: "category_name",
                 ellipsis: true,
+                fixed: "left",
             },
             {
                 title: "封面",
@@ -101,6 +102,12 @@ export default defineComponent({
                 customRender: ({ text }: { text: string }) => {
                     return <Image class="category-poster" src={text} fallback={LogoFallback} />;
                 },
+            },
+            {
+                title: "文章数量",
+                width: "120px",
+                dataIndex: "article_count",
+                ellipsis: true,
             },
             {
                 title: "创建时间",
