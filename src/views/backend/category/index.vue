@@ -11,6 +11,7 @@
             <template #action="{ record }">
                 <a-space>
                     <a-button size="small" type="primary" ghost @click="onClickEdit(record)">编辑</a-button>
+                    <a-button size="small" type="primary" ghost @click="onViewArticles(record)">分类下文章</a-button>
                 </a-space>
             </template>
         </a-table>
@@ -24,6 +25,7 @@
 <script lang="tsx">
 import { defineComponent, reactive, ref } from "vue";
 import { Image, Modal } from "ant-design-vue";
+import { useRouter } from "vue-router";
 import Edit from "./edit.vue";
 import { CategoryDTO } from "@/bean/dto";
 import { categoryService } from "@/services/category";
@@ -37,6 +39,8 @@ export default defineComponent({
         [Modal.name]: Modal,
     },
     setup() {
+        const router = useRouter();
+
         const categoryList = ref<CategoryDTO[]>([]);
 
         const pagination = reactive({
@@ -72,6 +76,10 @@ export default defineComponent({
         const onClickEdit = (record: CategoryDTO) => {
             detailRow.value = record;
             isEditVisible.value = true;
+        };
+
+        const onViewArticles = (record: CategoryDTO) => {
+            router.push(`/category/${record.category_name}`);
         };
 
         const onEditSuccess = () => {
@@ -112,7 +120,7 @@ export default defineComponent({
             },
             {
                 title: "操作",
-                width: "100px",
+                width: "200px",
                 key: "action",
                 fixed: "right",
                 slots: { customRender: "action" },
@@ -128,6 +136,7 @@ export default defineComponent({
             pagination,
             onClickEdit,
             onEditSuccess,
+            onViewArticles,
         };
     },
 });
