@@ -1,5 +1,12 @@
 
 
+# [2.3.0](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.2.0...2.3.0) (2024-06-12)
+
+
+### Features
+
+* **category:** 后台分类支持展示文章数量 ([208bb4e](https://github.com/cumt-robin/vue3-ts-blog-frontend/commit/208bb4e8d1d75855ec81701a6e073908e1b3eaa7)), closes [#8](https://github.com/cumt-robin/vue3-ts-blog-frontend/issues/8)
+
 # [2.2.0](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.0.6...2.2.0) (2024-06-12)
 
 
