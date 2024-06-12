@@ -80,5 +80,12 @@ export const backendRoute: RouteRecordRaw = {
                 title: "审核评论回复",
             },
         },
+        {
+            path: "category",
+            component: () => import(/* webpackChunkName: "backend-category" */ "@/views/backend/category/index.vue"),
+            meta: {
+                title: "分类维护",
+            },
+        },
     ],
 };
