@@ -1,47 +1,32 @@
 <template>
     <section class="admin-page-wrapper">
-        <a-table
-            row-key="id"
-            :data-source="categoryList"
-            :columns="columns"
-            :loading="loading"
-            :scroll="{ x: 1500 }"
-            :pagination="pagination"
-        >
+        <a-table row-key="id" :data-source="tagList" :columns="columns" :loading="loading" :scroll="{ x: 1500 }" :pagination="pagination">
             <template #action="{ record }">
                 <a-space>
-                    <a-button size="small" type="primary" ghost @click="onClickEdit(record)">编辑</a-button>
-                    <a-button size="small" type="primary" ghost @click="onViewArticles(record)">分类下文章</a-button>
+                    <a-button size="small" type="primary" ghost @click="onViewArticles(record)">标签下文章</a-button>
                 </a-space>
             </template>
         </a-table>
-
-        <a-modal title="编辑分类" v-model:visible="isEditVisible" width="640px" :footer="null">
-            <edit v-if="isEditVisible" :row="detailRow" @cancel="isEditVisible = false" @success="onEditSuccess" />
-        </a-modal>
     </section>
 </template>
 
 <script lang="tsx">
 import { defineComponent, reactive, ref } from "vue";
-import { Image, Modal } from "ant-design-vue";
+import { Modal } from "ant-design-vue";
 import { useRouter } from "vue-router";
-import Edit from "./edit.vue";
-import { CategoryDTO } from "@/bean/dto";
-import { categoryService } from "@/services/category";
+import { TagDTO } from "@/bean/dto";
+import { tagService } from "@/services/tag";
 import { useAsyncLoading } from "@/hooks/async";
 import { format } from "@/utils/date-utils";
-import LogoFallback from "@/assets/img/logo2.png";
 
 export default defineComponent({
     components: {
-        Edit,
         [Modal.name]: Modal,
     },
     setup() {
         const router = useRouter();
 
-        const categoryList = ref<CategoryDTO[]>([]);
+        const tagList = ref<TagDTO[]>([]);
 
         const pagination = reactive({
             current: 1,
@@ -55,53 +40,31 @@ export default defineComponent({
         });
 
         // 分页查询
-        const handleGetCategorys = async () => {
-            const res = await categoryService.adminPage({
+        const handleGetTags = async () => {
+            const res = await tagService.adminPage({
                 pageNo: pagination.current,
                 pageSize: pagination.pageSize,
             });
-            categoryList.value = res.data;
+            tagList.value = res.data;
             pagination.total = res.total;
         };
 
-        const { trigger: search, loading } = useAsyncLoading(handleGetCategorys);
+        const { trigger: search, loading } = useAsyncLoading(handleGetTags);
 
         // 直接调用
         search();
 
-        const isEditVisible = ref(false);
-
-        const detailRow = ref<CategoryDTO>();
-
-        const onClickEdit = (record: CategoryDTO) => {
-            detailRow.value = record;
-            isEditVisible.value = true;
-        };
-
-        const onViewArticles = (record: CategoryDTO) => {
-            router.push(`/category/${record.category_name}`);
-        };
-
-        const onEditSuccess = () => {
-            isEditVisible.value = false;
-            search();
+        const onViewArticles = (record: TagDTO) => {
+            router.push(`/tag/${record.tag_name}`);
         };
 
         const columns = ref([
             {
-                title: "分类名称",
+                title: "标签名称",
                 width: "160px",
-                dataIndex: "category_name",
+                dataIndex: "tag_name",
                 ellipsis: true,
                 fixed: "left",
-            },
-            {
-                title: "封面",
-                width: "140px",
-                dataIndex: "poster",
-                customRender: ({ text }: { text: string }) => {
-                    return <Image class="category-poster" src={text} fallback={LogoFallback} />;
-                },
             },
             {
                 title: "文章数量",
@@ -127,7 +90,7 @@ export default defineComponent({
             },
             {
                 title: "操作",
-                width: "200px",
+                width: "120px",
                 key: "action",
                 fixed: "right",
                 slots: { customRender: "action" },
@@ -135,14 +98,10 @@ export default defineComponent({
         ]);
 
         return {
-            categoryList,
+            tagList,
             columns,
             loading,
-            isEditVisible,
-            detailRow,
             pagination,
-            onClickEdit,
-            onEditSuccess,
             onViewArticles,
         };
     },

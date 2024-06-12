@@ -3,7 +3,7 @@
  * @description: 路由配置
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { backendRoute } from "./backend";
+import { BACKEND_ROUTE } from "./backend";
 import { FALLBACK_ROUTE, NOT_FOUND_ROUTE } from "./not-found";
 import store from "@/store";
 import { SET_USER_INFO } from "@/store/constants";
@@ -117,7 +117,7 @@ const routes: Array<RouteRecordRaw> = [
             title: "ChatGpt AI对话",
         },
     },
-    backendRoute,
+    BACKEND_ROUTE,
     NOT_FOUND_ROUTE,
     FALLBACK_ROUTE,
 ];
