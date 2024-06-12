@@ -1,5 +1,7 @@
 
 
+## 2.0.6 (2024-06-12)
+
 ## 2.0.5 (2024-06-11)
 
 ## [2.0.4](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/v2.0.3...2.0.4) (2024-06-11)
