@@ -1,9 +1,9 @@
 ---
-name: "[Feature request] I want to introduce a new feature"
+name: Feature request
 about: Suggest an idea for this project
-title: ''
-labels: ''
-assignees: ''
+title: "[Feature request] I want to introduce a new feature"
+labels: enhancement
+assignees: cumt-robin
 
 ---
 

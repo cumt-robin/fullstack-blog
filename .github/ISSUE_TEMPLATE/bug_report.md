@@ -1,9 +1,9 @@
 ---
-name: "[Bug Report] I encountered a bug"
+name: Bug report
 about: Create a report to help us improve
-title: ''
-labels: ''
-assignees: ''
+title: "[Bug Report] I encountered a bug"
+labels: bug
+assignees: cumt-robin
 
 ---
 
