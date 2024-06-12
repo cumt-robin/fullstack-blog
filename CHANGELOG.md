@@ -1,5 +1,12 @@
 
 
+# [2.4.0](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.3.0...2.4.0) (2024-06-12)
+
+
+### Features
+
+* **tag:** 后台标签维护功能 ([152a8ac](https://github.com/cumt-robin/vue3-ts-blog-frontend/commit/152a8ac6c609d5575111641072573fd58455169d)), closes [#10](https://github.com/cumt-robin/vue3-ts-blog-frontend/issues/10)
+
 # [2.3.0](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.2.0...2.3.0) (2024-06-12)
 
 
