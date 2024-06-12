@@ -1,5 +1,12 @@
 
 
+# [2.2.0](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.0.6...2.2.0) (2024-06-12)
+
+
+### Features
+
+* 分类下文章查看 ([1e9f067](https://github.com/cumt-robin/vue3-ts-blog-frontend/commit/1e9f0671fdc182bce89f28f73d10627959032ce0))
+
 # 2.1.0 (2024-06-12)
 
 
