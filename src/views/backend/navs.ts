@@ -86,4 +86,16 @@ export const navs: NavItem[] = [
             },
         ],
     },
+    {
+        key: "sub4",
+        icon: BookOutlined.name,
+        title: "分类管理",
+        children: [
+            {
+                key: "/backend/category",
+                title: "分类维护",
+                parentKeys: ["sub4"],
+            },
+        ],
+    },
 ];

@@ -30,6 +30,7 @@ export interface TagCamelCaseDTO extends RecordDTO {
 
 export interface CategoryDTO extends RecordDTO {
     category_name: string;
+    poster: string;
 }
 
 export interface TagDTO extends RecordDTO {

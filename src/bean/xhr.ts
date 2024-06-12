@@ -47,6 +47,12 @@ export interface UpdateArticleDeletedModel extends PlainObject {
     deleted: 0 | 1;
 }
 
+export interface UpdateCategoryModel extends PlainObject {
+    id: number;
+    category_name: string;
+    poster: string;
+}
+
 // 响应Model
 export interface CommonResponse<T = unknown> {
     code: string;
