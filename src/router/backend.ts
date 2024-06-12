@@ -5,7 +5,7 @@
 
 import { RouteRecordRaw } from "vue-router";
 
-export const backendRoute: RouteRecordRaw = {
+export const BACKEND_ROUTE: RouteRecordRaw = {
     path: "/backend",
     name: "Backend",
     component: () => import(/* webpackChunkName: "backend" */ "@/views/backend/index.vue"),
@@ -85,6 +85,13 @@ export const backendRoute: RouteRecordRaw = {
             component: () => import(/* webpackChunkName: "backend-category" */ "@/views/backend/category/index.vue"),
             meta: {
                 title: "分类维护",
+            },
+        },
+        {
+            path: "tag",
+            component: () => import(/* webpackChunkName: "backend-tag" */ "@/views/backend/tag/index.vue"),
+            meta: {
+                title: "标签维护",
             },
         },
     ],

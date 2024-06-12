@@ -3,11 +3,11 @@
  * @description: 菜单配置
  */
 
-import { BookOutlined, MessageOutlined, CommentOutlined, FolderOutlined } from "@ant-design/icons-vue";
+import { BookOutlined, MessageOutlined, CommentOutlined, FolderOutlined, TagOutlined } from "@ant-design/icons-vue";
 import { app } from "@/main";
 import { TreeNode } from "@/bean/base";
 
-const icons = [BookOutlined, MessageOutlined, CommentOutlined, FolderOutlined];
+const icons = [BookOutlined, MessageOutlined, CommentOutlined, FolderOutlined, TagOutlined];
 
 const registerIcons = () => {
     icons.forEach((icon) => {
@@ -95,6 +95,18 @@ export const navs: NavItem[] = [
                 key: "/backend/category",
                 title: "分类维护",
                 parentKeys: ["sub4"],
+            },
+        ],
+    },
+    {
+        key: "sub5",
+        icon: TagOutlined.name,
+        title: "标签管理",
+        children: [
+            {
+                key: "/backend/tag",
+                title: "标签维护",
+                parentKeys: ["sub5"],
             },
         ],
     },
