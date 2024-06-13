@@ -50,7 +50,7 @@ jobs:
           echo "Removing container"
           docker rm ${{secrets.DOCKER_CONTAINER_NAME}}
           echo "Creating new container"
-          docker run -dp ${{secrets.HOST_PORT}}:${{secrets.CONTAINER_PORT}} --name ${{secrets.DOCKER_CONTAINER_NAME}} ${{secrets.DOCKER_NAMESPACE}}/${{secrets.DOCKER_REPOSITORY}}:${{github.ref_name}}
+          docker run -dp ${{secrets.HOST_PORT}}:${{secrets.CONTAINER_PORT}} --name ${{secrets.DOCKER_CONTAINER_NAME}} ${{secrets.DOCKER_REGISTRY}}/${{secrets.DOCKER_NAMESPACE}}/${{secrets.DOCKER_REPOSITORY}}:${{github.ref_name}}
           echo "Done"
           END
 
