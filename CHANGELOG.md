@@ -1,5 +1,12 @@
 
 
+# [2.5.0](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.4.0...2.5.0) (2024-06-13)
+
+
+### Features
+
+* **article:** 文章详情页增加分类标签，支持内链 ([c7855a6](https://github.com/cumt-robin/vue3-ts-blog-frontend/commit/c7855a651970d9b4071fb281df500100909fb52e)), closes [#12](https://github.com/cumt-robin/vue3-ts-blog-frontend/issues/12)
+
 # [2.4.0](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.3.0...2.4.0) (2024-06-12)
 
 
