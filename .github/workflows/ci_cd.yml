@@ -48,7 +48,7 @@ jobs:
 
           Host remote
           HostName $SSH_HOST
-          User $SSH_HOST
+          User $SSH_USERNAME
           IdentityFile ~/.ssh/id_rsa
           END
 
