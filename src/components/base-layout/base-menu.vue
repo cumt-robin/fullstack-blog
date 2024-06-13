@@ -19,12 +19,12 @@
                         </a>
                     </a-col>
                     <a-col :span="8">
-                        <a title="github" href="https://github.com/cumt-robin" target="_blank">
+                        <a title="github" href="https://github.com/cumt-robin" target="_blank" rel="nofollow">
                             <icon-svg icon="github" :size="24" />
                         </a>
                     </a-col>
                     <a-col :span="8">
-                        <a title="掘金" href="https://juejin.im/user/5ca40a18f265da30b8178b31/posts" target="_blank">
+                        <a title="掘金" href="https://juejin.im/user/5ca40a18f265da30b8178b31/posts" target="_blank" rel="nofollow">
                             <icon-svg icon="juejin" :size="24" />
                         </a>
                     </a-col>
@@ -46,7 +46,7 @@
                 <router-link to="/messages"><icon-svg icon="leave-message" />留言</router-link>
             </li>
             <li class="menu__item">
-                <a href="https://chat.wbjiang.cn" target="_blank"><icon-svg icon="chat" />随心聊Chat</a>
+                <a href="https://chat.wbjiang.cn" target="_blank" rel="nofollow"><icon-svg icon="chat" />随心聊Chat</a>
             </li>
             <li class="menu__item">
                 <router-link to="/chatgpt"><icon-svg icon="chat" />ChatGPT体验</router-link>
@@ -55,7 +55,9 @@
                 <router-link to="/chat"><icon-svg icon="chat" />在线交流</router-link>
             </li>
             <li class="menu__item">
-                <a target="_blank" href="https://github.com/cumt-robin/vue3-ts-blog-frontend"><icon-svg icon="github" />开源地址</a>
+                <a target="_blank" href="https://github.com/cumt-robin/vue3-ts-blog-frontend" rel="nofollow"
+                    ><icon-svg icon="github" />开源地址</a
+                >
             </li>
         </ul>
     </section>

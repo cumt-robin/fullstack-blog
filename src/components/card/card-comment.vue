@@ -6,9 +6,14 @@
             </template>
         </el-image>
         <div class="comment__info">
-            <a class="comment__user" target="_blank" :href="formattedComment.jumpoutMiddleLink" v-if="formattedComment.site_url">{{
-                formattedComment.nick_name
-            }}</a>
+            <a
+                class="comment__user"
+                target="_blank"
+                rel="nofollow"
+                :href="formattedComment.jumpoutMiddleLink"
+                v-if="formattedComment.site_url"
+                >{{ formattedComment.nick_name }}</a
+            >
             <span class="comment__user" v-else>{{ formattedComment.nick_name }}</span>
 
             <span class="comment__time">{{ formattedComment.fomattedTime }}</span>

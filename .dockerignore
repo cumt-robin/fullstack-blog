@@ -31,3 +31,5 @@
 **/dist
 LICENSE
 README.md
+**/*.xmind
+docs
