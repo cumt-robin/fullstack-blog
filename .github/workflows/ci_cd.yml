@@ -31,13 +31,19 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $SSH_HOST >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
+          
+          echo "here1"
 
           cat >>~/.ssh/config <<END
           Host remote
           HostName ${{secrets.SSH_HOST}}
+          Port 22
           User ${{secrets.SSH_USERNAME}}
           IdentityFile ~/.ssh/id_rsa
+          StrictHostKeyChecking no
           END
+
+          echo "here2"
 
           cat >~/remote.sh <<END
           docker ps
@@ -48,4 +54,7 @@ jobs:
           docker run -dp ${{secrets.HOST_PORT}}:${{secrets.CONTAINER_PORT}} --name ${{secrets.DOCKER_CONTAINER_NAME}} ${{secrets.DOCKER_NAMESPACE}}/${{secrets.DOCKER_REPOSITORY}}:${{github.ref_name}}
           END
 
+          echo "here3"
+
           ssh remote < ~/remote.sh
+        shell: bash
