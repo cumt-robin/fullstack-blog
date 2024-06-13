@@ -35,8 +35,9 @@
 
 <script lang="tsx">
 import { defineComponent, reactive, ref } from "vue";
-import { message, Modal, Image } from "ant-design-vue";
+import { message, Modal, Image, Space, Tag } from "ant-design-vue";
 import { RouterLink, useRouter } from "vue-router";
+import { ColumnProps } from "ant-design-vue/lib/table/interface";
 import styles from "./index.module.scss";
 import { ArticleDTO } from "@/bean/dto";
 import { articleService } from "@/services/article";
@@ -125,7 +126,7 @@ export default defineComponent({
             router.push(`/backend/article/edit/${record.id}`);
         };
 
-        const columns = ref([
+        const columns = ref<ColumnProps[]>([
             {
                 title: "文章",
                 width: "160px",
@@ -152,6 +153,26 @@ export default defineComponent({
                 title: "阅读量",
                 width: "120px",
                 dataIndex: "read_num",
+            },
+            {
+                title: "分类",
+                width: "160px",
+                dataIndex: "categories",
+                customRender: ({ record }: { record: ArticleDTO }) => {
+                    return (
+                        <Space>
+                            {record.categories.map((item) => {
+                                return (
+                                    <RouterLink to={`/category/${item.categoryName}`}>
+                                        <Tag color="blue" style="cursor: pointer">
+                                            {item.categoryName}
+                                        </Tag>
+                                    </RouterLink>
+                                );
+                            })}
+                        </Space>
+                    );
+                },
             },
             {
                 title: "创建时间",
