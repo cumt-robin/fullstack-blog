@@ -33,6 +33,23 @@
                             版权声明：本文由<strong>Tusi</strong>原创，发表于{{ formattedTime }}，如需转载，请联系作者授权！
                         </p>
                     </div>
+
+                    <div class="relation-info" v-if="article">
+                        <div>
+                            分类：
+                            <router-link v-for="item in article.categories" :key="item.id" :to="`/category/${item.categoryName}`">
+                                <a-tag>{{ item.categoryName }}</a-tag>
+                            </router-link>
+                        </div>
+
+                        <div style="margin-top: 20px">
+                            标签：
+                            <router-link v-for="item in article.tags" :key="item.id" :to="`/tag/${item.tagName}`">
+                                <a-tag>{{ item.tagName }}</a-tag>
+                            </router-link>
+                        </div>
+                    </div>
+
                     <div class="reward__wrapper">
                         <p class="reward__tips">您的支持将鼓励我继续创作！</p>
                         <a-button type="primary" @click="isRewardVisible = true">赏</a-button>
@@ -111,7 +128,7 @@ import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from "vue"
 import { maxBy, minBy } from "lodash-es";
 import { SwapLeftOutlined, SwapRightOutlined, EditOutlined } from "@ant-design/icons-vue";
 import { useStore } from "vuex";
-import { Drawer, Modal } from "ant-design-vue";
+import { Drawer, Modal, Tag } from "ant-design-vue";
 import Comments from "./comments.vue";
 import { setScrollTop } from "@/utils/dom";
 import { articleService } from "@/services/article";
@@ -128,6 +145,7 @@ export default defineComponent({
         Comments,
         [Drawer.name]: Drawer,
         [Modal.name]: Modal,
+        [Tag.name]: Tag,
     },
     setup() {
         // vuex
@@ -190,11 +208,13 @@ export default defineComponent({
         const setMarkedOptions = () => {
             const renderer = new marked.Renderer();
             renderer.link = function customLink(href, title, text) {
-                return `<a class="link" href="${href}" target="_blank" title="${text}">${text}</a>`;
+                return `<a class="link" href="${href}" target="_blank" title="${text}" rel="nofollow">${text}</a>`;
             };
             renderer.image = function customImage(href, title, text) {
                 return (
-                    `<a class="img-wrapper" href="${href}" target="_blank" title="${text}">` + `<img src="${href}" alt="${text}">` + "</a>"
+                    `<a class="img-wrapper" href="${href}" target="_blank" rel="nofollow" title="${text}">` +
+                    `<img src="${href}" alt="${text}">` +
+                    "</a>"
                 );
             };
             marked.setOptions({
@@ -308,6 +328,16 @@ export default defineComponent({
     > h2 {
         margin: 0 0 0.6em 0;
         font-size: 1.8em;
+    }
+}
+
+.relation {
+    &-info {
+        padding-bottom: 40px;
+        .ant-tag {
+            cursor: pointer;
+            border-radius: 2px;
+        }
     }
 }
 

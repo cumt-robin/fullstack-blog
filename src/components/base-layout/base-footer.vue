@@ -11,8 +11,12 @@
                 <h3>GitHub开源</h3>
                 <p>
                     博客代码已开源，欢迎 star 支持！<br />
-                    <a target="_blank" href="https://github.com/cumt-robin/vue3-ts-blog-frontend">前端：vue3-ts-blog-frontend</a><br />
-                    <a target="_blank" href="https://github.com/cumt-robin/express-blog-backend">后端：express-blog-backend</a>
+                    <a target="_blank" rel="nofollow" href="https://github.com/cumt-robin/vue3-ts-blog-frontend"
+                        >前端：vue3-ts-blog-frontend</a
+                    ><br />
+                    <a target="_blank" rel="nofollow" href="https://github.com/cumt-robin/express-blog-backend"
+                        >后端：express-blog-backend</a
+                    >
                 </p>
             </section>
             <section class="footer-column">
@@ -39,7 +43,9 @@
                 <ul class="social-list">
                     <li>
                         <icon-svg title="微信号" icon="wechat" />
-                        <a target="_blank" href="https://qncdn.wbjiang.cn/%E5%85%AC%E4%BC%97%E5%8F%B7/qrcode_bin.jpg">加我微信</a>
+                        <a target="_blank" rel="nofollow" href="https://qncdn.wbjiang.cn/%E5%85%AC%E4%BC%97%E5%8F%B7/qrcode_bin.jpg"
+                            >加我微信</a
+                        >
                     </li>
                     <li>
                         <icon-svg title="我的邮箱" icon="email" />
@@ -47,7 +53,7 @@
                     </li>
                     <li>
                         <icon-svg title="github" icon="github" />
-                        <a target="_blank" href="https://github.com/cumt-robin">https://github.com/cumt-robin</a>
+                        <a target="_blank" rel="nofollow" href="https://github.com/cumt-robin">https://github.com/cumt-robin</a>
                     </li>
                 </ul>
             </section>
@@ -55,22 +61,22 @@
                 <h3>友情推荐</h3>
                 <a-row :gutter="12">
                     <a-col :span="12">
-                        <a target="_blank" href="https://chat.wbjiang.cn">随心聊Chat</a>
+                        <a target="_blank" rel="nofollow" href="https://chat.wbjiang.cn">随心聊Chat</a>
                     </a-col>
                     <a-col :span="12">
                         <a target="_blank" href="https://jview.wbjiang.cn/">JView UI</a>
                     </a-col>
                     <a-col :span="12">
-                        <a target="_blank" href="http://hexo.wbjiang.cn">Tusi博客(Hexo版)</a>
+                        <a target="_blank" rel="nofollow" href="http://hexo.wbjiang.cn">Tusi博客(Hexo版)</a>
                     </a-col>
                     <a-col :span="12">
-                        <a target="_blank" href="https://juejin.im/user/5ca40a18f265da30b8178b31/posts">Tusi的掘金</a>
+                        <a target="_blank" rel="nofollow" href="https://juejin.im/user/5ca40a18f265da30b8178b31/posts">Tusi的掘金</a>
                     </a-col>
                     <a-col :span="12">
-                        <a target="_blank" href="https://blog.csdn.net/weixin_41196185">Tusi的CSDN</a>
+                        <a target="_blank" rel="nofollow" href="https://blog.csdn.net/weixin_41196185">Tusi的CSDN</a>
                     </a-col>
                     <a-col :span="12">
-                        <a target="_blank" href="https://www.whatled.com/">少将全栈</a>
+                        <a target="_blank" rel="nofollow" href="https://www.whatled.com/">少将全栈</a>
                     </a-col>
                 </a-row>
             </section>

@@ -229,11 +229,13 @@ export default defineComponent({
             // https://marked.js.org/using_advanced
             const renderer = new marked.Renderer();
             renderer.link = function customLink(href, title, text) {
-                return `<a class="link" href="${href}" target="_blank" title="${text}">${text}</a>`;
+                return `<a class="link" href="${href}" target="_blank" rel="nofollow" title="${text}">${text}</a>`;
             };
             renderer.image = function customImage(href, title, text) {
                 return (
-                    `<a class="img-wrapper" href="${href}" target="_blank" title="${text}">` + `<img src="${href}" alt="${text}">` + "</a>"
+                    `<a class="img-wrapper" href="${href}" target="_blank" rel="nofollow" title="${text}">` +
+                    `<img src="${href}" alt="${text}">` +
+                    "</a>"
                 );
             };
             marked.setOptions({
