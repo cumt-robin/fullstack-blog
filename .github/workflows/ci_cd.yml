@@ -61,4 +61,4 @@ jobs:
           docker run -dp $HOST_PORT:$CONTAINER_PORT --name $DOCKER_CONTAINER_NAME $DOCKER_NAMESPACE/$DOCKER_REPOSITORY:$GITHUB_REF_NAME
           END
 
-          ssh -o StrictHostKeyChecking=no -t remote <~/remote.sh
+          ssh -vvv -T -o StrictHostKeyChecking=no remote < ~/remote.sh
