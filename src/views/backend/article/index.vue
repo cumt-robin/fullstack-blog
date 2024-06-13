@@ -138,7 +138,7 @@ export default defineComponent({
             },
             {
                 title: "封面",
-                width: "140px",
+                width: "110px",
                 dataIndex: "poster",
                 customRender: ({ text }: { text: string }) => {
                     return <Image src={text} fallback={LogoFallback} wrapperClassName={styles.articlePoster} />;
@@ -151,21 +151,41 @@ export default defineComponent({
             },
             {
                 title: "阅读量",
-                width: "120px",
+                width: "80px",
                 dataIndex: "read_num",
             },
             {
                 title: "分类",
-                width: "160px",
+                width: "200px",
                 dataIndex: "categories",
                 customRender: ({ record }: { record: ArticleDTO }) => {
                     return (
-                        <Space>
+                        <Space size={2} style="flex-wrap: wrap;row-gap:10px">
                             {record.categories.map((item) => {
                                 return (
                                     <RouterLink to={`/category/${item.categoryName}`}>
                                         <Tag color="blue" style="cursor: pointer">
                                             {item.categoryName}
+                                        </Tag>
+                                    </RouterLink>
+                                );
+                            })}
+                        </Space>
+                    );
+                },
+            },
+            {
+                title: "标签",
+                width: "200px",
+                dataIndex: "tags",
+                customRender: ({ record }: { record: ArticleDTO }) => {
+                    return (
+                        <Space size={2} style="flex-wrap: wrap;row-gap:10px">
+                            {record.tags.map((item) => {
+                                return (
+                                    <RouterLink to={`/tag/${item.tagName}`}>
+                                        <Tag color="green" style="cursor: pointer">
+                                            {item.tagName}
                                         </Tag>
                                     </RouterLink>
                                 );
