@@ -1,5 +1,12 @@
 
 
+# [2.7.0](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.6.0...2.7.0) (2024-06-13)
+
+
+### Features
+
+* **backend-article:** 后台文章展示所属的标签 ([6fc5df9](https://github.com/cumt-robin/vue3-ts-blog-frontend/commit/6fc5df9ea6028fd823c08865bab0353890b89fcd)), closes [#16](https://github.com/cumt-robin/vue3-ts-blog-frontend/issues/16)
+
 # [2.6.0](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.5.0...2.6.0) (2024-06-13)
 
 
