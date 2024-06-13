@@ -1,5 +1,7 @@
 
 
+## [2.7.3](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.7.2...2.7.3) (2024-06-13)
+
 ## [2.7.2](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.7.1...2.7.2) (2024-06-13)
 
 ## [2.7.1](https://github.com/cumt-robin/vue3-ts-blog-frontend/compare/2.7.0...2.7.1) (2024-06-13)
