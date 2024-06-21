@@ -1,0 +1,21 @@
+{
+  "name": "fullstack-blog",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@9.4.0",
+  "description": "",
+  "scripts": {
+    "frontend:dev": "pnpm --filter frontend dev",
+    "backend:dev": "pnpm --filter backend dev",
+    "fullstack:dev": "pnpm --filter frontend --filter backend dev ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Tusi",
+  "license": "MIT",
+  "engines": {
+    "pnpm": ">=9.0.0",
+    "node": ">=18.0.0"
+  }
+}

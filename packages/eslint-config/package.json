@@ -1,0 +1,20 @@
+{
+  "name": "@fullstack-blog/eslint-config",
+  "version": "1.0.0",
+  "description": "common eslint config",
+  "files": [
+    "base.js"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Tusi",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^2.2.1"
+  }
+}

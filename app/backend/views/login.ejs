@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>登录</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <%- include("./nav.ejs") %>
+    <form>
+        <label for="username">用户名</label>
+        <input type="text" name="username" id="username" />
+        <label for="pwd">密码</label>
+        <input type="text" name="pwd" id="pwd" />
+        <button id="loginBtn" type="submit">登录</button>
+    </form>
+    <script>
+        document.getElementById('loginBtn').addEventListener('click', function(e) {
+            e.preventDefault()
+            var username = document.getElementById('username').value
+            var pwd = document.getElementById('pwd').value
+            location.href = './verify?' + 'username=' + username + '&' + 'pwd=' + pwd
+        })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+{
+    "editor.tabSize": 4,
+    "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact", "vue"],
+    // 防止内置css校验和stylelint重复报错
+    "css.validate": false,
+    "less.validate": false,
+    "scss.validate": false,
+    "editor.formatOnSave": false,
+    // 代码保存动作
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit",
+        "source.fixAll.stylelint": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "eslint.workingDirectories": [
+        {
+            "mode": "auto"
+        }
+    ],
+    "[vue]": {
+        "editor.defaultFormatter": "Vue.volar"
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
+}

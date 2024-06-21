@@ -1,0 +1,12 @@
+# 敏感配置信息
+config/dev.env.js
+config/env.js
+config/prod.env.js
+deploy.config.js
+
+# Logs
+logs
+*.log
+
+# Optional eslint cache
+.eslintcache
