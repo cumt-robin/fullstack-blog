@@ -240,7 +240,7 @@ export default defineComponent({
         const { trigger: onClickReplySub, loading: isReplySubLoading } = useAsyncLoading(handleReplySub);
 
         const formattedComment = computed(() => {
-            const comment = props.comment;
+            const { comment } = props;
             return {
                 ...comment,
                 avatar: comment.avatar || avatarFallback,

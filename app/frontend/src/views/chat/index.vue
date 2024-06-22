@@ -135,7 +135,7 @@ export default defineComponent({
     methods: {
         createSocket() {
             const self = this;
-            this.socket = io(process.env.VUE_APP_SOCKET_SERVER + "/chatroom");
+            this.socket = io(`${process.env.VUE_APP_SOCKET_SERVER}/chatroom`);
             this.socket.on("connect", function () {
                 console.log("连上了");
             });
@@ -150,6 +150,8 @@ export default defineComponent({
                             type: "sys_msg",
                             customClass: "sys_msg",
                         });
+                        break;
+                    default:
                         break;
                 }
             });
@@ -185,6 +187,8 @@ export default defineComponent({
                             type: "others",
                             customClass: "others",
                         });
+                        break;
+                    default:
                         break;
                 }
             });

@@ -8,6 +8,12 @@ export interface RecordDTO extends PlainObject {
     id: number;
 }
 
+export interface CategoryCamelCaseDTO extends RecordDTO {
+    categoryName: string;
+}
+export interface TagCamelCaseDTO extends RecordDTO {
+    tagName: string;
+}
 export interface ArticleDTO extends RecordDTO {
     article_name: string;
     article_text: string;
@@ -21,13 +27,6 @@ export interface ArticleDTO extends RecordDTO {
     categories: CategoryCamelCaseDTO[];
 }
 
-export interface CategoryCamelCaseDTO extends RecordDTO {
-    categoryName: string;
-}
-export interface TagCamelCaseDTO extends RecordDTO {
-    tagName: string;
-}
-
 export interface CategoryDTO extends RecordDTO {
     category_name: string;
     poster: string;
@@ -35,19 +34,6 @@ export interface CategoryDTO extends RecordDTO {
 
 export interface TagDTO extends RecordDTO {
     tag_name: string;
-}
-
-export interface CommentDTO extends RecordDTO {
-    site_url: string;
-    nick_name: string;
-    avatar: string;
-    create_time: string;
-    content: string;
-    article_id: number;
-    article_name: string;
-    email: string;
-    jump_url: string;
-    replies: ReplyDTO[];
 }
 
 export interface ReplyDTO extends RecordDTO {
@@ -61,6 +47,19 @@ export interface ReplyDTO extends RecordDTO {
     site_url: string;
     article_id: number;
     article_name: string;
+}
+
+export interface CommentDTO extends RecordDTO {
+    site_url: string;
+    nick_name: string;
+    avatar: string;
+    create_time: string;
+    content: string;
+    article_id: number;
+    article_name: string;
+    email: string;
+    jump_url: string;
+    replies: ReplyDTO[];
 }
 
 export interface CommentUserInfo extends PlainObject {

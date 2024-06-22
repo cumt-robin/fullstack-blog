@@ -53,12 +53,12 @@ import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 
 import { Avatar, Checkbox, Dropdown, Layout, Menu, Table } from "ant-design-vue";
-import { NavItem, navs } from "./navs";
 import { tree2Arr } from "@/utils/tree";
 import { key } from "@/store";
 import { LOGOUT_ACTION } from "@/store/constants";
 
 import { app } from "@/main";
+import { NavItem, navs } from "./navs";
 
 const components = [Table, Layout, Checkbox, Avatar];
 
@@ -154,6 +154,8 @@ export default defineComponent({
                 case "logout":
                     await store.dispatch(LOGOUT_ACTION);
                     router.push("/");
+                    break;
+                default:
                     break;
             }
         };

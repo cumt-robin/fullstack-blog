@@ -4,6 +4,7 @@ module.exports = {
         'plugin:import/recommended',
         'plugin:import/typescript',
         'airbnb-base',
+        'prettier',
     ],
     plugins: ['import', 'prettier'],
     settings: {
@@ -14,10 +15,21 @@ module.exports = {
     },
     rules: {
         'no-console': ['warn', { allow: ['warn', 'error'] }],
+        'no-plusplus': 'off',
+        'no-use-before-define': 'off',
+        'global-require': 'off',
+        'func-names': ['off', 'as-needed'],
+        'consistent-return': 'off',
+        'camelcase': 'off',
+        'import/no-cycle': 'off',
+        'prefer-promise-reject-errors': 'off',
+        'default-param-last': 'off',
+        'no-unused-expressions': ['warn', { 'allowTernary': true }],
+        'no-param-reassign': 'off',
         'prettier/prettier': 'error',
         'import/prefer-default-export': 'off',
         'import/extensions': 'off',
         'import/no-named-as-default': 'off',
         'import/no-extraneous-dependencies': ['error', { devDependencies: true, optionalDependencies: true, peerDependencies: true }],
-    }
+    },
 }

@@ -55,13 +55,13 @@ import { computed, defineComponent, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import { Input, message, Modal } from "ant-design-vue";
 import DOMPurify from "dompurify";
-import CommentUserInfo from "./comment-user-info.vue";
 import { commentService } from "@/services/comment";
 import { CommentDTO } from "@/bean/dto";
 import CardComment from "@/components/card/card-comment.vue";
 import { useAsyncLoading } from "@/hooks/async";
 import { key } from "@/store";
 import { app } from "@/main";
+import CommentUserInfo from "./comment-user-info.vue";
 
 app.use(ElInfiniteScroll);
 
@@ -140,14 +140,14 @@ export default defineComponent({
         const commentUserInfo = computed(() => store.state.commentUserInfo);
         const isEditUserInfoVisible = ref(false);
 
-        const onUserInfoEmpty = () => {
-            remindCreateUserInfo();
-        };
-
         // 没有评论用户信息，先提示用户录入信息
         const remindCreateUserInfo = () => {
             message.warning(`请在${props.topic}前填写部分必要信息，我们不会公开您的私密信息！`);
             isEditUserInfoVisible.value = true;
+        };
+
+        const onUserInfoEmpty = () => {
+            remindCreateUserInfo();
         };
 
         // 评论

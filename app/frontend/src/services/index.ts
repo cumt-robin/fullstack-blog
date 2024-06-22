@@ -42,21 +42,22 @@ api.interceptors.response.use(
         if (code === "0") {
             // code 为 0 代表返回正常返回
             return Promise.resolve(res);
-        } else {
-            // inner code handler
-            switch (code) {
-                case InnerCode.Unauthorized:
-                case InnerCode.TokenExpired:
-                case InnerCode.Forbidden:
-                    eventBus.emit("sessionInvalid");
-                    router.push("/login");
-                    break;
-            }
-            if (msg) {
-                message.error(msg);
-            }
-            return Promise.reject(res);
         }
+        // inner code handler
+        switch (code) {
+            case InnerCode.Unauthorized:
+            case InnerCode.TokenExpired:
+            case InnerCode.Forbidden:
+                eventBus.emit("sessionInvalid");
+                router.push("/login");
+                break;
+            default:
+                break;
+        }
+        if (msg) {
+            message.error(msg);
+        }
+        return Promise.reject(res);
     },
     (error) => {
         console.error(error.response);

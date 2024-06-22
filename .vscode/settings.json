@@ -17,6 +17,12 @@
             "mode": "auto"
         }
     ],
+    "stylelint.validate": [
+        "css",
+        "less",
+        "scss",
+        "vue"
+    ],
     "[vue]": {
         "editor.defaultFormatter": "Vue.volar"
     },

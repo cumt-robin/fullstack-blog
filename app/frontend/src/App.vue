@@ -15,9 +15,9 @@ import { computed, defineComponent } from "vue";
 import zhCN from "ant-design-vue/es/locale/zh_CN";
 import { useRoute } from "vue-router";
 import { ConfigProvider } from "ant-design-vue";
-import { eventBus } from "./utils/eventbus";
 import { useBaseStore } from "@/store";
 import { CLEAR_USER_SESSION } from "@/store/constants";
+import { eventBus } from "./utils/eventbus";
 
 export default defineComponent({
     components: {

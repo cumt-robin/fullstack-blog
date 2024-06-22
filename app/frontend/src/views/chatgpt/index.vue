@@ -200,7 +200,7 @@ export default defineComponent({
                     updateScrollTop();
                     return;
                 }
-                const text = JSON.parse(e.data).choices[0].text;
+                const { text } = JSON.parse(e.data).choices[0];
                 if (text) {
                     if (!content) {
                         // 第一条数据来了

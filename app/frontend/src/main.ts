@@ -10,6 +10,7 @@ import store, { key } from "./store";
 import globalComponents from "./components";
 // import globalDirectives from "./directives";
 import { init } from "./utils/date-utils";
+
 init();
 
 export const app = createApp(App);

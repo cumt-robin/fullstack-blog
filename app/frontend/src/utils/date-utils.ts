@@ -175,20 +175,23 @@ export function humanizeDuration(seconds: string | number): string {
     if (seconds < 60) {
         // 如果小于1分钟
         return `${seconds}秒`;
-    } else if (seconds >= 60 && seconds < 3600) {
+    }
+    if (seconds >= 60 && seconds < 3600) {
         // 如果大于1分钟，小于1小时
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = seconds - minutes * 60;
         const secondsDescription = remainingSeconds > 0 ? `${remainingSeconds}秒` : "";
         return `${minutes}分钟${secondsDescription}`;
-    } else if (seconds >= 3600 && seconds < 86400) {
+    }
+    if (seconds >= 3600 && seconds < 86400) {
         // 如果大于1小时，小于1天
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds - hours * 3600) / 60);
         // const remainingSeconds = seconds - hours * 3600 - minutes * 60
         const minutesDescription = minutes > 0 ? `${minutes}分钟` : "";
         return `${hours}小时${minutesDescription}`;
-    } else if (seconds >= 86400) {
+    }
+    if (seconds >= 86400) {
         // 如果大于1天
         const days = Math.floor(seconds / 86400);
         const hours = Math.floor((seconds - days * 86400) / 3600);
@@ -196,7 +199,6 @@ export function humanizeDuration(seconds: string | number): string {
         // const remainingSeconds = seconds - days * 86400 - hours * 3600 - minutes * 60
         const hoursDescription = hours > 0 ? `${hours}小时` : "";
         return `${days}天${hoursDescription}`;
-    } else {
-        return "";
     }
+    return "";
 }

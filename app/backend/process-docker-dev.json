@@ -2,7 +2,7 @@
     "apps": [
         {
             "name": "blog",
-            "script": "app.js",
+            "script": "src/app.js",
             "env": {
                 "NODE_ENV": "development",
                 "PORT": 8002

@@ -3,10 +3,10 @@
  * @description: 路由配置
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { BACKEND_ROUTE } from "./backend";
-import { FALLBACK_ROUTE, NOT_FOUND_ROUTE } from "./not-found";
 import store from "@/store";
 import { SET_USER_INFO } from "@/store/constants";
+import { BACKEND_ROUTE } from "./backend";
+import { FALLBACK_ROUTE, NOT_FOUND_ROUTE } from "./not-found";
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -128,9 +128,8 @@ const router = createRouter({
     scrollBehavior(to, from, savedPosition) {
         if (savedPosition) {
             return savedPosition;
-        } else {
-            return { top: 0 };
         }
+        return { top: 0 };
     },
 });
 

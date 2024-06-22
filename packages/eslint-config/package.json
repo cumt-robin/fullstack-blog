@@ -10,7 +10,7 @@
   },
   "author": "Tusi",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.23.4",

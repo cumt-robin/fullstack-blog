@@ -1,0 +1,23 @@
+services:
+  frontend:
+    image: fullstack-blog-frontend:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app/frontend/src:/usr/src/fullstack-blog/app/frontend/src
+      - ./tsconfig.base.json:/usr/src/fullstack-blog/tsconfig.base.json
+    environment:
+      # 设置任何环境变量
+      - NODE_ENV=development
+
+  backend:
+    image: fullstack-blog-backend:latest
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./app/backend/src:/app/backend/src
+    environment:
+      - NODE_ENV=development
+
+# 如果还有数据库或其他服务，也可以在这里添加
+# ...

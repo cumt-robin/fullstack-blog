@@ -105,12 +105,6 @@ import css from "highlight.js/lib/languages/css";
 import shell from "highlight.js/lib/languages/shell";
 import json from "highlight.js/lib/languages/json";
 import plaintext from "highlight.js/lib/languages/plaintext";
-hljs.registerLanguage("javascript", javascript);
-hljs.registerLanguage("html", html);
-hljs.registerLanguage("css", css);
-hljs.registerLanguage("shell", shell);
-hljs.registerLanguage("json", json);
-hljs.registerLanguage("plaintext", plaintext);
 // 皮肤
 import "highlight.js/styles/atom-one-dark.css";
 import DOMPurify from "dompurify";
@@ -126,6 +120,13 @@ import { ArticleDTO, CategoryDTO, UserDTO } from "@/bean/dto";
 import { categoryService } from "@/services/category";
 import { key } from "@/store";
 import { articleService } from "@/services/article";
+
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("html", html);
+hljs.registerLanguage("css", css);
+hljs.registerLanguage("shell", shell);
+hljs.registerLanguage("json", json);
+hljs.registerLanguage("plaintext", plaintext);
 
 interface NewTagDTO {
     value: string;
@@ -182,6 +183,10 @@ export default defineComponent({
         const articleDetail = ref<ArticleDTO | null>(null);
         const originalTagNames = computed(() => articleDetail.value?.tags.map((item) => item.tagName) || []);
         const originalCategoryIds = computed(() => articleDetail.value?.categories.map((item) => item.id) || []);
+
+        const relFormModel = reactive<RelFormModel>({
+            oldCategoryIds: [],
+        });
 
         const init = async () => {
             if (route.params.id) {
@@ -240,7 +245,7 @@ export default defineComponent({
             };
             marked.setOptions({
                 renderer,
-                highlight: function (code, lang) {
+                highlight(code, lang) {
                     const language = hljs.getLanguage(lang) ? lang : "plaintext";
                     return hljs.highlight(code, { language }).value;
                 },
@@ -271,6 +276,9 @@ export default defineComponent({
 
         const onMdContentChange = throttle(handleRender, 300);
 
+        // 处理关系表
+        const isRelationVisible = ref(false);
+
         // 处理基本表单
         const handlePublish = async () => {
             await formRef.value.validate();
@@ -278,13 +286,6 @@ export default defineComponent({
         };
 
         const { trigger: onClickPublish, loading: isPublishLoading } = useAsyncLoading(handlePublish);
-
-        // 处理关系表
-        const isRelationVisible = ref(false);
-
-        const relFormModel = reactive<RelFormModel>({
-            oldCategoryIds: [],
-        });
 
         // 新tag处理
         const newTagList = ref<NewTagDTO[]>([]);

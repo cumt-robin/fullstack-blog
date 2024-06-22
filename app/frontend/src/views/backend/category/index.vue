@@ -26,12 +26,12 @@
 import { defineComponent, reactive, ref } from "vue";
 import { Image, Modal } from "ant-design-vue";
 import { useRouter } from "vue-router";
-import Edit from "./edit.vue";
 import { CategoryDTO } from "@/bean/dto";
 import { categoryService } from "@/services/category";
 import { useAsyncLoading } from "@/hooks/async";
 import { format } from "@/utils/date-utils";
 import LogoFallback from "@/assets/img/logo2.png";
+import Edit from "./edit.vue";
 
 export default defineComponent({
     components: {

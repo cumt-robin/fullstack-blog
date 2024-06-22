@@ -18,6 +18,7 @@ interface LazyloadElement extends HTMLElement {
 
 class LazyloadHelper {
     private el: HTMLElement;
+
     private onScrollThrottle: GeneralFunction;
 
     constructor(el: HTMLElement) {

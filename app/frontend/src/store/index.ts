@@ -4,6 +4,9 @@
  */
 import { InjectionKey } from "vue";
 import { createStore, Store, ActionContext, useStore } from "vuex";
+import { CommentUserInfo, UserDTO } from "@/bean/dto";
+import { userService } from "@/services/user";
+import { LoginModel } from "@/bean/xhr";
 import {
     SET_IS_MENU_VISIBLE,
     SET_COMMENT_USER_INFO,
@@ -13,9 +16,6 @@ import {
     LOGOUT_ACTION,
     CLEAR_USER_SESSION,
 } from "./constants";
-import { CommentUserInfo, UserDTO } from "@/bean/dto";
-import { userService } from "@/services/user";
-import { LoginModel } from "@/bean/xhr";
 
 export interface RootState {
     token: string;
@@ -24,7 +24,7 @@ export interface RootState {
     userInfo: UserDTO | null;
 }
 
-export const key: InjectionKey<Store<RootState>> = Symbol();
+export const key: InjectionKey<Store<RootState>> = Symbol("key");
 
 let commentUserInfo = null;
 const commentUserInfoInStorage = localStorage.getItem("commentUserInfo");

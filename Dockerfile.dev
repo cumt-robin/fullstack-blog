@@ -1,0 +1,24 @@
+FROM node:18-slim AS base
+RUN npm i -g pnpm
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+
+FROM base AS build
+COPY . /usr/src/app
+WORKDIR /usr/src/app
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN pnpm deploy --filter=frontend /app/frontend
+RUN pnpm deploy --filter=backend /app/backend
+
+FROM base AS frontend
+COPY --from=build /app/frontend /usr/src/fullstack-blog/app/frontend
+WORKDIR /usr/src/fullstack-blog/app/frontend
+EXPOSE 3000
+CMD ["pnpm", "dev"]
+
+FROM base AS backend
+RUN npm i -g pm2-dev
+COPY --from=build /app/backend /app/backend
+WORKDIR /app/backend
+EXPOSE 8002
+CMD ["pnpm", "docker-dev"]

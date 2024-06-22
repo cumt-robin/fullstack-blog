@@ -18,6 +18,7 @@ module.exports = {
         "@vue/prettier",
         "@vue/prettier/@typescript-eslint",
     ],
+    plugins: ["@typescript-eslint", "vue"],
     settings: {
         // eslint-import-resolver-webpack
         "import/resolver": {
@@ -46,6 +47,7 @@ module.exports = {
             files: ["*.ts", "*.tsx", "*.vue"],
             plugins: ["@typescript-eslint"],
             rules: {
+                "no-shadow": "off",
                 "@typescript-eslint/no-explicit-any": [2, { ignoreRestArgs: true }],
             },
         },

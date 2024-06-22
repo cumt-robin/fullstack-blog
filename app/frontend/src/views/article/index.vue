@@ -114,12 +114,6 @@ import css from "highlight.js/lib/languages/css";
 import shell from "highlight.js/lib/languages/shell";
 import json from "highlight.js/lib/languages/json";
 import plaintext from "highlight.js/lib/languages/plaintext";
-hljs.registerLanguage("javascript", javascript);
-hljs.registerLanguage("html", html);
-hljs.registerLanguage("css", css);
-hljs.registerLanguage("shell", shell);
-hljs.registerLanguage("json", json);
-hljs.registerLanguage("plaintext", plaintext);
 // 皮肤
 import "highlight.js/styles/atom-one-dark.css";
 import DOMPurify from "dompurify";
@@ -129,12 +123,19 @@ import { maxBy, minBy } from "lodash-es";
 import { SwapLeftOutlined, SwapRightOutlined, EditOutlined } from "@ant-design/icons-vue";
 import { useStore } from "vuex";
 import { Drawer, Modal, Tag } from "ant-design-vue";
-import Comments from "./comments.vue";
 import { setScrollTop } from "@/utils/dom";
 import { articleService } from "@/services/article";
 import { useAsyncLoading } from "@/hooks/async";
 import { format } from "@/utils/date-utils";
 import { key } from "@/store";
+import Comments from "./comments.vue";
+
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("html", html);
+hljs.registerLanguage("css", css);
+hljs.registerLanguage("shell", shell);
+hljs.registerLanguage("json", json);
+hljs.registerLanguage("plaintext", plaintext);
 
 export default defineComponent({
     name: "Article",
@@ -219,7 +220,7 @@ export default defineComponent({
             };
             marked.setOptions({
                 renderer,
-                highlight: function (code, lang) {
+                highlight(code, lang) {
                     const language = hljs.getLanguage(lang) ? lang : "plaintext";
                     return hljs.highlight(code, { language }).value;
                 },
@@ -249,6 +250,8 @@ export default defineComponent({
                     case 2:
                         prevArticle.value = minBy(results, "id");
                         nextArticle.value = maxBy(results, "id");
+                        break;
+                    default:
                         break;
                 }
             }
@@ -418,7 +421,6 @@ export default defineComponent({
         left: 0;
         bottom: 0;
         color: #392570;
-        font-size: 45px;
     }
     &::after {
         content: "\201D";

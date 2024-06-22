@@ -41,12 +41,12 @@
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { throttle } from "lodash-es";
-import BaseFooter from "./base-footer.vue";
-import BaseMenu from "./base-menu.vue";
-import HotColumn from "./hot-column.vue";
 import { key } from "@/store";
 import { SET_IS_MENU_VISIBLE } from "@/store/constants";
 import { setScrollTop } from "@/utils/dom";
+import BaseFooter from "./base-footer.vue";
+import BaseMenu from "./base-menu.vue";
+import HotColumn from "./hot-column.vue";
 
 export default defineComponent({
     name: "BaseLayout",
@@ -64,6 +64,8 @@ export default defineComponent({
         // 菜单部分
         const isMenuVisible = computed(() => store.state.isMenuVisible);
         const isAnimationEnabled = ref(false);
+
+        const hideMenu = () => store.commit(SET_IS_MENU_VISIBLE, false);
 
         const onToggleMenu = () => {
             if (isAnimationEnabled.value === false) {
@@ -91,24 +93,22 @@ export default defineComponent({
             hideMenu();
         };
 
-        const hideMenu = () => store.commit(SET_IS_MENU_VISIBLE, false);
-
         // 侧边按钮
         const isShowGoTopIcon = ref(false);
         let hideTimer: number | null = null;
-
-        const setHideTimer = () => {
-            clearHideTimer();
-            hideTimer = window.setTimeout(() => {
-                isShowGoTopIcon.value = false;
-            }, 5000);
-        };
 
         const clearHideTimer = () => {
             if (hideTimer) {
                 clearTimeout(hideTimer);
                 hideTimer = null;
             }
+        };
+
+        const setHideTimer = () => {
+            clearHideTimer();
+            hideTimer = window.setTimeout(() => {
+                isShowGoTopIcon.value = false;
+            }, 5000);
         };
 
         const onScroll = () => {

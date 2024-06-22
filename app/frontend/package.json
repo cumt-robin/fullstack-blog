@@ -6,7 +6,8 @@
         "build": "vue-cli-service build",
         "build:analyze": "cross-env npm_config_report=true yarn build",
         "test:unit": "vue-cli-service test:unit",
-        "lint": "vue-cli-service lint",
+        "lint": "vue-cli-service lint --no-fix",
+        "lint-fix": "vue-cli-service lint",
         "vue-ui": "vue ui",
         "webpack-output": "vue inspect > output.js"
     },

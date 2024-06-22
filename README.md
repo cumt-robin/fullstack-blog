@@ -1,34 +1,22 @@
-Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/7177402980180688952)开源全栈项目的前端部分，采用 Vue3 + Typescript 实现。
+Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/7177402980180688952)开源全栈项目，采用 Vue3 + Typescript + NodeJS Express 实现。
 
-如果您需要找到后端源码，可以打开[express-blog-backend](https://github.com/cumt-robin/express-blog-backend)。
+最新代码采用 pnpm monorepo 架构搭建。
 
-如果您需要找到小程序源码，可以打开[blog-weapp](https://github.com/cumt-robin/blog-weapp)。
+如果你需要找到旧版的前后端工程独立仓库代码，其中前端部分可以查看 2.X 版本。后端部分可以打开[express-blog-backend](https://github.com/cumt-robin/express-blog-backend)。
+
+小程序源码是独立仓库维护的，可以打开[blog-weapp](https://github.com/cumt-robin/blog-weapp)。
 
 ## 相关博客
 
 我写了一系列博客专栏，介绍如何使用 Vue3+TS+Node 打造个人博客。[点击前往专栏](https://juejin.cn/column/7177402980180688952)。
 
-## 启动项目
+## 容器化运行项目
 
-本项目适合 Node 16 版本。
+见[docker-ops.md](./docker-ops.md)。
 
-安装依赖：
+## 非容器化运行项目
 
-```
-yarn
-```
-
-启动项目：
-
-```
-yarn serve
-```
-
-## 打包项目
-
-```
-yarn build
-```
+见[legacy-ops.md](./legacy-ops.md)。
 
 ## 联系我
 

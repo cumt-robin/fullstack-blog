@@ -35,9 +35,8 @@ function setElementScrollTop({ target = document.documentElement, value }: { tar
 function getNextScrollTopValue(start: number, end: number, stepNo: number, stepTotal: number): number {
     if (start > end) {
         return start - easingFunc(stepNo / stepTotal) * (start - end);
-    } else {
-        return start + easingFunc(stepNo / stepTotal) * (end - start);
     }
+    return start + easingFunc(stepNo / stepTotal) * (end - start);
 }
 
 interface StepOptions {
@@ -78,9 +77,8 @@ interface SetScrollTopOptions {
 function getEleScrollTop(target = document.body): number {
     if (target === document.body || target === document.documentElement) {
         return document.body.scrollTop || document.documentElement.scrollTop;
-    } else {
-        return target.scrollTop;
     }
+    return target.scrollTop;
 }
 
 export function setScrollTop({
