@@ -6,6 +6,8 @@ services:
     volumes:
       - ./app/frontend/src:/usr/src/fullstack-blog/app/frontend/src
       - ./tsconfig.base.json:/usr/src/fullstack-blog/tsconfig.base.json
+      - ./.prettierrc.json:/usr/src/fullstack-blog/.prettierrc.json
+      - ./.prettierignore:/usr/src/fullstack-blog/.prettierignore
     environment:
       # 设置任何环境变量
       - NODE_ENV=development

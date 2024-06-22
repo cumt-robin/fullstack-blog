@@ -109,29 +109,36 @@ export default defineComponent({
 :deep(.timeline-card) {
     border: 0;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+
     .ant-card-body {
         display: flex;
         padding: 10px;
     }
+
     .timeline-card__poster {
         width: 80px;
         height: 60px;
     }
+
     .timeline-card__info {
         flex: 1;
         margin-left: 10px;
         font-size: 12px;
         overflow: hidden;
+
         > time {
             color: #999;
         }
+
         > h4 {
             margin: 3px 0;
             font-size: 14px;
             line-height: 1.2em;
         }
+
         .category {
             font-weight: 700;
+
             + .category::before {
                 content: ", ";
             }

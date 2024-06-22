@@ -1,6 +1,6 @@
 {
   "name": "fullstack-blog",
-  "version": "1.0.0",
+  "version": "3.0.0",
   "type": "module",
   "private": true,
   "packageManager": "pnpm@9.4.0",
