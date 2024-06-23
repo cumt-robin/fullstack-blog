@@ -3,6 +3,6 @@
  */
 
 module.exports = {
-    ...require('./env'),
-    ...(process.env.NODE_ENV === 'production' ? require("./prod.env") : require("./dev.env"))
-}
+    ...require("./env"),
+    ...(process.env.NODE_ENV === "production" ? require("./prod.env") : require("./dev.env")),
+};

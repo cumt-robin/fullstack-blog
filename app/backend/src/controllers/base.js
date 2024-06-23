@@ -1,15 +1,16 @@
-const express = require('express');
+const express = require("express");
+
 const router = express.Router();
+const jwt = require("jsonwebtoken");
 const errcode = require("../utils/errcode");
-const authMap = require('../permissions/auth');
-const jwt = require('jsonwebtoken');
-const config = require('../config')
+const authMap = require("../permissions/auth");
+const config = require("../config");
 
 /**
  * base controller
  * 权限验证
  */
-router.use(function(req, res, next) {
+router.use((req, res, next) => {
     // CORS 处理，已交给 Nginx 处理
     // if (req.headers.origin) {
     //     if (config.allowClient.includes(req.headers.origin)) {
@@ -21,23 +22,22 @@ router.use(function(req, res, next) {
     // }
 
     const authority = authMap.get(req.path);
-    
+
     if (authority) {
         // 需要检验token的接口
-        const token = req.headers.authorization ? req.headers.authorization.replace('Bearer ', '') : undefined
+        const token = req.headers.authorization ? req.headers.authorization.replace("Bearer ", "") : undefined;
         if (token) {
-            
             jwt.verify(token, config.jwt.secret, (err, payload) => {
                 if (err) {
-                    console.error(err)
+                    console.error(err);
                     return res.send({
-                        ...errcode.AUTH.UNAUTHORIZED
+                        ...errcode.AUTH.UNAUTHORIZED,
                     });
                 }
                 // token是否和权限符合
-                if (payload.roleName != authority.role) {
+                if (payload.roleName !== authority.role) {
                     return res.send({
-                        ...errcode.AUTH.FORBIDDEN
+                        ...errcode.AUTH.FORBIDDEN,
                     });
                 }
 
@@ -46,11 +46,10 @@ router.use(function(req, res, next) {
 
                 // 执行权转交后续中间件
                 next();
-            })
-            
+            });
         } else {
             return res.send({
-                ...errcode.AUTH.UNAUTHORIZED
+                ...errcode.AUTH.UNAUTHORIZED,
             });
         }
     } else {

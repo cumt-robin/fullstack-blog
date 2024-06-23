@@ -7,7 +7,9 @@
         "restart": "pm2 restart blog",
         "docker-dev": "pm2-dev start process-docker-dev.json",
         "deploy-setup:prod": "pm2 deploy production setup",
-        "deploy:prod": "pm2 deploy production"
+        "deploy:prod": "pm2 deploy production",
+        "lint": "eslint --ext .js --cache src",
+        "lint-fix": "eslint --ext .js --fix --cache src"
     },
     "repository": {
         "type": "git",
@@ -36,5 +38,9 @@
         "socket.io": "^2.1.1",
         "svg-captcha": "^1.3.12",
         "xss": "^1.0.9"
+    },
+    "devDependencies": {
+        "@fullstack-blog/eslint-config": "workspace:^",
+        "eslint": "^7.32.0"
     }
 }
