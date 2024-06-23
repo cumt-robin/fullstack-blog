@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const theme = require("./antd-theme.js");
 
 // function addStyleResource(rule) {
@@ -17,6 +17,7 @@ const theme = require("./antd-theme.js");
 module.exports = {
     publicPath: "/",
     devServer: {
+        host: "0.0.0.0",
         port: 3000,
         open: true,
         proxy: {
@@ -27,6 +28,11 @@ module.exports = {
                     "^/api": "",
                 },
             },
+        },
+        watchOptions: {
+            ignored: /node_modules/,
+            aggregateTimeout: 300,
+            poll: 1000,
         },
     },
     chainWebpack: (config) => {

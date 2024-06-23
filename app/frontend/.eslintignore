@@ -1,4 +1,5 @@
 src/**/*.d.ts
 dist
 vue.config.js
+vue.config.docker.js
 .eslintrc.cjs

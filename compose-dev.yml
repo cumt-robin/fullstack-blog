@@ -5,6 +5,7 @@ services:
       - "3000:3000"
     volumes:
       - ./app/frontend/src:/usr/src/fullstack-blog/app/frontend/src
+      - ./app/frontend/vue.config.docker.js:/usr/src/fullstack-blog/app/frontend/vue.config.js
       - ./tsconfig.base.json:/usr/src/fullstack-blog/tsconfig.base.json
       - ./.prettierrc.json:/usr/src/fullstack-blog/.prettierrc.json
       - ./.prettierignore:/usr/src/fullstack-blog/.prettierignore
