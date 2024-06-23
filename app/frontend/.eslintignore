@@ -1,3 +1,4 @@
+node_modules
 src/**/*.d.ts
 dist
 vue.config.js
