@@ -23,7 +23,7 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install -g pnpm
-          pnpm install
+          pnpm install --frozen-lockfile
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
