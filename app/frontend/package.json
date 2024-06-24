@@ -11,15 +11,6 @@
         "vue-ui": "vue ui",
         "webpack-output": "vue inspect > output.js"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/cumt-robin/vue3-ts-blog-frontend.git"
-    },
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/cumt-robin/vue3-ts-blog-frontend/issues"
-    },
-    "homepage": "https://blog.wbjiang.cn/",
     "dependencies": {
         "ant-design-vue": "~2.1.6",
         "axios": "^0.21.1",

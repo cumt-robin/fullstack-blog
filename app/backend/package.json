@@ -11,15 +11,6 @@
         "lint": "eslint --ext .js --cache src",
         "lint-fix": "eslint --ext .js --fix --cache src"
     },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/cumt-robin/express-blog-backend.git"
-    },
-    "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/cumt-robin/express-blog-backend/issues"
-    },
-    "homepage": "https://blog.wbjiang.cn/",
     "dependencies": {
         "compression": "^1.7.3",
         "cookie-parser": "~1.4.3",

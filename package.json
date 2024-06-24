@@ -4,20 +4,39 @@
   "type": "module",
   "private": true,
   "packageManager": "pnpm@9.4.0",
-  "description": "",
+  "keywords": [
+    "vue",
+    "vue3",
+    "nodejs",
+    "express",
+    "typescript",
+    "monorepo",
+    "fullstack",
+    "blog"
+  ],
+  "description": "This is a full-stack blog project based on Vue3, typescript, nodejs, express, which uses pnpm monorepo architecture and supports Docker containerization",
+  "author": "Tusi",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cumt-robin/vue3-ts-blog-frontend.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cumt-robin/vue3-ts-blog-frontend/issues"
+  },
+  "homepage": "https://blog.wbjiang.cn/",
   "scripts": {
     "frontend:dev": "pnpm --filter frontend dev",
     "backend:dev": "pnpm --filter backend dev",
     "fullstack:dev": "pnpm --filter frontend --filter backend dev ",
     "lint-fix": "pnpm --filter ./app/** lint-fix",
-    "lint": "pnpm --filter ./app/** lint",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "pnpm --filter ./app/** lint"
   },
-  "keywords": [],
-  "author": "Tusi",
-  "license": "MIT",
   "engines": {
     "pnpm": ">=9.0.0",
     "node": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.5"
   }
 }
