@@ -5,11 +5,16 @@
  * @LastEditTime: 2021-05-27 09:24:43
  * @Description: db helpers
  */
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const config = require("../config");
 const errcode = require("./errcode");
 
-const pool = mysql.createPool(config.mysql);
+const pool = mysql.createPool({
+    multipleStatements: true,
+    waitForConnections: true,
+    charset: "UTF8MB4_UNICODE_CI",
+    ...config.mysql,
+});
 
 pool.on("connection", (connection) => {
     // console.log('取得连接');
@@ -23,6 +28,10 @@ pool.on("error", (err) => {
     console.error(err);
 });
 
+/**
+ * 获取 mysql connection，可以携带 res 对象，方便在连接异常时自动响应错误
+ * @param {import("express").Response} res
+ */
 function getConnection(res) {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
@@ -42,6 +51,13 @@ function getConnection(res) {
     });
 }
 
+/**
+ * 执行 mysql 查询语句，自动 release connection
+ * @param {string | import("mysql2").QueryOptions} options
+ * @param {import("mysql2").PoolConnection} connection
+ * @param {boolean} release
+ * @returns
+ */
 function execQuery(options, connection, release = true) {
     return new Promise((resolve, reject) => {
         // Use the connection
@@ -67,8 +83,8 @@ function execQuery(options, connection, release = true) {
 
 /**
  * 执行 mysql 查询语句
- * @param {*} options 支持 sql string 和 options 两种形式调用，如果要传参数，必须使用 options 对象，options.sql 是 sql 语句，options.values 是参数数组。
- * @param {*} connection 如果传入 connect 直接使用
+ * @param {string | import("mysql2").QueryOptions} options 支持 sql string 和 options 两种形式调用，如果要传参数，必须使用 options 对象，options.sql 是 sql 语句，options.values 是参数数组。
+ * @param {import("mysql2").PoolConnection} connection 如果传入 connect 直接使用
  * @param {boolean} release 执行 query 后，是否自动 release
  */
 function query(options, connection, release) {
@@ -78,6 +94,12 @@ function query(options, connection, release) {
     return getConnection().then((connection) => execQuery(options, connection, release));
 }
 
+/**
+ * 执行事务，自动 commit 和 rollback
+ * @param {import("mysql2").PoolConnection} connection
+ * @param {Promise} task
+ * @returns
+ */
 function execTransaction(connection, task) {
     return new Promise((resolve, reject) => {
         connection.beginTransaction((err) => {

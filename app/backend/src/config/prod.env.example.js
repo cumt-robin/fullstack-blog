@@ -6,8 +6,5 @@ module.exports = {
         user: "mysql username",
         password: "mysql password",
         database: "mysql database name",
-        multipleStatements: true,
-        waitForConnections: true,
-        charset: "UTF8MB4_UNICODE_CI",
     },
 };
