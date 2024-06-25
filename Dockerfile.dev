@@ -18,7 +18,7 @@ CMD ["pnpm", "dev"]
 
 FROM base AS backend
 RUN npm i -g pm2-dev
-COPY --from=build /app/backend /app/backend
-WORKDIR /app/backend
+COPY --from=build /app/backend /usr/src/fullstack-blog/app/backend
+WORKDIR /usr/src/fullstack-blog/app/backend
 EXPOSE 8002
 CMD ["pnpm", "docker-dev"]
