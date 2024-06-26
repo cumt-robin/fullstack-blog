@@ -1,12 +1,14 @@
 {
     "editor.tabSize": 4,
+    "files.eol": "\n",
     "eslint.validate": ["javascript", "typescript", "javascriptreact", "typescriptreact", "vue"],
     // 防止内置css校验和stylelint重复报错
     "css.validate": false,
     "less.validate": false,
     "scss.validate": false,
+    // 保存时不调用格式化，交给 lint fix
     "editor.formatOnSave": false,
-    // 代码保存动作
+    // 代码保存动作，调用 lint fix
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
         "source.fixAll.stylelint": "explicit"

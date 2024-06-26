@@ -1,0 +1,4 @@
+{
+    "app/**/src/**/*.{js,mjs,jsx,ts,tsx,vue}": "eslint --cache --fix",
+    "app/**/src/**/*.{css,less,scss,vue}": "stylelint --cache --fix"
+}
