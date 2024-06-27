@@ -16,6 +16,12 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 我写了一系列博客专栏，介绍如何使用 Vue3+TS+Node 打造个人博客。[点击前往专栏](https://juejin.cn/column/7177402980180688952)。
 
+## 全局依赖
+
+```shell
+pnpm add -g commitizen
+```
+
 ## git 配置
 
 ```shell

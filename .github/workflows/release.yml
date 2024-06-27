@@ -29,6 +29,7 @@ jobs:
         uses: changesets/action@v1
         with:
           publish: pnpm release
+          commit: "chore: version packages"
           createGithubReleases: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
