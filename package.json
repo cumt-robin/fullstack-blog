@@ -31,7 +31,8 @@
     "fullstack:dev": "pnpm --filter frontend --filter backend dev ",
     "lint-fix": "pnpm --filter ./app/** lint-fix",
     "lint": "pnpm --filter ./app/** lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "release": "pnpm changeset tag"
   },
   "engines": {
     "pnpm": ">=9.0.0",
