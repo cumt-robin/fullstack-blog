@@ -1,5 +1,11 @@
 # frontend
 
+## 3.4.0
+
+### Minor Changes
+
+-   36a8c5d: 创作时支持 tag 自动补全
+
 ## 3.3.0
 
 ### Minor Changes
