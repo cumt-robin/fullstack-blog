@@ -77,13 +77,23 @@
                     </a-row>
                 </a-form-item>
                 <a-form-item name="categorys" label="已有分类">
-                    <a-checkbox-group v-model:value="relFormModel.oldCategoryIds">
-                        <a-row :gutter="16">
-                            <a-col v-for="category in categorys" :key="category.id" :xs="8" :sm="4">
-                                <a-checkbox class="category-checkbox" :value="category.id">{{ category.category_name }}</a-checkbox>
-                            </a-col>
-                        </a-row>
-                    </a-checkbox-group>
+                    <div>
+                        <a-input-search
+                            v-model:value="categoryWd"
+                            placeholder="模糊搜索"
+                            :loading="categorySearchLoading"
+                            style="width: 256px"
+                            @input="onCategorySearchInput"
+                        />
+                        <br />
+                        <a-checkbox-group v-model:value="relFormModel.oldCategoryIds" style="width: 100%">
+                            <a-row :gutter="16">
+                                <a-col v-for="category in categorys" :key="category.id" :xs="8" :sm="4">
+                                    <a-checkbox class="category-checkbox" :value="category.id">{{ category.category_name }}</a-checkbox>
+                                </a-col>
+                            </a-row>
+                        </a-checkbox-group>
+                    </div>
                 </a-form-item>
                 <a-form-item class="align-center">
                     <a-button type="primary" :loading="isConfirmLoading" @click.prevent="onConfirmPublish">{{
@@ -105,6 +115,7 @@ import css from "highlight.js/lib/languages/css";
 import shell from "highlight.js/lib/languages/shell";
 import json from "highlight.js/lib/languages/json";
 import plaintext from "highlight.js/lib/languages/plaintext";
+import yaml from "highlight.js/lib/languages/yaml";
 // 皮肤
 import "highlight.js/styles/atom-one-dark.css";
 import DOMPurify from "dompurify";
@@ -127,6 +138,7 @@ hljs.registerLanguage("css", css);
 hljs.registerLanguage("shell", shell);
 hljs.registerLanguage("json", json);
 hljs.registerLanguage("plaintext", plaintext);
+hljs.registerLanguage("yaml", yaml);
 
 interface NewTagDTO {
     value: string;
@@ -144,14 +156,15 @@ export default defineComponent({
     components: {
         PlusOutlined,
         DeleteOutlined,
-        [Form.name]: Form,
-        [Form.Item.name]: Form.Item,
-        [Input.name]: Input,
-        [Input.TextArea.name]: Input.TextArea,
-        [Radio.name]: Radio,
-        [Radio.Group.name]: Radio.Group,
-        [Modal.name]: Modal,
-        [Spin.name]: Spin,
+        [Form.name as string]: Form,
+        [Form.Item.name as string]: Form.Item,
+        [Input.name as string]: Input,
+        [Input.TextArea.name as string]: Input.TextArea,
+        [Input.Search.name as string]: Input.Search,
+        [Radio.name as string]: Radio,
+        [Radio.Group.name as string]: Radio.Group,
+        [Modal.name as string]: Modal,
+        [Spin.name as string]: Spin,
     },
     setup() {
         // vuex
@@ -165,6 +178,9 @@ export default defineComponent({
         const formRef = ref();
 
         const formModel = reactive({
+            articleTitle: "",
+            summary: "",
+            poster: "",
             articleText: "",
             private: 0,
         });
@@ -315,6 +331,24 @@ export default defineComponent({
             newTagList.value.splice(index, 1);
         };
 
+        // 分类搜索
+        const categoryWd = ref("");
+        const handleSearchCategory = async () => {
+            if (categoryWd.value) {
+                const { data } = await categoryService.fuzzy({
+                    wd: categoryWd.value,
+                });
+                categorys.value = data;
+            } else {
+                categorys.value = allCategorys.value;
+            }
+        };
+        const { loading: categorySearchLoading, trigger: searchCategory } = useAsyncLoading(handleSearchCategory);
+        const throttleSearchCategory = throttle(searchCategory, 1000);
+        const onCategorySearchInput = () => {
+            throttleSearchCategory();
+        };
+
         // 新分类处理
         const newCategoryList = ref<NewCategoryDTO[]>([]);
 
@@ -344,11 +378,13 @@ export default defineComponent({
         };
 
         // 已存在的分类
-        const categorys = ref<CategoryDTO[]>([]);
+        const allCategorys = ref<CategoryDTO[]>([]);
+        const categorys = ref<Partial<CategoryDTO>[]>([]);
         const categoryNames = computed(() => categorys.value.map((item) => item.category_name));
 
         const getCategorys = async () => {
             const res = await categoryService.all();
+            allCategorys.value = res.data;
             categorys.value = res.data;
         };
 
@@ -460,6 +496,9 @@ export default defineComponent({
             addCategory,
             deleteCategory,
             categorys,
+            categoryWd,
+            categorySearchLoading,
+            onCategorySearchInput,
         };
     },
 });
