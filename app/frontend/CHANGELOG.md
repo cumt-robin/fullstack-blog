@@ -1,5 +1,11 @@
 # frontend
 
+## 3.3.0
+
+### Minor Changes
+
+-   48ebfdb: 创作时支持分类模糊搜索
+
 ## 3.2.0
 
 ### Minor Changes
