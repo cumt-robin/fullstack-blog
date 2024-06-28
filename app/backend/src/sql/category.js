@@ -20,4 +20,5 @@ module.exports = {
         LIMIT ?, ?;\
         SELECT FOUND_ROWS() AS total;",
     AdminUpdateCategory: "UPDATE category SET ? WHERE id = ?",
+    FuzzyQueryCategory: "SELECT id, category_name FROM category WHERE category_name LIKE ?",
 };

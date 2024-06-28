@@ -9,6 +9,8 @@
         "test:unit": "vue-cli-service test:unit",
         "lint": "vue-cli-service lint --no-fix",
         "lint-fix": "vue-cli-service lint",
+        "lint-style": "stylelint src/**/*.{vue,less,scss,css} --cache",
+        "lint-style-fix": "stylelint src/**/*.{vue,less,scss,css} --cache --fix",
         "vue-ui": "vue ui",
         "webpack-output": "vue inspect > output.js"
     },

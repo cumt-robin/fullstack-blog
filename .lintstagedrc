@@ -1,4 +1,5 @@
 {
-    "app/**/src/**/*.{js,mjs,jsx,ts,tsx,vue}": "eslint --cache --fix",
-    "app/**/src/**/*.{css,less,scss,vue}": "stylelint --cache --fix"
+    "app/frontend/src/**/*.{js,mjs,jsx,ts,tsx,vue}": "pnpm --filter frontend lint-fix",
+    "app/frontend/src/**/*.{css,less,scss,vue}": "pnpm --filter frontend lint-style-fix",
+    "app/backend/src/**/*.{js}": "pnpm --filter backend lint-fix"
 }
