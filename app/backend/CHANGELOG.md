@@ -1,5 +1,11 @@
 # backend
 
+## 3.5.0
+
+### Minor Changes
+
+-   36a8c5d: 创作时支持 tag 自动补全
+
 ## 3.4.0
 
 ### Minor Changes
