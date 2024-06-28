@@ -32,7 +32,8 @@
     "lint-fix": "pnpm --filter ./app/** lint-fix",
     "lint": "pnpm --filter ./app/** lint",
     "prepare": "husky",
-    "release": "pnpm changeset tag"
+    "version": "pnpm changeset version && pnpm install --no-frozen-lockfile",
+    "release": "pnpm changeset tag && git push --follow-tags"
   },
   "engines": {
     "pnpm": ">=9.0.0",

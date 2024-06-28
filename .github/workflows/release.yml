@@ -20,15 +20,21 @@ jobs:
         with:
           node-version: 18
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 9.x
+
       - name: Install Dependencies
         run: |
-          npm install -g pnpm
           pnpm install --frozen-lockfile
 
       - name: Create Release Pull Request
         uses: changesets/action@v1
         with:
+          version: pnpm version
           publish: pnpm release
+          title: "bot: version packages"
           commit: "chore: version packages"
           createGithubReleases: true
         env:
