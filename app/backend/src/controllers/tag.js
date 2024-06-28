@@ -46,6 +46,32 @@ router.get("/article_count", (req, res, next) => {
 });
 
 /**
+ * 模糊查询标签
+ */
+router.get("/fuzzy", async (req, res) => {
+    const params = req.query;
+    if (!params.wd) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
+    try {
+        const { results } = await dbUtils.query({
+            sql: indexSQL.FuzzyQueryTag,
+            values: [`%${params.wd}%`],
+        });
+        res.send({
+            code: "0",
+            data: results || [],
+        });
+    } catch (error) {
+        res.send({
+            code: "010004",
+        });
+    }
+});
+
+/**
  * 管理员分页获取
  */
 router.get("/admin/page", (req, res, next) => {

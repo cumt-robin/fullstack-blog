@@ -24,7 +24,9 @@ authMap.set("/reply/unreviewd_reply_page", { role: "admin" });
 authMap.set("/reply/review", { role: "admin" });
 
 authMap.set("/category/admin/page", { role: "admin" });
+authMap.set("/category/fuzzy", { role: "admin" });
 
 authMap.set("/tag/admin/page", { role: "admin" });
+authMap.set("/tag/fuzzy", { role: "admin" });
 
 module.exports = authMap;
