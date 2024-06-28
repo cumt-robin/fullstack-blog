@@ -21,4 +21,5 @@ module.exports = {
         GROUP BY t.id\
         LIMIT ?, ?;\
         SELECT FOUND_ROWS() AS total;",
+    FuzzyQueryTag: "SELECT id, tag_name FROM tag WHERE tag_name LIKE ?",
 };

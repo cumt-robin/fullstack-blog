@@ -1,5 +1,5 @@
 {
     "app/frontend/src/**/*.{js,mjs,jsx,ts,tsx,vue}": "pnpm --filter frontend lint-fix",
     "app/frontend/src/**/*.{css,less,scss,vue}": "pnpm --filter frontend lint-style-fix",
-    "app/backend/src/**/*.{js}": "pnpm --filter backend lint-fix"
+    "app/backend/src/**/*.js": "pnpm --filter backend lint-fix"
 }

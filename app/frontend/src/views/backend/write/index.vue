@@ -61,7 +61,7 @@
                 <a-form-item name="newTags" label="文章标签">
                     <a-row :gutter="16">
                         <a-col v-for="(tag, index) in newTagList" :key="index" :xs="8" :sm="4">
-                            <a-input v-model:value="tag.value" />
+                            <a-auto-complete v-model:value="tag.value" :options="tagOptions" @focus="onTagFocus" @search="onSearchTag" />
                             <DeleteOutlined @click="deleteTag(index)" />
                         </a-col>
                         <a-col :span="4"><PlusOutlined @click="addTag" /></a-col>
@@ -120,9 +120,9 @@ import yaml from "highlight.js/lib/languages/yaml";
 import "highlight.js/styles/atom-one-dark.css";
 import DOMPurify from "dompurify";
 import { computed, defineComponent, reactive, ref } from "vue";
-import { throttle } from "lodash-es";
+import { throttle, debounce } from "lodash-es";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons-vue";
-import { Form, Input, message, Modal, Radio, Spin } from "ant-design-vue";
+import { Form, Input, message, Modal, Radio, Spin, AutoComplete } from "ant-design-vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { REQUIRED_VALIDATOR_BLUR } from "@/utils/validator";
@@ -131,6 +131,7 @@ import { ArticleDTO, CategoryDTO, UserDTO } from "@/bean/dto";
 import { categoryService } from "@/services/category";
 import { key } from "@/store";
 import { articleService } from "@/services/article";
+import { tagService } from "@/services/tag";
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("html", html);
@@ -165,6 +166,7 @@ export default defineComponent({
         [Radio.Group.name as string]: Radio.Group,
         [Modal.name as string]: Modal,
         [Spin.name as string]: Spin,
+        [AutoComplete.name as string]: AutoComplete,
     },
     setup() {
         // vuex
@@ -324,11 +326,39 @@ export default defineComponent({
                 newTagList.value.push({
                     value: "",
                 });
+                tagOptions.value = [];
             }
         };
 
         const deleteTag = (index: number) => {
             newTagList.value.splice(index, 1);
+        };
+
+        const tagOptions = ref<{ value: string }[]>([]);
+
+        const handleSearchTag = async (value: string) => {
+            if (value) {
+                const { data } = await tagService.fuzzy({
+                    wd: value,
+                });
+                tagOptions.value = data.map((item) => {
+                    return {
+                        value: item.tag_name,
+                    };
+                });
+            } else {
+                tagOptions.value = [];
+            }
+        };
+        const { trigger: searchTag } = useAsyncLoading(handleSearchTag);
+        const debounceSearchTag = debounce(searchTag, 1000);
+
+        const onTagFocus = () => {
+            tagOptions.value = [];
+        };
+
+        const onSearchTag = (value: string) => {
+            debounceSearchTag(value);
         };
 
         // 分类搜索
@@ -344,9 +374,9 @@ export default defineComponent({
             }
         };
         const { loading: categorySearchLoading, trigger: searchCategory } = useAsyncLoading(handleSearchCategory);
-        const throttleSearchCategory = throttle(searchCategory, 1000);
+        const debounceSearchCategory = debounce(searchCategory, 1000);
         const onCategorySearchInput = () => {
-            throttleSearchCategory();
+            debounceSearchCategory();
         };
 
         // 新分类处理
@@ -499,6 +529,9 @@ export default defineComponent({
             categoryWd,
             categorySearchLoading,
             onCategorySearchInput,
+            tagOptions,
+            onSearchTag,
+            onTagFocus,
         };
     },
 });

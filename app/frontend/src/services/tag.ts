@@ -14,6 +14,10 @@ class TagService extends ApiService {
     public adminPage(params?: QueryPageModel) {
         return this.$get<PageResponse<TagDTO>>("admin/page", params);
     }
+
+    public fuzzy(params: { wd: string }) {
+        return this.$get<ArrayResponse<TagDTO>>("fuzzy", params);
+    }
 }
 
 export const tagService = new TagService("tag");
