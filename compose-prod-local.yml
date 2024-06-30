@@ -1,0 +1,22 @@
+services:
+  frontend:
+    build:
+      target: frontend
+    image: fullstack-blog-frontend:latest
+    ports:
+      - "3000:80"
+
+  backend:
+    build:
+      target: backend
+    image: fullstack-blog-backend:latest
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./app/backend/src/config/env.js:/usr/src/fullstack-blog/app/backend/src/config/env.js
+      - ./app/backend/src/config/prod.env.js:/usr/src/fullstack-blog/app/backend/src/config/prod.env.js
+    environment:
+      - NODE_ENV=production
+
+# 如果还有数据库或其他服务，也可以在这里添加
+# ...

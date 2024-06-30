@@ -29,6 +29,7 @@
     "frontend:dev": "pnpm --filter frontend dev",
     "backend:dev": "pnpm --filter backend dev",
     "fullstack:dev": "pnpm --filter frontend --filter backend dev ",
+    "frontend:build": "pnpm --filter frontend build",
     "lint-fix": "pnpm --filter ./app/** lint-fix",
     "lint": "pnpm --filter ./app/** lint",
     "prepare": "husky",
