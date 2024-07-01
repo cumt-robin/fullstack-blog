@@ -2,9 +2,21 @@
 
 Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/7177402980180688952)开源全栈项目，采用 Vue3 + Typescript + NodeJS Express 实现。
 
-最新代码采用 pnpm monorepo 架构搭建。
+最新代码采用 pnpm monorepo 架构搭建，工程化能力和开发体验都比较不错。
 
-如果你需要找到旧版的前后端工程独立仓库代码，其中前端部分可以查看 2.X 版本。后端部分可以打开[express-blog-backend](https://github.com/cumt-robin/express-blog-backend)。
+支持：
+
+- [x] pnpm monorepo 架构，单仓库开发全栈项目的极致体验
+- [x] changeset 最先进的 monorepo 版本管理工具
+- [x] Prettier + ESLint + Stylelint 代码质量与风格
+- [x] Commitizen git cz 交互式提交
+- [x] commitlint commit message 规范校验
+- [x] Husky + lint-staged 代码入库质量检查
+- [x] Docker Compose 开发和生产环境完整支持，一致的开发体验
+- [x] Github Actions 支持，构建和部署全部自动化
+
+
+如果你需要找到旧版的前后端工程独立仓库代码，其中前端部分可以查看 2.X 版本，具体请查看[v2 分支](https://github.com/cumt-robin/fullstack-blog/tree/v2)。后端部分可以打开[express-blog-backend](https://github.com/cumt-robin/express-blog-backend)。
 
 小程序源码是独立仓库维护的，可以打开[blog-weapp](https://github.com/cumt-robin/blog-weapp)。
 
