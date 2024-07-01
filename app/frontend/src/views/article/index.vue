@@ -23,7 +23,7 @@
                         <h2>
                             {{ article.article_name }}
                         </h2>
-                        <section class="md-preview" v-html="purifiedContent"></section>
+                        <section class="md-preview" v-html="purifiedContent" @click="onClickRichContent"></section>
                     </main>
 
                     <div class="copyright">
@@ -209,14 +209,12 @@ export default defineComponent({
         const setMarkedOptions = () => {
             const renderer = new marked.Renderer();
             renderer.link = function customLink(href, title, text) {
-                return `<a class="link" href="${href}" target="_blank" title="${text}" rel="nofollow">${text}</a>`;
+                return `<a class="link" rel="nofollow" href="${href}" title="${text}">${text}</a>`;
             };
             renderer.image = function customImage(href, title, text) {
-                return (
-                    `<a class="img-wrapper" href="${href}" target="_blank" rel="nofollow" title="${text}">` +
-                    `<img src="${href}" alt="${text}">` +
-                    "</a>"
-                );
+                return `<a class="img-wrapper" href="${href}" rel="nofollow" title="${text}">
+                    <img src="${href}" alt="${text}">
+                </a>`;
             };
             marked.setOptions({
                 renderer,
@@ -232,6 +230,13 @@ export default defineComponent({
                 smartypants: false,
                 xhtml: false,
             });
+        };
+
+        const onClickRichContent = (e) => {
+            if (e.target.tagName === "A") {
+                e.preventDefault();
+                router.push(`/jumpout/${encodeURIComponent(e.target.href)}`);
+            }
         };
 
         // 前后文章
@@ -289,6 +294,7 @@ export default defineComponent({
             commentsRef,
             showUserInfoForm,
             goToEdit,
+            onClickRichContent,
         };
     },
 });

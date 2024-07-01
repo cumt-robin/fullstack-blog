@@ -27,7 +27,6 @@ export default defineComponent({
         };
 
         const continueVisit = () => {
-            //
             window.location.href = route.params.target as string;
         };
 
