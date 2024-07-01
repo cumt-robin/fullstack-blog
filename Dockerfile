@@ -18,13 +18,10 @@ RUN pnpm build
 
 FROM nginx:latest AS frontend
 COPY --from=frontend-build /usr/src/fullstack-blog/app/frontend/dist/ /usr/share/nginx/html
-COPY nginx/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
 
 FROM base AS backend
-ENV NODE_ENV production
-ENV PORT 80
 COPY --from=build /app/backend /usr/src/fullstack-blog/app/backend
 WORKDIR /usr/src/fullstack-blog/app/backend
 USER node

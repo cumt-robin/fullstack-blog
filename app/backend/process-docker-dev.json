@@ -3,10 +3,6 @@
         {
             "name": "blog",
             "script": "src/app.js",
-            "env": {
-                "NODE_ENV": "development",
-                "PORT": 8002
-            },
             "watch": true,
             "ignore_watch": ["node_modules", "*.md"],
             "watch_options": {

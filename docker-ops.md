@@ -61,8 +61,39 @@ docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-front
 docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backend:3.0.0
 ```
 
-5. 重新运行
+5. 【仅首次】准备项目资源文件
+
+新建一个目录用于存放生产环境的 compose.yml 等资源文件，比如`/home/docker/app/fullstack-blog`。
+
+在这个目录下准备这些文件：
+
+```
+.
+|-- backend
+|   `-- config
+|       |-- env.js
+|       `-- prod.env.js
+|-- compose.yml
+`-- .env.docker.local
+
+其中 compose.yml 内容参照项目中的 compose.yml。
+
+.env.docker.local 文件参照下面内容：
+
+```
+REGISTRY=your_image_registry
+FRONTEND_VERSION=3.0.0
+BACKEND_VERSION=3.0.0
+```
+
+`backend/config`目录下放置的是后端服务的一些配置，其中 `env.js`参照项目中的`app/backend/config/env.example.js`，其中 `prod.env.js`参照项目中的`app/backend/config/prod.env.example.js`。
+
+6. 重新运行
 
 ```shell
 docker-compose up -d
 ```
+
+以上是分解步骤，相关命名以你的项目实际情况为准。
+
+以上过程也可以由 CI/CD 完成，具体见 .github/workflows 目录。

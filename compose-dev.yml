@@ -20,6 +20,7 @@ services:
       - ./app/backend/src:/usr/src/fullstack-blog/app/backend/src
     environment:
       - NODE_ENV=development
+      - PORT=8002
 
 # 如果还有数据库或其他服务，也可以在这里添加
 # ...
