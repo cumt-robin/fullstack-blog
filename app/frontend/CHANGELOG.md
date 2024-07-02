@@ -1,5 +1,11 @@
 # frontend
 
+## 3.6.0
+
+### Minor Changes
+
+-   77976ee: 文章内图片站内预览查看
+
 ## 3.5.0
 
 ### Minor Changes
