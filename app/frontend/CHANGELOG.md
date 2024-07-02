@@ -1,5 +1,11 @@
 # frontend
 
+## 3.5.0
+
+### Minor Changes
+
+-   06b9971: feat: 文章中打开外链时跳到中间页
+
 ## 3.4.0
 
 ### Minor Changes
