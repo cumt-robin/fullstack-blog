@@ -19,22 +19,25 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cumt-robin/vue3-ts-blog-frontend.git"
+    "url": "git+https://github.com/cumt-robin/fullstack-blog.git"
   },
   "bugs": {
-    "url": "https://github.com/cumt-robin/vue3-ts-blog-frontend/issues"
+    "url": "https://github.com/cumt-robin/fullstack-blog/issues"
   },
   "homepage": "https://blog.wbjiang.cn/",
   "scripts": {
     "frontend:dev": "pnpm --filter frontend dev",
+    "vite-vue3:dev": "pnpm --filter vite-vue3 dev",
     "backend:dev": "pnpm --filter backend dev",
-    "fullstack:dev": "pnpm --filter frontend --filter backend dev ",
+    "fullstack:dev": "pnpm --filter vite-vue3 --filter backend dev",
     "frontend:build": "pnpm --filter frontend build",
+    "vite-vue3:build": "pnpm --filter vite-vue3 build",
     "lint-fix": "pnpm --filter ./app/** lint-fix",
     "lint": "pnpm --filter ./app/** lint",
     "prepare": "husky",
     "version-bump": "pnpm changeset version && pnpm install --no-frozen-lockfile",
-    "release": "pnpm changeset tag && git push --follow-tags"
+    "release": "pnpm changeset tag && git push --follow-tags",
+    "sync-remote-tags": "git tag -l | xargs git tag -d && git pull --tags"
   },
   "engines": {
     "pnpm": ">=9.0.0",

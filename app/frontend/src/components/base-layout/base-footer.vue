@@ -11,7 +11,7 @@
                 <h3>GitHub开源</h3>
                 <p>
                     博客代码已开源，欢迎 star 支持！<br />
-                    <a target="_blank" rel="nofollow" href="https://github.com/cumt-robin/vue3-ts-blog-frontend"
+                    <a target="_blank" rel="nofollow" href="https://github.com/cumt-robin/fullstack-blog"
                         >前端：vue3-ts-blog-frontend</a
                     ><br />
                     <a target="_blank" rel="nofollow" href="https://github.com/cumt-robin/express-blog-backend"

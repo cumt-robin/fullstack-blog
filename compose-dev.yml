@@ -4,9 +4,10 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./app/frontend/src:/usr/src/fullstack-blog/app/frontend/src
-      - ./app/frontend/vue.config.docker.js:/usr/src/fullstack-blog/app/frontend/vue.config.js
-      - ./tsconfig.base.json:/usr/src/fullstack-blog/tsconfig.base.json
+      - ./app/vite-vue3/src:/usr/src/fullstack-blog/app/frontend/src
+      - ./app/vite-vue3/vite.config.docker.ts:/usr/src/fullstack-blog/app/frontend/vite.config.ts
+      - ./app/vite-vue3/index.html:/usr/src/fullstack-blog/app/frontend/index.html
+      - ./app/vite-vue3/public:/usr/src/fullstack-blog/app/frontend/public
       - ./.prettierrc.json:/usr/src/fullstack-blog/.prettierrc.json
       - ./.prettierignore:/usr/src/fullstack-blog/.prettierignore
     environment:

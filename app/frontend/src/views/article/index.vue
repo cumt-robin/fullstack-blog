@@ -455,6 +455,7 @@ export default defineComponent({
         left: 0;
         bottom: 0;
         color: #392570;
+        font-size: 45px;
     }
     &::after {
         content: "\201D";

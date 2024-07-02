@@ -39,7 +39,6 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, watch } from "vue";
 import { LocationQuery, useRoute, useRouter } from "vue-router";
-import { Breadcrumb, Divider, Pagination } from "ant-design-vue";
 import { ArticleDTO } from "@/bean/dto";
 import { articleService } from "@/services/article";
 import { useAsyncLoading } from "@/hooks/async";
@@ -50,10 +49,6 @@ export default defineComponent({
     name: "Home",
     components: {
         CardArticle,
-        [Breadcrumb.name]: Breadcrumb,
-        [Breadcrumb.Item.name]: Breadcrumb.Item,
-        [Divider.name]: Divider,
-        [Pagination.name]: Pagination,
     },
     setup() {
         // route
