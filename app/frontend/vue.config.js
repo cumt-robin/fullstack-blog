@@ -29,6 +29,7 @@ module.exports = {
             },
         },
     },
+    transpileDependencies: ['mermaid'],
     chainWebpack: (config) => {
         // html-webpack-plugin
         config.plugin("html").tap((args) => {

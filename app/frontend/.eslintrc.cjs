@@ -29,12 +29,13 @@ module.exports = {
         },
     },
     rules: {
-        "no-debugger": 2,
-        "no-case-declarations": 0,
-        "import/order": 1,
-        "import/no-unresolved": 0,
+        "no-debugger": 'error',
+        "no-case-declarations": 'off',
+        "import/order": 'warn',
+        "import/no-unresolved": 'off',
         // https://eslint.vuejs.org/rules/
-        "vue/require-default-prop": 0,
+        "vue/require-default-prop": 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
     },
     overrides: [
         {

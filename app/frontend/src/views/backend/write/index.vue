@@ -107,6 +107,7 @@
 
 <script lang="ts">
 import marked from "marked";
+import mermaid from "mermaid";
 // hljs 按需加载
 import hljs from "highlight.js/lib/core";
 import javascript from "highlight.js/lib/languages/javascript";
@@ -132,6 +133,7 @@ import { categoryService } from "@/services/category";
 import { key } from "@/store";
 import { articleService } from "@/services/article";
 import { tagService } from "@/services/tag";
+import { sleep } from "@/utils/bom";
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("html", html);
@@ -239,6 +241,15 @@ export default defineComponent({
                 if (data.categories.length > 0) {
                     relFormModel.oldCategoryIds = data.categories.map((item) => item.id);
                 }
+
+                setTimeout(() => {
+                    mermaid.initialize({
+                        theme: "default",
+                        startOnLoad: false,
+                    });
+
+                    mermaid.run();
+                }, 0);
             }
         };
 
@@ -260,6 +271,12 @@ export default defineComponent({
                     `<img src="${href}" alt="${text}">` +
                     "</a>"
                 );
+            };
+            renderer.code = function customCode(code, language) {
+                if (language === "mermaid") {
+                    return `<div class="mermaid">${code}</div>`;
+                }
+                return `<pre><code>${code}</code></pre>`;
             };
             marked.setOptions({
                 renderer,
@@ -286,10 +303,12 @@ export default defineComponent({
 
         const purifiedContent = ref("");
 
-        const handleRender = ({ target }: { target: HTMLTextAreaElement }) => {
+        const handleRender = async ({ target }: { target: HTMLTextAreaElement }) => {
             const content = target.value;
             const markedContent = marked(content);
             purifiedContent.value = DOMPurify.sanitize(markedContent);
+            await sleep(0);
+            mermaid.run();
         };
 
         const onMdContentChange = throttle(handleRender, 300);

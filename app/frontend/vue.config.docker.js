@@ -35,13 +35,13 @@ module.exports = {
             poll: 1000,
         },
     },
+    transpileDependencies: ['mermaid'],
     chainWebpack: (config) => {
         // html-webpack-plugin
         config.plugin("html").tap((args) => {
             args[0].title = process.env.VUE_APP_TITLE;
             return args;
         });
-
         // 本来打算使用 style-resources-loader 自动注入scss,但是发现对 element 使用的一些 sass 特性支持有点问题
         // const types = ["vue-modules", "vue", "normal-modules", "normal"];
         // types.forEach((type) => addStyleResource(config.module.rule("scss").oneOf(type)));
