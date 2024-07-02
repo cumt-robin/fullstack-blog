@@ -95,6 +95,8 @@
 
                 <comments ref="commentsRef" :article-id="articleId" />
             </a-drawer>
+
+            <a-image :src="previewImgSrc" style="display: none" ref="previewRef" />
         </template>
 
         <template #aside>
@@ -212,9 +214,9 @@ export default defineComponent({
                 return `<a class="link" rel="nofollow" href="${href}" title="${text}">${text}</a>`;
             };
             renderer.image = function customImage(href, title, text) {
-                return `<a class="img-wrapper" href="${href}" rel="nofollow" title="${text}">
+                return `<div class="img-wrapper" title="${text}">
                     <img src="${href}" alt="${text}">
-                </a>`;
+                </div>`;
             };
             marked.setOptions({
                 renderer,
@@ -232,10 +234,17 @@ export default defineComponent({
             });
         };
 
+        const previewImgSrc = ref();
+        const previewRef = ref();
+
         const onClickRichContent = (e) => {
             if (e.target.tagName === "A") {
                 e.preventDefault();
                 router.push(`/jumpout/${encodeURIComponent(e.target.href)}`);
+            } else if (e.target.tagName === "IMG") {
+                e.preventDefault();
+                previewImgSrc.value = e.target.src;
+                previewRef.value.$el.nextElementSibling.click();
             }
         };
 
@@ -295,6 +304,8 @@ export default defineComponent({
             showUserInfoForm,
             goToEdit,
             onClickRichContent,
+            previewImgSrc,
+            previewRef,
         };
     },
 });

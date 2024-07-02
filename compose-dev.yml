@@ -1,6 +1,6 @@
 services:
   frontend:
-    image: fullstack-blog-frontend:latest
+    image: fullstack-blog-frontend:dev
     ports:
       - "3000:3000"
     volumes:
@@ -13,7 +13,7 @@ services:
       - NODE_ENV=development
 
   backend:
-    image: fullstack-blog-backend:latest
+    image: fullstack-blog-backend:dev
     ports:
       - "8002:8002"
     volumes:
