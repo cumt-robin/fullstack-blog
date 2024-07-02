@@ -34,7 +34,7 @@
                         </p>
                     </div>
 
-                    <div class="relation-info" v-if="article">
+                    <div class="relation-info">
                         <div>
                             分类：
                             <router-link v-for="item in article.categories" :key="item.id" :to="`/category/${item.categoryName}`">
@@ -108,6 +108,7 @@
 
 <script>
 import marked from "marked";
+import mermaid from "mermaid";
 // hljs 按需加载
 import hljs from "highlight.js/lib/core";
 import javascript from "highlight.js/lib/languages/javascript";
@@ -180,6 +181,16 @@ export default defineComponent({
             purifiedContent.value = DOMPurify.sanitize(markedContent);
 
             startReportTimer();
+
+            // 此处不能用 await sleep，否则会影响 loading
+            setTimeout(() => {
+                mermaid.initialize({
+                    theme: "default",
+                    startOnLoad: false,
+                });
+
+                mermaid.run();
+            }, 0);
         };
 
         const { trigger: getDetail, loading } = useAsyncLoading(getArticleDetail);
@@ -217,6 +228,12 @@ export default defineComponent({
                 return `<div class="img-wrapper" title="${text}">
                     <img src="${href}" alt="${text}">
                 </div>`;
+            };
+            renderer.code = function customCode(code, language) {
+                if (language === "mermaid") {
+                    return `<div class="mermaid">${code}</div>`;
+                }
+                return `<pre><code>${code}</code></pre>`;
             };
             marked.setOptions({
                 renderer,
