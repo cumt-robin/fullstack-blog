@@ -2,29 +2,25 @@ services:
   frontend:
     build:
       target: frontend
-    image: ${REGISTRY}/fullstack-blog-frontend:${FRONTEND_VERSION:-latest}
+    image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/fullstack-blog-frontend:${FRONTEND_VERSION:-latest}
     ports:
       - "3000:80"
     environment:
       - BACKEND_PORT=8002
-    env_file:
-      - .env.docker.local
     command: /bin/bash -c "envsubst '$$BACKEND_PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
   backend:
     build:
       target: backend
-    image: ${REGISTRY}/fullstack-blog-backend:${BACKEND_VERSION:-latest}
+    image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/fullstack-blog-backend:${BACKEND_VERSION:-latest}
     ports:
       - "8002:8002"
     volumes:
-      - backend/config/env.js:/usr/src/fullstack-blog/app/backend/src/config/env.js
-      - backend/config/prod.env.js:/usr/src/fullstack-blog/app/backend/src/config/prod.env.js
+      - ./backend/config/env.js:/usr/src/fullstack-blog/app/backend/src/config/env.js
+      - ./backend/config/prod.env.js:/usr/src/fullstack-blog/app/backend/src/config/prod.env.js
     environment:
       - NODE_ENV=production
       - PORT=8002
-    env_file:
-      - .env.docker.local
 
 # 如果还有数据库或其他服务，也可以在这里添加
 # ...

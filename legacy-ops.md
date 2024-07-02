@@ -8,7 +8,7 @@
 pnpm install
 ```
 
-由于不是使用 docker-compose，需要修改`vue.config.js`中的`devServer`配置：
+由于不是使用 docker compose，需要修改`vue.config.js`中的`devServer`配置：
 
 ```
 target: "http://localhost:8002",

@@ -8,10 +8,10 @@
 sh build-dev-images.sh
 ```
 
-2. 运行 docker-compose
+2. 运行 docker compose
 
 ```shell
-docker-compose -f compose-dev.yml up -d
+docker compose -f compose-dev.yml up -d
 ```
 
 ## Docker 生产环境
@@ -29,7 +29,7 @@ docker build --target backend -t fullstack-blog-backend .
 使用 docker compose
 
 ```shell
-docker-compose build
+docker compose build
 ```
 
 2. 上传镜像
@@ -81,7 +81,8 @@ docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backe
 .env.docker.local 文件参照下面内容：
 
 ```
-REGISTRY=your_image_registry
+DOCKER_REGISTRY=your_image_registry
+DOCKER_NAMESPACE=your_registry_namespace
 FRONTEND_VERSION=3.0.0
 BACKEND_VERSION=3.0.0
 ```
@@ -91,7 +92,7 @@ BACKEND_VERSION=3.0.0
 6. 重新运行
 
 ```shell
-docker-compose up -d
+docker compose --env-file .env.docker.local up -d
 ```
 
 以上是分解步骤，相关命名以你的项目实际情况为准。

@@ -62,7 +62,7 @@ jobs:
           docker pull ${{secrets.DOCKER_REGISTRY}}/${{secrets.DOCKER_NAMESPACE}}/${{secrets.DOCKER_BACKEND_REPOSITORY}}:${{env.IMAGE_VERSION}}
           cd ${{secrets.PROJECT_DIR}}
           sed -i 's/^BACKEND_VERSION=.*/BACKEND_VERSION=${{env.IMAGE_VERSION}}/' .env.docker.local
-          docker compose up -d
+          docker compose --env-file .env.docker.local up -d
           echo "Done"
           END
 
