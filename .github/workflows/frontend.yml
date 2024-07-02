@@ -1,4 +1,4 @@
-name: ci_cd
+name: frontend_cicd
 on:
   push:
     tags:
