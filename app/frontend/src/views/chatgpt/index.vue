@@ -122,7 +122,7 @@ export default defineComponent({
                 time: format(new Date(), "HH:mm:ss"),
                 user: "Chat AI",
                 content:
-                    "源码地址如下，前端：https://github.com/cumt-robin/vue3-ts-blog-frontend，后端：https://github.com/cumt-robin/express-blog-backend",
+                    "源码地址如下，前端：https://github.com/cumt-robin/fullstack-blog，后端：https://github.com/cumt-robin/express-blog-backend",
                 type: "others",
                 customClass: "others",
             });

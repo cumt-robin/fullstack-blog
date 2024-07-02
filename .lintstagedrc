@@ -1,5 +1,7 @@
 {
     "app/frontend/src/**/*.{js,mjs,jsx,ts,tsx,vue}": "pnpm --filter frontend lint-fix",
     "app/frontend/src/**/*.{css,less,scss,vue}": "pnpm --filter frontend lint-style-fix",
+    "app/vite-vue3/src/**/*.{js,mjs,jsx,ts,tsx,vue}": "pnpm --filter vite-vue3 lint-fix",
+    "app/vite-vue3/src/**/*.{css,less,scss,vue}": "pnpm --filter vite-vue3 lint-style-fix",
     "app/backend/src/**/*.js": "pnpm --filter backend lint-fix"
 }

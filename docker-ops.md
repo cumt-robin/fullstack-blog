@@ -75,6 +75,7 @@ docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backe
 |       `-- prod.env.js
 |-- compose.yml
 `-- .env.docker.local
+```
 
 其中 compose.yml 内容参照项目中的 compose.yml。
 
@@ -98,3 +99,17 @@ docker compose --env-file .env.docker.local up -d
 以上是分解步骤，相关命名以你的项目实际情况为准。
 
 以上过程也可以由 CI/CD 完成，具体见 .github/workflows 目录。
+
+## 本地测试生产环境 Docker 镜像
+
+1. 打镜像
+
+```shell
+docker compose -f compose-prod-local.yml build
+```
+
+2. 运行镜像测试
+
+```shell
+docker compose -f compose-prod-local.yml up -d
+```

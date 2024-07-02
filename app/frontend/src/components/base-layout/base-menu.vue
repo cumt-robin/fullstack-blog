@@ -55,7 +55,7 @@
                 <router-link to="/chat"><icon-svg icon="chat" />在线交流</router-link>
             </li>
             <li class="menu__item">
-                <a target="_blank" href="https://github.com/cumt-robin/vue3-ts-blog-frontend" rel="nofollow"
+                <a target="_blank" href="https://github.com/cumt-robin/fullstack-blog" rel="nofollow"
                     ><icon-svg icon="github" />开源地址</a
                 >
             </li>
