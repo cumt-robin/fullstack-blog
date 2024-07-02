@@ -1,5 +1,11 @@
 # frontend
 
+## 3.7.0
+
+### Minor Changes
+
+-   faf9406: feat: 支持 mermaid 图表
+
 ## 3.6.0
 
 ### Minor Changes
