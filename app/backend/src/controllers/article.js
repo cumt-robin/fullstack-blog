@@ -11,8 +11,13 @@ const dbUtils = require("../utils/db");
  * @description 根据传入的count获取阅读排行top N的文章
  */
 router.get("/top_read", (req, res, next) => {
-    const params = req.query;
-    dbUtils.query({ sql: indexSQL.GetTopRead, values: [Number(params.count)] }).then(({ results }) => {
+    const count = Number(req.query.count);
+    if (Number.isNaN(count)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
+    dbUtils.query({ sql: indexSQL.GetTopRead, values: [count] }).then(({ results }) => {
         if (results) {
             res.send({
                 code: "0",
@@ -35,6 +40,11 @@ router.get("/top_read", (req, res, next) => {
 router.get("/page", (req, res, next) => {
     const pageNo = Number(req.query.pageNo || 1);
     const pageSize = Number(req.query.pageSize || 10);
+    if (Number.isNaN(pageNo) || Number.isNaN(pageSize)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     dbUtils.query({ sql: indexSQL.GetPagedArticle, values: [(pageNo - 1) * pageSize, pageSize] }).then(({ results }) => {
         if (results) {
             results[0].forEach(handleCategoryAndTag);
@@ -59,6 +69,11 @@ router.get("/page_admin", (req, res, next) => {
     const params = req.query;
     const pageNo = Number(params.pageNo || 1);
     const pageSize = Number(params.pageSize || 10);
+    if (Number.isNaN(pageNo) || Number.isNaN(pageSize)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     dbUtils.query({ sql: indexSQL.GetArticlePageAdmin, values: [(pageNo - 1) * pageSize, pageSize] }).then(({ results }) => {
         if (results) {
             // 查询成功
@@ -84,6 +99,11 @@ router.get("/page_admin", (req, res, next) => {
  */
 router.get("/neighbors", (req, res, next) => {
     const id = Number(req.query.id);
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     dbUtils.query({ sql: indexSQL.QueryPreAndNextArticleIds, values: [id, id] }).then(({ results }) => {
         if (results) {
             res.send({
@@ -104,7 +124,13 @@ router.get("/neighbors", (req, res, next) => {
  * @description 上报阅读记录
  */
 router.put("/update_read_num", (req, res, next) => {
-    dbUtils.query({ sql: indexSQL.UpdateReadSum, values: [req.body.id] }).then(({ results }) => {
+    const { id } = req.body;
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
+    dbUtils.query({ sql: indexSQL.UpdateReadSum, values: [id] }).then(({ results }) => {
         if (results) {
             res.send({
                 code: "0",
@@ -122,8 +148,13 @@ router.put("/update_read_num", (req, res, next) => {
  * @description 修改私密/公开
  */
 router.put("/update_private", (req, res, next) => {
-    const params = req.body;
-    dbUtils.query({ sql: indexSQL.UpdateArticlePrivate, values: [params.private, params.id] }).then(({ results }) => {
+    const { private: _private, id } = req.body;
+    if (Number.isNaN(id) || (_private !== 0 && _private !== 1)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
+    dbUtils.query({ sql: indexSQL.UpdateArticlePrivate, values: [_private, id] }).then(({ results }) => {
         if (results) {
             res.send({
                 code: "0",
@@ -141,8 +172,13 @@ router.put("/update_private", (req, res, next) => {
  * @description 逻辑删除/恢复
  */
 router.put("/update_deleted", (req, res, next) => {
-    const params = req.body;
-    dbUtils.query({ sql: indexSQL.UpdateArticleDeleted, values: [params.deleted, params.id] }).then(({ results }) => {
+    const { deleted: _deleted, id } = req.body;
+    if (Number.isNaN(id) || (_deleted !== 0 && _deleted !== 1)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
+    dbUtils.query({ sql: indexSQL.UpdateArticleDeleted, values: [_deleted, id] }).then(({ results }) => {
         if (results) {
             res.send({
                 code: "0",
@@ -160,8 +196,13 @@ router.put("/update_deleted", (req, res, next) => {
  * @description 物理删除
  */
 router.delete("/delete", (req, res, next) => {
-    const params = req.query;
-    dbUtils.query({ sql: indexSQL.DeleteArticleById, values: [params.id] }).then(({ results }) => {
+    const id = Number(req.query.id);
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
+    dbUtils.query({ sql: indexSQL.DeleteArticleById, values: [id] }).then(({ results }) => {
         if (results) {
             res.send({
                 code: "0",
@@ -179,8 +220,13 @@ router.delete("/delete", (req, res, next) => {
  * @description 获得文章详情
  */
 router.get("/detail", (req, res, next) => {
-    const params = req.query;
-    dbUtils.query({ sql: indexSQL.GetArticleByID, values: [Number(params.id)] }).then(({ results }) => {
+    const id = Number(req.query.id);
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
+    dbUtils.query({ sql: indexSQL.GetArticleByID, values: [id] }).then(({ results }) => {
         if (results && results.length > 0) {
             const data = results[0];
             if (data.private) {
@@ -219,6 +265,11 @@ router.get("/detail", (req, res, next) => {
 router.get("/page_by_category", (req, res, next) => {
     const pageNo = Number(req.query.pageNo || 1);
     const pageSize = Number(req.query.pageSize || 10);
+    if (Number.isNaN(pageNo) || Number.isNaN(pageSize)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     dbUtils
         .query({
             sql: indexSQL.GetPagedArticleByCategory,
@@ -248,6 +299,11 @@ router.get("/page_by_category", (req, res, next) => {
 router.get("/page_by_tag", (req, res, next) => {
     const pageNo = Number(req.query.pageNo || 1);
     const pageSize = Number(req.query.pageSize || 10);
+    if (Number.isNaN(pageNo) || Number.isNaN(pageSize)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     dbUtils
         .query({ sql: indexSQL.GetPagedArticleByTag, values: [req.query.keyword, (pageNo - 1) * pageSize, pageSize] })
         .then(({ results }) => {
