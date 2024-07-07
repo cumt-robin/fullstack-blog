@@ -1,5 +1,11 @@
 # backend
 
+## 3.5.1
+
+### Patch Changes
+
+-   b498fa4: fix: 文章相关查询参数校验
+
 ## 3.5.0
 
 ### Minor Changes
