@@ -3,7 +3,7 @@ name: frontend_cicd
 on:
   push:
     tags:
-      - 'frontend@[0-9]+.[0-9]+.[0-9]+'
+      - 'frontend@*'
 
 env:
   SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}

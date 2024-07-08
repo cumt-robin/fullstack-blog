@@ -22,8 +22,8 @@ COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
 EXPOSE 80
 
 FROM base AS backend
+RUN npm i -g pm2-runtime
 COPY --from=build /app/backend /usr/src/fullstack-blog/app/backend
 WORKDIR /usr/src/fullstack-blog/app/backend
-USER node
 EXPOSE 8002
-CMD ["node", "src/app.js"]
+CMD ["pnpm", "start-docker-prod"]
