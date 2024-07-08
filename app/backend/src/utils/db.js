@@ -1,10 +1,3 @@
-/*
- * @Author: Tusi
- * @Date: 2019-04-09 16:05:13
- * @LastEditors: Tusi
- * @LastEditTime: 2021-05-27 09:24:43
- * @Description: db helpers
- */
 const mysql = require("mysql2");
 const config = require("../config");
 const errcode = require("./errcode");
@@ -43,7 +36,7 @@ function getConnection(res) {
                         ...errcode.AUTH.UNAUTHORIZED,
                     });
                 }
-                reject(err);
+                throw err;
             } else {
                 resolve(connection);
             }
@@ -70,7 +63,7 @@ function execQuery(options, connection, release = true) {
 
             if (error) {
                 // Handle error after the release.
-                reject(error);
+                throw error;
             } else {
                 resolve({
                     results,

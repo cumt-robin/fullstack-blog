@@ -15,10 +15,15 @@ const dbUtils = require("../utils/db");
  * @description 分页查询评论或留言
  */
 router.get("/page", (req, res, next) => {
+    const params = req.query;
+    const pageNo = Number(params.pageNo || 1);
+    const pageSize = Number(params.pageSize || 10);
+    if (Number.isNaN(pageNo) || Number.isNaN(pageSize)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     dbUtils.getConnection(res).then((connection) => {
-        const params = req.query;
-        const pageNo = Number(params.pageNo || 1);
-        const pageSize = Number(params.pageSize || 10);
         const sql = params.id ? indexSQL.GetCommentsByArticleID : indexSQL.GetMessagesApproved;
         const sqlParams = params.id
             ? [Number(params.id), (pageNo - 1) * pageSize, pageSize, Number(params.id)]
@@ -159,6 +164,11 @@ router.get("/page_not_approved", (req, res, next) => {
     const params = req.query;
     const pageNo = Number(params.pageNo || 1);
     const pageSize = Number(params.pageSize || 10);
+    if (Number.isNaN(pageNo) || Number.isNaN(pageSize)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     const sql = Number(params.type) === 1 ? indexSQL.QueryNotApprovedPageComment : indexSQL.QueryNotApprovedPageMessage;
     const sqlParams = [(pageNo - 1) * pageSize, pageSize];
     dbUtils.query({ sql, values: sqlParams }).then(({ results }) => {
@@ -182,6 +192,11 @@ router.get("/page_not_approved", (req, res, next) => {
  */
 router.put("/review", (req, res, next) => {
     const params = req.body;
+    if (Number.isNaN(params.id) || Number.isNaN(params.approved)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     dbUtils.query({ sql: indexSQL.UpdateApprovedByCommentID, values: [params.approved, params.id] }).then(({ results }) => {
         if (results) {
             if (Number(params.approved) === 1 && params.email) {
@@ -232,6 +247,11 @@ router.get("/page_admin", (req, res, next) => {
     const params = req.query;
     const pageNo = Number(params.pageNo || 1);
     const pageSize = Number(params.pageSize || 10);
+    if (Number.isNaN(pageNo) || Number.isNaN(pageSize)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     const sqlStr = Number(params.type) === 1 ? indexSQL.GetPageCommentAdmin : indexSQL.GetPageMessageAdmin;
     dbUtils.query({ sql: sqlStr, values: [(pageNo - 1) * pageSize, pageSize] }).then(({ results }) => {
         if (results) {
@@ -256,6 +276,11 @@ router.get("/page_admin", (req, res, next) => {
  */
 router.put("/update", (req, res, next) => {
     const params = req.body;
+    if (Number.isNaN(params.id)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     dbUtils.query({ sql: indexSQL.UpdateComment, values: [params, params.id] }).then(({ results }) => {
         if (results) {
             // 查询成功
@@ -277,8 +302,13 @@ router.put("/update", (req, res, next) => {
  * @description 删除评论
  */
 router.delete("/delete", (req, res, next) => {
-    const params = req.query;
-    dbUtils.query({ sql: indexSQL.DeleteComment, values: [params.id] }).then(({ results }) => {
+    const id = Number(req.query.id);
+    if (Number.isNaN(id)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
+    dbUtils.query({ sql: indexSQL.DeleteComment, values: [id] }).then(({ results }) => {
         if (results) {
             // 查询成功
             res.send({

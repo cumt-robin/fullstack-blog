@@ -2,78 +2,84 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 
 const router = express.Router();
+const { body } = require("express-validator");
 const indexSQL = require("../sql");
 const emailHandler = require("../utils/email");
 const config = require("../config");
 const errcode = require("../utils/errcode");
 const dbUtils = require("../utils/db");
+const { validateInterceptor } = require("../utils/validate");
 
 /**
  * @description 登录
  */
-router.put("/login", (req, res, next) => {
-    const params = req.body;
-    if (!req.session.captcha) {
-        res.send({
-            code: "001001",
-            data: null,
-            msg: "验证码有误，换一张试试呢",
-        });
-    } else if (params.captcha.toLowerCase() !== req.session.captcha.toLowerCase()) {
-        res.send({
-            code: "001002",
-            data: null,
-            msg: "验证码输入有误",
-        });
-    } else {
-        dbUtils.getConnection(res).then((connection) => {
-            dbUtils
-                .query({ sql: indexSQL.QueryByUserNameAndPwd, values: [params.userName, params.password] }, connection, false)
-                .then(({ results }) => {
-                    if (results.length > 0) {
-                        const user = results[0];
-                        const signResult = jwt.sign(
-                            {
-                                id: user.id,
-                                userName: user.user_name,
-                                roleId: user.role_id,
-                                roleName: user.role_name,
-                            },
-                            config.jwt.secret,
-                            {
-                                expiresIn: `${config.jwt.expireDays}d`,
-                            }
-                        );
-                        // 更新登录时间
-                        dbUtils.query(
-                            {
-                                sql: indexSQL.UpdateUserById,
-                                values: [{ last_login_time: new Date() }, user.id],
-                            },
-                            connection,
-                            false
-                        );
-                        res.send({
-                            code: "0",
-                            data: {
-                                ...results[0],
-                                token: signResult,
-                            },
-                        });
-                    } else {
-                        res.send({
-                            code: "001003",
-                            data: null,
-                            msg: "用户名或密码输入有误",
-                        });
-                    }
-                })
-                .finally(() => {
-                    connection.release();
-                });
-        });
+router.put(
+    "/login",
+    [body("captcha").isString(), body("userName").isString(), body("password").isString(), validateInterceptor],
+    (req, res, next) => {
+        const params = req.body;
+        if (!req.session.captcha) {
+            res.send({
+                code: "001001",
+                data: null,
+                msg: "验证码有误，换一张试试呢",
+            });
+        } else if (params.captcha.toLowerCase() !== req.session.captcha.toLowerCase()) {
+            res.send({
+                code: "001002",
+                data: null,
+                msg: "验证码输入有误",
+            });
+        } else {
+            dbUtils.getConnection(res).then((connection) => {
+                dbUtils
+                    .query({ sql: indexSQL.QueryByUserNameAndPwd, values: [params.userName, params.password] }, connection, false)
+                    .then(({ results }) => {
+                        if (results.length > 0) {
+                            const user = results[0];
+                            const signResult = jwt.sign(
+                                {
+                                    id: user.id,
+                                    userName: user.user_name,
+                                    roleId: user.role_id,
+                                    roleName: user.role_name,
+                                },
+                                config.jwt.secret,
+                                {
+                                    expiresIn: `${config.jwt.expireDays}d`,
+                                }
+                            );
+                            // 更新登录时间
+                            dbUtils.query(
+                                {
+                                    sql: indexSQL.UpdateUserById,
+                                    values: [{ last_login_time: new Date() }, user.id],
+                                },
+                                connection,
+                                false
+                            );
+                            res.send({
+                                code: "0",
+                                data: {
+                                    ...results[0],
+                                    token: signResult,
+                                },
+                            });
+                        } else {
+                            res.send({
+                                code: "001003",
+                                data: null,
+                                msg: "用户名或密码输入有误",
+                            });
+                        }
+                    })
+                    .finally(() => {
+                        connection.release();
+                    });
+            });
+        }
     }
-});
+);
 
 /**
  * @description 退出登录

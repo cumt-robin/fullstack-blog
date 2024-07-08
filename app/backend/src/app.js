@@ -8,6 +8,7 @@ const helmet = require("helmet");
 // const compression = require('compression');
 const routeMiddleware = require("./routes/index");
 const { startWs } = require("./utils/ws");
+const { ValidationError } = require("./utils/validate");
 
 const app = express();
 
@@ -60,6 +61,10 @@ app.use((req, res, next) => {
 
 // error handler
 app.use((err, req, res, next) => {
+    if (err instanceof ValidationError) {
+        return res.status(err.statusCode).json(err.errorBody);
+    }
+
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get("env") === "development" ? err : {};
