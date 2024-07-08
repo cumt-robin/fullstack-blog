@@ -20,6 +20,7 @@
         "ejs": "~2.5.7",
         "express": "~4.17.2",
         "express-session": "~1.17.2",
+        "express-validator": "^7.1.0",
         "helmet": "^3.18.0",
         "jsonwebtoken": "^9.0.2",
         "lodash": "^4.17.21",

@@ -78,6 +78,11 @@ router.get("/admin/page", (req, res, next) => {
     const params = req.query;
     const pageNo = Number(params.pageNo || 1);
     const pageSize = Number(params.pageSize || 10);
+    if (Number.isNaN(pageNo) || Number.isNaN(pageSize)) {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     const sqlParams = [(pageNo - 1) * pageSize, pageSize];
     dbUtils.query({ sql: indexSQL.GetCategoryAdminPage, values: sqlParams }).then(({ results }) => {
         if (results) {
@@ -104,6 +109,11 @@ router.get("/admin/page", (req, res, next) => {
  */
 router.put("/admin/update", (req, res, next) => {
     const { category_name, poster, id } = req.body;
+    if (Number.isNaN(id) || typeof category_name !== "string" || typeof poster !== "string") {
+        return res.status(400).json({
+            msg: "请求有误",
+        });
+    }
     const params = {
         category_name,
         poster,
