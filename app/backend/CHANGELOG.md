@@ -1,5 +1,11 @@
 # backend
 
+## 3.5.3
+
+### Patch Changes
+
+-   cb810b5: fix: 引入 express-validator 做参数校验
+
 ## 3.5.2
 
 ### Patch Changes
