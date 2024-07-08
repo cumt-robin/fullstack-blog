@@ -1,5 +1,11 @@
 # backend
 
+## 3.5.2
+
+### Patch Changes
+
+-   3a58abe: fix: backend docker 采用 pm2-runtime 部署
+
 ## 3.5.1
 
 ### Patch Changes
