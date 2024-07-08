@@ -7,6 +7,7 @@
         "start-prod": "pm2 start ecosystem.config.js --env production",
         "restart": "pm2 restart blog",
         "docker-dev": "pm2-dev start process-docker-dev.json",
+        "start-docker-prod": "pm2-runtime start process-docker-prod.json",
         "deploy-setup:prod": "pm2 deploy production setup",
         "deploy:prod": "pm2 deploy production",
         "lint": "eslint --ext .js --cache src",
