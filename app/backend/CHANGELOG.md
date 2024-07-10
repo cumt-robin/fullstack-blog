@@ -1,5 +1,12 @@
 # backend
 
+## 3.5.4
+
+### Patch Changes
+
+-   b19fdad: fix: Tag Controller 参数校验完善
+-   a3b0de0: fix: Category Controller 参数校验完善
+
 ## 3.5.3
 
 ### Patch Changes
