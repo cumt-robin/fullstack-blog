@@ -85,7 +85,6 @@ router.post(
         validateInterceptor,
     ],
     (req, res, next) => {
-        // XSS防护
         const params = matchedData(req);
         params.content = xss(params.content);
         // 默认是未审核状态
@@ -185,7 +184,7 @@ router.get(
     ],
     (req, res, next) => {
         const { pageNo, pageSize, type } = matchedData(req);
-        const sql = type ? indexSQL.QueryNotApprovedPageComment : indexSQL.QueryNotApprovedPageMessage;
+        const sql = type === 1 ? indexSQL.QueryNotApprovedPageComment : indexSQL.QueryNotApprovedPageMessage;
         const sqlParams = [(pageNo - 1) * pageSize, pageSize];
         dbUtils.query({ sql, values: sqlParams }).then(({ results }) => {
             if (results) {
@@ -296,7 +295,7 @@ router.get(
 );
 
 /**
- * @description 修改评论
+ * @description 修改评论，暂时只定义了修改 deleted 状态
  */
 router.put("/update", [body("id").isInt(), body("deleted").optional().isIn([0, 1]), validateInterceptor], (req, res, next) => {
     const params = matchedData(req);
