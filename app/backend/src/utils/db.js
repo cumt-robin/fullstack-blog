@@ -97,14 +97,14 @@ function execTransaction(connection, task) {
     return new Promise((resolve, reject) => {
         connection.beginTransaction((err) => {
             if (err) {
-                reject(err);
+                throw err;
             }
             task.then(
                 (resp) => {
                     connection.commit((err) => {
                         if (err) {
                             connection.rollback(() => {
-                                reject(err);
+                                throw err;
                             });
                         } else {
                             resolve(resp);
@@ -113,12 +113,12 @@ function execTransaction(connection, task) {
                 },
                 (err) => {
                     connection.rollback(() => {
-                        reject(err);
+                        throw err;
                     });
                 }
             ).catch((err) => {
                 connection.rollback(() => {
-                    reject(err);
+                    throw err;
                 });
             });
         });

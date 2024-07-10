@@ -34,14 +34,14 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 - [x] Vite + Vue3 + Pinia: 见 app/vite-vue3
 - [x] Vue CLI + Vue3 + Vuex: 见 app/frontend
-- [] CRA + React
-- [] Vite + React
-- [] Vite + Nuxt
+- [ ] CRA + React
+- [ ] Vite + React
+- [ ] Vite + Nuxt
 
 后端部分：
 
 - [x] Express + MySQL: 见 app/backend
-- [] NestJS 开发中...
+- [ ] NestJS 开发中...
 
 ## Features
 
