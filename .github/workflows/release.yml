@@ -7,19 +7,17 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-env:
-  GITHUB_TOKEN: ${{secrets.PERSONAL_TOKEN}}
 
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      contents: write
+      pull-requests: write
+      issues: write
     steps:
-      - name: Set Git User
-        run: |
-          git config --global user.email "1148121254@qq.com"
-          git config --global user.name "cumt-robin"
-
       - name: Checkout Repo
         uses: actions/checkout@v4
 
@@ -45,4 +43,3 @@ jobs:
           title: "bot: version packages"
           commit: "chore: version packages"
           createGithubReleases: true
-          setupGitUser: false
