@@ -15,6 +15,11 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
+      - name: Set Git User
+        run: |
+          git config --global user.email "1148121254@qq.com"
+          git config --global user.name "cumt-robin"
+
       - name: Checkout Repo
         uses: actions/checkout@v4
 
