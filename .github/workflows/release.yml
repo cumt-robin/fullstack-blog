@@ -7,19 +7,15 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
-
 jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    permissions:
-      actions: write
-      contents: write
-      pull-requests: write
-      issues: write
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PERSONAL_TOKEN }}
 
       - name: Setup Node.js 18
         uses: actions/setup-node@v4
@@ -43,3 +39,5 @@ jobs:
           title: "bot: version packages"
           commit: "chore: version packages"
           createGithubReleases: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
