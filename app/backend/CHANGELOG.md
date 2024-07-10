@@ -1,5 +1,12 @@
 # backend
 
+## 3.5.5
+
+### Patch Changes
+
+-   c1eb96f: fix: Comment Controller 参数校验修改
+-   c9f550e: fix: Reply Controller 参数校验修改
+
 ## 3.5.4
 
 ### Patch Changes
