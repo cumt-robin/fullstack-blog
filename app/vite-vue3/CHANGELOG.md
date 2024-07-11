@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.3
+
+### Patch Changes
+
+-   b1cc483: fix: vite-vue3 项目百度统计代码
+
 ## 1.0.2
 
 ### Patch Changes
