@@ -35,14 +35,14 @@ import { useAsyncLoading } from "@/hooks/async";
 export default defineComponent({
     name: "Tag",
     components: {
-        [Badge.name]: Badge,
-        [Tag.name]: Tag,
+        [Badge.name as string]: Badge,
+        [Tag.name as string]: Tag,
     },
     setup() {
         const tagList = ref<TagDTO[]>([]);
 
         const handleGetAllTag = async () => {
-            const res = await tagService.all({ getCount: true });
+            const res = await tagService.all({ getCount: "1" });
             tagList.value = res.data;
         };
 

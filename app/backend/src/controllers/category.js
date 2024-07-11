@@ -11,9 +11,9 @@ const { validateInterceptor } = require("../utils/validate");
  * @param {Boolean} getCount 是否需要同时查出每个分类下的文章数量
  * @description 查询分类
  */
-router.get("/all", [query("getCount").optional().isBoolean(), validateInterceptor], (req, res, next) => {
+router.get("/all", [query("getCount").optional().isIn(["0", "1"]).default("0"), validateInterceptor], (req, res, next) => {
     const { getCount } = matchedData(req);
-    const sql = getCount ? indexSQL.QueryCategoryAndCount : indexSQL.QueryAllCategories;
+    const sql = getCount === "1" ? indexSQL.QueryCategoryAndCount : indexSQL.QueryAllCategories;
     dbUtils.query(sql).then(({ results }) => {
         if (results) {
             res.send({

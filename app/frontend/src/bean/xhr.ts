@@ -20,11 +20,11 @@ export interface QueryHotColumnModel extends PlainObject {
 }
 
 export interface QueryCategoryModel extends PlainObject {
-    getCount?: boolean;
+    getCount?: "0" | "1";
 }
 
 export interface QueryTagModel extends PlainObject {
-    getCount?: boolean;
+    getCount?: "0" | "1";
 }
 
 export interface QueryCommentPageModel extends QueryPageModel {
