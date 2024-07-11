@@ -19,7 +19,7 @@ const { validateInterceptor } = require("../utils/validate");
 router.get(
     "/page",
     [
-        query("id").notEmpty().isNumeric().toInt(),
+        query("id").optional().isNumeric().toInt(),
         query("pageNo").optional().isNumeric().toInt().default(1),
         query("pageSize").optional().isNumeric().toInt().default(10),
         validateInterceptor,
