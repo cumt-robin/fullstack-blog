@@ -1,5 +1,11 @@
 # backend
 
+## 3.5.8
+
+### Patch Changes
+
+-   fdb8f8d: fix: comment page id 参数校验 bug
+
 ## 3.5.7
 
 ### Patch Changes
