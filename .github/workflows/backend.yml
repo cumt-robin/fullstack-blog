@@ -11,10 +11,12 @@ env:
 jobs:
   extract:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.extract_version.outputs.version }}
     steps:
-    - name: Extract Version To Output
-      run: |
-        echo "version=$(echo ${{ github.ref_name }} | sed 's/backend@//')" >> $GITHUB_OUTPUT
+      - id: extract_version
+        run: |
+          echo "version=$(echo ${{ github.ref_name }} | sed 's/backend@//')" >> $GITHUB_OUTPUT
 
   build:
     needs: extract
@@ -68,4 +70,3 @@ jobs:
           END
 
           ssh remote < ~/remote.sh
-        shell: bash

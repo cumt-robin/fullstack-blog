@@ -2,11 +2,10 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 
 const router = express.Router();
-const { body } = require("express-validator");
+const { body, matchedData } = require("express-validator");
 const indexSQL = require("../sql");
 const emailHandler = require("../utils/email");
 const config = require("../config");
-const errcode = require("../utils/errcode");
 const dbUtils = require("../utils/db");
 const { validateInterceptor } = require("../utils/validate");
 
@@ -15,16 +14,16 @@ const { validateInterceptor } = require("../utils/validate");
  */
 router.put(
     "/login",
-    [body("captcha").isString(), body("userName").isString(), body("password").isString(), validateInterceptor],
+    [body("captcha").notEmpty(), body("userName").notEmpty(), body("password").notEmpty(), validateInterceptor],
     (req, res, next) => {
-        const params = req.body;
+        const { captcha, userName, password } = matchedData(req);
         if (!req.session.captcha) {
             res.send({
                 code: "001001",
                 data: null,
                 msg: "验证码有误，换一张试试呢",
             });
-        } else if (params.captcha.toLowerCase() !== req.session.captcha.toLowerCase()) {
+        } else if (captcha.toLowerCase() !== req.session.captcha.toLowerCase()) {
             res.send({
                 code: "001002",
                 data: null,
@@ -33,7 +32,7 @@ router.put(
         } else {
             dbUtils.getConnection(res).then((connection) => {
                 dbUtils
-                    .query({ sql: indexSQL.QueryByUserNameAndPwd, values: [params.userName, params.password] }, connection, false)
+                    .query({ sql: indexSQL.QueryByUserNameAndPwd, values: [userName, password] }, connection, false)
                     .then(({ results }) => {
                         if (results.length > 0) {
                             const user = results[0];
@@ -85,6 +84,7 @@ router.put(
  * @description 退出登录
  */
 router.put("/logout", (req, res, next) => {
+    // TODO: jwt 进入黑名单
     res.send({
         code: "0",
     });
