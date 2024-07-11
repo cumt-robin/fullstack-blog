@@ -42,7 +42,7 @@ export default defineComponent({
         const categoryList = ref<CategoryDTO[]>([]);
 
         const handleGetAllCategory = async () => {
-            const res = await categoryService.all({ getCount: true });
+            const res = await categoryService.all({ getCount: "1" });
             categoryList.value = res.data;
         };
 

@@ -70,8 +70,8 @@ export default defineComponent({
     components: {
         CardComment,
         CommentUserInfo,
-        [Input.name]: Input,
-        [Modal.name]: Modal,
+        [Input.name as string]: Input,
+        [Modal.name as string]: Modal,
     },
     props: {
         articleId: {
@@ -179,8 +179,6 @@ export default defineComponent({
                 article_id: props.articleId,
                 // 用article_id来区分是留言板还是文章评论，留言是没有文章id的，而文章评论是有的
                 content: purifiedContent,
-                // 默认是未审核状态
-                approved: 0,
                 // 回访url
                 jump_url: window.location.href,
                 // 用户信息

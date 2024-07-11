@@ -34,7 +34,7 @@ import { useAsyncLoading } from "@/hooks/async";
 const tagList = ref<TagDTO[]>([]);
 
 const handleGetAllTag = async () => {
-    const res = await tagService.all({ getCount: true });
+    const res = await tagService.all({ getCount: "1" });
     tagList.value = res.data;
 };
 

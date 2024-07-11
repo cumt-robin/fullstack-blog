@@ -79,7 +79,7 @@ import { replyService } from "@/services/reply";
 export default defineComponent({
     name: "CardComment",
     components: {
-        [Input.name]: Input,
+        [Input.name as string]: Input,
     },
     emits: ["userInfoEmpty", "setActive"],
     props: {
@@ -141,8 +141,6 @@ export default defineComponent({
                 comment_id: props.comment.id,
                 // 父级回复的id，这里是一级回复表单，所以为null即可
                 parent_id: null,
-                // 默认是待审核状态
-                approved: 0,
                 // 记录网页的url，用于发邮件时附上链接
                 jump_url: window.location.href,
                 // 文章id
@@ -215,8 +213,6 @@ export default defineComponent({
                 comment_id: props.comment.id,
                 // 父级回复的id
                 parent_id: subReplyForm.parent_id,
-                // 默认是待审核状态
-                approved: 0,
                 // 记录网页的url，用于发邮件时附上链接
                 jump_url: window.location.href,
                 // 文章id
