@@ -1,5 +1,11 @@
 # backend
 
+## 3.5.7
+
+### Patch Changes
+
+-   0f24738: fix: 部分校验 bug 修复
+
 ## 3.5.6
 
 ### Patch Changes

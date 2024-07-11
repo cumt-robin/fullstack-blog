@@ -1,5 +1,11 @@
 # frontend
 
+## 3.7.1
+
+### Patch Changes
+
+-   0f24738: fix: 部分校验 bug 修复
+
 ## 3.7.0
 
 ### Minor Changes
