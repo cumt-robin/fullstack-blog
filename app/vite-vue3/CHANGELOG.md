@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.4
+
+### Patch Changes
+
+-   e5a4cf8: chore: 增加 robots.txt 配置
+
 ## 1.0.3
 
 ### Patch Changes
