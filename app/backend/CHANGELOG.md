@@ -1,5 +1,11 @@
 # backend
 
+## 3.5.6
+
+### Patch Changes
+
+-   0bc693d: fix: User Controller 参数校验完善
+
 ## 3.5.5
 
 ### Patch Changes
