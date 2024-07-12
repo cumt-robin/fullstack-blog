@@ -1,8 +1,8 @@
 services:
-  frontend:
+  vite-vue3:
     build:
-      target: frontend
-    image: fullstack-blog-frontend:latest
+      target: vite-vue3-frontend
+    image: fullstack-blog-vite-vue3:latest
     ports:
       - "3000:80"
     environment:

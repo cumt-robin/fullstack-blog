@@ -1,10 +1,20 @@
 services:
-  frontend:
+  vite-vue3:
     build:
-      target: frontend
-    image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/fullstack-blog-frontend:${FRONTEND_VERSION:-latest}
+      target: vite-vue3-frontend
+    image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/fullstack-blog-vite-vue3:${VITE_VUE3_VERSION:-latest}
     ports:
       - "3000:80"
+    environment:
+      - BACKEND_PORT=8002
+    command: /bin/bash -c "envsubst '$$BACKEND_PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+
+  webpack-vue3:
+    build:
+      target: webpack-vue3-frontend
+    image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/fullstack-blog-webpack-vue3:${WEBPACK_VUE3_VERSION:-latest}
+    ports:
+      - "3001:80"
     environment:
       - BACKEND_PORT=8002
     command: /bin/bash -c "envsubst '$$BACKEND_PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"

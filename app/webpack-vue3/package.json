@@ -1,5 +1,5 @@
 {
-    "name": "frontend",
+    "name": "webpack-vue3",
     "version": "3.7.1",
     "private": true,
     "scripts": {
