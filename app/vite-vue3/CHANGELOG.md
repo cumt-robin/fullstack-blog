@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.7
+
+### Patch Changes
+
+-   4a2edf3: chore: backend 项目改为 express-server
+
 ## 1.0.6
 
 ### Patch Changes

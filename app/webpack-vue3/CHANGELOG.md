@@ -1,5 +1,11 @@
 # webpack-vue3
 
+## 3.7.4
+
+### Patch Changes
+
+-   4a2edf3: chore: backend 项目改为 express-server
+
 ## 3.7.3
 
 ### Patch Changes
