@@ -1,5 +1,11 @@
 # frontend
 
+## 3.7.2
+
+### Patch Changes
+
+-   7303cbe: ci: 支持 webpack-vue3 部署
+
 ## 3.7.1
 
 ### Patch Changes
