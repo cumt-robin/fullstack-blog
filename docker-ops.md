@@ -23,7 +23,7 @@ docker compose -f compose-dev.yml up -d
 ```shell
 docker build --target vite-vue3-frontend -t fullstack-blog-vite-vue3 .
 
-docker build --target backend -t fullstack-blog-backend .
+docker build --target express-backend -t fullstack-blog-express .
 ```
 
 使用 docker compose
@@ -41,12 +41,12 @@ docker login --username=xxx registry.cn-hangzhou.aliyuncs.com
 # 打 tag
 docker tag fullstack-blog-vite-vue3 registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-vite-vue3:3.0.0
 
-docker tag fullstack-blog-backend registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backend:3.0.0
+docker tag fullstack-blog-express registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-express:3.0.0
 
 # 推送镜像
 docker push registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-vite-vue3:3.0.0
 
-docker push registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backend:3.0.0
+docker push registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-express:3.0.0
 ```
 
 3. 登录服务器
@@ -58,7 +58,7 @@ docker login --username=xxx registry.cn-hangzhou.aliyuncs.com
 
 docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-vite-vue3:3.0.0
 
-docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backend:3.0.0
+docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-express:3.0.0
 ```
 
 5. 【仅首次】准备项目资源文件
@@ -69,7 +69,7 @@ docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backe
 
 ```
 .
-|-- backend
+|-- express-server
 |   `-- config
 |       |-- env.js
 |       `-- prod.env.js
@@ -86,10 +86,10 @@ DOCKER_REGISTRY=your_image_registry
 DOCKER_NAMESPACE=your_registry_namespace
 VITE_VUE3_VERSION=1.0.4
 WEBPACK_VUE3_VERSION=3.7.1
-BACKEND_VERSION=3.5.0
+EXPRESS_SERVER_VERSION=3.5.0
 ```
 
-`backend/config`目录下放置的是后端服务的一些配置，其中 `env.js`参照项目中的`app/backend/config/env.example.js`，其中 `prod.env.js`参照项目中的`app/backend/config/prod.env.example.js`。
+`express-server/config`目录下放置的是后端服务的一些配置，其中 `env.js`参照项目中的`app/express-server/src/config/env.example.js`，其中 `prod.env.js`参照项目中的`app/express-server/src/config/prod.env.example.js`。
 
 6. 重新运行
 

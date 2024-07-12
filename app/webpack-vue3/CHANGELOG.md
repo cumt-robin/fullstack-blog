@@ -1,4 +1,4 @@
-# frontend
+# webpack-vue3
 
 ## 3.7.3
 

@@ -9,15 +9,15 @@ services:
       - BACKEND_PORT=8002
     command: /bin/bash -c "envsubst '$$BACKEND_PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && cat /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
-  backend:
+  express-server:
     build:
-      target: backend
-    image: fullstack-blog-backend:latest
+      target: express-backend
+    image: fullstack-blog-express:latest
     ports:
       - "8002:8002"
     volumes:
-      - ./app/backend/src/config/env.js:/usr/src/fullstack-blog/app/backend/src/config/env.js
-      - ./app/backend/src/config/prod.env.js:/usr/src/fullstack-blog/app/backend/src/config/prod.env.js
+      - ./app/express-server/src/config/env.js:/usr/src/fullstack-blog/app/express-server/src/config/env.js
+      - ./app/express-server/src/config/prod.env.js:/usr/src/fullstack-blog/app/express-server/src/config/prod.env.js
     environment:
       - NODE_ENV=production
       - PORT=8002

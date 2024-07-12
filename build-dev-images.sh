@@ -1,6 +1,6 @@
 #!/bin/bash
 
 docker build . -f Dockerfile.dev --target vite-vue3-frontend --tag fullstack-blog-vite-vue3:dev
-docker build . -f Dockerfile.dev --target backend --tag fullstack-blog-backend:dev
+docker build . -f Dockerfile.dev --target express-backend --tag fullstack-blog-express:dev
 
 echo "build images successfully."
