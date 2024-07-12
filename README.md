@@ -32,8 +32,8 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 其中前端部分：
 
-- [x] Vite + Vue3 + Pinia: 见 app/vite-vue3
-- [x] Vue CLI + Vue3 + Vuex: 见 app/frontend
+- [x] Vite + Vue3 + Pinia: 代码见目录 app/vite-vue3，查看线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
+- [x] Vue CLI + Vue3 + Vuex: 代码见目录 app/webpack-vue3，查看线上效果点击[webpack-vue3-blog.wbjiang.cn](https://webpack-vue3-blog.wbjiang.cn/)
 - [ ] CRA + React
 - [ ] Vite + React
 - [ ] Vite + Nuxt
@@ -47,6 +47,7 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 - 文章分页
 - 文章详情
+- 热门文章
 - 分类及分类下文章
 - 标签及标签下文章
 - 留言板

@@ -4,12 +4,6 @@ dist
 .eslintcache
 .stylelintcache
 
-# backend
-app/backend/src/config/dev.env.js
-app/backend/src/config/env.js
-app/backend/src/config/prod.env.js
-app/backend/deploy.config.js
-
 # local env files
 .env.local
 .env.*.local

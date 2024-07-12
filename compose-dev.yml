@@ -1,13 +1,13 @@
 services:
-  frontend:
-    image: fullstack-blog-frontend:dev
+  vite-vue3:
+    image: fullstack-blog-vite-vue3:dev
     ports:
       - "3000:3000"
     volumes:
-      - ./app/vite-vue3/src:/usr/src/fullstack-blog/app/frontend/src
-      - ./app/vite-vue3/vite.config.docker.ts:/usr/src/fullstack-blog/app/frontend/vite.config.ts
-      - ./app/vite-vue3/index.html:/usr/src/fullstack-blog/app/frontend/index.html
-      - ./app/vite-vue3/public:/usr/src/fullstack-blog/app/frontend/public
+      - ./app/vite-vue3/src:/usr/src/fullstack-blog/app/vite-vue3/src
+      - ./app/vite-vue3/vite.config.docker.ts:/usr/src/fullstack-blog/app/vite-vue3/vite.config.ts
+      - ./app/vite-vue3/index.html:/usr/src/fullstack-blog/app/vite-vue3/index.html
+      - ./app/vite-vue3/public:/usr/src/fullstack-blog/app/vite-vue3/public
       - ./.prettierrc.json:/usr/src/fullstack-blog/.prettierrc.json
       - ./.prettierignore:/usr/src/fullstack-blog/.prettierignore
     environment:

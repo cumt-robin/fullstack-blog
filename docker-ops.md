@@ -21,7 +21,7 @@ docker compose -f compose-dev.yml up -d
 使用单独的命令：
 
 ```shell
-docker build --target frontend -t fullstack-blog-frontend .
+docker build --target vite-vue3-frontend -t fullstack-blog-vite-vue3 .
 
 docker build --target backend -t fullstack-blog-backend .
 ```
@@ -39,12 +39,12 @@ docker compose build
 docker login --username=xxx registry.cn-hangzhou.aliyuncs.com
 
 # 打 tag
-docker tag fullstack-blog-frontend registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-frontend:3.0.0
+docker tag fullstack-blog-vite-vue3 registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-vite-vue3:3.0.0
 
 docker tag fullstack-blog-backend registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backend:3.0.0
 
 # 推送镜像
-docker push registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-frontend:3.0.0
+docker push registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-vite-vue3:3.0.0
 
 docker push registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backend:3.0.0
 ```
@@ -56,7 +56,7 @@ docker push registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backe
 ```shell
 docker login --username=xxx registry.cn-hangzhou.aliyuncs.com
 
-docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-frontend:3.0.0
+docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-vite-vue3:3.0.0
 
 docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backend:3.0.0
 ```
@@ -84,8 +84,9 @@ docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-backe
 ```
 DOCKER_REGISTRY=your_image_registry
 DOCKER_NAMESPACE=your_registry_namespace
-FRONTEND_VERSION=3.0.0
-BACKEND_VERSION=3.0.0
+VITE_VUE3_VERSION=1.0.4
+WEBPACK_VUE3_VERSION=3.7.1
+BACKEND_VERSION=3.5.0
 ```
 
 `backend/config`目录下放置的是后端服务的一些配置，其中 `env.js`参照项目中的`app/backend/config/env.example.js`，其中 `prod.env.js`参照项目中的`app/backend/config/prod.env.example.js`。
