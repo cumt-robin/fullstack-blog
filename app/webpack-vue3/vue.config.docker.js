@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require("path");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const theme = require("./antd-theme.js");
+const Components = require("unplugin-vue-components/webpack").default;
+const { AntDesignVueResolver, ElementPlusResolver } = require("unplugin-vue-components/resolvers");
+const { DefinePlugin } = require("webpack");
 
 // function addStyleResource(rule) {
 //     rule.use("style-resource")
@@ -35,13 +38,30 @@ module.exports = {
             poll: 1000,
         },
     },
-    transpileDependencies: ['mermaid'],
+    transpileDependencies: ["mermaid"],
+    configureWebpack: {
+        devtool: process.env.NODE_ENV === "production" ? 'hidden-source-map' : 'eval-cheap-module-source-map',
+        plugins: [
+            new DefinePlugin({
+                __VUE_OPTIONS_API__: true,
+                __VUE_PROD_DEVTOOLS__: false,
+                __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
+            })
+        ]
+    },
     chainWebpack: (config) => {
+        config.plugin("unplugin-vue-components").use(
+            Components({
+                resolvers: [AntDesignVueResolver({ importStyle: 'less', resolveIcons: true }), ElementPlusResolver({ importStyle: true })],
+            })
+        );
+
         // html-webpack-plugin
         config.plugin("html").tap((args) => {
             args[0].title = process.env.VUE_APP_TITLE;
             return args;
         });
+
         // 本来打算使用 style-resources-loader 自动注入scss,但是发现对 element 使用的一些 sass 特性支持有点问题
         // const types = ["vue-modules", "vue", "normal-modules", "normal"];
         // types.forEach((type) => addStyleResource(config.module.rule("scss").oneOf(type)));
@@ -77,9 +97,6 @@ module.exports = {
             process.env.NODE_ENV === "production",
             (config) => {
                 // 生产环境
-
-                // devtool设置
-                config.devtool("nosources-source-map");
 
                 // 内联 runtimeChunk
                 config

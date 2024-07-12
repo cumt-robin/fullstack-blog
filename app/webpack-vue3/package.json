@@ -15,7 +15,7 @@
         "webpack-output": "vue inspect > output.js"
     },
     "dependencies": {
-        "ant-design-vue": "~2.1.6",
+        "ant-design-vue": "~3.3.0-beta.4",
         "axios": "^0.21.1",
         "bezier-easing": "^2.1.0",
         "core-js": "^3.6.5",
@@ -31,7 +31,7 @@
         "mitt": "^3.0.1",
         "qs": "^6.10.1",
         "socket.io-client": "^2.1.1",
-        "vue": "~3.0.11",
+        "vue": "~3.3.13",
         "vue-router": "~4.0.8",
         "vuex": "~4.0.1"
     },
@@ -81,6 +81,7 @@
         "stylelint-scss": "^3.19.0",
         "typescript": "~4.1.5",
         "typescript-eslint": "^7.13.1",
+        "unplugin-vue-components": "^0.27.2",
         "vue-jest": "^5.0.0-0",
         "webpack": "^4.0.0",
         "webpack-bundle-analyzer": "^4.4.2"

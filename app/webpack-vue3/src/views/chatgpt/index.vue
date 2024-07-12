@@ -51,7 +51,7 @@
                         <a-textarea
                             v-model:value="chatForm.chatContent"
                             placeholder="输入内容后点击发送..."
-                            :autosize="{ minRows: 2, maxRows: 4 }"
+                            :auto-size="{ minRows: 2, maxRows: 4 }"
                             @keydown="onKeydownChat"
                         />
                     </a-form-item>
@@ -84,27 +84,13 @@
 
 <script>
 import { defineComponent, watch, ref, reactive, nextTick } from "vue";
-import { DownOutlined } from "@ant-design/icons-vue";
-import { Card, Dropdown, Form, Input, Menu, message, Radio } from "ant-design-vue";
+import { message } from "ant-design-vue";
 import { format } from "@/utils/date-utils";
 import { setScrollTop } from "@/utils/dom";
 import { chatgptService } from "@/services/chatgpt";
 import { useAsyncLoading } from "@/hooks/async";
 
 export default defineComponent({
-    components: {
-        DownOutlined,
-        [Dropdown.name]: Dropdown,
-        [Menu.name]: Menu,
-        [Menu.Item.name]: Menu.Item,
-        [Form.name]: Form,
-        [Form.Item.name]: Form.Item,
-        [Input.name]: Input,
-        [Input.TextArea.name]: Input.TextArea,
-        [Radio.name]: Radio,
-        [Radio.Group.name]: Radio.Group,
-        [Card.name]: Card,
-    },
     setup() {
         const msgList = ref([
             {

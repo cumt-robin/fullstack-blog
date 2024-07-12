@@ -1,8 +1,8 @@
 <template>
     <section class="admin-page-wrapper">
         <a-table row-key="id" :data-source="tagList" :columns="columns" :loading="loading" :scroll="{ x: 1500 }" :pagination="pagination">
-            <template #action="{ record }">
-                <a-space>
+            <template #bodyCell="{ column, record }">
+                <a-space v-if="column.key === 'action'">
                     <a-button size="small" type="primary" ghost @click="onViewArticles(record)">标签下文章</a-button>
                 </a-space>
             </template>
@@ -12,7 +12,6 @@
 
 <script lang="tsx">
 import { defineComponent, reactive, ref } from "vue";
-import { Modal } from "ant-design-vue";
 import { useRouter } from "vue-router";
 import { TagDTO } from "@/bean/dto";
 import { tagService } from "@/services/tag";
@@ -20,9 +19,6 @@ import { useAsyncLoading } from "@/hooks/async";
 import { format } from "@/utils/date-utils";
 
 export default defineComponent({
-    components: {
-        [Modal.name]: Modal,
-    },
     setup() {
         const router = useRouter();
 
@@ -93,7 +89,6 @@ export default defineComponent({
                 width: "120px",
                 key: "action",
                 fixed: "right",
-                slots: { customRender: "action" },
             },
         ]);
 

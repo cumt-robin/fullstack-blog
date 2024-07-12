@@ -12,8 +12,8 @@
             :scroll="{ x: 1500 }"
             :pagination="pagination"
         >
-            <template #action="{ record }">
-                <a-space>
+            <template #bodyCell="{ column, record }">
+                <a-space v-if="column.key === 'action'">
                     <a-button size="small" :type="record.deleted == 1 ? 'primary' : 'danger'" ghost @click="onClickLogicDel(record)">{{
                         record.deleted == 1 ? "逻辑恢复" : "逻辑删除"
                     }}</a-button>
@@ -145,7 +145,6 @@ export default defineComponent({
                 width: "180px",
                 key: "action",
                 fixed: "right",
-                slots: { customRender: "action" },
             },
         ]);
 

@@ -1,5 +1,5 @@
 <template>
-    <a-form class="edit-form" ref="formRef" :model="formModel" :rules="rules" :wrapper-col="{ span: 24 }">
+    <a-form class="edit-form" ref="formRef" layout="vertical" :model="formModel" :rules="rules" :wrapper-col="{ span: 24 }">
         <a-form-item label="分类名称" name="category_name">
             <a-input v-model:value="formModel.category_name" placeholder="请输入分类名称"></a-input>
         </a-form-item>
@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType, reactive } from "vue";
-import { Form, Input, message } from "ant-design-vue";
+import { message } from "ant-design-vue";
 import { useAsyncLoading } from "@/hooks/async";
 import { REQUIRED_VALIDATOR_BLUR } from "@/utils/validator";
 import { categoryService } from "@/services/category";
@@ -28,11 +28,6 @@ export default defineComponent({
         row: {
             type: Object as PropType<CategoryDTO>,
         },
-    },
-    components: {
-        [Form.name]: Form,
-        [Form.Item.name]: Form.Item,
-        [Input.name]: Input,
     },
     emits: ["success"],
     setup(props, { emit }) {

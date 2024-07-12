@@ -27,17 +27,11 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { Badge, Tag } from "ant-design-vue";
 import { TagDTO } from "@/bean/dto";
 import { tagService } from "@/services/tag";
 import { useAsyncLoading } from "@/hooks/async";
 
 export default defineComponent({
-    name: "Tag",
-    components: {
-        [Badge.name as string]: Badge,
-        [Tag.name as string]: Tag,
-    },
     setup() {
         const tagList = ref<TagDTO[]>([]);
 

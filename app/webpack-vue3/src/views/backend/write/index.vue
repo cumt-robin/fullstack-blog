@@ -59,22 +59,31 @@
         <a-modal title="关联分类/标签" v-model:visible="isRelationVisible" :footer="null" width="860px">
             <a-form class="form-releation" ref="relFormRef" :model="relFormModel" :wrapper-col="{ span: 24 }">
                 <a-form-item name="newTags" label="文章标签">
-                    <a-row :gutter="16">
-                        <a-col v-for="(tag, index) in newTagList" :key="index" :xs="8" :sm="4">
-                            <a-auto-complete v-model:value="tag.value" :options="tagOptions" @focus="onTagFocus" @search="onSearchTag" />
-                            <DeleteOutlined @click="deleteTag(index)" />
-                        </a-col>
-                        <a-col :span="4"><PlusOutlined @click="addTag" /></a-col>
-                    </a-row>
+                    <a-form-item-rest>
+                        <a-row :gutter="16">
+                            <a-col v-for="(tag, index) in newTagList" :key="index" :xs="8" :sm="4">
+                                <a-auto-complete
+                                    v-model:value="tag.value"
+                                    :options="tagOptions"
+                                    @focus="onTagFocus"
+                                    @search="onSearchTag"
+                                />
+                                <DeleteOutlined @click="deleteTag(index)" />
+                            </a-col>
+                            <a-col :span="4"><PlusOutlined @click="addTag" /></a-col>
+                        </a-row>
+                    </a-form-item-rest>
                 </a-form-item>
                 <a-form-item name="newCategorys" label="新增分类">
-                    <a-row :gutter="16">
-                        <a-col v-for="(category, index) in newCategoryList" :key="index" :xs="8" :sm="4">
-                            <a-input v-model:value="category.value" />
-                            <DeleteOutlined @click="deleteCategory(index)" />
-                        </a-col>
-                        <a-col :span="4"><PlusOutlined @click="addCategory" /></a-col>
-                    </a-row>
+                    <a-form-item-rest>
+                        <a-row :gutter="16">
+                            <a-col v-for="(category, index) in newCategoryList" :key="index" :xs="8" :sm="4">
+                                <a-input v-model:value="category.value" />
+                                <DeleteOutlined @click="deleteCategory(index)" />
+                            </a-col>
+                            <a-col :span="4"><PlusOutlined @click="addCategory" /></a-col>
+                        </a-row>
+                    </a-form-item-rest>
                 </a-form-item>
                 <a-form-item name="categorys" label="已有分类">
                     <div>
@@ -86,13 +95,15 @@
                             @input="onCategorySearchInput"
                         />
                         <br />
-                        <a-checkbox-group v-model:value="relFormModel.oldCategoryIds" style="width: 100%">
-                            <a-row :gutter="16">
-                                <a-col v-for="category in categorys" :key="category.id" :xs="8" :sm="4">
-                                    <a-checkbox class="category-checkbox" :value="category.id">{{ category.category_name }}</a-checkbox>
-                                </a-col>
-                            </a-row>
-                        </a-checkbox-group>
+                        <a-form-item-rest>
+                            <a-checkbox-group v-model:value="relFormModel.oldCategoryIds" style="width: 100%">
+                                <a-row :gutter="16">
+                                    <a-col v-for="category in categorys" :key="category.id" :xs="8" :sm="4">
+                                        <a-checkbox class="category-checkbox" :value="category.id">{{ category.category_name }}</a-checkbox>
+                                    </a-col>
+                                </a-row>
+                            </a-checkbox-group>
+                        </a-form-item-rest>
                     </div>
                 </a-form-item>
                 <a-form-item class="align-center">
@@ -122,8 +133,7 @@ import "highlight.js/styles/atom-one-dark.css";
 import DOMPurify from "dompurify";
 import { computed, defineComponent, reactive, ref } from "vue";
 import { throttle, debounce } from "lodash-es";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons-vue";
-import { Form, Input, message, Modal, Radio, Spin, AutoComplete } from "ant-design-vue";
+import { message } from "ant-design-vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
 import { REQUIRED_VALIDATOR_BLUR } from "@/utils/validator";
@@ -156,20 +166,6 @@ interface RelFormModel {
 }
 
 export default defineComponent({
-    components: {
-        PlusOutlined,
-        DeleteOutlined,
-        [Form.name as string]: Form,
-        [Form.Item.name as string]: Form.Item,
-        [Input.name as string]: Input,
-        [Input.TextArea.name as string]: Input.TextArea,
-        [Input.Search.name as string]: Input.Search,
-        [Radio.name as string]: Radio,
-        [Radio.Group.name as string]: Radio.Group,
-        [Modal.name as string]: Modal,
-        [Spin.name as string]: Spin,
-        [AutoComplete.name as string]: AutoComplete,
-    },
     setup() {
         // vuex
         const store = useStore(key);

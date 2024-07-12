@@ -2,14 +2,7 @@
     <a-layout class="backend-layout">
         <a-layout-sider :trigger="null" v-model:collapsed="menuState.collapsed" collapsible breakpoint="lg" @collapse="onSiderCollapse">
             <img class="logo" src="@/assets/img/logo.png" />
-            <a-menu
-                theme="dark"
-                mode="inline"
-                v-model:openKeys="menuState.openKeys"
-                :selected-keys="selectedKeys"
-                :inline-collapsed="menuState.collapsed"
-                @click="onClickMenu"
-            >
+            <a-menu theme="dark" mode="inline" v-model:openKeys="menuState.openKeys" :selected-keys="selectedKeys" @click="onClickMenu">
                 <a-sub-menu v-for="sub in navs" :key="sub.key">
                     <template #title>
                         <span>
@@ -47,24 +40,13 @@
     </a-layout>
 </template>
 <script lang="ts">
-import { MenuFoldOutlined, MenuUnfoldOutlined, HomeOutlined } from "@ant-design/icons-vue";
 import { computed, defineComponent, reactive, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
-
-import { Avatar, Checkbox, Dropdown, Layout, Menu, Table } from "ant-design-vue";
 import { tree2Arr } from "@/utils/tree";
 import { key } from "@/store";
 import { LOGOUT_ACTION } from "@/store/constants";
-
-import { app } from "@/main";
 import { NavItem, navs } from "./navs";
-
-const components = [Table, Layout, Checkbox, Avatar];
-
-components.forEach((comp) => {
-    app.use(comp);
-});
 
 interface MenuState {
     collapsed: boolean;
@@ -74,15 +56,6 @@ interface MenuState {
 
 export default defineComponent({
     name: "Backend",
-    components: {
-        MenuFoldOutlined,
-        MenuUnfoldOutlined,
-        HomeOutlined,
-        [Dropdown.name]: Dropdown,
-        [Menu.name]: Menu,
-        [Menu.SubMenu.name]: Menu.SubMenu,
-        [Menu.Item.name]: Menu.Item,
-    },
     setup() {
         // vuex
         const store = useStore(key);
@@ -218,6 +191,7 @@ export default defineComponent({
 :deep(.right-main) {
     padding: 24px;
     flex: 1;
+    overflow: auto;
 }
 
 :deep(.admin-page-wrapper) {

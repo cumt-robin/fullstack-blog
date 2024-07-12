@@ -29,7 +29,6 @@
 <script lang="ts">
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
-import { EditOutlined } from "@ant-design/icons-vue";
 import Comments from "@/views/article/comments.vue";
 import { commentService } from "@/services/comment";
 import { key } from "@/store";
@@ -38,7 +37,6 @@ export default defineComponent({
     name: "Messages",
     components: {
         Comments,
-        EditOutlined,
     },
     setup() {
         // vuex
