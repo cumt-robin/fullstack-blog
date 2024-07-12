@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: /backend
-Disallow: /login
-Disallow: /jumpout

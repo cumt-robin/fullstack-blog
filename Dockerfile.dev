@@ -7,12 +7,12 @@ FROM base AS build
 COPY . /usr/src/app
 WORKDIR /usr/src/app
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
-RUN pnpm deploy --filter=vite-vue3 /app/frontend
+RUN pnpm deploy --filter=vite-vue3 /app/vite-vue3
 RUN pnpm deploy --filter=backend /app/backend
 
-FROM base AS frontend
-COPY --from=build /app/frontend /usr/src/fullstack-blog/app/frontend
-WORKDIR /usr/src/fullstack-blog/app/frontend
+FROM base AS vite-vue3-frontend
+COPY --from=build /app/vite-vue3 /usr/src/fullstack-blog/app/vite-vue3
+WORKDIR /usr/src/fullstack-blog/app/vite-vue3
 EXPOSE 3000
 CMD ["pnpm", "dev"]
 
