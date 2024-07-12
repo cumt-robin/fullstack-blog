@@ -1,5 +1,11 @@
 # frontend
 
+## 3.7.3
+
+### Patch Changes
+
+-   3bad363: ci: 重新部署
+
 ## 3.7.2
 
 ### Patch Changes
