@@ -2,6 +2,9 @@
 const path = require("path");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const theme = require("./antd-theme.js");
+const Components = require("unplugin-vue-components/webpack").default;
+const { AntDesignVueResolver, ElementPlusResolver } = require("unplugin-vue-components/resolvers");
+const { DefinePlugin } = require("webpack");
 
 // function addStyleResource(rule) {
 //     rule.use("style-resource")
@@ -29,8 +32,24 @@ module.exports = {
             },
         },
     },
-    transpileDependencies: ['mermaid'],
+    transpileDependencies: ["mermaid"],
+    configureWebpack: {
+        devtool: process.env.NODE_ENV === "production" ? 'hidden-source-map' : 'eval-cheap-module-source-map',
+        plugins: [
+            new DefinePlugin({
+                __VUE_OPTIONS_API__: true,
+                __VUE_PROD_DEVTOOLS__: false,
+                __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: false
+            })
+        ]
+    },
     chainWebpack: (config) => {
+        config.plugin("unplugin-vue-components").use(
+            Components({
+                resolvers: [AntDesignVueResolver({ importStyle: 'less', resolveIcons: true }), ElementPlusResolver({ importStyle: true })],
+            })
+        );
+
         // html-webpack-plugin
         config.plugin("html").tap((args) => {
             args[0].title = process.env.VUE_APP_TITLE;
@@ -72,9 +91,6 @@ module.exports = {
             process.env.NODE_ENV === "production",
             (config) => {
                 // 生产环境
-
-                // devtool设置
-                config.devtool("nosources-source-map");
 
                 // 内联 runtimeChunk
                 config

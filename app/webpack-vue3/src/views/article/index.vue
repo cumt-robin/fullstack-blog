@@ -123,9 +123,7 @@ import DOMPurify from "dompurify";
 import { useRoute, useRouter } from "vue-router";
 import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from "vue";
 import { maxBy, minBy } from "lodash-es";
-import { SwapLeftOutlined, SwapRightOutlined, EditOutlined } from "@ant-design/icons-vue";
 import { useStore } from "vuex";
-import { Drawer, Modal, Tag } from "ant-design-vue";
 import { setScrollTop } from "@/utils/dom";
 import { articleService } from "@/services/article";
 import { useAsyncLoading } from "@/hooks/async";
@@ -143,13 +141,7 @@ hljs.registerLanguage("plaintext", plaintext);
 export default defineComponent({
     name: "Article",
     components: {
-        SwapLeftOutlined,
-        SwapRightOutlined,
-        EditOutlined,
         Comments,
-        [Drawer.name]: Drawer,
-        [Modal.name]: Modal,
-        [Tag.name]: Tag,
     },
     setup() {
         // vuex

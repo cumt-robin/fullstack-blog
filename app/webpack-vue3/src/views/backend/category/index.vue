@@ -8,8 +8,8 @@
             :scroll="{ x: 1500 }"
             :pagination="pagination"
         >
-            <template #action="{ record }">
-                <a-space>
+            <template #bodyCell="{ column, record }">
+                <a-space v-if="column.key === 'action'">
                     <a-button size="small" type="primary" ghost @click="onClickEdit(record)">编辑</a-button>
                     <a-button size="small" type="primary" ghost @click="onViewArticles(record)">分类下文章</a-button>
                 </a-space>
@@ -24,7 +24,7 @@
 
 <script lang="tsx">
 import { defineComponent, reactive, ref } from "vue";
-import { Image, Modal } from "ant-design-vue";
+import { Image } from "ant-design-vue";
 import { useRouter } from "vue-router";
 import { CategoryDTO } from "@/bean/dto";
 import { categoryService } from "@/services/category";
@@ -36,7 +36,6 @@ import Edit from "./edit.vue";
 export default defineComponent({
     components: {
         Edit,
-        [Modal.name]: Modal,
     },
     setup() {
         const router = useRouter();
@@ -130,7 +129,6 @@ export default defineComponent({
                 width: "200px",
                 key: "action",
                 fixed: "right",
-                slots: { customRender: "action" },
             },
         ]);
 

@@ -18,7 +18,7 @@
 
             <span class="comment__time">{{ formattedComment.fomattedTime }}</span>
             <div class="comment__content">{{ formattedComment.content }}</div>
-            <my-button class="btn-reply" icon="reply" size="small" @click="showReplyRoot">回复</my-button>
+            <MyButton class="btn-reply" icon="reply" size="small" @click="showReplyRoot">回复</MyButton>
 
             <div class="reply-form" v-if="isActive && isShowReplyInput">
                 <a-input ref="rootReplyInputRef" v-model:value="replyRootContent" size="small" :placeholder="replyPlaceHolder" />
@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="reply__content">{{ reply.content }}</div>
-                    <my-button class="btn-reply" icon="reply" size="small" @click="showReplySub(reply)">回复</my-button>
+                    <MyButton class="btn-reply" icon="reply" size="small" @click="showReplySub(reply)">回复</MyButton>
 
                     <div class="reply-form" v-if="isActive && reply.id === activeSubId && isShowSubReplyInput">
                         <a-input ref="subReplyInputRef" v-model:value="subReplyForm.content" size="small" :placeholder="replyPlaceHolder" />
@@ -68,7 +68,7 @@
 import { computed, defineComponent, nextTick, PropType, reactive, ref } from "vue";
 import dayjs from "dayjs";
 import { useStore } from "vuex";
-import { Input, message, Modal } from "ant-design-vue";
+import { message, Modal } from "ant-design-vue";
 import DOMPurify from "dompurify";
 import { CommentDTO, ReplyDTO } from "@/bean/dto";
 import { format } from "@/utils/date-utils";
@@ -78,9 +78,6 @@ import { replyService } from "@/services/reply";
 
 export default defineComponent({
     name: "CardComment",
-    components: {
-        [Input.name as string]: Input,
-    },
     emits: ["userInfoEmpty", "setActive"],
     props: {
         comment: {

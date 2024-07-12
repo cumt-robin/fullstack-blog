@@ -25,7 +25,7 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, ref } from "vue";
 import { useStore } from "vuex";
-import { message, Form, Input } from "ant-design-vue";
+import { message } from "ant-design-vue";
 import { CommentUserInfo } from "@/bean/dto";
 import { EMAIL_VALIDATOR, REQUIRED_VALIDATOR_BLUR, URL_VALIDATOR } from "@/utils/validator";
 import { key } from "@/store";
@@ -33,11 +33,6 @@ import { SET_COMMENT_USER_INFO } from "@/store/constants";
 
 export default defineComponent({
     name: "CommentUserInfo",
-    components: {
-        [Form.name]: Form,
-        [Form.Item.name]: Form.Item,
-        [Input.name]: Input,
-    },
     emits: ["cancel", "success"],
     props: {
         topic: {

@@ -46,7 +46,6 @@ import CardArticle from "@/components/card/card-article.vue";
 import { setScrollTop } from "@/utils/dom";
 
 export default defineComponent({
-    name: "Home",
     components: {
         CardArticle,
     },

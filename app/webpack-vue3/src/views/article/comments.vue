@@ -25,7 +25,7 @@
             <a-empty v-else-if="!isFetchLoading">
                 <template #description>
                     暂无{{ topic }}，快来说两句吧！
-                    <my-button class="btn-add" type="primary" @click="createComment">创建{{ topic }}</my-button>
+                    <MyButton class="btn-add" type="primary" @click="createComment">创建{{ topic }}</MyButton>
                 </template>
             </a-empty>
 
@@ -43,7 +43,7 @@
             <a-button class="btn-publish" type="primary" size="small" :loading="isPublishLoading" @click="onClickPublish">发布</a-button>
         </div>
 
-        <a-modal v-model:visible="isEditUserInfoVisible" :footer="null">
+        <a-modal title="修改个人信息" v-model:visible="isEditUserInfoVisible" :footer="null">
             <comment-user-info :topic="topic" @cancel="isEditUserInfoVisible = false" @success="isEditUserInfoVisible = false" />
         </a-modal>
     </section>
@@ -53,7 +53,7 @@
 import { ElInfiniteScroll } from "element-plus";
 import { computed, defineComponent, reactive, ref } from "vue";
 import { useStore } from "vuex";
-import { Input, message, Modal } from "ant-design-vue";
+import { message } from "ant-design-vue";
 import DOMPurify from "dompurify";
 import { commentService } from "@/services/comment";
 import { CommentDTO } from "@/bean/dto";
@@ -70,8 +70,6 @@ export default defineComponent({
     components: {
         CardComment,
         CommentUserInfo,
-        [Input.name as string]: Input,
-        [Modal.name as string]: Modal,
     },
     props: {
         articleId: {
@@ -226,6 +224,7 @@ export default defineComponent({
 }
 
 .comments__list {
+    margin-bottom: 20px;
     > li + li {
         margin-top: 20px;
     }

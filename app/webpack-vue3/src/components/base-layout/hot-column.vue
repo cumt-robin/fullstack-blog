@@ -30,16 +30,12 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { Card } from "ant-design-vue";
 import { ArticleDTO } from "@/bean/dto";
 import { articleService } from "@/services/article";
 import { useAsyncLoading } from "@/hooks/async";
 
 export default defineComponent({
     name: "HotColumn",
-    components: {
-        [Card.name]: Card,
-    },
     setup() {
         const hotList = ref<ArticleDTO[]>([]);
 

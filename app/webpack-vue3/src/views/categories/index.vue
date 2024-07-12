@@ -31,16 +31,11 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { Badge } from "ant-design-vue";
 import { CategoryDTO } from "@/bean/dto";
 import { categoryService } from "@/services/category";
 import { useAsyncLoading } from "@/hooks/async";
 
 export default defineComponent({
-    name: "Category",
-    components: {
-        [Badge.name as string]: Badge,
-    },
     setup() {
         const categoryList = ref<CategoryDTO[]>([]);
 

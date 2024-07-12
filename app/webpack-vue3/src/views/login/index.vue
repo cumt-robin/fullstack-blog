@@ -36,8 +36,7 @@
 <script lang="ts">
 import Hashes from "jshashes";
 import { defineComponent, reactive, ref } from "vue";
-import { UserOutlined, LockOutlined } from "@ant-design/icons-vue";
-import { Form, Input, message } from "ant-design-vue";
+import { message } from "ant-design-vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { REQUIRED_VALIDATOR_BLUR } from "@/utils/validator";
@@ -49,13 +48,6 @@ import { LOGIN_ACTION } from "@/store/constants";
 
 export default defineComponent({
     name: "Login",
-    components: {
-        UserOutlined,
-        LockOutlined,
-        [Form.name]: Form,
-        [Form.Item.name]: Form.Item,
-        [Input.name]: Input,
-    },
     setup() {
         // vuex
         const store = useStore(key);

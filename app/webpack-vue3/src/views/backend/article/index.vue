@@ -12,8 +12,8 @@
             :scroll="{ x: 1500 }"
             :pagination="pagination"
         >
-            <template #action="{ record, index }">
-                <a-space>
+            <template #bodyCell="{ column, record, index }">
+                <a-space v-if="column.key === 'action'">
                     <a-button
                         size="small"
                         type="primary"
@@ -37,7 +37,7 @@
 import { defineComponent, reactive, ref } from "vue";
 import { message, Modal, Image, Space, Tag } from "ant-design-vue";
 import { RouterLink, useRouter } from "vue-router";
-import { ColumnProps } from "ant-design-vue/lib/table/interface";
+import type { ColumnType } from "ant-design-vue/lib/table/interface";
 import { ArticleDTO } from "@/bean/dto";
 import { articleService } from "@/services/article";
 import { useAsyncLoading } from "@/hooks/async";
@@ -105,6 +105,7 @@ export default defineComponent({
                     });
                     message.success("操作成功");
                     search();
+                    return Promise.resolve();
                 },
             });
         };
@@ -126,7 +127,7 @@ export default defineComponent({
             router.push(`/backend/article/edit/${record.id}`);
         };
 
-        const columns = ref<ColumnProps[]>([
+        const columns = ref<ColumnType[]>([
             {
                 title: "文章",
                 width: "160px",
@@ -215,7 +216,6 @@ export default defineComponent({
                 width: "300px",
                 key: "action",
                 fixed: "right",
-                slots: { customRender: "action" },
             },
         ]);
 

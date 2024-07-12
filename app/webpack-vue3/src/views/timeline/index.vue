@@ -43,7 +43,6 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
-import { Card, Timeline } from "ant-design-vue";
 import { ArticleDTO } from "@/bean/dto";
 import { articleService } from "@/services/article";
 import { useAsyncLoading } from "@/hooks/async";
@@ -51,11 +50,6 @@ import { format } from "@/utils/date-utils";
 
 export default defineComponent({
     name: "Timeline",
-    components: {
-        [Timeline.name]: Timeline,
-        [Timeline.Item.name]: Timeline.Item,
-        [Card.name]: Card,
-    },
     setup() {
         const articleList = ref<ArticleDTO[]>([]);
 

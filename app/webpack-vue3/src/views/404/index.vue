@@ -16,12 +16,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
-import { Result } from "ant-design-vue";
 
 export default defineComponent({
-    components: {
-        [Result.name]: Result,
-    },
     setup() {
         const router = useRouter();
         const backHome = () => {

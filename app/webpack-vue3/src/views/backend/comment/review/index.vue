@@ -12,8 +12,8 @@
             :scroll="{ x: 1500 }"
             :pagination="pagination"
         >
-            <template #action="{ record }">
-                <a-space>
+            <template #bodyCell="{ column, record }">
+                <a-space v-if="column.key === 'action'">
                     <a-button size="small" type="primary" ghost @click="onCommitReview(record, 1)">通过</a-button>
                     <a-button size="small" type="danger" ghost @click="onCommitReview(record, 2)">不通过</a-button>
                 </a-space>
@@ -142,7 +142,6 @@ export default defineComponent({
                 width: "180px",
                 key: "action",
                 fixed: "right",
-                slots: { customRender: "action" },
             },
         ]);
 
