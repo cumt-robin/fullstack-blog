@@ -32,15 +32,15 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 其中前端部分：
 
-- [x] Vite + Vue3 + Pinia: 代码见目录 app/vite-vue3，查看线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
-- [x] Vue CLI + Vue3 + Vuex: 代码见目录 app/webpack-vue3，查看线上效果点击[webpack-vue3-blog.wbjiang.cn](https://webpack-vue3-blog.wbjiang.cn/)
+- [x] Vite + Vue3 + Pinia: 见目录 app/vite-vue3，线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
+- [x] Vue CLI + Vue3 + Vuex: 见目录 app/webpack-vue3，线上效果点击[webpack-vue3-blog.wbjiang.cn](https://webpack-vue3-blog.wbjiang.cn/)
 - [ ] CRA + React
 - [ ] Vite + React
 - [ ] Vite + Nuxt
 
 后端部分：
 
-- [x] Express + MySQL: 见 app/backend
+- [x] Express + MySQL: 见目录 app/express-server
 - [ ] NestJS 开发中...
 
 ## Features

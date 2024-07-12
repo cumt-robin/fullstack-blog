@@ -12,7 +12,7 @@ export default defineConfig({
         port: 3000,
         proxy: {
             "/api": {
-                target: "http://backend:8002",
+                target: "http://express-server:8002",
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, ""),
             },

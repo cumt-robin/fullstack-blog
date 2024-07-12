@@ -22,7 +22,7 @@ module.exports = {
         open: true,
         proxy: {
             "/api": {
-                target: "http://backend:8002",
+                target: "http://express-server:8002",
                 changeOrigin: true,
                 pathRewrite: {
                     "^/api": "",

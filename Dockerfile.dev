@@ -8,7 +8,7 @@ COPY . /usr/src/app
 WORKDIR /usr/src/app
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm deploy --filter=vite-vue3 /app/vite-vue3
-RUN pnpm deploy --filter=backend /app/backend
+RUN pnpm deploy --filter=express-server /app/express-server
 
 FROM base AS vite-vue3-frontend
 COPY --from=build /app/vite-vue3 /usr/src/fullstack-blog/app/vite-vue3
@@ -16,9 +16,9 @@ WORKDIR /usr/src/fullstack-blog/app/vite-vue3
 EXPOSE 3000
 CMD ["pnpm", "dev"]
 
-FROM base AS backend
+FROM base AS express-backend
 RUN npm i -g pm2-dev
-COPY --from=build /app/backend /usr/src/fullstack-blog/app/backend
-WORKDIR /usr/src/fullstack-blog/app/backend
+COPY --from=build /app/express-server /usr/src/fullstack-blog/app/express-server
+WORKDIR /usr/src/fullstack-blog/app/express-server
 EXPOSE 8002
 CMD ["pnpm", "docker-dev"]

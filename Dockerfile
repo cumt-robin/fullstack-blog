@@ -9,7 +9,7 @@ WORKDIR /usr/src/app
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm deploy --filter=vite-vue3 /app/vite-vue3
 RUN pnpm deploy --filter=webpack-vue3 /app/webpack-vue3
-RUN pnpm deploy --filter=backend /app/backend
+RUN pnpm deploy --filter=express-server /app/express-server
 
 FROM base AS vite-vue3-build
 COPY --from=build /app/vite-vue3 /usr/src/fullstack-blog/app/vite-vue3
@@ -33,9 +33,9 @@ COPY --from=webpack-vue3-build /usr/src/fullstack-blog/app/webpack-vue3/dist/ /u
 COPY nginx/default.conf.template /etc/nginx/conf.d/default.conf.template
 EXPOSE 80
 
-FROM base AS backend
+FROM base AS express-backend
 RUN npm i -g pm2-runtime
-COPY --from=build /app/backend /usr/src/fullstack-blog/app/backend
-WORKDIR /usr/src/fullstack-blog/app/backend
+COPY --from=build /app/express-server /usr/src/fullstack-blog/app/express-server
+WORKDIR /usr/src/fullstack-blog/app/express-server
 EXPOSE 8002
 CMD ["pnpm", "start-docker-prod"]

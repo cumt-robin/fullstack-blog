@@ -13,12 +13,12 @@ services:
     environment:
       - NODE_ENV=development
 
-  backend:
-    image: fullstack-blog-backend:dev
+  express-server:
+    image: fullstack-blog-express:dev
     ports:
       - "8002:8002"
     volumes:
-      - ./app/backend/src:/usr/src/fullstack-blog/app/backend/src
+      - ./app/express-server/src:/usr/src/fullstack-blog/app/express-server/src
     environment:
       - NODE_ENV=development
       - PORT=8002
