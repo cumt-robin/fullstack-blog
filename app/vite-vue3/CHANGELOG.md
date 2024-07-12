@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.5
+
+### Patch Changes
+
+-   7303cbe: ci: 支持 webpack-vue3 部署
+
 ## 1.0.4
 
 ### Patch Changes
