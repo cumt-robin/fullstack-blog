@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.6
+
+### Patch Changes
+
+-   3bad363: ci: 重新部署
+
 ## 1.0.5
 
 ### Patch Changes
