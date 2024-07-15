@@ -1,5 +1,11 @@
 # webpack-vue3
 
+## 3.7.5
+
+### Patch Changes
+
+-   ff699c8: fix: 分类面包屑展示异常，Modal 无法关闭，其他样式问题修改
+
 ## 3.7.4
 
 ### Patch Changes
