@@ -27,9 +27,9 @@ jobs:
         with:
           version: 9.4.0
 
-      - name: Install Dependencies
+      - name: Install Workspace Root Dependencies
         run: |
-          pnpm install --frozen-lockfile
+          pnpm install --workspace-root --frozen-lockfile
 
       - name: Create PR or Publish Release
         uses: changesets/action@v1
