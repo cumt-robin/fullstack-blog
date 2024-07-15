@@ -1,6 +1,6 @@
 {
     "name": "webpack-vue3",
-    "version": "3.7.5",
+    "version": "3.7.6",
     "private": true,
     "scripts": {
         "dev": "vue-cli-service serve",

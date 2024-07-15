@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.8
+
+### Patch Changes
+
+-   0e82de4: chore: nginx backend 引用错误
+
 ## 1.0.7
 
 ### Patch Changes
