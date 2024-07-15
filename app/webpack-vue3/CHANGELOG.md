@@ -1,5 +1,11 @@
 # webpack-vue3
 
+## 3.7.6
+
+### Patch Changes
+
+-   0e82de4: chore: nginx backend 引用错误
+
 ## 3.7.5
 
 ### Patch Changes
