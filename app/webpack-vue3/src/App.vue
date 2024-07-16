@@ -50,6 +50,7 @@ export default defineComponent({
 .hidden-x {
     overflow-x: hidden;
 }
+
 .is-admin {
     height: 100%;
 }

@@ -28,10 +28,12 @@
   "scripts": {
     "webpack-vue3:dev": "pnpm --filter webpack-vue3 dev",
     "vite-vue3:dev": "pnpm --filter vite-vue3 dev",
+    "cra-react18:dev": "pnpm --filter cra-react18 dev",
     "express-server:dev": "pnpm --filter express-server dev",
     "fullstack:dev": "pnpm --filter vite-vue3 --filter express-server dev",
     "webpack-vue3:build": "pnpm --filter webpack-vue3 build",
     "vite-vue3:build": "pnpm --filter vite-vue3 build",
+    "cra-react18:build": "pnpm --filter cra-react18 build",
     "lint-fix": "pnpm --filter ./app/** lint-fix",
     "lint": "pnpm --filter ./app/** lint",
     "prepare": "husky",
@@ -45,13 +47,11 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.5",
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.7"
-  },
-  "dependencies": {
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2"
   },
   "config": {
     "commitizen": {

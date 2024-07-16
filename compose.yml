@@ -26,6 +26,7 @@ services:
     ports:
       - "8002:8002"
     volumes:
+      - ./express-server/config/dev.env.js:/usr/src/fullstack-blog/app/express-server/src/config/dev.env.js
       - ./express-server/config/env.js:/usr/src/fullstack-blog/app/express-server/src/config/env.js
       - ./express-server/config/prod.env.js:/usr/src/fullstack-blog/app/express-server/src/config/prod.env.js
     environment:

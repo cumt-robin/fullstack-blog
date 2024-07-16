@@ -1,18 +1,21 @@
 # fullstack-blog ![release](https://img.shields.io/github/v/release/cumt-robin/fullstack-blog) ![license](https://img.shields.io/github/license/cumt-robin/fullstack-blog) ![stars](https://img.shields.io/github/stars/cumt-robin/fullstack-blog) ![building](https://img.shields.io/github/actions/workflow/status/cumt-robin/fullstack-blog/release.yml) ![lang](https://img.shields.io/github/languages/count/cumt-robin/fullstack-blog) ![commit](https://img.shields.io/github/last-commit/cumt-robin/fullstack-blog) ![release-date](https://img.shields.io/github/release-date/cumt-robin/fullstack-blog)
 
-Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/7177402980180688952)开源全栈项目，采用 Vue3 + Typescript + NodeJS Express 实现。如果你是一个前端开发者，还不太清楚后端开发或者全栈的概念，请一定不要错过这个项目，我相信它会对你的工作或者求职有所帮助！
+Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/7177402980180688952)开源全栈项目，最初采用 Vue3 + Vue CLI + Typescript + NodeJS Express 实现，目前已经涵盖了多种技术实现，无论你是 Webpack/Vite 使用者，或者是 Vue/React 爱好者，这里都有你想要的内容，你甚至可以从这里学会多种框架的使用。
+
+如果你是一个前端开发者，还不太清楚后端开发或者全栈的概念，请一定不要错过这个项目，我相信它会对你的工作或者求职有所帮助！
 
 本项目最新代码采用 pnpm monorepo 架构搭建，工程化能力和开发体验都比较不错，目前支持：
 
 - [x] Pnpm monorepo 架构，单仓库开发全栈项目的极致体验
 - [x] Changeset：最先进的 monorepo 版本管理工具
 - [x] Vite 支持：跟进最新的 Vue 生态
-- [x] Prettier + ESLint + Stylelint 代码质量与风格
+- [x] Prettier + ESLint + Stylelint 全项目支持，统一的代码风格，与低质量代码说拜拜
 - [x] Commitizen: git cz 交互式提交
 - [x] Commitlint: commit message 规范校验
 - [x] Husky + lint-staged 代码入库质量检查
 - [x] Docker Compose 开发和生产环境完整支持，一致的开发体验
 - [x] Github Actions 支持，构建和部署全部自动化
+- [x] unplugin-vue-components 支持识别和导入组件，按需加载
 
 如果你需要找到旧版的前后端工程独立仓库代码，其中前端部分可以查看 2.X 版本，具体请查看[v2 分支](https://github.com/cumt-robin/fullstack-blog/tree/v2)。后端部分可以打开[express-blog-backend](https://github.com/cumt-robin/express-blog-backend)。
 
@@ -28,14 +31,14 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 ## Monorepo 介绍
 
-我们在 pnpm monorepo 支持了多种技术框架，你可以根据需要组合使用。
+为了让大部分前端开发者能够上手本项目，我们在 pnpm monorepo 支持了多种技术框架，你可以根据需要组合使用。
 
 其中前端部分：
 
-- [x] Vite + Vue3 + Pinia: 见目录 app/vite-vue3，线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
-- [x] Vue CLI + Vue3 + Vuex: 见目录 app/webpack-vue3，线上效果点击[webpack-vue3-blog.wbjiang.cn](https://webpack-vue3-blog.wbjiang.cn/)
-- [ ] CRA + React
-- [ ] Vite + React
+- [x] Vite + Vue3 + Pinia + TypeScript: 见目录 app/vite-vue3，线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
+- [x] Vue CLI + Vue3 + Vuex + TypeScript + SCSS: 见目录 app/webpack-vue3，线上效果点击[webpack-vue3-blog.wbjiang.cn](https://webpack-vue3-blog.wbjiang.cn/)
+- [ ] CRA + React18 + TypeScript + React-Redux + Redux Toolkit + Tailwindcss + Styled Components
+- [ ] Vite + React18 + TypeScript + Zustand
 - [ ] Vite + Nuxt
 
 后端部分：

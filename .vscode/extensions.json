@@ -1,10 +1,13 @@
 {
     "recommendations": [
-        "vue.volar",
         "dbaeumer.vscode-eslint",
         "stylelint.vscode-stylelint",
         "esbenp.prettier-vscode",
         "editorconfig.editorconfig",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "mgmcdermott.vscode-language-babel",
+        "bradlc.vscode-tailwindcss",
+        "styled-components.vscode-styled-components",
+        "tusi.fe-dev-snippets"
     ]
 }
