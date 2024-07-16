@@ -37,8 +37,8 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 - [x] Vite + Vue3 + Pinia + TypeScript: 见目录 app/vite-vue3，线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
 - [x] Vue CLI + Vue3 + Vuex + TypeScript: 见目录 app/webpack-vue3，线上效果点击[webpack-vue3-blog.wbjiang.cn](https://webpack-vue3-blog.wbjiang.cn/)
-- [ ] CRA + React18 + TypeScript
-- [ ] Vite + React18 + TypeScript
+- [ ] CRA + React18 + TypeScript + React-Redux + Redux Toolkit
+- [ ] Vite + React18 + TypeScript + Zustand
 - [ ] Vite + Nuxt
 
 后端部分：

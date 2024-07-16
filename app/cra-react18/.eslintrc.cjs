@@ -1,0 +1,33 @@
+module.exports = {
+    root: true,
+    env: {
+        node: true,
+    },
+    parser: "@typescript-eslint/parser",
+    extends: [
+        // "@fullstack-blog/eslint-config/base.js",
+        "eslint:recommended",
+        "react-app",
+        "react-app/jest",
+        "prettier",
+    ],
+    plugins: ["prettier"],
+    settings: {
+        // eslint-import-resolver-webpack
+        "import/resolver": {
+            webpack: {
+                config: "config/webpack.config.js",
+                env: {
+                    NODE_ENV: "development",
+                },
+            },
+        },
+    },
+    rules: {
+        "prettier/prettier": "error",
+        "no-case-declarations": "off",
+        "import/order": "warn",
+        "import/no-unresolved": "off",
+        "@typescript-eslint/explicit-module-boundary-types": "off",
+    },
+};
