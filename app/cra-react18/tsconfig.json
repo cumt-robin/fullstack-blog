@@ -9,9 +9,13 @@
         "paths": {
             "@/*": ["src/*"]
         },
+        "types": ["jest", "@testing-library/jest-dom"],
         "lib": ["esnext", "dom", "dom.iterable"],
-        "jsx": "react"
+        "jsx": "react-jsx",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "moduleDetection": "force"
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx"],
+    "include": ["src"],
     "exclude": ["node_modules"]
 }
