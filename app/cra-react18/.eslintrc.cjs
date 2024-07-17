@@ -4,13 +4,7 @@ module.exports = {
         node: true,
     },
     parser: "@typescript-eslint/parser",
-    extends: [
-        // "@fullstack-blog/eslint-config/base.js",
-        "eslint:recommended",
-        "react-app",
-        "react-app/jest",
-        "prettier",
-    ],
+    extends: ["eslint:recommended", "react-app", "react-app/jest", "prettier"],
     plugins: ["prettier"],
     settings: {
         // eslint-import-resolver-webpack
