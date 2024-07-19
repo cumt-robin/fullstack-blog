@@ -4,9 +4,12 @@
  */
 module.exports = {
     extends: ["stylelint-config-standard", "stylelint-prettier/recommended", "stylelint-config-prettier"],
-    plugins: ["stylelint-scss", "stylelint-prettier"],
+    plugins: ["stylelint-scss", "stylelint-less", "stylelint-prettier"],
     rules: {
         'prettier/prettier': true,
+        "at-rule-no-unknown": null,
+        "color-no-invalid-hex": true,
+        "less/color-no-invalid-hex": true,
         "max-empty-lines": 1,
         "selector-max-empty-lines": 0,
         "function-max-empty-lines": 0,
@@ -24,11 +27,5 @@ module.exports = {
                 ignorePseudoClasses: ["deep", "global"],
             },
         ],
-        "at-rule-no-unknown": [
-            true,
-            {
-                ignoreAtRules: ["mixin", "include", "extend", "at-root"]
-            }
-        ]
     },
 };

@@ -9,7 +9,7 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 - [x] Pnpm monorepo 架构，单仓库开发全栈项目的极致体验
 - [x] Changeset：最先进的 monorepo 版本管理工具
 - [x] Vite 支持：跟进最新的 Vue 生态
-- [x] Prettier + ESLint + Stylelint 代码质量与风格
+- [x] Prettier + ESLint + Stylelint 全项目支持，统一的代码风格，与低质量代码说拜拜
 - [x] Commitizen: git cz 交互式提交
 - [x] Commitlint: commit message 规范校验
 - [x] Husky + lint-staged 代码入库质量检查
@@ -36,8 +36,8 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 其中前端部分：
 
 - [x] Vite + Vue3 + Pinia + TypeScript: 见目录 app/vite-vue3，线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
-- [x] Vue CLI + Vue3 + Vuex + TypeScript: 见目录 app/webpack-vue3，线上效果点击[webpack-vue3-blog.wbjiang.cn](https://webpack-vue3-blog.wbjiang.cn/)
-- [ ] CRA + React18 + TypeScript + React-Redux + Redux Toolkit
+- [x] Vue CLI + Vue3 + Vuex + TypeScript + SCSS: 见目录 app/webpack-vue3，线上效果点击[webpack-vue3-blog.wbjiang.cn](https://webpack-vue3-blog.wbjiang.cn/)
+- [ ] CRA + React18 + TypeScript + React-Redux + Redux Toolkit + Tailwindcss + Styled Components
 - [ ] Vite + React18 + TypeScript + Zustand
 - [ ] Vite + Nuxt
 

@@ -4,7 +4,7 @@
  */
 module.exports = {
     extends: ["stylelint-config-standard", "stylelint-prettier/recommended", "stylelint-config-prettier"],
-    plugins: ["stylelint-less", "stylelint-prettier"],
+    plugins: ["stylelint-scss", "stylelint-prettier"],
     rules: {
         'prettier/prettier': true,
         "max-empty-lines": 1,
@@ -19,4 +19,5 @@ module.exports = {
             }
         ]
     },
+    customSyntax: "postcss-styled-syntax"
 };

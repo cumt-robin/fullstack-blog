@@ -1,4 +1,4 @@
-{
+module.exports = {
     "tabs": false,
     "tabWidth": 4,
     "endOfLine": "lf",

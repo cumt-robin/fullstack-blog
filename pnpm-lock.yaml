@@ -37,10 +37,10 @@ importers:
         version: 22.0.0(stylelint@13.13.1)
       stylelint-less:
         specifier: ^3.0.1
-        version: 3.0.1(postcss@7.0.39)(stylelint@13.13.1)
+        version: 3.0.1(postcss@8.4.38)(stylelint@13.13.1)
       stylelint-prettier:
         specifier: ^1.2.0
-        version: 1.2.0(prettier@2.8.8)(stylelint@13.13.1)
+        version: 1.2.0(prettier@3.3.3)(stylelint@13.13.1)
 
   app/cra-react18:
     dependencies:
@@ -229,8 +229,8 @@ importers:
         specifier: ^0.13.8
         version: 0.13.8(eslint-plugin-import@2.29.1)(webpack@5.93.0)
       eslint-plugin-prettier:
-        specifier: ^3.3.1
-        version: 3.4.1(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@2.8.8)
+        specifier: ^5.2.1
+        version: 5.2.1(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.3)
       eslint-webpack-plugin:
         specifier: ^3.1.1
         version: 3.2.0(eslint@8.57.0)(webpack@5.93.0)
@@ -279,12 +279,15 @@ importers:
       postcss-preset-env:
         specifier: ^7.0.1
         version: 7.8.3(postcss@8.4.38)
+      postcss-styled-syntax:
+        specifier: ^0.6.4
+        version: 0.6.4(postcss@8.4.38)
       prettier:
-        specifier: ^2.8.8
-        version: 2.8.8
+        specifier: ^3.3.3
+        version: 3.3.3
       prettier-plugin-tailwindcss:
         specifier: ^0.6.5
-        version: 0.6.5(prettier@2.8.8)
+        version: 0.6.5(prettier@3.3.3)
       prompts:
         specifier: ^2.4.2
         version: 2.4.2
@@ -306,6 +309,18 @@ importers:
       style-loader:
         specifier: ^3.3.1
         version: 3.3.4(webpack@5.93.0)
+      stylelint:
+        specifier: ^13.13.1
+        version: 13.13.1
+      stylelint-config-prettier:
+        specifier: ^8.0.2
+        version: 8.0.2(stylelint@13.13.1)
+      stylelint-config-standard:
+        specifier: ^22.0.0
+        version: 22.0.0(stylelint@13.13.1)
+      stylelint-prettier:
+        specifier: ^1.2.0
+        version: 1.2.0(prettier@3.3.3)(stylelint@13.13.1)
       terser-webpack-plugin:
         specifier: ^5.2.5
         version: 5.3.10(webpack@5.93.0)
@@ -490,7 +505,7 @@ importers:
         version: 22.0.0(stylelint@13.13.1)
       stylelint-prettier:
         specifier: ^1.2.0
-        version: 1.2.0(prettier@2.8.8)(stylelint@13.13.1)
+        version: 1.2.0(prettier@3.3.3)(stylelint@13.13.1)
       stylelint-scss:
         specifier: ^3.19.0
         version: 3.21.0(stylelint@13.13.1)
@@ -608,31 +623,31 @@ importers:
         version: 4.33.0(eslint@7.32.0)(typescript@4.1.6)
       '@vue/cli-plugin-babel':
         specifier: ~4.5.0
-        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(core-js@3.37.1)(vue@3.3.13(typescript@4.1.6))
+        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(core-js@3.37.1)(vue@3.3.13(typescript@4.1.6))
       '@vue/cli-plugin-eslint':
         specifier: ~4.5.0
-        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(eslint@7.32.0)
+        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(eslint@7.32.0)
       '@vue/cli-plugin-router':
         specifier: ~4.5.0
-        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))
+        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))
       '@vue/cli-plugin-typescript':
         specifier: ~4.5.0
-        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(eslint@7.32.0)(typescript@4.1.6)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
+        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(eslint@7.32.0)(typescript@4.1.6)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
       '@vue/cli-plugin-unit-jest':
         specifier: ~4.5.0
-        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
+        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
       '@vue/cli-plugin-vuex':
         specifier: ~4.5.0
-        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))
+        version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))
       '@vue/cli-service':
         specifier: ~4.5.0
-        version: 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
+        version: 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
       '@vue/compiler-sfc':
         specifier: ~3.0.11
         version: 3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6))
       '@vue/eslint-config-prettier':
         specifier: ^6.0.0
-        version: 6.0.0(eslint-plugin-prettier@3.4.1(eslint@7.32.0)(prettier@2.8.8))(eslint@7.32.0)(prettier@2.8.8)
+        version: 6.0.0(eslint-plugin-prettier@5.2.1(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0(eslint@7.32.0))(eslint@7.32.0)(prettier@3.3.3))(eslint@7.32.0)(prettier@3.3.3)
       '@vue/eslint-config-typescript':
         specifier: ^7.0.0
         version: 7.0.0(@typescript-eslint/eslint-plugin@4.33.0(@typescript-eslint/parser@4.33.0(eslint@7.32.0)(typescript@4.1.6))(eslint@7.32.0)(typescript@4.1.6))(@typescript-eslint/parser@4.33.0(eslint@7.32.0)(typescript@4.1.6))(eslint-plugin-vue@7.20.0(eslint@7.32.0))(eslint@7.32.0)(typescript@4.1.6)
@@ -690,9 +705,12 @@ importers:
       stylelint-config-standard:
         specifier: ^22.0.0
         version: 22.0.0(stylelint@13.13.1)
+      stylelint-less:
+        specifier: ^3.0.1
+        version: 3.0.1(postcss@8.4.38)(stylelint@13.13.1)
       stylelint-prettier:
         specifier: ^1.2.0
-        version: 1.2.0(prettier@2.8.8)(stylelint@13.13.1)
+        version: 1.2.0(prettier@3.3.3)(stylelint@13.13.1)
       stylelint-scss:
         specifier: ^3.19.0
         version: 3.21.0(stylelint@13.13.1)
@@ -2207,6 +2225,10 @@ packages:
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
+
+  '@pkgr/core@0.1.1':
+    resolution: {integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==}
+    engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
 
   '@pmmmwh/react-refresh-webpack-plugin@0.5.15':
     resolution: {integrity: sha512-LFWllMA55pzB9D34w/wXUCf8+c+IYKuJDgxiZ3qMhl64KRMBHYM1I3VdGaD2BV5FNPV2/S2596bppxHbv2ZydQ==}
@@ -6149,6 +6171,20 @@ packages:
       eslint-config-prettier:
         optional: true
 
+  eslint-plugin-prettier@5.2.1:
+    resolution: {integrity: sha512-gH3iR3g4JfF+yYPaJYkN7jEl9QbweL/YfkoRlNnuIEHEz1vHVlCmWOS+eGGiRuzHQXdJFCOTxRgvju9b8VUmrw==}
+    engines: {node: ^14.18.0 || >=16.0.0}
+    peerDependencies:
+      '@types/eslint': '>=8.0.0'
+      eslint: '>=8.0.0'
+      eslint-config-prettier: '*'
+      prettier: '>=3.0.0'
+    peerDependenciesMeta:
+      '@types/eslint':
+        optional: true
+      eslint-config-prettier:
+        optional: true
+
   eslint-plugin-react-hooks@4.6.2:
     resolution: {integrity: sha512-QzliNJq4GinDBcD8gPB5v0wh6g8q3SUi6EFF0x8N/BL9PoVs0atuGc47ozMRyOWAKdwaZ5OnbOEa3WR+dSGKuQ==}
     engines: {node: '>=10'}
@@ -10039,6 +10075,12 @@ packages:
     resolution: {integrity: sha512-UMz42UD0UY0EApS0ZL9o1XnLhSTtvvvLe5Dc2H2O56fvRZi+KulDyf5ctDhhtYJBGKStV2FL1fy6253cmLgqVQ==}
     engines: {node: '>=4'}
 
+  postcss-styled-syntax@0.6.4:
+    resolution: {integrity: sha512-uWiLn+9rKgIghUYmTHvXMR6MnyPULMe9Gv3bV537Fg4FH6CA6cn21WMjKss2Qb98LUhT847tKfnRGG3FhSOgUQ==}
+    engines: {node: '>=14.17'}
+    peerDependencies:
+      postcss: ^8.4.21
+
   postcss-svgo@4.0.3:
     resolution: {integrity: sha512-NoRbrcMWTtUghzuKSoIm6XV+sJdvZ7GZSc3wdBN0W19FTtp2ko8NqLsgoh/m9CzNhU3KLPvQmjIwtaNFkaFTvw==}
     engines: {node: '>=6.9.0'}
@@ -10169,6 +10211,11 @@ packages:
   prettier@2.8.8:
     resolution: {integrity: sha512-tdN8qQGvNjw4CHbY+XXk0JgCXn9QiF21a55rBe5LJAU+kDyC4WQn4+awm2Xfk2lQMk5fKup9XgzTZtGkjBdP9Q==}
     engines: {node: '>=10.13.0'}
+    hasBin: true
+
+  prettier@3.3.3:
+    resolution: {integrity: sha512-i2tDNA0O5IrMO757lfrdQZCc2jPNDVntV0m/+4whiDfWaTKfMNgR7Qz0NAeGz/nRqF4m5/6CLzbP4/liHt12Ew==}
+    engines: {node: '>=14'}
     hasBin: true
 
   pretty-bytes@5.6.0:
@@ -11698,6 +11745,10 @@ packages:
 
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
+
+  synckit@0.9.1:
+    resolution: {integrity: sha512-7gr8p9TQP6RAHusBOSLs46F4564ZrjV8xFmw5zCmgmhGUcw2hxsShhJ6CEiHQMgPDwAQ1fWHPM0ypc4RMAig4A==}
+    engines: {node: ^14.18.0 || >=16.0.0}
 
   table@6.8.2:
     resolution: {integrity: sha512-w2sfv80nrAh2VCbqR5AK27wswXhqcck2AhfnNW76beQXskGZ1V12GwS//yYVa3d3fcvAip2OUnbDAjW2k3v9fA==}
@@ -14959,6 +15010,8 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
+  '@pkgr/core@0.1.1': {}
+
   '@pmmmwh/react-refresh-webpack-plugin@0.5.15(@types/webpack@4.41.38)(react-refresh@0.11.0)(sockjs-client@1.6.1)(type-fest@0.21.3)(webpack-dev-server@4.15.2(webpack@5.93.0))(webpack@5.93.0)':
     dependencies:
       ansi-html: 0.0.9
@@ -15182,14 +15235,14 @@ snapshots:
     dependencies:
       '@babel/core': 7.24.7
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0)(postcss-less@3.1.4)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss@8.4.38)
     transitivePeerDependencies:
       - supports-color
 
   '@stylelint/postcss-markdown@0.36.2(postcss-syntax@0.36.2(postcss-html@0.36.0)(postcss-less@3.1.4)(postcss-scss@2.1.1)(postcss@7.0.39))(postcss@7.0.39)':
     dependencies:
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0)(postcss-less@3.1.4)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss@8.4.38)
       remark: 13.0.0
       unist-util-find-all-after: 3.0.2
     transitivePeerDependencies:
@@ -16093,11 +16146,11 @@ snapshots:
 
   '@vue/cli-overlay@4.5.19': {}
 
-  '@vue/cli-plugin-babel@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(core-js@3.37.1)(vue@3.3.13(typescript@4.1.6))':
+  '@vue/cli-plugin-babel@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(core-js@3.37.1)(vue@3.3.13(typescript@4.1.6))':
     dependencies:
       '@babel/core': 7.24.7
       '@vue/babel-preset-app': 4.5.19(@babel/core@7.24.7)(core-js@3.37.1)(vue@3.3.13(typescript@4.1.6))
-      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
+      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
       '@vue/cli-shared-utils': 4.5.19
       babel-loader: 8.3.0(@babel/core@7.24.7)(webpack@4.47.0)
       cache-loader: 4.1.0(webpack@4.47.0)
@@ -16110,9 +16163,9 @@ snapshots:
       - webpack-cli
       - webpack-command
 
-  '@vue/cli-plugin-eslint@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(eslint@7.32.0)':
+  '@vue/cli-plugin-eslint@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(eslint@7.32.0)':
     dependencies:
-      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
+      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
       '@vue/cli-shared-utils': 4.5.19
       eslint: 7.32.0
       eslint-loader: 2.2.1(eslint@7.32.0)(webpack@4.47.0)
@@ -16125,16 +16178,16 @@ snapshots:
       - webpack-cli
       - webpack-command
 
-  '@vue/cli-plugin-router@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))':
+  '@vue/cli-plugin-router@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))':
     dependencies:
-      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
+      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
       '@vue/cli-shared-utils': 4.5.19
 
-  '@vue/cli-plugin-typescript@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(eslint@7.32.0)(typescript@4.1.6)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))':
+  '@vue/cli-plugin-typescript@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(eslint@7.32.0)(typescript@4.1.6)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))':
     dependencies:
       '@babel/core': 7.24.7
       '@types/webpack-env': 1.18.5
-      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
+      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
       '@vue/cli-shared-utils': 4.5.19
       babel-loader: 8.3.0(@babel/core@7.24.7)(webpack@4.47.0)
       cache-loader: 4.1.0(webpack@4.47.0)
@@ -16157,12 +16210,12 @@ snapshots:
       - webpack-cli
       - webpack-command
 
-  '@vue/cli-plugin-unit-jest@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))':
+  '@vue/cli-plugin-unit-jest@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))':
     dependencies:
       '@babel/core': 7.24.7
       '@babel/plugin-transform-modules-commonjs': 7.24.7(@babel/core@7.24.7)
       '@types/jest': 24.9.1
-      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
+      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
       '@vue/cli-shared-utils': 4.5.19
       babel-core: 7.0.0-bridge.0(@babel/core@7.24.7)
       babel-jest: 24.9.0(@babel/core@7.24.7)
@@ -16183,11 +16236,11 @@ snapshots:
       - vue
       - vue-template-compiler
 
-  '@vue/cli-plugin-vuex@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))':
+  '@vue/cli-plugin-vuex@4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))':
     dependencies:
-      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
+      '@vue/cli-service': 4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))
 
-  '@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))':
+  '@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6))':
     dependencies:
       '@intervolga/optimize-cssnano-plugin': 1.0.6(webpack@4.47.0)
       '@soda/friendly-errors-webpack-plugin': 1.8.1(webpack@4.47.0)
@@ -16196,8 +16249,8 @@ snapshots:
       '@types/webpack': 4.41.38
       '@types/webpack-dev-server': 3.11.6(debug@4.3.5)
       '@vue/cli-overlay': 4.5.19
-      '@vue/cli-plugin-router': 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))
-      '@vue/cli-plugin-vuex': 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@2.8.8)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))
+      '@vue/cli-plugin-router': 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))
+      '@vue/cli-plugin-vuex': 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(less-loader@7.3.0(less@4.2.0)(webpack@4.47.0))(lodash@4.17.21)(prettier@3.3.3)(sass-loader@8.0.2(sass@1.77.6)(webpack@4.47.0))(typescript@4.1.6)(underscore@1.12.1)(vue-template-compiler@2.7.16)(vue@3.3.13(typescript@4.1.6)))
       '@vue/cli-shared-utils': 4.5.19
       '@vue/component-compiler-utils': 3.3.0(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)
       '@vue/preload-webpack-plugin': 1.1.2(html-webpack-plugin@3.2.0(webpack@4.47.0))(webpack@4.47.0)
@@ -16237,7 +16290,7 @@ snapshots:
       terser-webpack-plugin: 1.4.5(webpack@4.47.0)
       thread-loader: 2.1.3(webpack@4.47.0)
       url-loader: 2.3.0(file-loader@4.3.0(webpack@4.47.0))(webpack@4.47.0)
-      vue-loader: 15.11.1(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(cache-loader@4.1.0(webpack@4.47.0))(css-loader@3.6.0(webpack@4.47.0))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(prettier@2.8.8)(underscore@1.12.1)(vue-template-compiler@2.7.16)(webpack@4.47.0)
+      vue-loader: 15.11.1(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(cache-loader@4.1.0(webpack@4.47.0))(css-loader@3.6.0(webpack@4.47.0))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(prettier@3.3.3)(underscore@1.12.1)(vue-template-compiler@2.7.16)(webpack@4.47.0)
       vue-style-loader: 4.1.3
       webpack: 4.47.0
       webpack-bundle-analyzer: 3.9.0
@@ -16549,12 +16602,12 @@ snapshots:
 
   '@vue/devtools-api@6.6.3': {}
 
-  '@vue/eslint-config-prettier@6.0.0(eslint-plugin-prettier@3.4.1(eslint@7.32.0)(prettier@2.8.8))(eslint@7.32.0)(prettier@2.8.8)':
+  '@vue/eslint-config-prettier@6.0.0(eslint-plugin-prettier@5.2.1(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0(eslint@7.32.0))(eslint@7.32.0)(prettier@3.3.3))(eslint@7.32.0)(prettier@3.3.3)':
     dependencies:
       eslint: 7.32.0
       eslint-config-prettier: 6.15.0(eslint@7.32.0)
-      eslint-plugin-prettier: 3.4.1(eslint@7.32.0)(prettier@2.8.8)
-      prettier: 2.8.8
+      eslint-plugin-prettier: 5.2.1(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0(eslint@7.32.0))(eslint@7.32.0)(prettier@3.3.3)
+      prettier: 3.3.3
 
   '@vue/eslint-config-typescript@7.0.0(@typescript-eslint/eslint-plugin@4.33.0(@typescript-eslint/parser@4.33.0(eslint@7.32.0)(typescript@4.1.6))(eslint@7.32.0)(typescript@4.1.6))(@typescript-eslint/parser@4.33.0(eslint@7.32.0)(typescript@4.1.6))(eslint-plugin-vue@7.20.0(eslint@7.32.0))(eslint@7.32.0)(typescript@4.1.6)':
     dependencies:
@@ -19640,6 +19693,11 @@ snapshots:
       eslint: 7.32.0
       get-stdin: 6.0.0
 
+  eslint-config-prettier@9.1.0(eslint@7.32.0):
+    dependencies:
+      eslint: 7.32.0
+    optional: true
+
   eslint-config-prettier@9.1.0(eslint@8.57.0):
     dependencies:
       eslint: 8.57.0
@@ -19943,14 +20001,6 @@ snapshots:
       safe-regex-test: 1.0.3
       string.prototype.includes: 2.0.0
 
-  eslint-plugin-prettier@3.4.1(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@2.8.8):
-    dependencies:
-      eslint: 8.57.0
-      prettier: 2.8.8
-      prettier-linter-helpers: 1.0.0
-    optionalDependencies:
-      eslint-config-prettier: 9.1.0(eslint@8.57.0)
-
   eslint-plugin-prettier@3.4.1(eslint-config-prettier@9.1.0(eslint@9.5.0))(eslint@9.5.0)(prettier@2.8.8):
     dependencies:
       eslint: 9.5.0
@@ -19959,11 +20009,25 @@ snapshots:
     optionalDependencies:
       eslint-config-prettier: 9.1.0(eslint@9.5.0)
 
-  eslint-plugin-prettier@3.4.1(eslint@7.32.0)(prettier@2.8.8):
+  eslint-plugin-prettier@5.2.1(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0(eslint@7.32.0))(eslint@7.32.0)(prettier@3.3.3):
     dependencies:
       eslint: 7.32.0
-      prettier: 2.8.8
+      prettier: 3.3.3
       prettier-linter-helpers: 1.0.0
+      synckit: 0.9.1
+    optionalDependencies:
+      '@types/eslint': 8.56.10
+      eslint-config-prettier: 9.1.0(eslint@7.32.0)
+
+  eslint-plugin-prettier@5.2.1(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.3):
+    dependencies:
+      eslint: 8.57.0
+      prettier: 3.3.3
+      prettier-linter-helpers: 1.0.0
+      synckit: 0.9.1
+    optionalDependencies:
+      '@types/eslint': 8.56.10
+      eslint-config-prettier: 9.1.0(eslint@8.57.0)
 
   eslint-plugin-react-hooks@4.6.2(eslint@8.57.0):
     dependencies:
@@ -24449,7 +24513,7 @@ snapshots:
     dependencies:
       htmlparser2: 3.10.1
       postcss: 7.0.39
-      postcss-syntax: 0.36.2(postcss-html@0.36.0)(postcss-less@3.1.4)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss@8.4.38)
 
   postcss-image-set-function@4.0.7(postcss@8.4.38):
     dependencies:
@@ -24922,6 +24986,11 @@ snapshots:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
 
+  postcss-styled-syntax@0.6.4(postcss@8.4.38):
+    dependencies:
+      postcss: 8.4.38
+      typescript: 5.5.3
+
   postcss-svgo@4.0.3:
     dependencies:
       postcss: 7.0.39
@@ -24934,13 +25003,9 @@ snapshots:
       postcss-value-parser: 4.2.0
       svgo: 2.8.0
 
-  postcss-syntax@0.36.2(postcss-html@0.36.0)(postcss-less@3.1.4)(postcss-scss@2.1.1)(postcss@7.0.39):
+  postcss-syntax@0.36.2(postcss@8.4.38):
     dependencies:
-      postcss: 7.0.39
-    optionalDependencies:
-      postcss-html: 0.36.0(postcss-syntax@0.36.2)(postcss@7.0.39)
-      postcss-less: 3.1.4
-      postcss-scss: 2.1.1
+      postcss: 8.4.38
 
   postcss-unique-selectors@4.0.1:
     dependencies:
@@ -24985,11 +25050,13 @@ snapshots:
     dependencies:
       fast-diff: 1.3.0
 
-  prettier-plugin-tailwindcss@0.6.5(prettier@2.8.8):
+  prettier-plugin-tailwindcss@0.6.5(prettier@3.3.3):
     dependencies:
-      prettier: 2.8.8
+      prettier: 3.3.3
 
   prettier@2.8.8: {}
+
+  prettier@3.3.3: {}
 
   pretty-bytes@5.6.0: {}
 
@@ -26719,16 +26786,16 @@ snapshots:
       stylelint: 13.13.1
       stylelint-config-recommended: 5.0.0(stylelint@13.13.1)
 
-  stylelint-less@3.0.1(postcss@7.0.39)(stylelint@13.13.1):
+  stylelint-less@3.0.1(postcss@8.4.38)(stylelint@13.13.1):
     dependencies:
-      postcss: 7.0.39
+      postcss: 8.4.38
       postcss-resolve-nested-selector: 0.1.1
       postcss-value-parser: 4.2.0
       stylelint: 13.13.1
 
-  stylelint-prettier@1.2.0(prettier@2.8.8)(stylelint@13.13.1):
+  stylelint-prettier@1.2.0(prettier@3.3.3)(stylelint@13.13.1):
     dependencies:
-      prettier: 2.8.8
+      prettier: 3.3.3
       prettier-linter-helpers: 1.0.0
       stylelint: 13.13.1
 
@@ -26778,7 +26845,7 @@ snapshots:
       postcss-sass: 0.4.4
       postcss-scss: 2.1.1
       postcss-selector-parser: 6.1.0
-      postcss-syntax: 0.36.2(postcss-html@0.36.0)(postcss-less@3.1.4)(postcss-scss@2.1.1)(postcss@7.0.39)
+      postcss-syntax: 0.36.2(postcss@8.4.38)
       postcss-value-parser: 4.2.0
       resolve-from: 5.0.0
       slash: 3.0.0
@@ -26872,6 +26939,11 @@ snapshots:
       stable: 0.1.8
 
   symbol-tree@3.2.4: {}
+
+  synckit@0.9.1:
+    dependencies:
+      '@pkgr/core': 0.1.1
+      tslib: 2.6.3
 
   table@6.8.2:
     dependencies:
@@ -27646,7 +27718,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vue-loader@15.11.1(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(cache-loader@4.1.0(webpack@4.47.0))(css-loader@3.6.0(webpack@4.47.0))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(prettier@2.8.8)(underscore@1.12.1)(vue-template-compiler@2.7.16)(webpack@4.47.0):
+  vue-loader@15.11.1(@vue/compiler-sfc@3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6)))(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(cache-loader@4.1.0(webpack@4.47.0))(css-loader@3.6.0(webpack@4.47.0))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(prettier@3.3.3)(underscore@1.12.1)(vue-template-compiler@2.7.16)(webpack@4.47.0):
     dependencies:
       '@vue/component-compiler-utils': 3.3.0(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)
       css-loader: 3.6.0(webpack@4.47.0)
@@ -27658,7 +27730,7 @@ snapshots:
     optionalDependencies:
       '@vue/compiler-sfc': 3.0.11(babel-core@7.0.0-bridge.0(@babel/core@7.24.7))(ejs@3.1.10)(handlebars@4.7.8)(lodash@4.17.21)(underscore@1.12.1)(vue@3.3.13(typescript@4.1.6))
       cache-loader: 4.1.0(webpack@4.47.0)
-      prettier: 2.8.8
+      prettier: 3.3.3
       vue-template-compiler: 2.7.16
     transitivePeerDependencies:
       - arc-templates

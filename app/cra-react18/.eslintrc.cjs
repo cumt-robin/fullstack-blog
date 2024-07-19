@@ -11,9 +11,6 @@ module.exports = {
         "import/resolver": {
             webpack: {
                 config: "config/webpack.config.js",
-                env: {
-                    NODE_ENV: "development",
-                },
             },
         },
     },
