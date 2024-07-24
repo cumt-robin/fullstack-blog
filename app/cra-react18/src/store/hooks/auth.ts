@@ -1,7 +1,10 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectIsAuthed } from "../slices/auth";
-import { RootState } from "..";
+import { AppDispatch, RootState } from "..";
+
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
+export const useAppSelector = useSelector.withTypes<RootState>();
 
 export const useIsAuthed = () => {
-    return useSelector((state: RootState) => selectIsAuthed(state));
+    return useAppSelector((state) => selectIsAuthed(state));
 };

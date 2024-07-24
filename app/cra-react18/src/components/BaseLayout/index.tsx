@@ -1,7 +1,9 @@
 import { NavLink } from "react-router-dom";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import IconSvg from "../IconSvg";
+import BaseMenu from "./BaseMenu";
 import logo from "@/assets/img/logo.png";
+import { useIsAuthed } from "@/store/hooks/auth";
 
 const Header = styled.header`
     padding: 18px 40px;
@@ -29,7 +31,7 @@ const HeaderIconWrapper = styled.div`
     position: absolute;
     top: 20px;
     left: 12px;
-    .icon-svg {
+    ${IconSvg} {
         font-size: 24px;
         color: #fff;
         cursor: pointer;
@@ -37,6 +39,12 @@ const HeaderIconWrapper = styled.div`
 `;
 
 const BaseLayout = () => {
+    const isAuthed = useIsAuthed();
+
+    const onToggleMenu = () => {
+        //
+    };
+
     return (
         <section>
             <Header>
@@ -45,22 +53,22 @@ const BaseLayout = () => {
                 </NavLink>
                 <h3>一个坚持原创的前端分享驿站</h3>
                 <HeaderIconWrapper>
-                    <IconSvg
-                        icon="menu"
-                        title="打开菜单"
-                        css={css`
-                            color: #fff;
-                            font-size: 24px;
-                            cursor: pointer;
-                        `}
-                    />
+                    <IconSvg icon="menu" title="打开菜单" onClick={onToggleMenu} />
+                    {isAuthed ? (
+                        <NavLink
+                            to="/backend"
+                            title="进入后台"
+                            style={{
+                                marginLeft: "8px",
+                            }}
+                        >
+                            <IconSvg icon="admin" />
+                        </NavLink>
+                    ) : null}
                 </HeaderIconWrapper>
-
-                {/* <icon-svg class="menu-toggle" icon="menu" title="打开菜单" @click="onToggleMenu" />
-                    <router-link v-if="isAuthed" to="/backend" class="adm-entry" title="进入后台">
-                        <icon-svg icon="admin" />
-                    </router-link> */}
             </Header>
+
+            <BaseMenu />
         </section>
     );
 };
