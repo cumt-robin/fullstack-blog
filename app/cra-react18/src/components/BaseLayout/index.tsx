@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+import IconSvg from "../IconSvg";
 import logo from "@/assets/img/logo.png";
 
 const Header = styled.header`
@@ -24,6 +25,17 @@ const Header = styled.header`
     }
 `;
 
+const HeaderIconWrapper = styled.div`
+    position: absolute;
+    top: 20px;
+    left: 12px;
+    .icon-svg {
+        font-size: 24px;
+        color: #fff;
+        cursor: pointer;
+    }
+`;
+
 const BaseLayout = () => {
     return (
         <section>
@@ -32,12 +44,22 @@ const BaseLayout = () => {
                     <img src={logo} alt="logo" />
                 </NavLink>
                 <h3>一个坚持原创的前端分享驿站</h3>
-                {/* <div class="icons-wrapper">
-                    <icon-svg class="menu-toggle" icon="menu" title="打开菜单" @click="onToggleMenu" />
+                <HeaderIconWrapper>
+                    <IconSvg
+                        icon="menu"
+                        title="打开菜单"
+                        css={css`
+                            color: #fff;
+                            font-size: 24px;
+                            cursor: pointer;
+                        `}
+                    />
+                </HeaderIconWrapper>
+
+                {/* <icon-svg class="menu-toggle" icon="menu" title="打开菜单" @click="onToggleMenu" />
                     <router-link v-if="isAuthed" to="/backend" class="adm-entry" title="进入后台">
                         <icon-svg icon="admin" />
-                    </router-link>
-                </div> */}
+                    </router-link> */}
             </Header>
         </section>
     );

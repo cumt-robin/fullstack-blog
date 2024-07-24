@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import BaseLayout from "@/components/BaseLayout";
 
 const Home: React.FC = () => {
