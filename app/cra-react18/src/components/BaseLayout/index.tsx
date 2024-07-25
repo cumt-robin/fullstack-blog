@@ -1,9 +1,13 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import classNames from "classnames";
+import { useState } from "react";
 import IconSvg from "../IconSvg";
 import BaseMenu from "./BaseMenu";
 import logo from "@/assets/img/logo.png";
 import { useIsAuthed } from "@/store/hooks/auth";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setIsMenuVisible } from "@/store/slices/ui";
 
 const Header = styled.header`
     padding: 18px 40px;
@@ -40,13 +44,44 @@ const HeaderIconWrapper = styled.div`
 
 const BaseLayout = () => {
     const isAuthed = useIsAuthed();
+    const isMenuVisible = useAppSelector((state) => state.ui.isMenuVisible);
+    const dispatch = useAppDispatch();
+    const [isAnimationEnabled, setIsAnimationEnabled] = useState(false);
 
-    const onToggleMenu = () => {
-        //
+    const hideMenu = () => {
+        dispatch(setIsMenuVisible(false));
     };
 
+    const onToggleMenu = () => {
+        if (isAnimationEnabled === false) {
+            setIsAnimationEnabled(true);
+        }
+        if (isMenuVisible) {
+            // 走统一的关闭逻辑
+            hideMenu();
+        } else {
+            dispatch(setIsMenuVisible(true));
+            // 在弹出菜单时保证禁用滚动
+            document.body.style.overflow = "hidden";
+        }
+    };
+
+    const onSectionAnimationEnd = () => {
+        if (isMenuVisible === false) {
+            setIsAnimationEnabled(false);
+            // 解禁滚动
+            document.body.style.overflow = "";
+        }
+    };
+
+    const sectionClass = classNames({
+        slideInLeft: isMenuVisible,
+        slideOutLeft: !isMenuVisible,
+        "animated faster": isAnimationEnabled,
+    });
+
     return (
-        <section>
+        <section className={sectionClass} style={{ minHeight: "100%" }} onAnimationEnd={onSectionAnimationEnd}>
             <Header>
                 <NavLink to="/">
                     <img src={logo} alt="logo" />
@@ -68,7 +103,7 @@ const BaseLayout = () => {
                 </HeaderIconWrapper>
             </Header>
 
-            <BaseMenu />
+            <BaseMenu open={isMenuVisible} />
         </section>
     );
 };
