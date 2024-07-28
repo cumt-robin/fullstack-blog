@@ -1,7 +1,7 @@
 import BaseLayout from "@/components/BaseLayout";
 
 const Home: React.FC = () => {
-    return <BaseLayout></BaseLayout>;
+    return <BaseLayout>MAIN</BaseLayout>;
 };
 
 export default Home;

@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import classNames from "classnames";
-import { useState } from "react";
+import { PropsWithChildren, useState } from "react";
 import IconSvg from "../IconSvg";
 import BaseMenu from "./BaseMenu";
 import logo from "@/assets/img/logo.png";
@@ -42,7 +42,26 @@ const HeaderIconWrapper = styled.div`
     }
 `;
 
-const BaseLayout = () => {
+const Mask = styled.div<{ show: boolean }>`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.24);
+    z-index: 100;
+    display: ${({ show }) => (show ? "block" : "none")};
+`;
+
+const Main = styled.main`
+    padding: 24px 24px 0;
+    @media screen and (min-width: 992px) {
+        width: 800px;
+        margin: 0 auto;
+    }
+`;
+
+const BaseLayout: React.FC<PropsWithChildren> = ({ children }) => {
     const isAuthed = useIsAuthed();
     const isMenuVisible = useAppSelector((state) => state.ui.isMenuVisible);
     const dispatch = useAppDispatch();
@@ -74,6 +93,10 @@ const BaseLayout = () => {
         }
     };
 
+    const onClickMask = () => {
+        hideMenu();
+    };
+
     const sectionClass = classNames({
         slideInLeft: isMenuVisible,
         slideOutLeft: !isMenuVisible,
@@ -102,6 +125,10 @@ const BaseLayout = () => {
                     ) : null}
                 </HeaderIconWrapper>
             </Header>
+
+            <Main>{children}</Main>
+
+            <Mask show={isMenuVisible} onClick={onClickMask} />
 
             <BaseMenu open={isMenuVisible} />
         </section>
