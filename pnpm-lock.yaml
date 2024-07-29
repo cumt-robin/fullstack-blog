@@ -249,6 +249,9 @@ importers:
       html-webpack-plugin:
         specifier: ^5.5.0
         version: 5.6.0(webpack@5.93.0)
+      http-proxy-middleware:
+        specifier: ^3.0.0
+        version: 3.0.0
       identity-obj-proxy:
         specifier: ^3.0.0
         version: 3.0.0
@@ -7204,6 +7207,10 @@ packages:
     peerDependenciesMeta:
       '@types/express':
         optional: true
+
+  http-proxy-middleware@3.0.0:
+    resolution: {integrity: sha512-36AV1fIaI2cWRzHo+rbcxhe3M3jUDCNzc4D5zRl57sEWRAxdXYtw7FSQKYY6PDKssiAKjLYypbssHk+xs/kMXw==}
+    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
 
   http-proxy@1.18.1:
     resolution: {integrity: sha512-7mz/721AbnJwIVbnaSv1Cz3Am0ZLT/UBwkC92VlxhXv/k/BBQfM2fXElQNC27BVGr0uwUpplYPQM9LnaBMR5NQ==}
@@ -17384,7 +17391,7 @@ snapshots:
 
   axios@0.21.4:
     dependencies:
-      follow-redirects: 1.15.6(debug@4.3.5)
+      follow-redirects: 1.15.6(debug@4.3.5(supports-color@6.1.0))
     transitivePeerDependencies:
       - debug
 
@@ -17396,7 +17403,7 @@ snapshots:
 
   axios@1.7.2:
     dependencies:
-      follow-redirects: 1.15.6(debug@4.3.5)
+      follow-redirects: 1.15.6(debug@4.3.5(supports-color@6.1.0))
       form-data: 4.0.0
       proxy-from-env: 1.1.0
     transitivePeerDependencies:
@@ -21380,7 +21387,7 @@ snapshots:
   http-proxy-middleware@2.0.6(@types/express@4.17.21):
     dependencies:
       '@types/http-proxy': 1.17.14
-      http-proxy: 1.18.1(debug@4.3.5)
+      http-proxy: 1.18.1(debug@4.3.5(supports-color@6.1.0))
       is-glob: 4.0.3
       is-plain-obj: 3.0.0
       micromatch: 4.0.7
@@ -21388,6 +21395,17 @@ snapshots:
       '@types/express': 4.17.21
     transitivePeerDependencies:
       - debug
+
+  http-proxy-middleware@3.0.0:
+    dependencies:
+      '@types/http-proxy': 1.17.14
+      debug: 4.3.5(supports-color@6.1.0)
+      http-proxy: 1.18.1(debug@4.3.5)
+      is-glob: 4.0.3
+      is-plain-obj: 3.0.0
+      micromatch: 4.0.7
+    transitivePeerDependencies:
+      - supports-color
 
   http-proxy@1.18.1(debug@4.3.5(supports-color@6.1.0)):
     dependencies:

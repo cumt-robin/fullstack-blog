@@ -96,7 +96,7 @@ api.interceptors.response.use(
             }
         }
         return Promise.reject(error.response);
-    }
+    },
 );
 
 export class ApiService {
@@ -157,7 +157,7 @@ export class ApiService {
         config: PlainObject = {
             headers: { "Content-Type": "multipart/form-data" },
             transformRequest: null,
-        }
+        },
     ): Promise<T> {
         return api.post(`/${this.feature}/${action}`, params, config);
     }

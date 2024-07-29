@@ -4,6 +4,8 @@ import classNames from "classnames";
 import { PropsWithChildren, useState } from "react";
 import IconSvg from "../IconSvg";
 import BaseMenu from "./BaseMenu";
+import BaseFooter from "./BaseFooter";
+import HotColumn from "./HotColumn";
 import logo from "@/assets/img/logo.png";
 import { useIsAuthed } from "@/store/hooks/auth";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -42,7 +44,7 @@ const HeaderIconWrapper = styled.div`
     }
 `;
 
-const Mask = styled.div<{ show: boolean }>`
+const Mask = styled.div<{ open: boolean }>`
     position: absolute;
     top: 0;
     left: 0;
@@ -50,7 +52,7 @@ const Mask = styled.div<{ show: boolean }>`
     height: 100%;
     background: rgba(0, 0, 0, 0.24);
     z-index: 100;
-    display: ${({ show }) => (show ? "block" : "none")};
+    display: ${({ open }) => (open ? "block" : "none")};
 `;
 
 const Main = styled.main`
@@ -128,9 +130,13 @@ const BaseLayout: React.FC<PropsWithChildren> = ({ children }) => {
 
             <Main>{children}</Main>
 
-            <Mask show={isMenuVisible} onClick={onClickMask} />
+            <HotColumn />
+
+            <BaseFooter />
 
             <BaseMenu open={isMenuVisible} />
+
+            <Mask open={isMenuVisible} onClick={onClickMask} />
         </section>
     );
 };

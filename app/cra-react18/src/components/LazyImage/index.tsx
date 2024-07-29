@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useRef } from "react";
+import defaultImg from "@/assets/img/default.png";
 
 interface LazyImageProps {
     src: string;
-    alt: string;
-    placeholder: string;
+    alt?: string;
+    placeholder?: string;
     threshold?: number;
 }
 
-const LazyImage: React.FC<LazyImageProps> = ({ src, alt, placeholder, threshold = 0.1 }) => {
+type ExtraProps = Omit<React.HTMLAttributes<HTMLImageElement>, keyof LazyImageProps>;
+
+const LazyImage: React.FC<LazyImageProps & ExtraProps> = ({ src, alt, placeholder = defaultImg, threshold = 0.1, ...restAttrs }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isInView, setIsInView] = useState(false);
-    const imgRef = useRef<HTMLDivElement | null>(null);
+    const imgRef = useRef<HTMLImageElement | null>(null);
     const observerRef = useRef<IntersectionObserver | null>(null);
 
     useEffect(() => {
@@ -49,7 +52,7 @@ const LazyImage: React.FC<LazyImageProps> = ({ src, alt, placeholder, threshold 
         };
     }, [isInView, src]);
 
-    return <div ref={imgRef}>{isInView && isLoaded ? <img src={src} alt={alt} /> : <img src={placeholder} alt={alt} />}</div>;
+    return <img {...restAttrs} ref={imgRef} src={isInView && isLoaded ? src : placeholder} alt={alt} />;
 };
 
 export default LazyImage;
