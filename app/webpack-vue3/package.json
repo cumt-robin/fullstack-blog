@@ -70,6 +70,7 @@
         "less": "^4.1.1",
         "less-loader": "^7.3.0",
         "postcss": "^8.4.40",
+        "postcss-scss": "^4.0.9",
         "sass": "^1.26.5",
         "sass-loader": "^8.0.2",
         "sass-resources-loader": "^2.2.1",

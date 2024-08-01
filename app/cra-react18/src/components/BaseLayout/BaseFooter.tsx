@@ -64,6 +64,7 @@ const Wrapper = styled.section`
         flex: 1;
         max-width: 200px;
         overflow: hidden;
+        cursor: pointer;
         + .qrcode {
             margin-left: 10px;
         }

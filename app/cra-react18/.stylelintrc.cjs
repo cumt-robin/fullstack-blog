@@ -10,6 +10,8 @@ module.exports = {
         "at-rule-no-unknown": null,
         "color-no-invalid-hex": true,
         "less/color-no-invalid-hex": true,
+        "keyframes-name-pattern": null,
+        "selector-class-pattern": null,
     },
     customSyntax: "postcss-styled-syntax",
     overrides: [

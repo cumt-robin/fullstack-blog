@@ -1,9 +1,9 @@
+@import url("./reset.less");
+@import url("./animation.less");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import "./reset.less";
-@import "./animation.less";
 
 @layer utilities {
     .clearfix {
@@ -12,6 +12,7 @@
             display: table;
             content: "";
         }
+
         &::after {
             clear: both;
         }

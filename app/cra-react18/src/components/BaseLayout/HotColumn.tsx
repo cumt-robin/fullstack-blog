@@ -60,7 +60,7 @@ const HotColumn: React.FC = () => {
     }, []);
 
     return (
-        <StyledCard title={<div>热门推荐</div>}>
+        <StyledCard title={<div>热门推荐</div>} hoverable={true} loading={loading}>
             {hotList.length > 0 ? (
                 <ul>
                     {hotList.map((article, index) => {

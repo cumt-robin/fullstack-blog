@@ -23,9 +23,9 @@
         "css",
         "less",
         "scss",
-        "vue",
-        "styled"
+        "vue"
     ],
+    "stylelint.enable": true,
     "[vue]": {
         "editor.defaultFormatter": "Vue.volar"
     },
