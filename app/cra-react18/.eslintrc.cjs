@@ -20,5 +20,7 @@ module.exports = {
         "import/order": "warn",
         "import/no-unresolved": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
+        "react-hooks/exhaustive-deps": "off",
+        "react-hooks/rules-of-hooks": "error",
     },
 };

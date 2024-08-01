@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import styled from "styled-components";
 import defaultImg from "@/assets/img/default.png";
 
 interface LazyImageProps {
@@ -55,4 +56,4 @@ const LazyImage: React.FC<LazyImageProps & ExtraProps> = ({ src, alt, placeholde
     return <img {...restAttrs} ref={imgRef} src={isInView && isLoaded ? src : placeholder} alt={alt} />;
 };
 
-export default LazyImage;
+export default styled(LazyImage)``;

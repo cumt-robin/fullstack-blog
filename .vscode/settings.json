@@ -23,7 +23,8 @@
         "css",
         "less",
         "scss",
-        "vue"
+        "vue",
+        "styled"
     ],
     "[vue]": {
         "editor.defaultFormatter": "Vue.volar"

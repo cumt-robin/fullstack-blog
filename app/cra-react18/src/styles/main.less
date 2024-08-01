@@ -4,3 +4,16 @@
 
 @import "./reset.less";
 @import "./animation.less";
+
+@layer utilities {
+    .clearfix {
+        &::after,
+        &::before {
+            display: table;
+            content: "";
+        }
+        &::after {
+            clear: both;
+        }
+    }
+}

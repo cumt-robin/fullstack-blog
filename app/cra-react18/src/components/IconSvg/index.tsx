@@ -11,7 +11,7 @@ const iconPrefix = "icon-";
 const fallbackIcon = "home";
 
 interface IconSvgProps {
-    icon?: string;
+    icon: string;
     size?: number;
     color?: string;
     css?: ReturnType<typeof styledCss>;
@@ -24,7 +24,7 @@ const IconSvg: React.FC<IconSvgProps & ExtraProps> = ({ icon, ...restAttrs }) =>
     return <Icon type={iconType} {...restAttrs} />;
 };
 
-const StyledIconSvg = styled(IconSvg)<IconSvgProps & ExtraProps>`
+const StyledIconSvg = styled(IconSvg)<IconSvgProps>`
     font-size: ${(props) => (isNumber(props.size) ? `${props.size}px` : "16px")};
     color: ${(props) => props.color};
     & + & {
