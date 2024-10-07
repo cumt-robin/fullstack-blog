@@ -12,7 +12,7 @@ interface AsyncLoadingResponse {
     error: unknown;
 }
 
-export const useAsyncLoading = (fn: GeneralFunction<Promise<unknown>>): AsyncLoadingResponse => {
+export const useAsyncLoading = (fn: GeneralFunction<Promise<unknown>>, deps: any[] = []): AsyncLoadingResponse => {
     const [loading, setLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState<unknown>();
@@ -27,6 +27,6 @@ export const useAsyncLoading = (fn: GeneralFunction<Promise<unknown>>): AsyncLoa
             setLoading(false);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, deps);
     return { trigger, loading, isError, error };
 };
