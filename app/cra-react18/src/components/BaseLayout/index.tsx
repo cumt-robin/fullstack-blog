@@ -115,13 +115,7 @@ const BaseLayout: React.FC<PropsWithChildren> = ({ children }) => {
                 <HeaderIconWrapper>
                     <IconSvg icon="menu" title="打开菜单" onClick={onToggleMenu} />
                     {isAuthed ? (
-                        <NavLink
-                            to="/backend"
-                            title="进入后台"
-                            style={{
-                                marginLeft: "8px",
-                            }}
-                        >
+                        <NavLink to="/backend" title="进入后台" className="ml-2">
                             <IconSvg icon="admin" />
                         </NavLink>
                     ) : null}
