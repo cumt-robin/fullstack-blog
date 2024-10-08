@@ -1,19 +1,49 @@
 services:
-  vite-vue3:
-    image: fullstack-blog-vite-vue3:dev
+  mysql:
+    restart: always
+    image: mysql:8.4.2
+    ports:
+      - "3308:3306"
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+      - MYSQL_CHARSET=utf8mb4
+      - MYSQL_COLLATION=utf8mb4_0900_ai_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/init-scripts:/docker-entrypoint-initdb.d
+
+  cra-react18:
+    restart: always
+    image: fullstack-blog-cra-react18:dev
     ports:
       - "3000:3000"
     volumes:
-      - ./app/vite-vue3/src:/usr/src/fullstack-blog/app/vite-vue3/src
-      - ./app/vite-vue3/vite.config.docker.ts:/usr/src/fullstack-blog/app/vite-vue3/vite.config.ts
-      - ./app/vite-vue3/index.html:/usr/src/fullstack-blog/app/vite-vue3/index.html
-      - ./app/vite-vue3/public:/usr/src/fullstack-blog/app/vite-vue3/public
+      - ./app/cra-react18/src:/usr/src/fullstack-blog/app/cra-react18/src
+      - ./app/cra-react18/public:/usr/src/fullstack-blog/app/cra-react18/public
       - ./.prettierrc.json:/usr/src/fullstack-blog/.prettierrc.json
       - ./.prettierignore:/usr/src/fullstack-blog/.prettierignore
     environment:
       - NODE_ENV=development
 
+  # vite-vue3:
+  #   image: fullstack-blog-vite-vue3:dev
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - ./app/vite-vue3/src:/usr/src/fullstack-blog/app/vite-vue3/src
+  #     - ./app/vite-vue3/vite.config.docker.ts:/usr/src/fullstack-blog/app/vite-vue3/vite.config.ts
+  #     - ./app/vite-vue3/index.html:/usr/src/fullstack-blog/app/vite-vue3/index.html
+  #     - ./app/vite-vue3/public:/usr/src/fullstack-blog/app/vite-vue3/public
+  #     - ./.prettierrc.json:/usr/src/fullstack-blog/.prettierrc.json
+  #     - ./.prettierignore:/usr/src/fullstack-blog/.prettierignore
+  #   environment:
+  #     - NODE_ENV=development
+
   express-server:
+    restart: always
     image: fullstack-blog-express:dev
     ports:
       - "8002:8002"
@@ -23,5 +53,5 @@ services:
       - NODE_ENV=development
       - PORT=8002
 
-# 如果还有数据库或其他服务，也可以在这里添加
-# ...
+volumes:
+  mysql_data:

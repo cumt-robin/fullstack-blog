@@ -2,10 +2,10 @@
 module.exports = {
     allowClient: ["localhost:3000", "127.0.0.1:3000"],
     mysql: {
-        host: "localhost",
+        host: "localhost（如果是docker运行，直接填mysql）",
         port: "3306",
-        user: "your mysql username",
+        user: "root",
         password: "your mysql password",
-        database: "your mysql database name",
+        database: "blog_db",
     },
 };

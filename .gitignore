@@ -3,6 +3,7 @@ node_modules
 dist
 .eslintcache
 .stylelintcache
+mysql/init-scripts
 
 # local env files
 .env.local

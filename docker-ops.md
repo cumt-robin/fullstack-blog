@@ -1,5 +1,17 @@
 这是通过 docker 运行项目的说明，如果你不使用 docker，请直接看 [legacy-ops](./legacy-ops.md) 文档。
 
+## 数据库准备
+
+关注公众号[程序员白彬](https://qncdn.wbjiang.cn/%E5%85%AC%E4%BC%97%E5%8F%B7/qrcode_new.jpg)，回复关键词【博客数据库脚本】获取初始 MySQL 脚本。
+
+将脚本放置在项目工程的 mysql/init-scripts 目录下。
+
+```
+|-- mysql
+|   `-- init-scripts
+|       |-- init.sql
+```
+
 ## Docker 开发环境
 
 1. 构建镜像
@@ -11,7 +23,7 @@ sh build-dev-images.sh
 2. 运行 docker compose
 
 ```shell
-docker compose -f compose-dev.yml up -d
+docker compose --env-file .env.docker.local -f compose-dev.yml up -d
 ```
 
 ## Docker 生产环境
@@ -112,5 +124,5 @@ docker compose -f compose-prod-local.yml build
 2. 运行镜像测试
 
 ```shell
-docker compose -f compose-prod-local.yml up -d
+docker compose --env-file .env.docker.local -f compose-prod-local.yml up -d
 ```

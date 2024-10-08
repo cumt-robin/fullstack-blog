@@ -31,6 +31,7 @@
     "cra-react18:dev": "pnpm --filter cra-react18 dev",
     "express-server:dev": "pnpm --filter express-server dev",
     "fullstack:dev": "pnpm --filter vite-vue3 --filter express-server dev",
+    "docker:dev": "pnpm --filter cra-react18 --filter express-server docker-dev",
     "webpack-vue3:build": "pnpm --filter webpack-vue3 build",
     "vite-vue3:build": "pnpm --filter vite-vue3 build",
     "cra-react18:build": "pnpm --filter cra-react18 build",

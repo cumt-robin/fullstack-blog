@@ -1,4 +1,20 @@
 services:
+  mysql:
+    restart: always
+    image: mysql:8.4.2
+    ports:
+      - "3308:3306"
+    environment:
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+      - MYSQL_CHARSET=utf8mb4
+      - MYSQL_COLLATION=utf8mb4_0900_ai_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./mysql/init-scripts:/docker-entrypoint-initdb.d
+
   vite-vue3:
     build:
       target: vite-vue3-frontend
@@ -22,5 +38,5 @@ services:
       - NODE_ENV=production
       - PORT=8002
 
-# 如果还有数据库或其他服务，也可以在这里添加
-# ...
+volumes:
+  mysql_data:
