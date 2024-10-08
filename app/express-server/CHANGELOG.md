@@ -1,5 +1,11 @@
 # express-server
 
+## 3.5.10
+
+### Patch Changes
+
+-   f19a3ae: refactor: 改用mysql容器
+
 ## 3.5.9
 
 ### Patch Changes
