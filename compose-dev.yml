@@ -19,7 +19,7 @@ services:
     restart: always
     image: fullstack-blog-cra-react18:dev
     ports:
-      - "3000:3000"
+      - "3002:3000"
     volumes:
       - ./app/cra-react18/src:/usr/src/fullstack-blog/app/cra-react18/src
       - ./app/cra-react18/public:/usr/src/fullstack-blog/app/cra-react18/public
