@@ -17,11 +17,11 @@ RUN pnpm deploy --filter=express-server /app/express-server
 # EXPOSE 3000
 # CMD ["pnpm", "dev"]
 
-FROM base AS cra-react18-frontend
-COPY --from=build /app/cra-react18 /usr/src/fullstack-blog/app/cra-react18
-WORKDIR /usr/src/fullstack-blog/app/cra-react18
-EXPOSE 3000
-CMD ["pnpm", "dev"]
+# FROM base AS cra-react18-frontend
+# COPY --from=build /app/cra-react18 /usr/src/fullstack-blog/app/cra-react18
+# WORKDIR /usr/src/fullstack-blog/app/cra-react18
+# EXPOSE 3000
+# CMD ["pnpm", "dev"]
 
 FROM base AS express-backend
 RUN npm i -g pm2-dev

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { NavLink, useParams, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
-import { Empty, Pagination, Skeleton } from "antd";
+import { Breadcrumb, Divider, Empty, Pagination, Skeleton } from "antd";
 import BaseLayout from "@/components/BaseLayout";
 import { ArticleDTO } from "@/bean/dto";
 import { articleService } from "@/services/article";
@@ -11,7 +11,9 @@ import CardArticle from "@/components/CardArticle";
 
 const ArticleList = styled.section``;
 
-const Home: React.FC = () => {
+const Category: React.FC = () => {
+    const { name } = useParams();
+
     const [articleList, setArticleList] = useState<ArticleDTO[]>([]);
 
     const [total, setTotal] = useState(0);
@@ -26,7 +28,10 @@ const Home: React.FC = () => {
 
     const handleGetArticleList = useCallback(
         async (isChangePage: boolean) => {
-            const { data, total } = await articleService.page(pageInfo);
+            const { data, total } = await articleService.pageByCategory({
+                ...pageInfo,
+                keyword: name as string,
+            });
             setArticleList(data);
             setTotal(total);
             if (isChangePage) {
@@ -36,10 +41,10 @@ const Home: React.FC = () => {
                 });
             }
         },
-        [pageInfo],
+        [pageInfo, name],
     );
 
-    const { trigger: getPageList, loading } = useAsyncLoading(handleGetArticleList, [pageInfo]);
+    const { trigger: getPageList, loading } = useAsyncLoading(handleGetArticleList, [pageInfo, name]);
 
     useEffect(() => {
         const qsPageNo = searchParams.get("pageNo");
@@ -71,6 +76,18 @@ const Home: React.FC = () => {
             <Skeleton loading={loading} active={true} paragraph={{ rows: 12 }}>
                 {articleList.length > 0 ? (
                     <>
+                        <Breadcrumb>
+                            <Breadcrumb.Item>
+                                <NavLink to="/">首页</NavLink>
+                            </Breadcrumb.Item>
+                            <Breadcrumb.Item>
+                                <NavLink to="/categories">所有分类</NavLink>
+                            </Breadcrumb.Item>
+                            <Breadcrumb.Item>{name}</Breadcrumb.Item>
+                        </Breadcrumb>
+
+                        <Divider />
+
                         <ArticleList>
                             {articleList.map((article) => (
                                 <CardArticle article={article} key={article.id} />
@@ -96,4 +113,4 @@ const Home: React.FC = () => {
     );
 };
 
-export default Home;
+export default Category;

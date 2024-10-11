@@ -1,12 +1,15 @@
 const mysql = require("mysql2");
-const config = require("../config");
 const errcode = require("./errcode");
 
 const pool = mysql.createPool({
+    host: "mysql",
+    port: 3306,
+    user: "root",
+    password: process.env.MYSQL_ROOT_PASSWORD,
+    database: process.env.MYSQL_DATABASE,
     multipleStatements: true,
     waitForConnections: true,
     charset: "UTF8MB4_UNICODE_CI",
-    ...config.mysql,
 });
 
 pool.on("connection", (connection) => {
@@ -115,7 +118,7 @@ function execTransaction(connection, task) {
                     connection.rollback(() => {
                         throw err;
                     });
-                }
+                },
             ).catch((err) => {
                 connection.rollback(() => {
                     throw err;

@@ -1,6 +1,7 @@
 import { RouterProvider } from "react-router-dom";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Skeleton } from "antd";
 import { Provider } from "react-redux";
+import { Suspense } from "react";
 import router from "./router";
 import { store } from "./store";
 
@@ -15,7 +16,9 @@ function App() {
                     },
                 }}
             >
-                <RouterProvider router={router} />
+                <Suspense fallback={<Skeleton />}>
+                    <RouterProvider router={router} />
+                </Suspense>
             </ConfigProvider>
         </Provider>
     );

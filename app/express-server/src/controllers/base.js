@@ -11,16 +11,6 @@ const config = require("../config");
  * 权限验证
  */
 router.use((req, res, next) => {
-    // CORS 处理，已交给 Nginx 处理
-    // if (req.headers.origin) {
-    //     if (config.allowClient.includes(req.headers.origin)) {
-    //         res.header('Access-Control-Allow-Origin', req.headers.origin);
-    //     }
-    //     res.header('Access-Control-Allow-Methods', 'PUT,GET,POST,DELETE,OPTIONS');
-    //     res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type,Range");
-    //     res.header('Access-Control-Allow-Credentials', 'true');
-    // }
-
     const authority = authMap.get(req.path);
 
     if (authority) {

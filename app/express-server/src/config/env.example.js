@@ -1,6 +1,5 @@
 // 请在同目录下新建一个 env.js 配置文件，用于配置通用设置，配置说明如下。
 module.exports = {
-    allowClient: [],
     email: {
         service: "163", // 邮箱服务商
         port: 465, // SMTP 端口
