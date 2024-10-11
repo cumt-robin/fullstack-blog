@@ -4,5 +4,5 @@
 
 module.exports = {
     ...require("./env"),
-    ...(process.env.NODE_ENV === "production" ? require("./prod.env") : require("./dev.env")),
+    // 可以根据 process.env.NODE_ENV 再补充环境变量
 };

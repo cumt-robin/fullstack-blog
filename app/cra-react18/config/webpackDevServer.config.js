@@ -64,6 +64,9 @@ module.exports = function (proxy, allowedHost) {
                 // src/node_modules is not ignored to support absolute imports
                 // https://github.com/facebook/create-react-app/issues/1065
                 ignored: ignoredFiles(paths.appSrc),
+                // ignored: /node_modules/,
+                // aggregateTimeout: 300,
+                // poll: 1000,
             },
         },
         client: {
