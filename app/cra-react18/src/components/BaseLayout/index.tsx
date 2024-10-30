@@ -55,15 +55,20 @@ const Mask = styled.div<{ open: boolean }>`
     display: ${({ open }) => (open ? "block" : "none")};
 `;
 
-const Main = styled.main`
+const Main = styled.main<{ $customStyles?: string }>`
     padding: 24px 24px 0;
     @media screen and (min-width: 992px) {
         width: 800px;
         margin: 0 auto;
     }
+    ${({ $customStyles }) => $customStyles};
 `;
 
-const BaseLayout: React.FC<PropsWithChildren> = ({ children }) => {
+const LayoutWrapper = styled.section`
+    min-height: 100%;
+`;
+
+const BaseLayout: React.FC<PropsWithChildren<{ mainStyle?: string }>> = ({ children, mainStyle }) => {
     const isAuthed = useIsAuthed();
     const isMenuVisible = useAppSelector((state) => state.ui.isMenuVisible);
     const dispatch = useAppDispatch();
@@ -106,7 +111,7 @@ const BaseLayout: React.FC<PropsWithChildren> = ({ children }) => {
     });
 
     return (
-        <section className={sectionClass} style={{ minHeight: "100%" }} onAnimationEnd={onSectionAnimationEnd}>
+        <LayoutWrapper className={sectionClass} onAnimationEnd={onSectionAnimationEnd}>
             <Header>
                 <NavLink to="/">
                     <img src={logo} alt="logo" />
@@ -122,7 +127,7 @@ const BaseLayout: React.FC<PropsWithChildren> = ({ children }) => {
                 </HeaderIconWrapper>
             </Header>
 
-            <Main>{children}</Main>
+            <Main $customStyles={mainStyle}>{children}</Main>
 
             <HotColumn />
 
@@ -131,7 +136,7 @@ const BaseLayout: React.FC<PropsWithChildren> = ({ children }) => {
             <BaseMenu open={isMenuVisible} />
 
             <Mask open={isMenuVisible} onClick={onClickMask} />
-        </section>
+        </LayoutWrapper>
     );
 };
 
