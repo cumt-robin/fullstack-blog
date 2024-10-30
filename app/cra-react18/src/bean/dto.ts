@@ -30,6 +30,7 @@ export interface ArticleDTO extends RecordDTO {
 export interface CategoryDTO extends RecordDTO {
     category_name: string;
     poster: string;
+    category_count?: number;
 }
 
 export interface TagDTO extends RecordDTO {
