@@ -92,7 +92,7 @@ const Section = styled.section<BaseMenuProps>`
             padding: 0 20px;
             color: #b8c7ce;
             transition: color 0.3s ease-in-out;
-            &.router-link-active {
+            &.active {
                 color: #fff;
             }
         }

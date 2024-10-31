@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { Badge, Col, Empty, Row, Skeleton } from "antd";
 import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { categoryService } from "@/services/category";
 import { CategoryDTO } from "@/bean/dto";
 import { useAsyncLoading } from "@/hooks/async";
@@ -39,6 +39,14 @@ const CategoryRow = styled(Row)`
     }
 `;
 
+const mainCss = css`
+    padding: 24px 18px;
+    background-color: #f5f5f5;
+    @media screen and (min-width: 992px) {
+        background-color: transparent;
+    }
+`;
+
 export const Component: React.FC = () => {
     const [categoryList, setCategoryList] = useState<CategoryDTO[]>([]);
 
@@ -54,7 +62,7 @@ export const Component: React.FC = () => {
     }, [getCategoryList]);
 
     return (
-        <BaseLayout mainStyle="padding: 24px 18px; background-color: #f5f5f5;">
+        <BaseLayout mainCss={mainCss}>
             <h2 style={{ marginBottom: "16px", fontSize: "24px", textAlign: "center" }}>文章分类</h2>
 
             <Skeleton loading={loading} active={true} paragraph={{ rows: 10 }}>
