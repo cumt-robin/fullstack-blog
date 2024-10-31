@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { NavLink, useLocation } from "react-router-dom";
+import styled, { RuleSet } from "styled-components";
 import classNames from "classnames";
-import { PropsWithChildren, useState } from "react";
+import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 import IconSvg from "../IconSvg";
 import BaseMenu from "./BaseMenu";
 import BaseFooter from "./BaseFooter";
@@ -55,28 +55,34 @@ const Mask = styled.div<{ open: boolean }>`
     display: ${({ open }) => (open ? "block" : "none")};
 `;
 
-const Main = styled.main<{ $customStyles?: string }>`
+const Main = styled.main<{ $mainCss?: RuleSet }>`
     padding: 24px 24px 0;
     @media screen and (min-width: 992px) {
         width: 800px;
         margin: 0 auto;
     }
-    ${({ $customStyles }) => $customStyles};
+    ${({ $mainCss }) => $mainCss};
 `;
 
 const LayoutWrapper = styled.section`
     min-height: 100%;
 `;
 
-const BaseLayout: React.FC<PropsWithChildren<{ mainStyle?: string }>> = ({ children, mainStyle }) => {
+const BaseLayout: React.FC<PropsWithChildren<{ mainCss?: RuleSet }>> = ({ children, mainCss }) => {
     const isAuthed = useIsAuthed();
     const isMenuVisible = useAppSelector((state) => state.ui.isMenuVisible);
     const dispatch = useAppDispatch();
     const [isAnimationEnabled, setIsAnimationEnabled] = useState(false);
 
-    const hideMenu = () => {
+    const location = useLocation();
+
+    const hideMenu = useCallback(() => {
         dispatch(setIsMenuVisible(false));
-    };
+    }, [dispatch]);
+
+    useEffect(() => {
+        hideMenu();
+    }, [location, hideMenu]);
 
     const onToggleMenu = () => {
         if (isAnimationEnabled === false) {
@@ -127,7 +133,7 @@ const BaseLayout: React.FC<PropsWithChildren<{ mainStyle?: string }>> = ({ child
                 </HeaderIconWrapper>
             </Header>
 
-            <Main $customStyles={mainStyle}>{children}</Main>
+            <Main $mainCss={mainCss}>{children}</Main>
 
             <HotColumn />
 

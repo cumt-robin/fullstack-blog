@@ -17,6 +17,10 @@ const router = createBrowserRouter([
         path: "/category/:name",
         element: <Category />,
     },
+    {
+        path: "/tags",
+        lazy: () => import("../views/Tags"),
+    },
 ]);
 
 export default router;

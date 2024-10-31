@@ -35,6 +35,7 @@ export interface CategoryDTO extends RecordDTO {
 
 export interface TagDTO extends RecordDTO {
     tag_name: string;
+    tag_count?: number;
 }
 
 export interface ReplyDTO extends RecordDTO {
