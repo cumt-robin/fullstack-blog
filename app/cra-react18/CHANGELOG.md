@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.4.0
+
+### Minor Changes
+
+-   5aae86e: feat: 标签列表及标签下文章等功能页面
+
 ## 0.3.0
 
 ### Minor Changes
