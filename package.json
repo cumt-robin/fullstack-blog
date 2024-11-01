@@ -26,6 +26,7 @@
   },
   "homepage": "https://blog.wbjiang.cn/",
   "scripts": {
+    "changeset": "changeset",
     "webpack-vue3:dev": "pnpm --filter webpack-vue3 dev",
     "vite-vue3:dev": "pnpm --filter vite-vue3 dev",
     "cra-react18:dev": "pnpm --filter cra-react18 dev",
