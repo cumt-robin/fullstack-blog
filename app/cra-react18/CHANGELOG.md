@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.6.0
+
+### Minor Changes
+
+-   a802af7: feat: cra-react18项目增加时间轴功能
+
 ## 0.5.0
 
 ### Minor Changes
