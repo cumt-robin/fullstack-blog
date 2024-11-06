@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.5.0
+
+### Minor Changes
+
+-   f023920: feat: cra-react18项目增加留言板
+
 ## 0.4.0
 
 ### Minor Changes
