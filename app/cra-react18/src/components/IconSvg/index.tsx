@@ -25,7 +25,7 @@ const IconSvg: React.FC<IconSvgProps & ExtraProps> = ({ icon, ...restAttrs }) =>
 };
 
 const StyledIconSvg = styled(IconSvg)<IconSvgProps>`
-    font-size: ${(props) => (isNumber(props.size) ? `${props.size}px` : "16px")};
+    font-size: ${(props) => (isNumber(props.size) ? `${props.size}px` : "1em")};
     color: ${(props) => props.color};
     & + & {
         margin-left: 10px;

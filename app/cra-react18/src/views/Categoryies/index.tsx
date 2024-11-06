@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Badge, Col, Empty, Row, Skeleton } from "antd";
 import { NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
@@ -50,16 +50,17 @@ const mainCss = css`
 export const Component: React.FC = () => {
     const [categoryList, setCategoryList] = useState<CategoryDTO[]>([]);
 
-    const handleGetCategoryList = useCallback(async () => {
+    const handleGetCategoryList = async () => {
         const { data } = await categoryService.all({ getCount: "1" });
         setCategoryList(data);
-    }, []);
+    };
 
     const { trigger: getCategoryList, loading } = useAsyncLoading(handleGetCategoryList);
 
     useEffect(() => {
         getCategoryList();
-    }, [getCategoryList]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <BaseLayout mainCss={mainCss}>

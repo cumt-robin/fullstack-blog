@@ -25,6 +25,10 @@ const router = createBrowserRouter([
         path: "/tag/:name",
         lazy: () => import("../views/Tag"),
     },
+    {
+        path: "/messages",
+        lazy: () => import("../views/Messages"),
+    },
 ]);
 
 export default router;

@@ -7,11 +7,23 @@ interface LazyImageProps {
     alt?: string;
     placeholder?: string;
     threshold?: number;
+    radius?: string;
 }
 
 type ExtraProps = Omit<React.HTMLAttributes<HTMLImageElement>, keyof LazyImageProps>;
 
-const LazyImage: React.FC<LazyImageProps & ExtraProps> = ({ src, alt, placeholder = defaultImg, threshold = 0.1, ...restAttrs }) => {
+const StyledImg = styled.img<{ $radius?: string }>`
+    border-radius: ${({ $radius }) => $radius};
+`;
+
+const LazyImage: React.FC<LazyImageProps & ExtraProps> = ({
+    src,
+    alt,
+    placeholder = defaultImg,
+    threshold = 0.1,
+    radius,
+    ...restAttrs
+}) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [isInView, setIsInView] = useState(false);
     const imgRef = useRef<HTMLImageElement | null>(null);
@@ -53,7 +65,7 @@ const LazyImage: React.FC<LazyImageProps & ExtraProps> = ({ src, alt, placeholde
         };
     }, [isInView, src]);
 
-    return <img {...restAttrs} ref={imgRef} src={isInView && isLoaded ? src : placeholder} alt={alt} />;
+    return <StyledImg {...restAttrs} ref={imgRef} src={isInView && isLoaded ? src : placeholder} alt={alt} $radius={radius} />;
 };
 
 export default styled(LazyImage)``;
