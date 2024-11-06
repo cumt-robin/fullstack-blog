@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 import { Empty, Pagination, Skeleton } from "antd";
@@ -20,46 +20,40 @@ const Home: React.FC = () => {
 
     const qsPageNo = searchParams.get("pageNo");
     const pageNo = qsPageNo ? Number(qsPageNo) : 1;
-    const [pageInfo, setPageInfo] = useState({ pageNo, pageSize: 6 });
 
-    const prevPageNo = useRef(pageInfo.pageNo);
-
-    const handleGetArticleList = useCallback(
-        async (isChangePage: boolean) => {
-            const { data, total } = await articleService.page(pageInfo);
-            setArticleList(data);
-            setTotal(total);
-            if (isChangePage) {
-                setScrollTop({
-                    useAnimation: true,
-                    duration: 0.3,
-                });
-            }
-        },
-        [pageInfo],
+    const fetchParams = useMemo(
+        () => ({
+            pageNo,
+            pageSize: 6,
+        }),
+        [pageNo],
     );
 
-    const { trigger: getPageList, loading } = useAsyncLoading(handleGetArticleList, [pageInfo]);
+    const prevPageNo = useRef(pageNo);
 
-    useEffect(() => {
-        const qsPageNo = searchParams.get("pageNo");
-        const pageNo = qsPageNo ? Number(qsPageNo) : 1;
-        if (pageNo && pageNo > 0 && pageNo !== prevPageNo.current) {
-            setPageInfo((prevPageInfo) => ({
-                ...prevPageInfo,
-                pageNo,
-            }));
+    const handleGetArticleList = async (isChangePage: boolean) => {
+        const { data, total } = await articleService.page(fetchParams);
+        setArticleList(data);
+        setTotal(total);
+        if (isChangePage) {
+            setScrollTop({
+                useAnimation: true,
+                duration: 0.3,
+            });
         }
-    }, [searchParams]);
+    };
+
+    const { trigger: getPageList, loading } = useAsyncLoading(handleGetArticleList, [fetchParams]);
 
     useEffect(() => {
-        const isChangePage = pageInfo.pageNo !== prevPageNo.current;
+        const isChangePage = fetchParams.pageNo !== prevPageNo.current;
         getPageList(isChangePage);
-    }, [pageInfo, getPageList]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [fetchParams]);
 
     useEffect(() => {
-        prevPageNo.current = pageInfo.pageNo;
-    }, [pageInfo]);
+        prevPageNo.current = fetchParams.pageNo;
+    }, [fetchParams]);
 
     // 分页改变
     const onPageNoChange = (page: number) => {
@@ -78,8 +72,8 @@ const Home: React.FC = () => {
                         </ArticleList>
 
                         <Pagination
-                            current={pageInfo.pageNo}
-                            pageSize={pageInfo.pageSize}
+                            current={fetchParams.pageNo}
+                            pageSize={fetchParams.pageSize}
                             total={total}
                             showLessItems={true}
                             simple={true}

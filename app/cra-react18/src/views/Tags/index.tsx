@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Badge, Empty, Skeleton, Tag } from "antd";
 import { NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
@@ -34,16 +34,17 @@ const mainCss = css`
 export const Component: React.FC = () => {
     const [tagList, setTagList] = useState<TagDTO[]>([]);
 
-    const handleGetTagList = useCallback(async () => {
+    const handleGetTagList = async () => {
         const { data } = await tagService.all({ getCount: "1" });
         setTagList(data);
-    }, []);
+    };
 
     const { trigger: getTagList, loading } = useAsyncLoading(handleGetTagList);
 
     useEffect(() => {
         getTagList();
-    }, [getTagList]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <BaseLayout mainCss={mainCss}>
