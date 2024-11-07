@@ -100,6 +100,12 @@ pnpm install
 
 如果你对本项目有一些建议或者想法，可以在[issue](https://github.com/cumt-robin/fullstack-blog/issues)提出，非常感谢！
 
+## 贡献者
+
+<a href="https://github.com/cumt-robin/fullstack-blog/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=cumt-robin/fullstack-blog" />
+</a>
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=cumt-robin/fullstack-blog&type=Date)](https://star-history.com/#cumt-robin/fullstack-blog&Date)
