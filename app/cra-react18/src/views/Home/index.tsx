@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import styled from "styled-components";
 import { Empty, Pagination, Skeleton } from "antd";
 import BaseLayout from "@/components/BaseLayout";
 import { ArticleDTO } from "@/bean/dto";
@@ -8,8 +7,6 @@ import { articleService } from "@/services/article";
 import { setScrollTop } from "@/utils/dom";
 import { useAsyncLoading } from "@/hooks/async";
 import CardArticle from "@/components/CardArticle";
-
-const ArticleList = styled.section``;
 
 const Home: React.FC = () => {
     const [articleList, setArticleList] = useState<ArticleDTO[]>([]);
@@ -65,11 +62,11 @@ const Home: React.FC = () => {
             <Skeleton loading={loading} active={true} paragraph={{ rows: 12 }}>
                 {articleList.length > 0 ? (
                     <>
-                        <ArticleList>
+                        <section>
                             {articleList.map((article) => (
                                 <CardArticle article={article} key={article.id} />
                             ))}
-                        </ArticleList>
+                        </section>
 
                         <Pagination
                             current={fetchParams.pageNo}

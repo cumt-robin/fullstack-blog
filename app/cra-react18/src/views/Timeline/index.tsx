@@ -106,7 +106,7 @@ export const Component: React.FC = () => {
     return (
         <BaseLayout>
             <>
-                {articleList.length > 0 ? (
+                {articleList.length ? (
                     <StyledTimeline>
                         {articleList.map((article) => (
                             <Timeline.Item key={article.id} color="#2b82a8">
@@ -133,9 +133,9 @@ export const Component: React.FC = () => {
                             </Timeline.Item>
                         ))}
                     </StyledTimeline>
-                ) : (
-                    <Empty />
-                )}
+                ) : null}
+
+                {!articleList.length && !loading ? <Empty /> : null}
 
                 <Skeleton loading={loading} active paragraph={{ rows: 6 }} />
 
