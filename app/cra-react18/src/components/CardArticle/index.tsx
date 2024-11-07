@@ -26,7 +26,8 @@ const Article = styled.article`
         font-weight: 700;
         > ul {
             > li {
-                display: inline-block;
+                display: inline-flex;
+                align-items: center;
                 + li {
                     margin-left: 20px;
                 }

@@ -33,6 +33,10 @@ const router = createBrowserRouter([
         path: "/timeline",
         lazy: () => import("../views/Timeline"),
     },
+    {
+        path: "/article/:id",
+        lazy: () => import("../views/Article"),
+    },
 ]);
 
 export default router;

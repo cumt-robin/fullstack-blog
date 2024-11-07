@@ -1,7 +1,8 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled, { RuleSet } from "styled-components";
 import classNames from "classnames";
-import { PropsWithChildren, useCallback, useEffect, useState } from "react";
+import { PropsWithChildren, useEffect, useState } from "react";
+import { throttle } from "lodash-es";
 import IconSvg from "../IconSvg";
 import BaseMenu from "./BaseMenu";
 import BaseFooter from "./BaseFooter";
@@ -10,6 +11,8 @@ import logo from "@/assets/img/logo.png";
 import { useIsAuthed } from "@/store/hooks/auth";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setIsMenuVisible } from "@/store/slices/ui";
+import { setScrollTop } from "@/utils/dom";
+import { flexCenter } from "@/styles/styled-mixins/base";
 
 const Header = styled.header`
     padding: 18px 40px;
@@ -66,23 +69,81 @@ const Main = styled.main<{ $mainCss?: RuleSet }>`
 
 const LayoutWrapper = styled.section`
     min-height: 100%;
+
+    > aside {
+        position: fixed;
+        bottom: 160px;
+        right: 24px;
+
+        ${IconSvg} {
+            ${flexCenter}
+            color: #fff;
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(102, 57, 57, 0.4);
+            cursor: pointer;
+            + ${IconSvg} {
+                margin-top: 10px;
+                margin-left: 0;
+            }
+        }
+    }
 `;
 
-const BaseLayout: React.FC<PropsWithChildren<{ mainCss?: RuleSet }>> = ({ children, mainCss }) => {
+const BaseLayout: React.FC<PropsWithChildren<{ mainCss?: RuleSet; asideIcons?: React.ReactNode }>> = ({
+    children,
+    asideIcons,
+    mainCss,
+}) => {
     const isAuthed = useIsAuthed();
     const isMenuVisible = useAppSelector((state) => state.ui.isMenuVisible);
     const dispatch = useAppDispatch();
     const [isAnimationEnabled, setIsAnimationEnabled] = useState(false);
+    const [isShowGoTopIcon, setIsShowGoTopIcon] = useState(false);
 
-    const location = useLocation();
-
-    const hideMenu = useCallback(() => {
+    const hideMenu = () => {
         dispatch(setIsMenuVisible(false));
-    }, [dispatch]);
+    };
 
     useEffect(() => {
-        hideMenu();
-    }, [location, hideMenu]);
+        let hideTimer: number | null = null;
+        const clearHideTimer = () => {
+            if (hideTimer) {
+                clearTimeout(hideTimer);
+                hideTimer = null;
+            }
+        };
+
+        const setHideTimer = () => {
+            clearHideTimer();
+            hideTimer = window.setTimeout(() => {
+                setIsShowGoTopIcon(false);
+            }, 5000);
+        };
+
+        const onScroll = () => {
+            const currScrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            if (currScrollTop > 0) {
+                setIsShowGoTopIcon(true);
+                setHideTimer();
+            } else {
+                setIsShowGoTopIcon(false);
+            }
+        };
+
+        const onScrollThrottle = throttle(onScroll, 300, { leading: true });
+
+        document.addEventListener("scroll", onScrollThrottle);
+        return () => {
+            hideMenu();
+            document.removeEventListener("scroll", onScrollThrottle);
+            clearHideTimer();
+            document.body.style.overflow = "";
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const onToggleMenu = () => {
         if (isAnimationEnabled === false) {
@@ -108,6 +169,12 @@ const BaseLayout: React.FC<PropsWithChildren<{ mainCss?: RuleSet }>> = ({ childr
 
     const onClickMask = () => {
         hideMenu();
+    };
+
+    const goToTop = () => {
+        setScrollTop({
+            useAnimation: true,
+        });
     };
 
     const sectionClass = classNames({
@@ -142,6 +209,11 @@ const BaseLayout: React.FC<PropsWithChildren<{ mainCss?: RuleSet }>> = ({ childr
             <BaseMenu open={isMenuVisible} />
 
             <Mask open={isMenuVisible} onClick={onClickMask} />
+
+            <aside>
+                {asideIcons}
+                <IconSvg icon="arrow-up" style={{ display: isShowGoTopIcon ? "flex" : "none" }} onClick={goToTop} />
+            </aside>
         </LayoutWrapper>
     );
 };

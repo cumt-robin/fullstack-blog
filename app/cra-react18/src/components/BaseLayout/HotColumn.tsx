@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card, Empty } from "antd";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
@@ -46,12 +46,12 @@ const StyledCard = styled(Card)`
 
 const HotColumn: React.FC = () => {
     const [hotList, setHotList] = useState<ArticleDTO[]>([]);
-    const handleGetHotList = useCallback(async () => {
+    const handleGetHotList = async () => {
         const res = await articleService.topRead({
             count: 6,
         });
         setHotList(res.data);
-    }, []);
+    };
 
     const { trigger: getHotList, loading } = useAsyncLoading(handleGetHotList);
 
