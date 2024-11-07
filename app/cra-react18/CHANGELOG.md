@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.7.0
+
+### Minor Changes
+
+-   a4f6a11: feat: cra-react18项目增加悬浮工具组件（一键到顶等）
+
 ## 0.6.0
 
 ### Minor Changes
