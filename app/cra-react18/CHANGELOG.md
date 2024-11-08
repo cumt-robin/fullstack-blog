@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.10.0
+
+### Minor Changes
+
+-   2b5325e: feat: cra-react18项目增加在线交流功能
+
 ## 0.9.0
 
 ### Minor Changes
