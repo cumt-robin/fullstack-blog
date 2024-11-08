@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.8.0
+
+### Minor Changes
+
+-   fa1d2aa: feat: cra-react18项目增加文章详情页
+
 ## 0.7.0
 
 ### Minor Changes
