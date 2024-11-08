@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.9.0
+
+### Minor Changes
+
+-   2d67c7f: feat: cra-react18项目增加登录页
+
 ## 0.8.0
 
 ### Minor Changes
