@@ -84,6 +84,7 @@ const LayoutWrapper = styled.section`
             border-radius: 50%;
             background-color: rgba(102, 57, 57, 0.4);
             cursor: pointer;
+            outline: none;
             + ${IconSvg} {
                 margin-top: 10px;
                 margin-left: 0;

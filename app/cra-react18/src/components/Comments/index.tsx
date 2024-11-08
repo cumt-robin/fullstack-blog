@@ -1,4 +1,4 @@
-import { Button, Empty, Input, message, Modal, Skeleton } from "antd";
+import { Button, Empty, Input, InputRef, message, Modal, Skeleton } from "antd";
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import DOMPurify from "dompurify";
@@ -14,7 +14,7 @@ import { selectCommentUserInfo } from "@/store/slices/auth";
 
 interface CommentsProps {
     articleId?: number;
-    topic: string;
+    topic?: string;
     autoLoad?: boolean;
     placeTop?: boolean;
 }
@@ -45,11 +45,16 @@ const CommentsWrapper = styled.div`
     }
 `;
 
+const ButtonCreate = styled(Button)`
+    margin: 20px auto;
+    display: block;
+`;
+
 export type CommentsRef = {
     showEditUserInfoForm: () => void;
 };
 
-const Comments = forwardRef<CommentsRef, CommentsProps>(({ articleId, topic, autoLoad, placeTop }, ref) => {
+const Comments = forwardRef<CommentsRef, CommentsProps>(({ articleId, topic = "评论", autoLoad, placeTop }, ref) => {
     const [content, setContent] = useState("");
     const commentsBodyRef = useRef<HTMLDivElement>(null);
     const commentUserInfo = useAppSelector(selectCommentUserInfo);
@@ -146,12 +151,10 @@ const Comments = forwardRef<CommentsRef, CommentsProps>(({ articleId, topic, aut
         prevPageNo.current = pageInfo.pageNo;
     }, [pageInfo]);
 
-    const commentInputRef = useRef(null);
+    const commentInputRef = useRef<InputRef>(null);
 
     const createComment = () => {
-        if (commentInputRef.current) {
-            // commentInputRef.current.focus();
-        }
+        commentInputRef.current?.focus();
     };
 
     const loadMore = () => {
@@ -200,9 +203,9 @@ const Comments = forwardRef<CommentsRef, CommentsProps>(({ articleId, topic, aut
                         description={
                             <>
                                 暂无{topic}，快来说两句吧！
-                                <Button type="primary" onClick={createComment}>
+                                <ButtonCreate type="primary" onClick={createComment}>
                                     创建{topic}
-                                </Button>
+                                </ButtonCreate>
                             </>
                         }
                     />
@@ -212,7 +215,7 @@ const Comments = forwardRef<CommentsRef, CommentsProps>(({ articleId, topic, aut
 
                 {isAllLoaded && <BottomTips content="没有更多了" />}
 
-                {comments.length > 0 && (
+                {!isAllLoaded && comments.length > 0 && (
                     <BottomTips
                         children={
                             <Button type="primary" shape="round" onClick={loadMore}>
@@ -224,7 +227,7 @@ const Comments = forwardRef<CommentsRef, CommentsProps>(({ articleId, topic, aut
             </div>
 
             {!placeTop && (
-                <>
+                <div className="leave-comment">
                     <Input
                         ref={commentInputRef}
                         value={content}
@@ -234,10 +237,16 @@ const Comments = forwardRef<CommentsRef, CommentsProps>(({ articleId, topic, aut
                     <Button type="primary" size="small" loading={isPublishLoading} onClick={onClickPublish} style={{ marginLeft: "10px" }}>
                         发布
                     </Button>
-                </>
+                </div>
             )}
 
-            <Modal title="修改个人信息" open={isEditUserInfoVisible} footer={null} styles={{ body: { paddingTop: "20px" } }}>
+            <Modal
+                title="修改个人信息"
+                open={isEditUserInfoVisible}
+                footer={null}
+                styles={{ body: { paddingTop: "20px" } }}
+                onCancel={() => setIsEditUserInfoVisible(false)}
+            >
                 <CommentUserInfoForm
                     topic={topic}
                     onCancel={() => setIsEditUserInfoVisible(false)}

@@ -58,6 +58,13 @@ export const Component: React.FC = () => {
         prevPageNo.current = fetchParams.pageNo;
     }, [fetchParams]);
 
+    useEffect(() => {
+        setScrollTop({
+            useAnimation: true,
+            duration: 0.3,
+        });
+    }, []);
+
     // 分页改变
     const onPageNoChange = (page: number) => {
         setSearchParams({ pageNo: String(page) });

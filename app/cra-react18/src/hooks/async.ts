@@ -12,8 +12,15 @@ interface AsyncLoadingResponse {
     error: unknown;
 }
 
-export const useAsyncLoading = (fn: GeneralFunction<Promise<unknown>>, deps: any[] = []): AsyncLoadingResponse => {
-    const [loading, setLoading] = useState(false);
+export const useAsyncLoading = (
+    fn: GeneralFunction<Promise<unknown>>,
+    deps: any[] = [],
+    options?: {
+        initialLoading?: boolean;
+    },
+): AsyncLoadingResponse => {
+    const { initialLoading = true } = options ?? {};
+    const [loading, setLoading] = useState(initialLoading);
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState<unknown>();
     const trigger = useCallback(async (...args: any[]) => {

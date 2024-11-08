@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { NavLink, useParams, useSearchParams } from "react-router-dom";
-import styled from "styled-components";
 import { Breadcrumb, Divider, Empty, Pagination, Skeleton } from "antd";
 import BaseLayout from "@/components/BaseLayout";
 import { ArticleDTO } from "@/bean/dto";
@@ -8,8 +7,6 @@ import { articleService } from "@/services/article";
 import { setScrollTop } from "@/utils/dom";
 import { useAsyncLoading } from "@/hooks/async";
 import CardArticle from "@/components/CardArticle";
-
-const ArticleList = styled.section``;
 
 const Category: React.FC = () => {
     const { name } = useParams();
@@ -55,6 +52,13 @@ const Category: React.FC = () => {
     }, [fetchParams]);
 
     useEffect(() => {
+        setScrollTop({
+            useAnimation: true,
+            duration: 0.3,
+        });
+    }, []);
+
+    useEffect(() => {
         prevPageNo.current = fetchParams.pageNo;
     }, [fetchParams.pageNo]);
 
@@ -80,11 +84,11 @@ const Category: React.FC = () => {
 
                         <Divider />
 
-                        <ArticleList>
+                        <section>
                             {articleList.map((article) => (
                                 <CardArticle article={article} key={article.id} />
                             ))}
-                        </ArticleList>
+                        </section>
 
                         <Pagination
                             current={fetchParams.pageNo}
