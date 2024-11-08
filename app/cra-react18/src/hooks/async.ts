@@ -19,7 +19,7 @@ export const useAsyncLoading = (
         initialLoading?: boolean;
     },
 ): AsyncLoadingResponse => {
-    const { initialLoading = true } = options ?? {};
+    const { initialLoading = false } = options ?? {};
     const [loading, setLoading] = useState(initialLoading);
     const [isError, setIsError] = useState(false);
     const [error, setError] = useState<unknown>();

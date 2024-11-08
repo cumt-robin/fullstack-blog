@@ -1,7 +1,9 @@
-import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, PayloadAction, buildCreateSlice, asyncThunkCreator } from "@reduxjs/toolkit";
 import { RootState } from "..";
 import { getLocalData } from "@/utils/bom";
 import { CommentUserInfo, UserDTO } from "@/bean/dto";
+import { LoginModel } from "@/bean/xhr";
+import { userService } from "@/services/user";
 
 interface AuthState {
     token: string | null;
@@ -15,11 +17,15 @@ const initialState: AuthState = {
     commentUserInfo: getLocalData<CommentUserInfo>({ key: "commentUserInfo", parse: true }),
 };
 
-export const authSlice = createSlice({
+export const createAuthSlice = buildCreateSlice({
+    creators: { asyncThunk: asyncThunkCreator },
+});
+
+export const authSlice = createAuthSlice({
     name: "auth",
     initialState,
-    reducers: {
-        setToken: (state, action: PayloadAction<string | null>) => {
+    reducers: ({ reducer, asyncThunk }) => ({
+        setToken: reducer((state, action: PayloadAction<string | null>) => {
             const value = action.payload;
             if (value === null) {
                 state.token = "";
@@ -28,8 +34,8 @@ export const authSlice = createSlice({
                 state.token = value;
                 localStorage.setItem("token", value);
             }
-        },
-        setUserInfo: (state, action: PayloadAction<UserDTO | null>) => {
+        }),
+        setUserInfo: reducer((state, action: PayloadAction<UserDTO | null>) => {
             const value = action.payload;
             if (value === null) {
                 state.userInfo = null;
@@ -38,8 +44,8 @@ export const authSlice = createSlice({
                 state.userInfo = value;
                 localStorage.setItem("userInfo", JSON.stringify(value));
             }
-        },
-        setCommentUserInfo: (state, action: PayloadAction<CommentUserInfo | null>) => {
+        }),
+        setCommentUserInfo: reducer((state, action: PayloadAction<CommentUserInfo | null>) => {
             const value = action.payload;
             if (value === null) {
                 state.commentUserInfo = null;
@@ -48,8 +54,14 @@ export const authSlice = createSlice({
                 state.commentUserInfo = value;
                 localStorage.setItem("commentUserInfo", JSON.stringify(value));
             }
-        },
-    },
+        }),
+        dispatchLogin: asyncThunk(async (payload: LoginModel, { dispatch }) => {
+            const { data } = await userService.login(payload);
+            dispatch(authSlice.actions.setToken(data.token));
+            dispatch(authSlice.actions.setUserInfo(data));
+            return data;
+        }),
+    }),
 });
 
 // Selector
@@ -59,5 +71,6 @@ export const selectCommentUserInfo = (state: RootState) => state.auth.commentUse
 // Computed Selector
 export const selectIsAuthed = createSelector(selectToken, (token) => !!token);
 // Actions
-export const { setCommentUserInfo } = authSlice.actions;
+export const { setCommentUserInfo, dispatchLogin } = authSlice.actions;
+// Reducer
 export default authSlice.reducer;

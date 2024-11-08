@@ -140,7 +140,9 @@ const Comments = forwardRef<CommentsRef, CommentsProps>(({ articleId, topic = "è
         setTotal(res.total);
     };
 
-    const { trigger: getComments, loading: isFetchLoading } = useAsyncLoading(handleGetComments, [pageInfo, articleId]);
+    const { trigger: getComments, loading: isFetchLoading } = useAsyncLoading(handleGetComments, [pageInfo, articleId], {
+        initialLoading: true,
+    });
 
     useEffect(() => {
         const isLoadMore = pageInfo.pageNo > 1 && pageInfo.pageNo !== prevPageNo.current;

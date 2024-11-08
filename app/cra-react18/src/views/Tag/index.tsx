@@ -46,7 +46,7 @@ export const Component: React.FC = () => {
         }
     };
 
-    const { trigger: getPageList, loading } = useAsyncLoading(handleGetArticleList, [fetchParams]);
+    const { trigger: getPageList, loading } = useAsyncLoading(handleGetArticleList, [fetchParams], { initialLoading: true });
 
     useEffect(() => {
         const isChangePage = fetchParams.pageNo !== prevPageNo.current;

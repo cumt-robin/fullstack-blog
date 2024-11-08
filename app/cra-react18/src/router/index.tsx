@@ -37,6 +37,10 @@ const router = createBrowserRouter([
         path: "/article/:id",
         lazy: () => import("../views/Article"),
     },
+    {
+        path: "/login",
+        lazy: () => import("../views/Login"),
+    },
 ]);
 
 export default router;
