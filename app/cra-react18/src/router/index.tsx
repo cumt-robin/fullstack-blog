@@ -41,6 +41,10 @@ const router = createBrowserRouter([
         path: "/login",
         lazy: () => import("../views/Login"),
     },
+    {
+        path: "/chat",
+        lazy: () => import("../views/Chat"),
+    },
 ]);
 
 export default router;
