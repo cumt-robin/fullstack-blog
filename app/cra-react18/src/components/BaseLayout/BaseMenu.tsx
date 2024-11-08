@@ -172,18 +172,6 @@ const BaseMenu: React.FC<BaseMenuProps> = ({ open }) => {
                     </NavLink>
                 </li>
                 <li className="menu__item">
-                    <a href="https://chat.wbjiang.cn" target="_blank" rel="nofollow noreferrer">
-                        <IconSvg icon="chat" />
-                        随心聊Chat
-                    </a>
-                </li>
-                <li className="menu__item">
-                    <NavLink to="/chatgpt">
-                        <IconSvg icon="chat" />
-                        ChatGPT体验
-                    </NavLink>
-                </li>
-                <li className="menu__item">
                     <NavLink to="/chat">
                         <IconSvg icon="chat" />
                         在线交流
