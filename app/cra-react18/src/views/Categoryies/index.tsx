@@ -55,7 +55,7 @@ export const Component: React.FC = () => {
         setCategoryList(data);
     };
 
-    const { trigger: getCategoryList, loading } = useAsyncLoading(handleGetCategoryList);
+    const { trigger: getCategoryList, loading } = useAsyncLoading(handleGetCategoryList, [], { initialLoading: true });
 
     useEffect(() => {
         getCategoryList();

@@ -85,7 +85,7 @@ export const Component: React.FC = () => {
         setTotal(res.total);
     };
 
-    const { trigger: getPageList, loading } = useAsyncLoading(handleGetArticleList, [pageInfo]);
+    const { trigger: getPageList, loading } = useAsyncLoading(handleGetArticleList, [pageInfo], { initialLoading: true });
 
     useEffect(() => {
         const isChangePage = pageInfo.pageNo !== prevPageNo.current;

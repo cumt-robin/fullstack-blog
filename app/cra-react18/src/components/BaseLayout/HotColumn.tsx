@@ -53,17 +53,18 @@ const HotColumn: React.FC = () => {
         setHotList(res.data);
     };
 
-    const { trigger: getHotList, loading } = useAsyncLoading(handleGetHotList);
+    const { trigger: getHotList, loading } = useAsyncLoading(handleGetHotList, [], { initialLoading: true });
 
     useEffect(() => {
         getHotList();
-    }, [getHotList]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     return (
         <StyledCard title={<div>热门推荐</div>} hoverable={true} loading={loading}>
             {hotList.length > 0 ? (
                 <ul>
-                    {hotList.map((article, index) => {
+                    {hotList.map((article) => {
                         return (
                             <li key={article.id} className="clearfix">
                                 <NavLink to={`/article/${article.id}`}>

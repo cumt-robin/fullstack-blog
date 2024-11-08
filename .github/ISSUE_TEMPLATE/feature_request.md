@@ -2,7 +2,7 @@
 name: Feature request
 about: Suggest an idea for this project
 title: "[Feature request] I want to introduce a new feature"
-labels: enhancement
+labels: feature
 assignees: cumt-robin
 
 ---

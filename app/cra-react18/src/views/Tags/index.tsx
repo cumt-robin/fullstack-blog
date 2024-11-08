@@ -39,7 +39,7 @@ export const Component: React.FC = () => {
         setTagList(data);
     };
 
-    const { trigger: getTagList, loading } = useAsyncLoading(handleGetTagList);
+    const { trigger: getTagList, loading } = useAsyncLoading(handleGetTagList, [], { initialLoading: true });
 
     useEffect(() => {
         getTagList();

@@ -341,7 +341,7 @@ export const ComponentImpl = forwardRef(({ articleId }: { articleId: number }, r
         }, 0);
     };
 
-    const { loading, trigger: getArticleDetail } = useAsyncLoading(handleGetArticleDetail);
+    const { loading, trigger: getArticleDetail } = useAsyncLoading(handleGetArticleDetail, [], { initialLoading: true });
 
     useEffect(() => {
         setScrollTop();
