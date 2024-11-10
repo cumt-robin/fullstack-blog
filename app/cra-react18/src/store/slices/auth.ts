@@ -55,11 +55,19 @@ export const authSlice = createAuthSlice({
                 localStorage.setItem("commentUserInfo", JSON.stringify(value));
             }
         }),
+        clearUserSession: asyncThunk(async (_, { dispatch }) => {
+            dispatch(authSlice.actions.setToken(null));
+            dispatch(authSlice.actions.setUserInfo(null));
+        }),
         dispatchLogin: asyncThunk(async (payload: LoginModel, { dispatch }) => {
             const { data } = await userService.login(payload);
             dispatch(authSlice.actions.setToken(data.token));
             dispatch(authSlice.actions.setUserInfo(data));
             return data;
+        }),
+        dispatchLogout: asyncThunk(async (_, { dispatch }) => {
+            await userService.logout();
+            dispatch(authSlice.actions.clearUserSession());
         }),
     }),
 });
@@ -71,6 +79,6 @@ export const selectCommentUserInfo = (state: RootState) => state.auth.commentUse
 // Computed Selector
 export const selectIsAuthed = createSelector(selectToken, (token) => !!token);
 // Actions
-export const { setCommentUserInfo, dispatchLogin } = authSlice.actions;
+export const { setCommentUserInfo, dispatchLogin, dispatchLogout } = authSlice.actions;
 // Reducer
 export default authSlice.reducer;
