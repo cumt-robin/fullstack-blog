@@ -1,21 +1,32 @@
-import { createBrowserRouter } from "react-router-dom";
-import { lazy } from "react";
+import { createBrowserRouter, Navigate, RouteObject } from "react-router-dom";
+import { lazy, PropsWithChildren } from "react";
 import Home from "@/views/Home";
+import { useIsAuthed } from "@/store/hooks/auth";
 
 const Category = lazy(() => import("../views/Category/index"));
 
-const router = createBrowserRouter([
+const Backend = lazy(() => import("../views/Backend/index"));
+
+const AuthGuard: React.FC<PropsWithChildren> = ({ children }) => {
+    const isAuthed = useIsAuthed();
+    if (!isAuthed) {
+        return <Navigate to="/login" replace />;
+    }
+    return children;
+};
+
+const routes: RouteObject[] = [
     {
         path: "/",
         element: <Home />,
     },
     {
-        path: "/categories",
-        lazy: () => import("../views/Categoryies"),
-    },
-    {
         path: "/category/:name",
         element: <Category />,
+    },
+    {
+        path: "/categories",
+        lazy: () => import("../views/Categoryies"),
     },
     {
         path: "/tags",
@@ -45,6 +56,27 @@ const router = createBrowserRouter([
         path: "/chat",
         lazy: () => import("../views/Chat"),
     },
-]);
+    {
+        path: "/backend",
+        element: (
+            <AuthGuard>
+                <Backend />
+            </AuthGuard>
+        ),
+        children: [
+            {
+                path: "",
+                element: <Navigate to="article" replace />,
+            },
+            {
+                path: "article",
+                lazy: () => import("../views/Backend/Article"),
+            },
+        ],
+        meta: {
+            auth: true,
+        },
+    },
+];
 
-export default router;
+export const router = createBrowserRouter(routes);
