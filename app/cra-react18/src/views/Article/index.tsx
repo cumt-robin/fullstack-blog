@@ -30,6 +30,7 @@ import avatar from "@/assets/img/avatar.jpg";
 import wechatPayme from "@/assets/img/wechat_payme.jpg";
 import IconSvg from "@/components/IconSvg";
 import { useIsAuthed } from "@/store/hooks/auth";
+import "@/styles/md.less";
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("html", html);

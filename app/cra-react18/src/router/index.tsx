@@ -72,10 +72,11 @@ const routes: RouteObject[] = [
                 path: "article",
                 lazy: () => import("../views/Backend/Article"),
             },
+            {
+                path: "write",
+                lazy: () => import("../views/Backend/Write"),
+            },
         ],
-        meta: {
-            auth: true,
-        },
     },
 ];
 
