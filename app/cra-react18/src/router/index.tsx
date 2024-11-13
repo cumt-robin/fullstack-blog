@@ -76,6 +76,10 @@ const routes: RouteObject[] = [
                 path: "write",
                 lazy: () => import("../views/Backend/Write"),
             },
+            {
+                path: "article/edit/:id",
+                lazy: () => import("../views/Backend/Write"),
+            },
         ],
     },
 ];

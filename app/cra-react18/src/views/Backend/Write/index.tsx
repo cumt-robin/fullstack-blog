@@ -26,7 +26,7 @@ import "@/styles/md.less";
 import { useAsyncLoading } from "@/hooks/async";
 import { sleep } from "@/utils/bom";
 import { REQUIRED_VALIDATOR_BLUR } from "@/utils/validator";
-import { CategoryDTO } from "@/bean/dto";
+import { ArticleDTO, CategoryDTO } from "@/bean/dto";
 import { useAppSelector } from "@/store/hooks";
 import { selectUserInfo } from "@/store/slices/auth";
 
@@ -40,6 +40,12 @@ hljs.registerLanguage("yaml", yaml);
 
 interface NewTagDTO {
     value: string;
+}
+
+interface RelationFormInitialValues {
+    newTags: string[];
+    oldCategoryIds: number[];
+    newCategorys: string[];
 }
 
 const Wrapper = styled.section`
@@ -92,12 +98,25 @@ export const Component = () => {
 
     const [categorys, setCategorys] = useState<CategoryDTO[]>([]);
     const [allCategorys, setAllCategorys] = useState<CategoryDTO[]>([]);
+    const [articleDetail, setArticleDetail] = useState<ArticleDTO | null>(null);
+    const [relationFormInitialValues, setRelationFormInitialValues] = useState<RelationFormInitialValues>({
+        newTags: [],
+        newCategorys: [],
+        oldCategoryIds: [],
+    });
+
     const visibleCategorys = useMemo(() => {
         return categoryWd ? categorys : allCategorys;
     }, [categoryWd, categorys, allCategorys]);
     const categoryNames = useMemo(() => {
         return allCategorys.map((item) => item.category_name);
     }, [allCategorys]);
+    const originalTagNames = useMemo(() => {
+        return articleDetail?.tags.map((item) => item.tagName) || [];
+    }, [articleDetail]);
+    const originalCategoryIds = useMemo(() => {
+        return articleDetail?.categories.map((item) => item.id) || [];
+    }, [articleDetail]);
 
     const userInfo = useAppSelector(selectUserInfo);
 
@@ -105,6 +124,34 @@ export const Component = () => {
 
     const handleEditInit = async () => {
         setIsEdit(true);
+        const { data } = await articleService.detail(Number(params.id));
+        setArticleDetail(data);
+        form.setFieldsValue({
+            articleTitle: data.article_name,
+            articleText: data.article_text,
+            poster: data.poster,
+            summary: data.summary,
+            private: data.private,
+        });
+        // 渲染markdown
+        if (data.article_text) {
+            const markedContent = marked(data.article_text);
+            setPurifiedContent(DOMPurify.sanitize(markedContent));
+        }
+
+        const relValues: Partial<RelationFormInitialValues> = {};
+        // 处理标签
+        if (data.tags.length > 0) {
+            relValues.newTags = data.tags.map((item) => item.tagName);
+        }
+        // 处理分类
+        if (data.categories.length > 0) {
+            relValues.oldCategoryIds = data.categories.map((item) => item.id);
+        }
+        setRelationFormInitialValues((prev) => ({ ...prev, ...relValues }));
+
+        await sleep(0);
+        mermaid.run();
     };
 
     const { loading: initLoading, trigger: triggerEditInit } = useAsyncLoading(handleEditInit);
@@ -167,6 +214,10 @@ export const Component = () => {
             });
         };
         initMarked();
+        mermaid.initialize({
+            theme: "default",
+            startOnLoad: false,
+        });
         getAllCategorys();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -241,6 +292,32 @@ export const Component = () => {
         // 校验通过，开始提交表单
         if (isEdit) {
             // 编辑场景
+            // 处理要删除的tag关系，即开始有，现在没有的那部分tag
+            const deleteTagIDs = (articleDetail as ArticleDTO).tags.filter((tag) => !tagNames.includes(tag.tagName)).map((tag) => tag.id);
+            // 处理要新增的tag关系，即现在有，开始没有的那部分tag
+            const newTags = tagNames.filter((tagName) => !originalTagNames.includes(tagName));
+
+            // 处理要删除的分类关系，即开始有，现在没有的那部分分类
+            const deleteCategoryIDs = (articleDetail as ArticleDTO).categories
+                .filter((category) => !oldCategoryIds.includes(category.id))
+                .map((category) => category.id);
+
+            // 需要新增的分类关系，依然放在 newCategories 中
+
+            // relatedCategoryIDs 存放的是需要新关联的分类关系，即现在勾选了，而开始没勾选的分类
+            const relatedCategoryIDs = oldCategoryIds.filter((categoryId) => !originalCategoryIds.includes(categoryId));
+
+            const params = {
+                id: articleDetail?.id,
+                ...form.getFieldsValue(),
+                deleteTagIDs: deleteTagIDs.length > 0 ? deleteTagIDs : null,
+                newTags: newTags.length > 0 ? newTags : null,
+                deleteCategoryIDs: deleteCategoryIDs.length > 0 ? deleteCategoryIDs : null,
+                newCategories: newCategoryNames.length > 0 ? newCategoryNames : null,
+                relatedCategoryIDs: relatedCategoryIDs.length > 0 ? relatedCategoryIDs : null,
+            };
+            await articleService.update(params);
+            message.success("保存成功");
         } else {
             // 发布场景
             const params = {
@@ -293,14 +370,16 @@ export const Component = () => {
                             <Radio value={1}>是</Radio>
                         </Radio.Group>
                     </Form.Item>
-                    <Form.Item name="articleText" label="正文部分" rules={[REQUIRED_VALIDATOR_BLUR]}>
+                    <Form.Item label="正文部分" rules={[REQUIRED_VALIDATOR_BLUR]}>
                         <Row gutter={20}>
                             <Col span={12}>
-                                <Input.TextArea
-                                    className="md-textarea"
-                                    placeholder="请输入markdown格式的正文"
-                                    onChange={onMdContentChange}
-                                />
+                                <Form.Item name="articleText" rules={[REQUIRED_VALIDATOR_BLUR]}>
+                                    <Input.TextArea
+                                        className="md-textarea"
+                                        placeholder="请输入markdown格式的正文"
+                                        onChange={onMdContentChange}
+                                    />
+                                </Form.Item>
                             </Col>
                             <Col span={12}>
                                 <section className="md-preview" dangerouslySetInnerHTML={{ __html: purifiedContent }} />
@@ -310,7 +389,13 @@ export const Component = () => {
                 </Form>
             </Spin>
             <Modal title="关联分类/标签" open={isRelationVisible} footer={null} width="860px" onCancel={() => setIsRelationVisible(false)}>
-                <Form form={relationForm} layout="vertical" wrapperCol={{ span: 24 }} onFinish={onConfirmPublish}>
+                <Form
+                    form={relationForm}
+                    layout="vertical"
+                    wrapperCol={{ span: 24 }}
+                    initialValues={relationFormInitialValues}
+                    onFinish={onConfirmPublish}
+                >
                     <Form.Item label="文章标签">
                         <Form.List
                             name="newTags"
