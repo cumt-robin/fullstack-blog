@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.12.0
+
+### Minor Changes
+
+-   7b3121e: feat: cra-react18项目增加开始创作页
+
 ## 0.11.0
 
 ### Minor Changes
