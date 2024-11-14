@@ -76,7 +76,7 @@ export const Component = () => {
         },
         {
             title: "操作",
-            width: "200px",
+            width: "120px",
             key: "action",
             fixed: "right",
             render: (_, record, index) => {

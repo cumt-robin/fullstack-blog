@@ -94,7 +94,11 @@ export const Component = () => {
             onOk: async () => {
                 await articleService.delete(record.id);
                 message.success("操作成功");
-                setPagination({ ...pagination, current: 1 });
+                if (pagination.current === 1) {
+                    search();
+                } else {
+                    setPagination({ ...pagination, current: 1 });
+                }
             },
         });
     };

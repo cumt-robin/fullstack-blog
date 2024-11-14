@@ -62,6 +62,7 @@ export interface CommentDTO extends RecordDTO {
     email: string;
     jump_url: string;
     replies: ReplyDTO[];
+    approved?: 0 | 1 | 2;
 }
 
 export interface CommentUserInfo extends PlainObject {

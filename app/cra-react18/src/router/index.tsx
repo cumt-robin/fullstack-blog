@@ -88,6 +88,10 @@ const routes: RouteObject[] = [
                 path: "tag",
                 lazy: () => import("../views/Backend/Tag"),
             },
+            {
+                path: "all-msg",
+                lazy: () => import("../views/Backend/Message/All"),
+            },
         ],
     },
 ];
