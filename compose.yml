@@ -1,7 +1,7 @@
 services:
   mysql:
     restart: always
-    image: mysql:8.4.2
+    image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/mysql:8.4.2
     ports:
       - "3308:3306"
     environment:
@@ -46,7 +46,6 @@ services:
       - "8002:8002"
     volumes:
       - ./express-server/config/env.js:/usr/src/fullstack-blog/app/express-server/src/config/env.js
-      - ./express-server/config/prod.env.js:/usr/src/fullstack-blog/app/express-server/src/config/prod.env.js
     environment:
       - NODE_ENV=production
       - PORT=8002

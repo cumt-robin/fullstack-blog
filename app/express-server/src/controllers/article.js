@@ -7,6 +7,7 @@ const utilsHelper = require("../utils/utils");
 const errcode = require("../utils/errcode");
 const dbUtils = require("../utils/db");
 const { validateInterceptor } = require("../utils/validate");
+const { parseToken } = require("../utils/auth");
 
 /**
  * @description 根据传入的count获取阅读排行top N的文章
@@ -55,7 +56,7 @@ router.get(
                 });
             }
         });
-    }
+    },
 );
 
 /**
@@ -87,7 +88,7 @@ router.get(
                 });
             }
         });
-    }
+    },
 );
 
 /**
@@ -147,7 +148,7 @@ router.put(
                 });
             }
         });
-    }
+    },
 );
 
 /**
@@ -169,7 +170,7 @@ router.put(
                 });
             }
         });
-    }
+    },
 );
 
 /**
@@ -195,12 +196,13 @@ router.delete("/delete", [query("id").notEmpty().isNumeric().toInt(), validateIn
  */
 router.get("/detail", [query("id").notEmpty().isNumeric().toInt(), validateInterceptor], (req, res, next) => {
     const { id } = matchedData(req);
-    dbUtils.query({ sql: indexSQL.GetArticleByID, values: [id] }).then(({ results }) => {
+    dbUtils.query({ sql: indexSQL.GetArticleByID, values: [id] }).then(async ({ results }) => {
         if (results && results.length > 0) {
             const data = results[0];
             if (data.private) {
                 // 如果是私密的，先判断有没有token
-                if (!req.cookies.token) {
+                const currentUser = await parseToken(req);
+                if (!currentUser) {
                     return res.send({
                         ...errcode.AUTH.FORBIDDEN,
                     });
@@ -261,7 +263,7 @@ router.get(
                     });
                 }
             });
-    }
+    },
 );
 
 /**
@@ -294,7 +296,7 @@ router.get(
                 });
             }
         });
-    }
+    },
 );
 
 /**
@@ -330,7 +332,7 @@ router.post(
                                     values: [articleTitle, articleText, summary, authorId, poster],
                                 },
                                 connection,
-                                false
+                                false,
                             )
                             .then(({ results }) => {
                                 articleId = results.insertId;
@@ -342,7 +344,7 @@ router.post(
                                   // 任务1-2：如果存在新的分类，插入分类表
                                   task() {
                                       const addCategoryTaskList = newCategories.map((item) =>
-                                          dbUtils.query({ sql: indexSQL.AddCategories, values: [item] }, connection, false)
+                                          dbUtils.query({ sql: indexSQL.AddCategories, values: [item] }, connection, false),
                                       );
                                       // 循环插入
                                       return Promise.all(addCategoryTaskList).then((ress) => {
@@ -357,8 +359,8 @@ router.post(
                                                   dbUtils.query(
                                                       { sql: indexSQL.AddArticleCategory, values: [articleId, item] },
                                                       connection,
-                                                      false
-                                                  )
+                                                      false,
+                                                  ),
                                               );
                                               return Promise.all(addArticleCategoryTaskList);
                                           },
@@ -371,7 +373,7 @@ router.post(
                                   // 任务1-3：如果选择了旧的分类，插入文章分类关系表
                                   task() {
                                       const addArticleCategoryTaskList = oldCategoryIds.map((item) =>
-                                          dbUtils.query({ sql: indexSQL.AddArticleCategory, values: [articleId, item] }, connection, false)
+                                          dbUtils.query({ sql: indexSQL.AddArticleCategory, values: [articleId, item] }, connection, false),
                                       );
                                       return Promise.all(addArticleCategoryTaskList);
                                   },
@@ -390,7 +392,7 @@ router.post(
                                         }
                                         // 存在，取得标签ID
                                         return { insertId: results[0].id };
-                                    })
+                                    }),
                                 );
                                 return Promise.all(addTagTaskList).then((ress) => {
                                     tagIDs = ress.map((res) => res.insertId);
@@ -401,7 +403,7 @@ router.post(
                                     // 任务1-4-1：插入文章标签关系表
                                     task() {
                                         const addArticleTagTaskList = tagIDs.map((item) =>
-                                            dbUtils.query({ sql: indexSQL.AddArticleTag, values: [articleId, item] }, connection, false)
+                                            dbUtils.query({ sql: indexSQL.AddArticleTag, values: [articleId, item] }, connection, false),
                                         );
                                         return Promise.all(addArticleTagTaskList);
                                     },
@@ -424,10 +426,10 @@ router.post(
                         code: "002001",
                         msg: "发布失败",
                     });
-                }
+                },
             );
         });
-    }
+    },
 );
 
 /**
@@ -495,7 +497,7 @@ router.put(
                           // 任务2
                           task() {
                               const deleteArticleTagTaskList = deleteTagIDs.map((item) =>
-                                  dbUtils.query({ sql: indexSQL.DeleteArticleTag, values: [id, item] }, connection, false)
+                                  dbUtils.query({ sql: indexSQL.DeleteArticleTag, values: [id, item] }, connection, false),
                               );
                               return Promise.all(deleteArticleTagTaskList);
                           },
@@ -515,7 +517,7 @@ router.put(
                                       }
                                       // 存在，取得标签ID
                                       return { insertId: results[0].id };
-                                  })
+                                  }),
                               );
                               return Promise.all(addTagTaskList).then((ress) => {
                                   tagIDs = ress.map((res) => res.insertId);
@@ -526,7 +528,7 @@ router.put(
                                   // 任务3-1：插入文章标签关系表
                                   task() {
                                       const addArticleTagTaskList = tagIDs.map((item) =>
-                                          dbUtils.query({ sql: indexSQL.AddArticleTag, values: [id, item] }, connection, false)
+                                          dbUtils.query({ sql: indexSQL.AddArticleTag, values: [id, item] }, connection, false),
                                       );
                                       return Promise.all(addArticleTagTaskList);
                                   },
@@ -539,7 +541,7 @@ router.put(
                           // 任务4
                           task() {
                               const deleteArticleCategoryTaskList = deleteCategoryIDs.map((item) =>
-                                  dbUtils.query({ sql: indexSQL.DeleteArticleCategory, values: [id, item] }, connection, false)
+                                  dbUtils.query({ sql: indexSQL.DeleteArticleCategory, values: [id, item] }, connection, false),
                               );
                               return Promise.all(deleteArticleCategoryTaskList);
                           },
@@ -559,7 +561,7 @@ router.put(
                                       }
                                       // 存在，取得分类ID
                                       return { insertId: results[0].id };
-                                  })
+                                  }),
                               );
                               return Promise.all(addCategoryTaskList).then((ress) => {
                                   categoryIDs = ress.map((res) => res.insertId);
@@ -570,7 +572,7 @@ router.put(
                                   // 任务5-1：插入文章分类关系表
                                   task() {
                                       const addArticleCategoryTaskList = categoryIDs.map((item) =>
-                                          dbUtils.query({ sql: indexSQL.AddArticleCategory, values: [id, item] }, connection, false)
+                                          dbUtils.query({ sql: indexSQL.AddArticleCategory, values: [id, item] }, connection, false),
                                       );
                                       return Promise.all(addArticleCategoryTaskList);
                                   },
@@ -583,7 +585,7 @@ router.put(
                           // 任务6
                           task() {
                               const relateTaskList = relatedCategoryIDs.map((item) =>
-                                  dbUtils.query({ sql: indexSQL.AddArticleCategory, values: [id, item] }, connection, false)
+                                  dbUtils.query({ sql: indexSQL.AddArticleCategory, values: [id, item] }, connection, false),
                               );
                               return Promise.all(relateTaskList);
                           },
@@ -603,10 +605,10 @@ router.put(
                         code: "002001",
                         msg: "更新失败",
                     });
-                }
+                },
             );
         });
-    }
+    },
 );
 
 /**

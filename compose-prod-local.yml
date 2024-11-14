@@ -33,7 +33,6 @@ services:
       - "8002:8002"
     volumes:
       - ./app/express-server/src/config/env.js:/usr/src/fullstack-blog/app/express-server/src/config/env.js
-      - ./app/express-server/src/config/prod.env.js:/usr/src/fullstack-blog/app/express-server/src/config/prod.env.js
     environment:
       - NODE_ENV=production
       - PORT=8002
