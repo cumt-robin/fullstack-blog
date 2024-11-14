@@ -49,6 +49,9 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=8002
+      - NPM_CONFIG_REGISTRY=https://registry.npmmirror.com
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
     depends_on:
       - mysql
 
