@@ -111,7 +111,7 @@ export const Component = () => {
         {
             title: "封面",
             dataIndex: "poster",
-            width: "110px",
+            width: "132px",
             render: (_, record) => {
                 return <StyledImage src={record.poster} fallback={LogoFallback} />;
             },
@@ -169,7 +169,7 @@ export const Component = () => {
         {
             title: "创建时间",
             dataIndex: "create_time",
-            width: "140px",
+            width: "160px",
             render: (value) => {
                 return format(value);
             },
@@ -177,7 +177,7 @@ export const Component = () => {
         {
             title: "更新时间",
             dataIndex: "update_time",
-            width: "140px",
+            width: "160px",
             render: (value) => {
                 return value ? format(value) : "-";
             },
