@@ -1,5 +1,12 @@
 # cra-react18
 
+## 0.18.0
+
+### Minor Changes
+
+-   a4f4a79: feat: cra-react18项目增加审核评论功能
+    fix: 后端审核评论参数approved校验错误
+
 ## 0.17.0
 
 ### Minor Changes
