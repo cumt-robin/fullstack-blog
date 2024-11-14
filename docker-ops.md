@@ -99,6 +99,8 @@ DOCKER_NAMESPACE=your_registry_namespace
 VITE_VUE3_VERSION=1.0.4
 WEBPACK_VUE3_VERSION=3.7.1
 EXPRESS_SERVER_VERSION=3.5.0
+MYSQL_DATABASE_NAME=xxx
+MYSQL_ROOT_PASSWORD=xxx
 ```
 
 `express-server/config`目录下放置的是后端服务的一些配置，其中 `env.js`参照项目中的`app/express-server/src/config/env.example.js`，其中 `prod.env.js`参照项目中的`app/express-server/src/config/prod.env.example.js`。
