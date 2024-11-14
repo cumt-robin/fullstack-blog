@@ -1,5 +1,11 @@
 # express-server
 
+## 3.5.11
+
+### Patch Changes
+
+-   8548ed1: fix: 管理员查看私密文章时提示没有权限
+
 ## 3.5.10
 
 ### Patch Changes
