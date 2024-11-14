@@ -1,5 +1,12 @@
 # express-server
 
+## 3.5.12
+
+### Patch Changes
+
+-   a4f4a79: feat: cra-react18项目增加审核评论功能
+    fix: 后端审核评论参数approved校验错误
+
 ## 3.5.11
 
 ### Patch Changes
