@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.15.0
+
+### Minor Changes
+
+-   599546a: feat: cra-react18项目增加标签管理
+
 ## 0.14.0
 
 ### Minor Changes
