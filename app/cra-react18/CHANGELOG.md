@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.16.0
+
+### Minor Changes
+
+-   4448d8e: feat: cra-react18项目增加所有留言功能
+
 ## 0.15.0
 
 ### Minor Changes
