@@ -37,7 +37,7 @@ export const Component = () => {
     });
 
     const handleGetCommentList = async () => {
-        const res = await commentService.pageAdmin({
+        const res = await commentService.pageNotApproved({
             pageNo: pagination.current as number,
             pageSize: pagination.pageSize as number,
             type: 1, // 1代表是文章评论
@@ -55,32 +55,19 @@ export const Component = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pagination.current, pagination.pageSize]);
 
-    const onClickLogicDel = async (record: CommentDTO) => {
-        const isDeleted = record.deleted === 1;
+    const onCommitReview = async (record: CommentDTO, approved: 1 | 2) => {
         Modal.confirm({
-            title: `确认要执行${isDeleted ? "逻辑恢复" : "逻辑删除"}吗？`,
+            title: `确认要执行${approved === 1 ? "通过" : "不通过"}操作吗？`,
             onOk: async () => {
-                await commentService.update({
+                await commentService.review({
                     id: record.id,
-                    deleted: isDeleted ? 0 : 1,
+                    approved,
+                    email: record.email,
+                    content: record.content,
+                    jump_url: record.jump_url,
                 });
                 message.success("操作成功");
                 search();
-            },
-        });
-    };
-
-    const onClickDel = async (record: CommentDTO) => {
-        Modal.confirm({
-            title: "确认要删除吗？",
-            onOk: async () => {
-                await commentService.delete(record.id);
-                message.success("操作成功");
-                if (pagination.current === 1) {
-                    search();
-                } else {
-                    setPagination({ ...pagination, current: 1 });
-                }
             },
         });
     };
@@ -139,14 +126,6 @@ export const Component = () => {
             },
         },
         {
-            title: "更新时间",
-            dataIndex: "update_time",
-            width: "160px",
-            render: (value) => {
-                return value ? format(value) : "-";
-            },
-        },
-        {
             title: "操作",
             width: "180px",
             key: "action",
@@ -154,12 +133,12 @@ export const Component = () => {
             render: (_, record, index) => {
                 return (
                     <Space>
-                        <Button type="primary" ghost size="small" danger={record.deleted !== 1} onClick={() => onClickLogicDel(record)}>
-                            {record.deleted === 1 ? "逻辑恢复" : "逻辑删除"}
+                        <Button type="primary" ghost size="small" onClick={() => onCommitReview(record, 1)}>
+                            通过
                         </Button>
 
-                        <Button type="primary" ghost size="small" onClick={() => onClickDel(record)}>
-                            物理删除
+                        <Button type="primary" ghost size="small" danger onClick={() => onCommitReview(record, 2)}>
+                            不通过
                         </Button>
                     </Space>
                 );
