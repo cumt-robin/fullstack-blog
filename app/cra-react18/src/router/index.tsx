@@ -84,6 +84,10 @@ const routes: RouteObject[] = [
                 path: "category",
                 lazy: () => import("../views/Backend/Category"),
             },
+            {
+                path: "tag",
+                lazy: () => import("../views/Backend/Tag"),
+            },
         ],
     },
 ];
