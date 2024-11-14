@@ -80,6 +80,10 @@ const routes: RouteObject[] = [
                 path: "article/edit/:id",
                 lazy: () => import("../views/Backend/Write"),
             },
+            {
+                path: "category",
+                lazy: () => import("../views/Backend/Category"),
+            },
         ],
     },
 ];
