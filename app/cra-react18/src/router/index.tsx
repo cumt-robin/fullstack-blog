@@ -100,6 +100,10 @@ const routes: RouteObject[] = [
                 path: "review-comment",
                 lazy: () => import("../views/Backend/Comment/Review"),
             },
+            {
+                path: "review-msg",
+                lazy: () => import("../views/Backend/Message/Review"),
+            },
         ],
     },
 ];
