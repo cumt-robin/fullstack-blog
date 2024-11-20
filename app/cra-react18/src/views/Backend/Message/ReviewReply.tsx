@@ -3,11 +3,10 @@ import { ColumnType, TablePaginationConfig } from "antd/es/table";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAsyncLoading } from "@/hooks/async";
-import { CommentDTO } from "@/bean/dto";
+import { ReplyDTO } from "@/bean/dto";
 import CommentAvatarFallback from "@/assets/img/comment-avatar.svg";
 import { format } from "@/utils/date-utils";
-import { commentService } from "@/services/comment";
-import { approvedFormatter } from "@/utils/formatter";
+import { replyService } from "@/services/reply";
 
 const Wrapper = styled.section`
     padding: 20px;
@@ -23,7 +22,7 @@ const Avatar = styled(Image)`
 `;
 
 export const Component = () => {
-    const [messageList, setMessageList] = useState<CommentDTO[]>([]);
+    const [replyList, setReplyList] = useState<ReplyDTO[]>([]);
 
     const [pagination, setPagination] = useState<TablePaginationConfig>({
         current: 1,
@@ -36,12 +35,12 @@ export const Component = () => {
     });
 
     const handleGetCommentList = async () => {
-        const res = await commentService.pageNotApproved({
+        const res = await replyService.unreviewdReplyPage({
             pageNo: pagination.current as number,
             pageSize: pagination.pageSize as number,
             type: 2, // 2代表是留言
         });
-        setMessageList(res.data);
+        setReplyList(res.data);
         setPagination({ ...pagination, total: res.total });
     };
 
@@ -54,11 +53,11 @@ export const Component = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [pagination.current, pagination.pageSize]);
 
-    const onCommitReview = async (record: CommentDTO, approved: 1 | 2) => {
+    const onCommitReview = async (record: ReplyDTO, approved: 1 | 2) => {
         Modal.confirm({
             title: `确认要执行${approved === 1 ? "通过" : "不通过"}操作吗？`,
             onOk: async () => {
-                await commentService.review({
+                await replyService.review({
                     id: record.id,
                     approved,
                     email: record.email,
@@ -71,7 +70,7 @@ export const Component = () => {
         });
     };
 
-    const columns: ColumnType<CommentDTO>[] = [
+    const columns: ColumnType<ReplyDTO>[] = [
         {
             title: "昵称",
             width: "120px",
@@ -86,17 +85,19 @@ export const Component = () => {
             },
         },
         {
-            title: "留言内容",
+            title: "回复内容",
+            width: "160px",
             dataIndex: "content",
-            width: "180px",
         },
         {
-            title: "审核状态",
-            dataIndex: "approved",
-            width: "120px",
-            render: (_, record) => {
-                return approvedFormatter(record.approved ?? 0);
-            },
+            title: "上一级回复内容",
+            width: "180px",
+            dataIndex: "reply_to_content",
+        },
+        {
+            title: "回复的留言内容",
+            width: "180px",
+            dataIndex: "comment_content",
         },
         {
             title: "邮箱",
@@ -141,7 +142,7 @@ export const Component = () => {
         <Wrapper>
             <Table
                 rowKey="id"
-                dataSource={messageList}
+                dataSource={replyList}
                 columns={columns}
                 loading={loading}
                 pagination={loading ? false : pagination}
