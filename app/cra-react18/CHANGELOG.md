@@ -1,5 +1,11 @@
 # cra-react18
 
+## 1.0.0
+
+### Major Changes
+
+-   bfa0625: cra-react18项目增加审核评论回复功能
+
 ## 0.20.0
 
 ### Minor Changes
