@@ -48,7 +48,7 @@ router.post(
                     },
                     (error) => {
                         console.log("通知邮件发送失败", error);
-                    }
+                    },
                 );
                 res.send({
                     code: "0",
@@ -61,7 +61,7 @@ router.post(
                 });
             }
         });
-    }
+    },
 );
 
 /**
@@ -137,7 +137,7 @@ router.get(
                 });
             }
         });
-    }
+    },
 );
 
 /**
@@ -147,7 +147,7 @@ router.put(
     "/review",
     [
         body("id").isInt(),
-        body("approved").isIn([0, 1]).withMessage("must be 0 or 1"),
+        body("approved").isIn([1, 2]).withMessage("must be 1 or 2"),
         body("email").optional().isString(),
         body("jump_url").optional().isString(),
         body("email").optional().isString(),
@@ -175,7 +175,7 @@ router.put(
                 });
             }
         });
-    }
+    },
 );
 
 module.exports = router;
