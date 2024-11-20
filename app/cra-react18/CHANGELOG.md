@@ -1,5 +1,11 @@
 # cra-react18
 
+## 0.20.0
+
+### Minor Changes
+
+-   bc8d30b: cra-react18项目增加审核留言回复功能，修复审核参数校验问题
+
 ## 0.19.0
 
 ### Minor Changes
