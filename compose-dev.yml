@@ -61,5 +61,25 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
 
+#   nestjs-server:
+#     restart: always
+#     image: fullstack-blog-nestjs:dev
+#     working_dir: /usr/src/fullstack-blog/app/nest-server
+#     ports:
+#       - "8003:8003"
+#     volumes:
+#       - ./app/nest-server/src:/usr/src/fullstack-blog/app/nest-server/src
+#       - ./app/nest-server/tsconfig.json:/usr/src/fullstack-blog/app/nest-server/tsconfig.json
+#       - ./app/nest-server/nest-cli.json:/usr/src/fullstack-blog/app/nest-server/nest-cli.json
+#       - ./app/nest-server/package.json:/usr/src/fullstack-blog/app/nest-server/package.json
+#     environment:
+#       - NODE_ENV=development
+#       - PORT=8003
+#       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#       - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+#     command: pnpm dev
+#     depends_on:
+#       - mysql
+
 volumes:
   mysql_data:

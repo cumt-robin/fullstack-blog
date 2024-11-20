@@ -23,7 +23,7 @@ sh build-dev-images.sh
 2. 运行 docker compose
 
 ```shell
-docker compose --env-file .env.docker.local -f compose-dev.yml up -d
+docker compose --env-file .env.docker.local -f compose-dev.yml up --watch -d
 ```
 
 ## Docker 生产环境
