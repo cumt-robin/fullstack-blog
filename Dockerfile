@@ -10,6 +10,7 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm deploy --filter=vite-vue3 /app/vite-vue3
 RUN pnpm deploy --filter=webpack-vue3 /app/webpack-vue3
 RUN pnpm deploy --filter=express-server /app/express-server
+RUN pnpm deploy --filter=nest-server /app/nest-server
 
 FROM base AS vite-vue3-build
 COPY --from=build /app/vite-vue3 /usr/src/fullstack-blog/app/vite-vue3
@@ -38,4 +39,11 @@ RUN npm i -g pm2-runtime
 COPY --from=build /app/express-server /usr/src/fullstack-blog/app/express-server
 WORKDIR /usr/src/fullstack-blog/app/express-server
 EXPOSE 8002
+CMD ["pnpm", "start-docker-prod"]
+
+FROM base AS nestjs-backend
+RUN npm i -g pm2-runtime
+COPY --from=build /app/nest-server /usr/src/fullstack-blog/app/nest-server
+WORKDIR /usr/src/fullstack-blog/app/nest-server
+EXPOSE 8003
 CMD ["pnpm", "start-docker-prod"]
