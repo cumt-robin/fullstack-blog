@@ -1,6 +1,6 @@
 {
     "name": "express-server",
-    "version": "3.5.12",
+    "version": "3.5.13",
     "private": true,
     "scripts": {
         "dev": "pm2 start process-dev.json",
