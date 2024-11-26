@@ -47,6 +47,7 @@ services:
     volumes:
       - ./express-server/config/env.js:/usr/src/fullstack-blog/app/express-server/src/config/env.js
     environment:
+      - TZ=Asia/Shanghai
       - NODE_ENV=production
       - PORT=8002
       - NPM_CONFIG_REGISTRY=https://registry.npmmirror.com

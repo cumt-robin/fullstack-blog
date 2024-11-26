@@ -9,7 +9,7 @@ const { validateInterceptor } = require("../utils/validate");
 
 /**
  * @param {Number} getCount 是否需要同时查出每个分类下的文章数量
- * @description 查询分类
+ * @description 查询标签
  */
 router.get("/all", [query("getCount").optional().isIn(["0", "1"]).default("0"), validateInterceptor], (req, res, next) => {
     const { getCount } = matchedData(req);
@@ -23,25 +23,6 @@ router.get("/all", [query("getCount").optional().isIn(["0", "1"]).default("0"), 
         } else {
             res.send({
                 code: "010001",
-                data: [],
-            });
-        }
-    });
-});
-
-/**
- * @description 获得标签下的文章数量
- */
-router.get("/article_count", (req, res, next) => {
-    dbUtils.query(indexSQL.GetArticleSum).then(({ results }) => {
-        if (results) {
-            res.send({
-                code: "0",
-                data: results,
-            });
-        } else {
-            res.send({
-                code: "010002",
                 data: [],
             });
         }
@@ -100,7 +81,7 @@ router.get(
                 });
             }
         });
-    }
+    },
 );
 
 module.exports = router;
