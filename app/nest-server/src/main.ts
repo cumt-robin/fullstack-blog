@@ -13,7 +13,8 @@ async function bootstrap() {
                 // 自定义异常处理逻辑，将验证错误转换为 HttpException
                 const message = errors
                     .map((err) => {
-                        return `${err.property}${Object.values(err.constraints).join(", ")}`;
+                        const info = Object.values(err.constraints).join(", ");
+                        return info.includes(err.property) ? info : `${err.property}${info}`;
                     })
                     .join("\n");
                 return new HttpException(

@@ -1,9 +1,4 @@
 module.exports = {
-    // 查询所有被关联的标签及其数量
-    GetArticleSum:
-        "SELECT t.id, t.tag_name, COUNT(*) AS blog_count FROM tag t\
-        LEFT JOIN article_tag a_t ON t.id = a_t.tag_id\
-        GROUP BY t.id",
     QueryAllTags: "SELECT * FROM tag",
     QueryTagAndCount:
         "SELECT t.*, COUNT(*) AS tag_count FROM tag t\
