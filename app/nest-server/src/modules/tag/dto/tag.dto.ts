@@ -16,9 +16,9 @@ export class FuzzyQueryTagsDto {
 export class GetTagAdminPageDto {
     @IsOptional()
     @QueryPositiveInt(1)
-    pageNo: number;
+    pageNo: number = 1;
 
     @IsOptional()
     @QueryPositiveInt(10)
-    pageSize: number;
+    pageSize: number = 10;
 }

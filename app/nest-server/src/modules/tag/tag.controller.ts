@@ -1,11 +1,13 @@
 import { Controller, Get, Query } from "@nestjs/common";
 import { TagService } from "./tag.service";
 import { FuzzyQueryTagsDto, GetAllTagsDto, GetTagAdminPageDto } from "./dto/tag.dto";
+import { PublicAccess } from "@/decorators/public-access.decorator";
 
 @Controller("tag")
 export class TagController {
     constructor(private readonly tagService: TagService) {}
 
+    @PublicAccess()
     @Get("/all")
     getAllTags(@Query() query: GetAllTagsDto) {
         return query.getCount === "1" ? this.tagService.getAllTagsWithArticleCount() : this.tagService.getAllTags();

@@ -9,29 +9,30 @@ export class ResponseInterceptor implements NestInterceptor {
     intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
         return next.handle().pipe(
             map((data) => ({ code: "0", ...data })),
-            catchError((error) => {
-                const statusCode = error instanceof HttpException ? error.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
-                const errorMessage = error.message || "请求失败";
+            // catchError((error) => {
+            //     console.log("ResponseInterceptor", error);
+            //     const statusCode = error instanceof HttpException ? error.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
+            //     const errorMessage = error.message || "请求失败";
 
-                // let errorData = null;
+            //     // let errorData = null;
 
-                // if (error instanceof HttpException) {
-                //     errorData = error.getResponse()["data"] || null; // 获取 data
-                // }
+            //     // if (error instanceof HttpException) {
+            //     //     errorData = error.getResponse()["data"] || null; // 获取 data
+            //     // }
 
-                // console.log(errorData);
-                // console.log(error instanceof HttpException, statusCode, error.message);
+            //     // console.log(errorData);
+            //     // console.log(error instanceof HttpException, statusCode, error.message);
 
-                return throwError(
-                    () =>
-                        new HttpException(
-                            {
-                                msg: errorMessage,
-                            },
-                            statusCode,
-                        ),
-                );
-            }),
+            //     return throwError(
+            //         () =>
+            //             new HttpException(
+            //                 {
+            //                     msg: errorMessage,
+            //                 },
+            //                 statusCode,
+            //             ),
+            //     );
+            // }),
         );
     }
 }
