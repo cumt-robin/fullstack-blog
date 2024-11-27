@@ -7,6 +7,7 @@ import { ValidatorModule } from "./modules/validator/validator.module";
 import { UserModule } from "./modules/user/user.module";
 import { AuthGuard } from "./guards/auth.guard";
 import { APP_GUARD } from "@nestjs/core";
+import { CategoryModule } from "./modules/category/category.module";
 
 @Module({
     imports: [
@@ -28,6 +29,7 @@ import { APP_GUARD } from "@nestjs/core";
         TagModule,
         ValidatorModule,
         UserModule,
+        CategoryModule,
     ],
     controllers: [],
     providers: [
