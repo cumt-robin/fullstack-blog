@@ -3,9 +3,18 @@ import { AppModule } from "./app.module";
 import { ResponseInterceptor } from "./interceptors/response.interceptor";
 import { InnerExceptionFilter } from "./exception-filters/inner.filter";
 import { HttpException, HttpStatus, ValidationPipe } from "@nestjs/common";
+import * as session from "express-session";
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+    app.use(
+        session({
+            secret: "llwb",
+            cookie: { path: "/", httpOnly: true, secure: false, maxAge: null },
+            resave: true,
+            saveUninitialized: true,
+        }),
+    );
     app.useGlobalPipes(
         new ValidationPipe({
             transform: true,

@@ -3,11 +3,16 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from "@nestjs/config";
 import { TagModule } from "./modules/tag/tag.module";
 import { ArticleModule } from "./modules/article/article.module";
+import { ValidatorModule } from "./modules/validator/validator.module";
+import { UserModule } from "./modules/user/user.module";
+import { AuthGuard } from "./guards/auth.guard";
+import { APP_GUARD } from "@nestjs/core";
+
 @Module({
     imports: [
         ConfigModule.forRoot({
-            envFilePath: [".env.development.local", ".env"],
             isGlobal: true,
+            envFilePath: [".env.development.local", ".env"],
         }),
         TypeOrmModule.forRoot({
             type: "mysql",
@@ -21,8 +26,15 @@ import { ArticleModule } from "./modules/article/article.module";
         }),
         ArticleModule,
         TagModule,
+        ValidatorModule,
+        UserModule,
     ],
     controllers: [],
-    providers: [],
+    providers: [
+        {
+            provide: APP_GUARD,
+            useClass: AuthGuard,
+        },
+    ],
 })
 export class AppModule {}

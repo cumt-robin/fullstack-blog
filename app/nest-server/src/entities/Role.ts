@@ -1,6 +1,6 @@
 import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 // import { RoleAuth } from "./RoleAuth";
-// import { User } from "./User";
+import { User } from "./User";
 
 @Index("RoleName", ["roleName"], { unique: true })
 @Entity("role", { schema: "blog_db" })
@@ -14,6 +14,6 @@ export class Role {
     // @OneToMany(() => RoleAuth, (roleAuth) => roleAuth.role)
     // roleAuths: RoleAuth[];
 
-    // @OneToMany(() => User, (user) => user.role)
-    // users: User[];
+    @OneToMany(() => User, (user) => user.role)
+    users: User[];
 }
