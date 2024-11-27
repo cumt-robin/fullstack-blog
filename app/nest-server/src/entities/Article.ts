@@ -1,8 +1,8 @@
 import { Column, Entity, Index, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 // import { User } from "./User";
-// import { ArticleCategory } from "./ArticleCategory";
 // import { Comments } from "./Comments";
 import { Tag } from "./Tag";
+import { Category } from "./Category";
 
 @Index("author_id", ["authorId"], {})
 @Entity("article", { schema: "blog_db" })
@@ -80,8 +80,8 @@ export class Article {
     // @JoinColumn([{ name: "author_id", referencedColumnName: "id" }])
     // author: User;
 
-    // @OneToMany(() => ArticleCategory, (articleCategory) => articleCategory.article)
-    // articleCategories: ArticleCategory[];
+    @ManyToMany(() => Category, (category) => category.articles)
+    categories: Category[];
 
     @ManyToMany(() => Tag, (tag) => tag.articles)
     tags: Tag[];
