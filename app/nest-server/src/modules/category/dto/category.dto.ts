@@ -1,5 +1,5 @@
 import { QueryPositiveInt } from "@/decorators/query-number.decorator";
-import { IsIn, IsInt, IsNotEmpty, IsOptional, IsPositive, isPositive, IsString, ValidateIf } from "class-validator";
+import { IsIn, IsInt, IsNotEmpty, IsOptional, IsPositive, IsString } from "class-validator";
 
 export class GetAllCategoriesDto {
     @IsOptional()

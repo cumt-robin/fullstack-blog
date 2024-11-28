@@ -1,7 +1,7 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-// import { Comments } from "./Comments";
+import { Comments } from "./Comments";
 
-@Index("a_id", ["commentId"], {})
+@Index("a_id", ["comment_id"], {})
 @Entity("reply", { schema: "blog_db" })
 export class Reply {
     @PrimaryGeneratedColumn({ type: "int", name: "id" })
@@ -17,31 +17,31 @@ export class Reply {
         name: "create_time",
         default: () => "CURRENT_TIMESTAMP",
     })
-    createTime: Date;
+    create_time: Date;
 
     @Column("datetime", { name: "update_time", nullable: true })
-    updateTime: Date | null;
+    update_time: Date | null;
 
     @Column("varchar", { name: "site_url", nullable: true, length: 100 })
-    siteUrl: string | null;
+    site_url: string | null;
 
     @Column("varchar", { name: "nick_name", nullable: true, length: 50 })
-    nickName: string | null;
+    nick_name: string | null;
 
     @Column("int", { name: "comment_id" })
-    commentId: number;
+    comment_id: number;
 
     @Column("int", { name: "parent_id", nullable: true })
-    parentId: number | null;
+    parent_id: number | null;
 
     @Column("int", { name: "approved" })
     approved: number;
 
     @Column("varchar", { name: "jump_url", nullable: true, length: 100 })
-    jumpUrl: string | null;
+    jump_url: string | null;
 
     @Column("int", { name: "article_id", nullable: true })
-    articleId: number | null;
+    article_id: number | null;
 
     @Column("varchar", { name: "avatar", nullable: true, length: 300 })
     avatar: string | null;
@@ -49,10 +49,10 @@ export class Reply {
     @Column("varchar", { name: "device", nullable: true, length: 100 })
     device: string | null;
 
-    // @ManyToOne(() => Comments, (comments) => comments.replies, {
-    //     onDelete: "CASCADE",
-    //     onUpdate: "CASCADE",
-    // })
-    // @JoinColumn([{ name: "comment_id", referencedColumnName: "id" }])
-    // comment: Comments;
+    @ManyToOne(() => Comments, (comments) => comments.replies, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+    })
+    @JoinColumn([{ name: "comment_id", referencedColumnName: "id" }])
+    comment: Comments;
 }

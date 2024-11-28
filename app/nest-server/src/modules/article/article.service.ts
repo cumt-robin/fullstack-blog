@@ -4,7 +4,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { DataSource, In, LessThan, Like, MoreThan, Repository } from "typeorm";
 import { GetPageWithKeywordDto, GetPageDto, CreateArticleDto, UpdateArticleDto } from "./dto/article.dto";
 import { InnerException } from "@/exceptions/inner.exception";
-import { AuthService } from "../auth/auth.service";
+import { AuthService } from "../common/auth.service";
 import { Category } from "@/entities/Category";
 import { ArticleCategory } from "@/entities/ArticleCategory";
 import { Tag } from "@/entities/Tag";
