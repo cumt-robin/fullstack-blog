@@ -8,6 +8,7 @@ import { UserModule } from "./modules/user/user.module";
 import { AuthGuard } from "./guards/auth.guard";
 import { APP_GUARD } from "@nestjs/core";
 import { CategoryModule } from "./modules/category/category.module";
+import { AuthModule } from "./modules/auth/auth.module";
 
 @Module({
     imports: [
@@ -25,6 +26,7 @@ import { CategoryModule } from "./modules/category/category.module";
             autoLoadEntities: true,
             // entities: [__dirname + "/entities/*.ts"],
         }),
+        AuthModule,
         ArticleModule,
         TagModule,
         ValidatorModule,

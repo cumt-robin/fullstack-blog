@@ -1,18 +1,15 @@
 import { PUBLIC_ACCESS_KEY } from "@/decorators/public-access.decorator";
 import { InnerException } from "@/exceptions/inner.exception";
+import { AuthService } from "@/modules/auth/auth.service";
 import { CanActivate, Injectable } from "@nestjs/common";
 
 import { ExecutionContext } from "@nestjs/common";
-import { ConfigService } from "@nestjs/config";
 import { Reflector } from "@nestjs/core";
-import { JwtService } from "@nestjs/jwt";
-import { Request } from "express";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
     constructor(
-        private readonly jwtService: JwtService,
-        private readonly configService: ConfigService,
+        private readonly authService: AuthService,
         private readonly reflector: Reflector,
     ) {}
 
@@ -23,15 +20,13 @@ export class AuthGuard implements CanActivate {
         }
 
         const request = context.switchToHttp().getRequest();
-        const token = this.extractTokenFromHeader(request);
+        const token = this.authService.extractToken(request.headers.authorization);
         if (!token) {
             throw new InnerException("000001", "对不起，您还未获得授权");
         }
 
         try {
-            const payload = await this.jwtService.verifyAsync(token, {
-                secret: this.configService.get("JWT_SECRET"),
-            });
+            const payload = await this.authService.verify(token);
             request["currentUser"] = payload;
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
@@ -39,10 +34,5 @@ export class AuthGuard implements CanActivate {
         }
 
         return true;
-    }
-
-    private extractTokenFromHeader(request: Request): string | undefined {
-        const [type, token] = request.headers.authorization?.split(" ") ?? [];
-        return type === "Bearer" ? token : undefined;
     }
 }

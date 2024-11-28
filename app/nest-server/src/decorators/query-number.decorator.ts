@@ -2,7 +2,7 @@ import { Transform, Type } from "class-transformer";
 import { IsInt, IsPositive } from "class-validator";
 
 /**
- * 转换查询字符串中的数字类型
+ * 查询字符串中的正整数类型
  * @param defaultValue 默认值
  */
 export function QueryPositiveInt(defaultValue: number = 0) {

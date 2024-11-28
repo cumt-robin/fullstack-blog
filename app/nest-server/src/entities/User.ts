@@ -1,6 +1,6 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Role } from "./Role";
-// import { Article } from "./Article";
+import { Article } from "./Article";
 
 @Index("UserName", ["user_name"], { unique: true })
 @Index("Email", ["email"], { unique: true })
@@ -48,8 +48,8 @@ export class User {
     @Column("datetime", { name: "last_login_time", nullable: true })
     last_login_time: Date | null;
 
-    // @OneToMany(() => Article, (article) => article.author)
-    // articles: Article[];
+    @OneToMany(() => Article, (article) => article.author)
+    articles: Article[];
 
     @ManyToOne(() => Role, (role) => role.users, {
         onDelete: "RESTRICT",

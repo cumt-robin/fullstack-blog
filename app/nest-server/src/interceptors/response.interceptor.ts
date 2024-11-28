@@ -8,7 +8,7 @@ import { catchError, map, Observable, throwError } from "rxjs";
 export class ResponseInterceptor implements NestInterceptor {
     intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
         return next.handle().pipe(
-            map((data) => ({ code: "0", ...data })),
+            map((data) => ({ code: "0", ...(data || {}) })),
             // catchError((error) => {
             //     console.log("ResponseInterceptor", error);
             //     const statusCode = error instanceof HttpException ? error.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
