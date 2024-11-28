@@ -9,6 +9,7 @@ import { AuthGuard } from "./guards/auth.guard";
 import { APP_GUARD } from "@nestjs/core";
 import { CategoryModule } from "./modules/category/category.module";
 import { AuthModule } from "./modules/auth/auth.module";
+import { CommentModule } from "./modules/comment/comment.module";
 
 @Module({
     imports: [
@@ -32,6 +33,7 @@ import { AuthModule } from "./modules/auth/auth.module";
         ValidatorModule,
         UserModule,
         CategoryModule,
+        CommentModule,
     ],
     controllers: [],
     providers: [
