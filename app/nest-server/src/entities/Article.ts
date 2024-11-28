@@ -1,32 +1,32 @@
 import { Column, Entity, Index, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-// import { User } from "./User";
+import { User } from "./User";
 // import { Comments } from "./Comments";
 import { Tag } from "./Tag";
 import { Category } from "./Category";
 
-@Index("author_id", ["authorId"], {})
+@Index("author_id", ["author_id"], {})
 @Entity("article", { schema: "blog_db" })
 export class Article {
     @PrimaryGeneratedColumn({ type: "int", name: "id" })
     id: number;
 
     @Column("varchar", { name: "article_name", comment: "标题", length: 500 })
-    articleName: string;
+    article_name: string;
 
     @Column("longtext", { name: "article_text", comment: "正文markdown" })
-    articleText: string;
+    article_text: string;
 
     @Column("datetime", {
         name: "create_time",
         default: () => "CURRENT_TIMESTAMP",
     })
-    createTime: Date;
+    create_time: Date;
 
     @Column("datetime", { name: "update_time", nullable: true })
-    updateTime: Date | null;
+    update_time: Date | null;
 
     @Column("int", { name: "author_id", comment: "作者id" })
-    authorId: number;
+    author_id: number;
 
     @Column("int", {
         name: "read_num",
@@ -34,15 +34,10 @@ export class Article {
         comment: "阅读量",
         default: () => "'0'",
     })
-    readNum: number | null;
+    read_num: number | null;
 
-    @Column("int", {
-        name: "like_num",
-        nullable: true,
-        comment: "喜欢",
-        default: () => "'0'",
-    })
-    likeNum: number | null;
+    @Column("int", { name: "like_num", comment: "是否私密", width: 1, default: () => 0 })
+    like_num: number;
 
     @Column("varchar", { name: "summary", comment: "摘要", length: 3000 })
     summary: string;
@@ -55,30 +50,18 @@ export class Article {
     })
     poster: string | null;
 
-    @Column("tinyint", {
-        name: "private",
-        nullable: true,
-        comment: "是否私密",
-        width: 1,
-        default: () => "'0'",
-    })
-    private: boolean | null;
+    @Column("tinyint", { name: "private", comment: "是否私密", width: 1, default: () => 0 })
+    private: 0 | 1;
 
-    @Column("tinyint", {
-        name: "deleted",
-        nullable: true,
-        comment: "是否已经被逻辑删除",
-        width: 1,
-        default: () => "'0'",
-    })
-    deleted: boolean | null;
+    @Column("tinyint", { name: "deleted", comment: "是否逻辑删除", width: 1, default: () => 0 })
+    deleted: 0 | 1;
 
-    // @ManyToOne(() => User, (user) => user.articles, {
-    //     onDelete: "CASCADE",
-    //     onUpdate: "CASCADE",
-    // })
-    // @JoinColumn([{ name: "author_id", referencedColumnName: "id" }])
-    // author: User;
+    @ManyToOne(() => User, (user) => user.articles, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+    })
+    @JoinColumn([{ name: "author_id", referencedColumnName: "id" }])
+    author: User;
 
     @ManyToMany(() => Category, (category) => category.articles)
     categories: Category[];
