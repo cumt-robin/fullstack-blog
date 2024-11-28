@@ -1,5 +1,11 @@
 # nest-server
 
+## 0.4.0
+
+### Minor Changes
+
+-   6a897d7: feat: NestJS article 模块接口实现
+
 ## 0.3.0
 
 ### Minor Changes
