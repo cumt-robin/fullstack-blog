@@ -10,4 +10,9 @@ MYSQL_USER=root
 MYSQL_PASSWORD=xxx
 MYSQL_DATABASE_NAME=blog_db
 JWT_SECRET=xxx
+EMAIL_USER=xxx@163.com
+EMAIL_PASS=xxx
+BLOG_NAME=Tusi博客
+AUTHOR_EMAIL=xxx
+SITE_URL=https://blog.wbjiang.cn
 ```

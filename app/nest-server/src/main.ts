@@ -3,7 +3,7 @@ import { AppModule } from "./app.module";
 import { ResponseInterceptor } from "./interceptors/response.interceptor";
 import { InnerExceptionFilter } from "./exception-filters/inner.filter";
 import { HttpException, HttpStatus, ValidationPipe } from "@nestjs/common";
-import * as session from "express-session";
+import session from "express-session";
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -23,7 +23,7 @@ async function bootstrap() {
                 const message = errors
                     .map((err) => {
                         const info = Object.values(err.constraints).join(", ");
-                        return info.includes(err.property) ? info : `${err.property}${info}`;
+                        return info.startsWith(err.property) ? info : `${err.property} ${info}`;
                     })
                     .join("\n");
                 return new HttpException(

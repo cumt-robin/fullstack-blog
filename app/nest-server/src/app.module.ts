@@ -8,8 +8,9 @@ import { UserModule } from "./modules/user/user.module";
 import { AuthGuard } from "./guards/auth.guard";
 import { APP_GUARD } from "@nestjs/core";
 import { CategoryModule } from "./modules/category/category.module";
-import { AuthModule } from "./modules/auth/auth.module";
 import { CommentModule } from "./modules/comment/comment.module";
+import { ReplyModule } from "./modules/reply/reply.module";
+import { CommonModule } from "./modules/common/common.module";
 
 @Module({
     imports: [
@@ -27,13 +28,15 @@ import { CommentModule } from "./modules/comment/comment.module";
             autoLoadEntities: true,
             // entities: [__dirname + "/entities/*.ts"],
         }),
-        AuthModule,
+        CommonModule,
         ArticleModule,
         TagModule,
         ValidatorModule,
         UserModule,
         CategoryModule,
         CommentModule,
+        ReplyModule,
+        CommonModule,
     ],
     controllers: [],
     providers: [

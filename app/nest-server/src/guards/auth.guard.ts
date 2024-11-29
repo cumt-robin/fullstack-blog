@@ -1,6 +1,6 @@
 import { PUBLIC_ACCESS_KEY } from "@/decorators/public-access.decorator";
 import { InnerException } from "@/exceptions/inner.exception";
-import { AuthService } from "@/modules/auth/auth.service";
+import { AuthService } from "@/modules/common/auth.service";
 import { CanActivate, Injectable } from "@nestjs/common";
 
 import { ExecutionContext } from "@nestjs/common";

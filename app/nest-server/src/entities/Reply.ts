@@ -1,5 +1,5 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-// import { Comments } from "./Comments";
+import { Comments } from "./Comments";
 
 @Index("a_id", ["comment_id"], {})
 @Entity("reply", { schema: "blog_db" })
@@ -49,10 +49,10 @@ export class Reply {
     @Column("varchar", { name: "device", nullable: true, length: 100 })
     device: string | null;
 
-    // @ManyToOne(() => Comments, (comments) => comments.replies, {
-    //     onDelete: "CASCADE",
-    //     onUpdate: "CASCADE",
-    // })
-    // @JoinColumn([{ name: "comment_id", referencedColumnName: "id" }])
-    // comment: Comments;
+    @ManyToOne(() => Comments, (comments) => comments.replies, {
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+    })
+    @JoinColumn([{ name: "comment_id", referencedColumnName: "id" }])
+    comment: Comments;
 }

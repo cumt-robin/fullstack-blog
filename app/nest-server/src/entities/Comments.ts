@@ -1,6 +1,6 @@
 import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Reply } from "./Reply";
 // import { Article } from "./Article";
-// import { Reply } from "./Reply";
 
 @Index("a_id", ["article_id"], {})
 @Entity("comments", { schema: "blog_db" })
@@ -54,6 +54,6 @@ export class Comments {
     // @JoinColumn([{ name: "article_id", referencedColumnName: "id" }])
     // article: Article;
 
-    // @OneToMany(() => Reply, (reply) => reply.comment)
-    // replies: Reply[];
+    @OneToMany(() => Reply, (reply) => reply.comment)
+    replies: Reply[];
 }
