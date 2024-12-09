@@ -14,6 +14,7 @@ import { CommonModule } from "./modules/common/common.module";
 
 @Module({
     imports: [
+        CommonModule,
         ConfigModule.forRoot({
             isGlobal: true,
             envFilePath: [".env.development.local", ".env"],
@@ -28,7 +29,6 @@ import { CommonModule } from "./modules/common/common.module";
             autoLoadEntities: true,
             // entities: [__dirname + "/entities/*.ts"],
         }),
-        CommonModule,
         ArticleModule,
         TagModule,
         ValidatorModule,
@@ -36,7 +36,6 @@ import { CommonModule } from "./modules/common/common.module";
         CategoryModule,
         CommentModule,
         ReplyModule,
-        CommonModule,
     ],
     controllers: [],
     providers: [

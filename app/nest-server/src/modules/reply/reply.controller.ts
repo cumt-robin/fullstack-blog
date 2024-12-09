@@ -1,34 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from "@nestjs/common";
+import { Controller, Post, Body, Get, Query, Put } from "@nestjs/common";
 import { ReplyService } from "./reply.service";
-import { CreateReplyDto } from "./dto/create-reply.dto";
-import { UpdateReplyDto } from "./dto/update-reply.dto";
+import { AddReplyDto, ReviewReplyDto } from "./dto/reply.dto";
+import { PublicAccess } from "@/decorators/public-access.decorator";
+import { GetTypedPageDto } from "../comment/dto/comment.dto";
 
 @Controller("reply")
 export class ReplyController {
     constructor(private readonly replyService: ReplyService) {}
 
-    @Post()
-    create(@Body() createReplyDto: CreateReplyDto) {
-        return this.replyService.create(createReplyDto);
+    @PublicAccess()
+    @Post("/add")
+    add(@Body() body: AddReplyDto) {
+        return this.replyService.add(body);
     }
 
-    @Get()
-    findAll() {
-        return this.replyService.findAll();
+    @Get("/getReplyOfCommentWaitReview")
+    getReplyOfCommentWaitReview() {
+        return this.replyService.getReplyOfCommentWaitReview();
     }
 
-    @Get(":id")
-    findOne(@Param("id") id: string) {
-        return this.replyService.findOne(+id);
+    @Get("/getReplyOfMsgWaitReview")
+    getReplyOfMsgWaitReview() {
+        return this.replyService.getReplyOfMsgWaitReview();
     }
 
-    @Patch(":id")
-    update(@Param("id") id: string, @Body() updateReplyDto: UpdateReplyDto) {
-        return this.replyService.update(+id, updateReplyDto);
+    @Get("/unreviewd_reply_page")
+    unreviewdReplyPage(@Query() query: GetTypedPageDto) {
+        return this.replyService.getUnreviewdReplyPage(query);
     }
 
-    @Delete(":id")
-    remove(@Param("id") id: string) {
-        return this.replyService.remove(+id);
+    @Put("/review")
+    review(@Body() body: ReviewReplyDto) {
+        return this.replyService.review(body);
     }
 }

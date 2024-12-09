@@ -1,5 +1,6 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Comments } from "./Comments";
+import { Article } from "./Article";
 
 @Index("a_id", ["comment_id"], {})
 @Entity("reply", { schema: "blog_db" })
@@ -43,6 +44,10 @@ export class Reply {
     @Column("int", { name: "article_id", nullable: true })
     article_id: number | null;
 
+    @ManyToOne(() => Article, (article) => article.replies, { nullable: true })
+    @JoinColumn({ name: "article_id" })
+    article: Article | null;
+
     @Column("varchar", { name: "avatar", nullable: true, length: 300 })
     avatar: string | null;
 
@@ -55,4 +60,13 @@ export class Reply {
     })
     @JoinColumn([{ name: "comment_id", referencedColumnName: "id" }])
     comment: Comments;
+
+    // 自引用关系，指向父回复
+    @ManyToOne(() => Reply, (reply) => reply.children, { nullable: true })
+    @JoinColumn({ name: "parent_id" })
+    parentReply: Reply;
+
+    // 反向关系，指向子回复
+    @OneToMany(() => Reply, (reply) => reply.parentReply)
+    children: Reply[];
 }
