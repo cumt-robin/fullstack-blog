@@ -3,6 +3,7 @@ import { User } from "./User";
 import { Tag } from "./Tag";
 import { Category } from "./Category";
 import { Comments } from "./Comments";
+import { Reply } from "./Reply";
 
 @Index("author_id", ["author_id"], {})
 @Entity("article", { schema: "blog_db" })
@@ -71,4 +72,7 @@ export class Article {
 
     @OneToMany(() => Comments, (comments) => comments.article)
     comments: Comments[];
+
+    @OneToMany(() => Reply, (reply) => reply.article)
+    replies: Reply[];
 }
