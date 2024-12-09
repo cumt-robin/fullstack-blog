@@ -1,5 +1,11 @@
 # nest-server
 
+## 0.5.0
+
+### Minor Changes
+
+-   5245b96: feat: nestjs comment模块实现
+
 ## 0.4.0
 
 ### Minor Changes
