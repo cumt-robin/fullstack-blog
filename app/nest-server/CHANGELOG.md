@@ -1,5 +1,11 @@
 # nest-server
 
+## 0.8.0
+
+### Minor Changes
+
+-   7178b87: feat: nestjs chatgpt 模块实现
+
 ## 0.7.0
 
 ### Minor Changes

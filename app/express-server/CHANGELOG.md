@@ -1,5 +1,11 @@
 # express-server
 
+## 3.5.14
+
+### Patch Changes
+
+-   7178b87: feat: nestjs chatgpt 模块实现
+
 ## 3.5.13
 
 ### Patch Changes
