@@ -1,0 +1,8 @@
+{
+    "apps": [
+        {
+            "name": "blog-nest-server",
+            "script": "dist/main.js"
+        }
+    ]
+}

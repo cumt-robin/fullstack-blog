@@ -7,7 +7,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_CHARSET=utf8mb4
       - MYSQL_COLLATION=utf8mb4_0900_ai_ci
     volumes:
@@ -59,14 +59,14 @@ services:
       - NODE_ENV=development
       - PORT=8002
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
 
 #   nestjs-server:
 #     restart: always
 #     image: fullstack-blog-nestjs:dev
 #     working_dir: /usr/src/fullstack-blog/app/nest-server
 #     ports:
-#       - "8003:8003"
+#       - "8012:8012"
 #     volumes:
 #       - ./app/nest-server/src:/usr/src/fullstack-blog/app/nest-server/src
 #       - ./app/nest-server/tsconfig.json:/usr/src/fullstack-blog/app/nest-server/tsconfig.json
@@ -74,9 +74,9 @@ services:
 #       - ./app/nest-server/package.json:/usr/src/fullstack-blog/app/nest-server/package.json
 #     environment:
 #       - NODE_ENV=development
-#       - PORT=8003
+#       - PORT=8012
 #       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-#       - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+#       - MYSQL_DATABASE=${MYSQL_DATABASE}
 #     command: pnpm dev
 #     depends_on:
 #       - mysql

@@ -7,7 +7,7 @@ services:
     environment:
       - TZ=Asia/Shanghai
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_CHARSET=utf8mb4
       - MYSQL_COLLATION=utf8mb4_0900_ai_ci
     volumes:
@@ -23,41 +23,68 @@ services:
     ports:
       - "3000:80"
     environment:
-      - BACKEND_PORT=8002
-    command: /bin/bash -c "envsubst '$$BACKEND_PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-
-  webpack-vue3:
-    restart: always
-    build:
-      target: webpack-vue3-frontend
-    image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/fullstack-blog-webpack-vue3:${WEBPACK_VUE3_VERSION:-latest}
-    ports:
-      - "3001:80"
-    environment:
-      - BACKEND_PORT=8002
-    command: /bin/bash -c "envsubst '$$BACKEND_PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
-
-  express-server:
-    restart: always
-    build:
-      target: express-backend
-    image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/fullstack-blog-express:${EXPRESS_SERVER_VERSION:-latest}
-    ports:
-      - "8002:8002"
+      - SERVER_NAME=nest-server
+      - SERVER_PORT=8012
     volumes:
-      - ./express-server/config/env.js:/usr/src/fullstack-blog/app/express-server/src/config/env.js
+      - ./nginx/default.conf.template:/etc/nginx/conf.d/default.conf.template
+    command: /bin/bash -c "envsubst '$$SERVER_NAME $$SERVER_PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && cat /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+
+#   webpack-vue3:
+#     restart: always
+#     build:
+#       target: webpack-vue3-frontend
+#     image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/fullstack-blog-webpack-vue3:${WEBPACK_VUE3_VERSION:-latest}
+#     ports:
+#       - "3001:80"
+#     environment:
+#       - SERVER_NAME=nest-server
+#       - SERVER_PORT=8012
+#     volumes:
+#       - ./nginx/default.conf.template:/etc/nginx/conf.d/default.conf.template
+#     command: /bin/bash -c "envsubst '$$SERVER_NAME $$SERVER_PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && cat /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+
+#   express-server:
+#     restart: always
+#     build:
+#       target: express-backend
+#     image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/fullstack-blog-express:${EXPRESS_SERVER_VERSION:-latest}
+#     depends_on:
+#       - mysql
+#     ports:
+#       - "8002:8002"
+#     environment:
+#       - TZ=Asia/Shanghai
+#       - NODE_ENV=production
+#       - PORT=8002
+#       - NPM_CONFIG_REGISTRY=https://registry.npmmirror.com
+#       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#       - MYSQL_DATABASE=${MYSQL_DATABASE}
+#     volumes:
+#       - ./express-server/config/env.js:/usr/src/fullstack-blog/app/express-server/src/config/env.js
+#     working_dir: /usr/src/fullstack-blog/app/express-server
+#     command: ["pnpm", "start-docker-prod"]
+
+
+  nest-server:
+    restart: always
+    build:
+      target: nestjs-backend
+    image: ${DOCKER_REGISTRY}/${DOCKER_NAMESPACE}/fullstack-blog-nest:${NEST_SERVER_VERSION:-latest}
+    depends_on:
+      - mysql
+    ports:
+      - "8012:8012"
     environment:
       - TZ=Asia/Shanghai
       - NODE_ENV=production
-      - PORT=8002
+      - PORT=8012
       - NPM_CONFIG_REGISTRY=https://registry.npmmirror.com
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE_NAME}
-    depends_on:
-      - mysql
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+    volumes:
+      - ./app/nest-server/.env.production.local:/usr/src/fullstack-blog/app/nest-server/.env.production.local
+    working_dir: /usr/src/fullstack-blog/app/nest-server
+    command: ["pnpm", "start-docker-prod"]
 
 volumes:
   mysql_data:
-
-# 如果还有其他服务，也可以在这里添加
-# ...

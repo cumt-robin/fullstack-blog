@@ -12,20 +12,6 @@
 |       |-- init.sql
 ```
 
-## Docker 开发环境
-
-1. 构建镜像
-
-```shell
-sh build-dev-images.sh
-```
-
-2. 运行 docker compose
-
-```shell
-docker compose --env-file .env.docker.local -f compose-dev.yml up --watch -d
-```
-
 ## Docker 生产环境
 
 1. 构建镜像
@@ -35,7 +21,7 @@ docker compose --env-file .env.docker.local -f compose-dev.yml up --watch -d
 ```shell
 docker build --target vite-vue3-frontend -t fullstack-blog-vite-vue3 .
 
-docker build --target express-backend -t fullstack-blog-express .
+docker build --target nestjs-backend -t fullstack-blog-nest .
 ```
 
 使用 docker compose
@@ -53,12 +39,12 @@ docker login --username=xxx registry.cn-hangzhou.aliyuncs.com
 # 打 tag
 docker tag fullstack-blog-vite-vue3 registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-vite-vue3:3.0.0
 
-docker tag fullstack-blog-express registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-express:3.0.0
+docker tag fullstack-blog-nest registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-nest:3.0.0
 
 # 推送镜像
 docker push registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-vite-vue3:3.0.0
 
-docker push registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-express:3.0.0
+docker push registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-nest:3.0.0
 ```
 
 3. 登录服务器
@@ -70,7 +56,7 @@ docker login --username=xxx registry.cn-hangzhou.aliyuncs.com
 
 docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-vite-vue3:3.0.0
 
-docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-express:3.0.0
+docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-nest:3.0.0
 ```
 
 5. 【仅首次】准备项目资源文件
@@ -81,10 +67,8 @@ docker pull registry.cn-hangzhou.aliyuncs.com/tusi_personal/fullstack-blog-expre
 
 ```
 .
-|-- express-server
-|   `-- config
-|       |-- env.js
-|       `-- prod.env.js
+|-- nest-server
+|   `-- .env.production.local
 |-- compose.yml
 `-- .env.docker.local
 ```
@@ -98,12 +82,25 @@ DOCKER_REGISTRY=your_image_registry
 DOCKER_NAMESPACE=your_registry_namespace
 VITE_VUE3_VERSION=1.0.4
 WEBPACK_VUE3_VERSION=3.7.1
-EXPRESS_SERVER_VERSION=3.5.0
-MYSQL_DATABASE_NAME=xxx
+NEST_SERVER_VERSION=3.5.0
+MYSQL_DATABASE=blog_db
 MYSQL_ROOT_PASSWORD=xxx
 ```
 
-`express-server/config`目录下放置的是后端服务的一些配置，其中 `env.js`参照项目中的`app/express-server/src/config/env.example.js`，其中 `prod.env.js`参照项目中的`app/express-server/src/config/prod.env.example.js`。
+`nest-server/.env.production.local`文件是 Nest 后端服务的配置文件，内容参照下方：
+
+```
+MYSQL_HOST=mysql
+MYSQL_PORT=3306
+JWT_SECRET=xxx
+EMAIL_USER=xxx@163.com
+EMAIL_PASS=xxx
+BLOG_NAME=Tusi博客
+AUTHOR_EMAIL=xxx
+SITE_URL=https://blog.wbjiang.cn
+OPENAI_API_KEY=xxx
+WEB_SOCKET_WHITE_LIST=https://blog.wbjiang.cn
+```
 
 6. 重新运行
 
@@ -120,7 +117,7 @@ docker compose --env-file .env.docker.local up -d
 1. 打镜像
 
 ```shell
-docker compose -f compose-prod-local.yml build
+docker compose --env-file .env.docker.local -f compose-prod-local.yml build
 ```
 
 2. 运行镜像测试
