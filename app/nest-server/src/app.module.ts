@@ -13,21 +13,23 @@ import { ReplyModule } from "./modules/reply/reply.module";
 import { CommonModule } from "./modules/common/common.module";
 import { BannerModule } from "./modules/banner/banner.module";
 import { ChatgptModule } from "./modules/chatgpt/chatgpt.module";
+import { ChatModule } from "./modules/chat/chat.module";
 
 @Module({
     imports: [
         CommonModule,
         ConfigModule.forRoot({
             isGlobal: true,
-            envFilePath: [".env.development.local", ".env"],
+            // 数组中的第一个文件路径具有最高优先级，依次类推。运行时环境变量优先级更高。
+            envFilePath: [".env.development.local", ".env.production.local", ".env"],
         }),
         TypeOrmModule.forRoot({
             type: "mysql",
             host: process.env.MYSQL_HOST,
             port: parseInt(process.env.MYSQL_PORT),
-            username: process.env.MYSQL_USER,
-            password: process.env.MYSQL_PASSWORD,
-            database: process.env.MYSQL_DATABASE_NAME,
+            username: "root",
+            password: process.env.MYSQL_ROOT_PASSWORD,
+            database: process.env.MYSQL_DATABASE,
             autoLoadEntities: true,
             // entities: [__dirname + "/entities/*.ts"],
         }),
@@ -40,6 +42,7 @@ import { ChatgptModule } from "./modules/chatgpt/chatgpt.module";
         ReplyModule,
         BannerModule,
         ChatgptModule,
+        ChatModule,
     ],
     controllers: [],
     providers: [
