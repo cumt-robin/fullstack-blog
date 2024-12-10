@@ -11,6 +11,7 @@ import { CategoryModule } from "./modules/category/category.module";
 import { CommentModule } from "./modules/comment/comment.module";
 import { ReplyModule } from "./modules/reply/reply.module";
 import { CommonModule } from "./modules/common/common.module";
+import { BannerModule } from "./modules/banner/banner.module";
 
 @Module({
     imports: [
@@ -36,6 +37,7 @@ import { CommonModule } from "./modules/common/common.module";
         CategoryModule,
         CommentModule,
         ReplyModule,
+        BannerModule,
     ],
     controllers: [],
     providers: [

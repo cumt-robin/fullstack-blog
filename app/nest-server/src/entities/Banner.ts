@@ -18,5 +18,5 @@ export class Banner {
     type: number | null;
 
     @Column("varchar", { name: "prefer_position", nullable: true, length: 20 })
-    preferPosition: string | null;
+    prefer_position: string | null;
 }
