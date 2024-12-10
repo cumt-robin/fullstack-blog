@@ -124,73 +124,7 @@ router.get("/chat", async (req, res, next) => {
                 stop: ["\n提问:", "\nAI:"],
                 stream: true,
             },
-            { responseType: "stream" }
-        );
-        req.session.chatgptRequestTime = Date.now();
-        if (!req.session.chatgptTopicCount) {
-            req.session.chatgptTopicCount = 1;
-        } else {
-            req.session.chatgptTopicCount += 1;
-        }
-        if (!req.session.chatgptTimes) {
-            req.session.chatgptTimes = 1;
-        } else {
-            req.session.chatgptTimes += 1;
-        }
-        res.setHeader("content-type", "text/event-stream");
-        completion.data.pipe(res);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            message: "Open AI 调用异常",
-        });
-    }
-});
-
-/**
- * @param {Number} wd 聊天上下文
- * @description chatgpt对话
- */
-router.get("/chat", async (req, res, next) => {
-    if (req.session.chatgptTopicCount && req.session.chatgptTopicCount >= 10) {
-        // 这个话题聊得有点深入了，不如换一个。
-        req.session.chatgptSessionPrompt = "";
-        req.session.chatgptTopicCount = 0;
-        return res.status(403).json({
-            msg: "这个话题聊得有点深入了，不如换一个",
-        });
-    }
-    if (req.session.chatgptTimes && req.session.chatgptTimes >= 50) {
-        // 到达调用上限，欢迎明天再来哦，实际上还需要定时任务，这里先不做了。
-        return res.status(403).json({
-            msg: "到达调用上限，欢迎明天再来哦",
-        });
-    }
-    if (req.session.chatgptRequestTime && Date.now() - req.session.chatgptRequestTime <= 3000) {
-        // 不允许在3s里重复调用
-        return res.status(429).json({
-            msg: "请降低请求频次",
-        });
-    }
-    if (!req.session.chatgptSessionPrompt) {
-        req.session.chatgptSessionPrompt = "";
-    }
-    const { wd } = req.query;
-    const prompt = `${req.session.chatgptSessionPrompt}\n提问:${wd}\nAI:`;
-    try {
-        const completion = await openai.createCompletion(
-            {
-                model: "text-davinci-003",
-                prompt,
-                temperature: 0.9,
-                max_tokens: 150,
-                top_p: 1,
-                frequency_penalty: 0,
-                presence_penalty: 0.6,
-                stop: ["\n提问:", "\nAI:"],
-                stream: true,
-            },
-            { responseType: "stream" }
+            { responseType: "stream" },
         );
         req.session.chatgptRequestTime = Date.now();
         if (!req.session.chatgptTopicCount) {
