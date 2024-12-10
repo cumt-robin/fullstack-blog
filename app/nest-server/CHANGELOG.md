@@ -1,5 +1,11 @@
 # nest-server
 
+## 0.7.0
+
+### Minor Changes
+
+-   9ea1151: feat: nestjs banner模块实现
+
 ## 0.6.0
 
 ### Minor Changes
