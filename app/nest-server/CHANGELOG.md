@@ -1,5 +1,11 @@
 # nest-server
 
+## 0.6.0
+
+### Minor Changes
+
+-   65b232f: feat: nestjs reply 接口
+
 ## 0.5.0
 
 ### Minor Changes
