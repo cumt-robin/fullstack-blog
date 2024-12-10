@@ -35,7 +35,7 @@ export class AuthGuard implements CanActivate {
             if (error instanceof TokenExpiredError) {
                 throw new InnerException("000002", "授权已过期");
             }
-            throw new InnerException("000001", "对不起，您还未获得授权");
+            throw new InnerException("000004", "授权验证失败");
         }
 
         return true;

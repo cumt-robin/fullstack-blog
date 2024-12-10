@@ -13,6 +13,7 @@ import { ReplyModule } from "./modules/reply/reply.module";
 import { CommonModule } from "./modules/common/common.module";
 import { BannerModule } from "./modules/banner/banner.module";
 import { ChatgptModule } from "./modules/chatgpt/chatgpt.module";
+import { ChatModule } from "./modules/chat/chat.module";
 
 @Module({
     imports: [
@@ -40,6 +41,7 @@ import { ChatgptModule } from "./modules/chatgpt/chatgpt.module";
         ReplyModule,
         BannerModule,
         ChatgptModule,
+        ChatModule,
     ],
     controllers: [],
     providers: [
