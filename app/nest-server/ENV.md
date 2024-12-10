@@ -15,4 +15,5 @@ EMAIL_PASS=xxx
 BLOG_NAME=Tusi博客
 AUTHOR_EMAIL=xxx
 SITE_URL=https://blog.wbjiang.cn
+OPENAI_API_KEY=xxx
 ```
