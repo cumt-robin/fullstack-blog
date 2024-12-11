@@ -31,7 +31,7 @@ export class ArticleController {
         return this.articleService.getPage(query);
     }
 
-    @Get("/admin/page")
+    @Get("/page_admin")
     adminPage(@Query() query: GetPageDto) {
         return this.articleService.getAdminPage(query);
     }

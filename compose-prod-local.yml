@@ -22,20 +22,30 @@ services:
     ports:
       - "3000:80"
     environment:
-      - BACKEND_PORT=8002
+      - BACKEND_PORT=8003
     command: /bin/bash -c "envsubst '$$BACKEND_PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && cat /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
 
-  express-server:
+  # express-server:
+  #   build:
+  #     target: express-backend
+  #   image: fullstack-blog-express:latest
+  #   ports:
+  #     - "8002:8002"
+  #   volumes:
+  #     - ./app/express-server/src/config/env.js:/usr/src/fullstack-blog/app/express-server/src/config/env.js
+  #   environment:
+  #     - NODE_ENV=production
+  #     - PORT=8002
+
+  nest-server:
     build:
-      target: express-backend
-    image: fullstack-blog-express:latest
+      target: nest-backend
+    image: fullstack-blog-nest:latest
     ports:
-      - "8002:8002"
-    volumes:
-      - ./app/express-server/src/config/env.js:/usr/src/fullstack-blog/app/express-server/src/config/env.js
+      - "8003:8003"
     environment:
       - NODE_ENV=production
-      - PORT=8002
+      - PORT=8003
 
 volumes:
   mysql_data:
