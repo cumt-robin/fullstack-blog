@@ -1,5 +1,11 @@
 # cra-react18
 
+## 1.0.2
+
+### Patch Changes
+
+-   5d42650: fix: socket.io v4 连接异常问题
+
 ## 1.0.1
 
 ### Patch Changes
