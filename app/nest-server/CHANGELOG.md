@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.0.0
+
+### Major Changes
+
+-   3aab4d5: feat: nestjs socket.io 集成
+
 ## 0.8.0
 
 ### Minor Changes
