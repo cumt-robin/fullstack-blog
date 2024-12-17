@@ -16,7 +16,7 @@ import { Server, Socket } from "socket.io";
     cors: {
         origin: (origin, callback) => {
             const list = process.env.WEB_SOCKET_WHITE_LIST.split(",");
-            if (list.includes(origin)) {
+            if (!origin || list.includes(origin)) {
                 callback(null, true);
             } else {
                 callback(new Error("Not allowed by CORS"));
