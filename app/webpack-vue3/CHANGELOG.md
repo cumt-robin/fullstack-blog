@@ -1,5 +1,11 @@
 # webpack-vue3
 
+## 3.7.7
+
+### Patch Changes
+
+-   373b310: fix: nest 采用 socket.io v4 版本，生产环境下前端连接 socket.io 报错
+
 ## 3.7.6
 
 ### Patch Changes

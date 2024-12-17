@@ -1,5 +1,11 @@
 # cra-react18
 
+## 1.0.1
+
+### Patch Changes
+
+-   373b310: fix: nest 采用 socket.io v4 版本，生产环境下前端连接 socket.io 报错
+
 ## 1.0.0
 
 ### Major Changes
