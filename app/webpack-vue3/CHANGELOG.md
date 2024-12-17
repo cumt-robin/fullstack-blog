@@ -1,5 +1,11 @@
 # webpack-vue3
 
+## 3.7.8
+
+### Patch Changes
+
+-   5d42650: fix: socket.io v4 连接异常问题
+
 ## 3.7.7
 
 ### Patch Changes
