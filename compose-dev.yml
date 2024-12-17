@@ -34,19 +34,20 @@ services:
 #       - CHOKIDAR_USEPOLLING=true
 #       - DANGEROUSLY_DISABLE_HOST_CHECK=true
 
-  # vite-vue3:
-  #   image: fullstack-blog-vite-vue3:dev
-  #   ports:
-  #     - "3000:3000"
-  #   volumes:
-  #     - ./app/vite-vue3/src:/usr/src/fullstack-blog/app/vite-vue3/src
-  #     - ./app/vite-vue3/vite.config.docker.ts:/usr/src/fullstack-blog/app/vite-vue3/vite.config.ts
-  #     - ./app/vite-vue3/index.html:/usr/src/fullstack-blog/app/vite-vue3/index.html
-  #     - ./app/vite-vue3/public:/usr/src/fullstack-blog/app/vite-vue3/public
-  #     - ./.prettierrc.json:/usr/src/fullstack-blog/.prettierrc.json
-  #     - ./.prettierignore:/usr/src/fullstack-blog/.prettierignore
-  #   environment:
-  #     - NODE_ENV=development
+  vite-vue3:
+    image: fullstack-blog-vite-vue3:dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app/vite-vue3/src:/usr/src/fullstack-blog/app/vite-vue3/src
+      - ./app/vite-vue3/vite.config.docker.ts:/usr/src/fullstack-blog/app/vite-vue3/vite.config.ts
+      - ./app/vite-vue3/index.html:/usr/src/fullstack-blog/app/vite-vue3/index.html
+      - ./app/vite-vue3/public:/usr/src/fullstack-blog/app/vite-vue3/public
+      - ./.prettierrc.json:/usr/src/fullstack-blog/.prettierrc.json
+      - ./.prettierignore:/usr/src/fullstack-blog/.prettierignore
+    environment:
+      - NODE_ENV=development
+      - VITE_APP_SOCKET_SERVER=http://express-server:8002
 
   express-server:
     restart: always
@@ -60,6 +61,9 @@ services:
       - PORT=8002
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - WEB_SOCKET_WHITE_LIST=http://localhost:3000
+    working_dir: /usr/src/fullstack-blog/app/express-server
+    command: ["pnpm", "docker-dev"]
 
 #   nestjs-server:
 #     restart: always

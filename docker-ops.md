@@ -12,6 +12,31 @@
 |       |-- init.sql
 ```
 
+## Docker 开发环境
+
+前端均支持 Docker 开发环境。
+
+后端暂时只支持 express-server。nest-server 由于文件更新检测问题，暂时无法支持 Docker 开发环境，后续再投入时间研究补充。
+
+构建镜像：
+
+```shell
+sh build-dev-images.sh
+```
+
+启动服务：
+
+```shell
+docker compose --env-file .env.docker.local -f compose-dev.yml up -d
+```
+
+其中的`.env.docker.local`文件内容参照下面内容：
+
+```
+MYSQL_ROOT_PASSWORD=xxx
+MYSQL_DATABASE=blog_db
+```
+
 ## Docker 生产环境
 
 1. 构建镜像

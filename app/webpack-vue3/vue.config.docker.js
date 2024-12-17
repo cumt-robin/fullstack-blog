@@ -25,7 +25,7 @@ module.exports = {
         open: true,
         proxy: {
             "/api": {
-                target: "http://express-server:8002",
+                target: "http://nest-server:8012",
                 changeOrigin: true,
                 pathRewrite: {
                     "^/api": "",

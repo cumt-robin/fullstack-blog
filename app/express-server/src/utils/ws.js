@@ -91,7 +91,19 @@ function broadcastExceptSelf(socket, param) {
 }
 
 function startWs(server) {
-    io = socketIo(server);
+    io = socketIo(server, {
+        cors: {
+            origin: (origin, callback) => {
+                const list = process.env.WEB_SOCKET_WHITE_LIST.split(",");
+                if (list.includes(origin)) {
+                    callback(null, true);
+                } else {
+                    callback(new Error("Not allowed by CORS"));
+                }
+            },
+            credentials: true,
+        },
+    });
     chatRoomHandler();
 }
 

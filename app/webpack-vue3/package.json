@@ -30,7 +30,7 @@
         "mermaid": "^10.9.1",
         "mitt": "^3.0.1",
         "qs": "^6.10.1",
-        "socket.io-client": "^2.1.1",
+        "socket.io-client": "^4.8.1",
         "vue": "~3.3.13",
         "vue-router": "~4.0.8",
         "vuex": "~4.0.1"
