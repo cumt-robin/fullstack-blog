@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.9
+
+### Patch Changes
+
+-   3aab4d5: feat: nestjs socket.io 集成
+
 ## 1.0.8
 
 ### Patch Changes
