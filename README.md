@@ -2,6 +2,8 @@
 
 Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/7177402980180688952)开源全栈项目，最初采用 Vue3 + Vue CLI + Typescript + NodeJS Express 实现，目前已经涵盖了多种技术实现，无论你是 Webpack/Vite 使用者，或者是 Vue/React 爱好者，这里都有你想要的内容，你甚至可以从这里学会多种框架的使用。
 
+除了最初采用的 Express，后端目前也提供了 NestJS 实现，并且后续会主要维护 NestJS 版本。
+
 如果你是一个前端开发者，还不太清楚后端开发或者全栈的概念，请一定不要错过这个项目，我相信它会对你的工作或者求职有所帮助！
 
 本项目最新代码采用 pnpm monorepo 架构搭建，工程化能力和开发体验都比较不错，目前支持：
@@ -43,8 +45,8 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 后端部分：
 
-- [x] Express + MySQL: 见目录 app/express-server
-- [ ] NestJS 开发中...
+- [x] NestJS + MySQL + TypeORM + class-validator: 见目录 app/nest-server
+- [x] Express + MySQL + express-validator: 见目录 app/express-server
 
 ## Features
 

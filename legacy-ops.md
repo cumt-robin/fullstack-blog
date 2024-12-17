@@ -11,7 +11,7 @@ pnpm install
 由于不是使用 docker compose，需要修改`vite.config.ts`中的`server`配置：
 
 ```
-target: "http://localhost:8002",
+target: "http://127.0.0.1:8012",
 ```
 
 启动项目：

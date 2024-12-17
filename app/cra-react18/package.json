@@ -33,7 +33,7 @@
     "react-redux": "^9.1.2",
     "react-refresh": "^0.11.0",
     "react-router-dom": "^6.24.1",
-    "socket.io-client": "^2.5.0",
+    "socket.io-client": "^4.8.1",
     "styled-components": "^6.1.11",
     "tailwindcss": "^3.4.6",
     "web-vitals": "^2.1.4"
