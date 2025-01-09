@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.0.2
+
+### Patch Changes
+
+-   1377f19: fix: 最后一篇文章详情页上一篇下一篇展示为同一篇
+
 ## 1.0.1
 
 ### Patch Changes
