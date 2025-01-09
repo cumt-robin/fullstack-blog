@@ -1,4 +1,9 @@
 FROM node:18-slim AS base
+
+# 安装 Python 和构建工具
+RUN apt-get update && apt-get install -y python3 make g++ \
+    && rm -rf /var/lib/apt/lists/*
+
 RUN npm i -g pnpm
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
@@ -6,6 +11,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 FROM base AS build
 COPY . /usr/src/app
 WORKDIR /usr/src/app
+# macos 15 运行下面这行会报错，所以上面加了 python3
 RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm deploy --filter=vite-vue3 /app/vite-vue3
 # RUN pnpm deploy --filter=cra-react18 /app/cra-react18
