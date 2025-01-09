@@ -94,7 +94,7 @@ export class ArticleService {
             }),
         ]);
         return {
-            data: [prev, next],
+            data: [prev, next].filter((item) => !!item),
         };
     }
 
