@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.0.3
+
+### Patch Changes
+
+-   9dcc2a2: 切换到 nest 服务后，部分文章的评论无法查询到
+
 ## 1.0.2
 
 ### Patch Changes
