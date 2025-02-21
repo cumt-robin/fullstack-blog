@@ -187,7 +187,6 @@ export class ReplyService {
             // 发个邮件通知下
             const jumpUrl = jump_url || this.configService.get("SITE_URL");
             await this.emailService.sendMail({
-                from: `"${this.configService.get("BLOG_NAME")}" <${this.configService.get("AUTHOR_EMAIL")}>`,
                 to: email,
                 subject: `${this.configService.get("BLOG_NAME")}《回复审核通过》`,
                 html: `<h1 style="text-align:center;color:#409EFF">感谢您在<a href="${jumpUrl}">${this.configService.get("BLOG_NAME")}</a>留下足迹</h1>\

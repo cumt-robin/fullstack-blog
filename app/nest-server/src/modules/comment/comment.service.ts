@@ -22,22 +22,26 @@ export class CommentService {
 
     async getPage(query: GetCommentPageDto) {
         const { id, pageNo, pageSize } = query;
-        const [data, total] = await this.commentRepository.findAndCount({
-            where: {
-                article_id: id ? id : IsNull(),
-                approved: 1,
-                replies: {
-                    approved: 1,
-                },
-            },
-            skip: (pageNo - 1) * pageSize,
-            take: pageSize,
-            relations: ["replies"],
-            select: ["id", "article_id", "content", "create_time", "nick_name", "site_url", "avatar", "device"],
-            order: {
-                create_time: "DESC",
-            },
-        });
+        const queryBuilder = this.commentRepository
+            .createQueryBuilder("comment")
+            .select([
+                "comment.id",
+                "comment.article_id",
+                "comment.content",
+                "comment.create_time",
+                "comment.nick_name",
+                "comment.site_url",
+                "comment.avatar",
+                "comment.device",
+            ])
+            .leftJoinAndSelect("comment.replies", "reply", "reply.approved = :replyApproved", { replyApproved: 1 })
+            .where("comment.approved = :approved", { approved: 1 })
+            .andWhere("comment.article_id = :articleId", { articleId: id ? id : IsNull() })
+            .skip((pageNo - 1) * pageSize)
+            .take(pageSize)
+            .orderBy("comment.create_time", "DESC");
+
+        const [data, total] = await queryBuilder.getManyAndCount();
 
         return {
             data,
