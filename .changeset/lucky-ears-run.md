@@ -1,5 +1,5 @@
 ---
-"vite-vue3": major
+"vite-vue3": patch
 ---
 
-s
+引入 google ads
