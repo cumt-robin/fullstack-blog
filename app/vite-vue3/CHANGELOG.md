@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 2.0.0
+
+### Major Changes
+
+-   7356046: s
+
 ## 1.0.11
 
 ### Patch Changes
