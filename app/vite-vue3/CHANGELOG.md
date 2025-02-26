@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.13
+
+### Patch Changes
+
+-   606b53e: 添加 ads.txt
+
 ## 1.0.12
 
 ### Patch Changes
