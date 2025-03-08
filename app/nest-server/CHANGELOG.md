@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.0.4
+
+### Patch Changes
+
+-   5a20f27: fix #215 nest服务留言板page查询报错
+
 ## 1.0.3
 
 ### Patch Changes
