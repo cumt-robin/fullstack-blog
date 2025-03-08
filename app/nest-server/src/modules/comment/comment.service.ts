@@ -36,13 +36,12 @@ export class CommentService {
             ])
             .leftJoinAndSelect("comment.replies", "reply", "reply.approved = :replyApproved", { replyApproved: 1 })
             .where("comment.approved = :approved", { approved: 1 })
-            .andWhere("comment.article_id = :articleId", { articleId: id ? id : IsNull() })
+            .andWhere(id ? "comment.article_id = :articleId" : "comment.article_id IS NULL", id ? { articleId: id } : {})
             .skip((pageNo - 1) * pageSize)
             .take(pageSize)
             .orderBy("comment.create_time", "DESC");
 
         const [data, total] = await queryBuilder.getManyAndCount();
-
         return {
             data,
             total,
