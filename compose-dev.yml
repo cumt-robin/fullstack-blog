@@ -64,6 +64,8 @@ services:
       - WEB_SOCKET_WHITE_LIST=http://localhost:3000
     working_dir: /usr/src/fullstack-blog/app/express-server
     command: ["pnpm", "docker-dev"]
+    depends_on:
+      - mysql
 
 #   nestjs-server:
 #     restart: always
