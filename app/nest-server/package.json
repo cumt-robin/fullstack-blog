@@ -1,6 +1,6 @@
 {
     "name": "nest-server",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "nestjs backend",
     "private": true,
     "scripts": {
