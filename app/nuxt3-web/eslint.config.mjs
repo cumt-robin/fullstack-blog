@@ -22,7 +22,18 @@ export default tsEslint.config(
         },
         rules: {
             "prettier/prettier": "error",
-            "no-unused-vars": "warn",
+            "no-unused-vars": "off",
+            "@typescript-eslint/no-unused-vars": [
+                "error",
+                {
+                    argsIgnorePattern: "^_",
+                    destructuredArrayIgnorePattern: "^_",
+                    varsIgnorePattern: "^_",
+                    args: "none",
+                    ignoreRestSiblings: true,
+                },
+            ],
+            "vue/multi-word-component-names": "off",
         },
     },
     eslintPluginPrettierRecommended,
