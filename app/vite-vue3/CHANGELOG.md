@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.15
+
+### Patch Changes
+
+-   b40ef91: chore: 调整actions 配置
+
 ## 1.0.14
 
 ### Patch Changes
