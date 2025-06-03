@@ -75,6 +75,9 @@
                     </a-col>
                 </a-row>
             </section>
+            <section class="footer-column">
+                <span>ICP备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">湘ICP备18024586号</a></span>
+            </section>
         </div>
     </footer>
 </template>
