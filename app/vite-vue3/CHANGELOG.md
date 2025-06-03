@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.14
+
+### Patch Changes
+
+-   7a52af4: chore: 增加备案号
+
 ## 1.0.13
 
 ### Patch Changes
