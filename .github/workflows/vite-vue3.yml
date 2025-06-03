@@ -46,18 +46,20 @@ jobs:
 
           mkdir -p ~/.ssh
 
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
 
           chmod 600 ~/.ssh/id_rsa
 
           cat >>~/.ssh/config <<END
           Host remote
-          HostName ${{secrets.SSH_HOST}}
-          Port 22
-          User ${{secrets.SSH_USERNAME}}
-          IdentityFile ~/.ssh/id_rsa
-          StrictHostKeyChecking no
+            HostName ${{secrets.SSH_HOST}}
+            Port 22
+            User ${{secrets.SSH_USERNAME}}
+            IdentityFile ~/.ssh/id_rsa
+            StrictHostKeyChecking no
           END
+
+          ssh-keyscan -H ${{secrets.SSH_HOST}} >> ~/.ssh/known_hosts
 
           cat >>~/remote.sh <<END
           docker ps
@@ -69,4 +71,4 @@ jobs:
           echo "Done"
           END
 
-          ssh remote < ~/remote.sh
+          ssh -t remote 'bash -s' < ~/remote.sh
