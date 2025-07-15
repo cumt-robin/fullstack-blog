@@ -25,6 +25,7 @@ api.defaults.headers.common["Content-Type"] = "application/x-www-form-urlencoded
 api.defaults.transformRequest = (data) => {
     return qs.stringify(data, { encode: true });
 };
+api.defaults.withCredentials = true;
 
 api.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
