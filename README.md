@@ -90,6 +90,14 @@ pnpm install
 
 见[legacy-ops.md](./legacy-ops.md)。
 
+## web 前端部署
+
+目前已采用云存储静态站点部署 + CDN加速
+
+## 服务端部署
+
+目前采用云服务器 Docker 容器化部署
+
 ## 联系我
 
 如果有遇到其他问题，也可以[联系我](https://qncdn.wbjiang.cn/%E5%85%AC%E4%BC%97%E5%8F%B7/qrcode_new.jpg)交流。
