@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.16
+
+### Patch Changes
+
+-   55d21dc: fix: 生产环境 cors 访问
+
 ## 1.0.15
 
 ### Patch Changes
