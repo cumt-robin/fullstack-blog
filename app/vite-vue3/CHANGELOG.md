@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.17
+
+### Patch Changes
+
+-   b1cf884: ci: vite-vue3 ci 缺失 node 和 pnpm 环境
+
 ## 1.0.16
 
 ### Patch Changes
