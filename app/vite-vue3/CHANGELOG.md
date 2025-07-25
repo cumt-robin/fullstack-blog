@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.18
+
+### Patch Changes
+
+-   502683f: fix: 修改 upload-to-qiniu-action 版本号，宽松到 v1
+
 ## 1.0.17
 
 ### Patch Changes
