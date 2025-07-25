@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Upload to Qiniu
-        uses: cumt-robin/upload-to-qiniu-action@v1.0.0
+        uses: cumt-robin/upload-to-qiniu-action@v1
         with:
           access_key: ${{ secrets.QINIU_ACCESS_KEY }}
           secret_key: ${{ secrets.QINIU_SECRET_KEY }}
