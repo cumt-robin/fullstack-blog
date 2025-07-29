@@ -30,10 +30,26 @@ jobs:
         pnpm install --frozen-lockfile
         pnpm vite-vue3:build
 
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: vite-vue3-dist
+        path: app/vite-vue3/dist
+        retention-days: 1
+
   deploy:
     needs: [build]
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: vite-vue3-dist
+          path: app/vite-vue3/dist
+
       - name: Upload to Qiniu
         uses: cumt-robin/upload-to-qiniu-action@v1
         with:
