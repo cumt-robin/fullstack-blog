@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.0.19
+
+### Patch Changes
+
+-   2d65849: ci: 优化vite-vue3构建上传流程
+
 ## 1.0.18
 
 ### Patch Changes
