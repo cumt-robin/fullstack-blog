@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.1.1
+
+### Patch Changes
+
+-   4ce686b: ci: action 改用 alioss 部署 vite-vue3 工程
+
 ## 1.1.0
 
 ### Minor Changes
