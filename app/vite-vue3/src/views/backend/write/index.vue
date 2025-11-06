@@ -542,8 +542,10 @@ const { trigger: onConfirmPublish, loading: isConfirmLoading } = useAsyncLoading
 :deep(.category-checkbox) {
     display: flex;
     align-items: center;
+
     .ant-checkbox + span {
         flex: 1;
+
         @include one-line-ellipsis;
     }
 }

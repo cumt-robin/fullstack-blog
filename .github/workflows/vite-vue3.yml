@@ -5,9 +5,6 @@ on:
     tags:
       - 'vite-vue3@*'
 
-env:
-  SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,6 +23,11 @@ jobs:
         version: 9.4.0
 
     - name: Build Dist
+      env:
+        VITE_APP_SENTRY_DSN: ${{ secrets.VITE_APP_SENTRY_DSN }}
+        VITE_APP_SENTRY_ORG: ${{ secrets.VITE_APP_SENTRY_ORG }}
+        VITE_APP_SENTRY_PROJECT: ${{ secrets.VITE_APP_SENTRY_PROJECT }}
+        VITE_APP_SENTRY_TOKEN: ${{ secrets.VITE_APP_SENTRY_TOKEN }}
       run: |
         pnpm install --frozen-lockfile
         pnpm vite-vue3:build

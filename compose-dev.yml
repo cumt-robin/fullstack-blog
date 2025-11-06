@@ -43,29 +43,32 @@ services:
       - ./app/vite-vue3/vite.config.docker.ts:/usr/src/fullstack-blog/app/vite-vue3/vite.config.ts
       - ./app/vite-vue3/index.html:/usr/src/fullstack-blog/app/vite-vue3/index.html
       - ./app/vite-vue3/public:/usr/src/fullstack-blog/app/vite-vue3/public
+      - ./app/vite-vue3/.env:/usr/src/fullstack-blog/app/vite-vue3/.env
+      - ./app/vite-vue3/.env.development:/usr/src/fullstack-blog/app/vite-vue3/.env.development
       - ./.prettierrc.json:/usr/src/fullstack-blog/.prettierrc.json
       - ./.prettierignore:/usr/src/fullstack-blog/.prettierignore
     environment:
       - NODE_ENV=development
-      - VITE_APP_SOCKET_SERVER=http://express-server:8002
+      - VITE_APP_BACKEND_SERVER=http://172.22.192.1:8012
+      - VITE_APP_SOCKET_SERVER=http://172.22.192.1:8012
 
-  express-server:
-    restart: always
-    image: fullstack-blog-express:dev
-    ports:
-      - "8002:8002"
-    volumes:
-      - ./app/express-server/src:/usr/src/fullstack-blog/app/express-server/src
-    environment:
-      - NODE_ENV=development
-      - PORT=8002
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - WEB_SOCKET_WHITE_LIST=http://localhost:3000
-    working_dir: /usr/src/fullstack-blog/app/express-server
-    command: ["pnpm", "docker-dev"]
-    depends_on:
-      - mysql
+#   express-server:
+#     restart: always
+#     image: fullstack-blog-express:dev
+#     ports:
+#       - "8002:8002"
+#     volumes:
+#       - ./app/express-server/src:/usr/src/fullstack-blog/app/express-server/src
+#     environment:
+#       - NODE_ENV=development
+#       - PORT=8002
+#       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#       - MYSQL_DATABASE=${MYSQL_DATABASE}
+#       - WEB_SOCKET_WHITE_LIST=http://localhost:3000
+#     working_dir: /usr/src/fullstack-blog/app/express-server
+#     command: ["pnpm", "docker-dev"]
+#     depends_on:
+#       - mysql
 
 #   nestjs-server:
 #     restart: always

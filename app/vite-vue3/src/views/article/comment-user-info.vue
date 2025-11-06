@@ -48,7 +48,7 @@ export default defineComponent({
                 nick_name: "",
                 email: "",
                 site_url: "",
-            }
+            },
         );
 
         const rules = reactive({

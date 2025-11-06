@@ -2,7 +2,7 @@
     <a-layout class="backend-layout">
         <a-layout-sider :trigger="null" v-model:collapsed="menuState.collapsed" collapsible breakpoint="lg" @collapse="onSiderCollapse">
             <img class="logo" src="@/assets/img/logo.png" />
-            <a-menu theme="dark" mode="inline" v-model:openKeys="menuState.openKeys" :selected-keys="selectedKeys" @click="onClickMenu">
+            <a-menu theme="dark" mode="inline" v-model:open-keys="menuState.openKeys" :selected-keys="selectedKeys" @click="onClickMenu">
                 <a-sub-menu v-for="sub in navs" :key="sub.key">
                     <template #title>
                         <span>
@@ -88,7 +88,7 @@ export default defineComponent({
             () => menuState.openKeys,
             (_val, oldVal) => {
                 menuState.preOpenKeys = oldVal;
-            }
+            },
         );
 
         // 路由的变化会，需要更新openKeys
@@ -96,7 +96,7 @@ export default defineComponent({
             () => route.path,
             () => {
                 menuState.openKeys = calcOpenKeys();
-            }
+            },
         );
 
         // 手动收起/展开菜单
@@ -173,18 +173,21 @@ export default defineComponent({
 }
 
 :deep(.right-header) {
-    background: rgb(255, 255, 255);
+    background: rgb(255 255 255);
     padding: 0;
+
     .anticon {
         font-size: 18px;
         transition: color 0.3s;
+
         &:hover {
             color: #1890ff;
         }
     }
+
     .admin-avatar {
         color: $color-primary;
-        background-color: rgb(253, 227, 207);
+        background-color: rgb(253 227 207);
         float: right;
         margin-right: 24px;
         margin-top: 16px;

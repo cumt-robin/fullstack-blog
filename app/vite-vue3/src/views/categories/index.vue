@@ -65,9 +65,11 @@ export default defineComponent({
     padding: 24px 18px;
     background-color: #f5f5f5;
 }
+
 :deep(.card-hot) {
     margin: 24px 18px;
 }
+
 h2 {
     margin: 0;
     text-align: center;
@@ -77,12 +79,14 @@ h2 {
     position: relative;
     margin-top: 20px;
     background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 9%);
 }
+
 :deep(.category__poster) {
     width: 100%;
     height: 120px;
 }
+
 .category__title {
     text-align: center;
     font-size: 14px;
@@ -90,7 +94,7 @@ h2 {
     padding-bottom: 4px;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
     :deep(.base-layout__main) {
         background-color: transparent;
     }

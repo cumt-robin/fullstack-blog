@@ -42,8 +42,9 @@
     font-size: 24px;
     height: 100%;
     border-radius: 50%;
-    background-color: rgba(102, 57, 57, 0.4);
+    background-color: rgb(102 57 57 / 40%);
     cursor: pointer;
+
     + .icon--aside {
         margin-top: 10px;
     }

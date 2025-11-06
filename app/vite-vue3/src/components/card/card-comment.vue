@@ -346,6 +346,7 @@ export default defineComponent({
 
 .reply__info {
     flex: 1;
+
     @include one-line-ellipsis;
 }
 

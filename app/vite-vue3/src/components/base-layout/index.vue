@@ -168,12 +168,19 @@ export default defineComponent({
     padding: 18px 40px;
     background: linear-gradient(to bottom right, #2177a7, #5fb7ac);
     text-align: center;
+
     > h3 {
         margin: 20px 0;
         color: #eaeab3;
         font-size: 20px;
         font-weight: 400;
-        text-shadow: 0 1px 0 #2e2e2e, 0 2px 0 #2c2c2c, 0 3px 0 #2a2a2a, 0 4px 0 #282828, 0 5px 0 #262626, 0 6px 0 #242424;
+        text-shadow:
+            0 1px 0 #2e2e2e,
+            0 2px 0 #2c2c2c,
+            0 3px 0 #2a2a2a,
+            0 4px 0 #282828,
+            0 5px 0 #262626,
+            0 6px 0 #242424;
     }
 }
 
@@ -189,6 +196,7 @@ export default defineComponent({
     position: absolute;
     top: 20px;
     left: 12px;
+
     .icon-svg {
         font-size: 24px;
         color: #fff;
@@ -206,7 +214,7 @@ export default defineComponent({
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.24);
+    background: rgb(0 0 0 / 24%);
     z-index: 100;
 }
 
@@ -218,7 +226,7 @@ export default defineComponent({
     height: 50px;
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
     :deep(.base-layout__main) {
         width: 800px;
         margin: 0 auto;

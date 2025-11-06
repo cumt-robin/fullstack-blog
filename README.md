@@ -37,7 +37,7 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 其中前端部分：
 
-- [x] Vite + Vue3 + Pinia + TypeScript: 见目录 app/vite-vue3，线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
+- [x] Vite + Vue3 + Pinia + TypeScript + Sentry: 见目录 app/vite-vue3，线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
 - [x] Vue CLI + Vue3 + Vuex + TypeScript + SCSS: 见目录 app/webpack-vue3
 - [x] CRA + React18 + TypeScript + React-Redux + Redux Toolkit + Tailwindcss + Styled Components: 见目录 app/cra-react18
 - [ ] Vite + React19 + TypeScript + Zustand
@@ -81,6 +81,27 @@ git config core.autocrlf input
 ```shell
 pnpm install
 ```
+
+## 环境变量
+
+针对 vite-vue3 工程，Sentry 涉及到私密信息 dsn 等，需要以环境变量提供。
+
+开发环境下，在 vite-vue3 目录下新建 .env.local 文件，内容模板如下，请替换成你自己的 Sentry DSN：
+
+```
+VITE_APP_SENTRY_DSN=https://xxxxx.ingest.us.sentry.io/xxxxx
+VITE_APP_SENTRY_ORG=xxx
+VITE_APP_SENTRY_PROJECT=xxx
+VITE_APP_SENTRY_TOKEN=xxx
+```
+
+项目打包时，如果是在本地打包，由于可以读取到 .env.local 文件，不需要再另外处理；
+
+如果是在 CI/CD 中打包，需要通过环境变量指定 VITE_APP_SENTRY_DSN，
+
+比如 github actions，需要在仓库的 Settings / Actions secrets and variables 中新增相关变量，比如 VITE_APP_SENTRY_DSN，
+
+或者以 secrets 的方式定义，然后在 workflow 文件中通过 env 来引用 secrets.VITE_APP_SENTRY_DSN。
 
 ## 容器化运行项目【推荐】
 

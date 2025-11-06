@@ -5,12 +5,12 @@ export function tree2Arr<T extends TreeNode>(tree: Array<T>, replaceChildren?: s
 export function tree2Arr<T extends TreeNode, D = unknown>(
     tree: Array<T>,
     replaceChildren?: string,
-    mapper?: (item: T, index: number, arr: Array<T>) => D
+    mapper?: (item: T, index: number, arr: Array<T>) => D,
 ): Array<D>;
 export function tree2Arr<T extends TreeNode, D = unknown>(
     tree: Array<T>,
     replaceChildren = "children",
-    mapper?: (item: T, index: number, arr: Array<T>) => D
+    mapper?: (item: T, index: number, arr: Array<T>) => D,
 ): Array<T> | Array<D> {
     const result = tree.reduce((prev, curr) => {
         const children = curr[replaceChildren] as T[];

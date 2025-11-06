@@ -124,7 +124,7 @@ export default defineComponent({
                     });
                 });
             },
-            { deep: true }
+            { deep: true },
         );
     },
     beforeUnmount() {
@@ -238,6 +238,7 @@ export default defineComponent({
     min-height: 400px;
     max-height: 800px;
     overflow: auto;
+
     &::-webkit-scrollbar {
         width: 6px;
         height: 6px;
@@ -249,14 +250,17 @@ export default defineComponent({
     }
 
     &::-webkit-scrollbar-track {
-        background: rgba(240, 227, 227, 0.5);
+        background: rgb(240 227 227 / 50%);
     }
+
     > li {
         + li {
             margin-top: 10px;
         }
+
         &.sys_msg {
             text-align: center;
+
             .content {
                 display: inline-block;
                 line-height: 30px;
@@ -267,39 +271,49 @@ export default defineComponent({
                 font-size: 14px;
             }
         }
+
         &.mine {
             text-align: right;
+
             .chat-item-wrap {
                 .txt-wrap {
                     padding-right: 60px;
+
                     .chat-text span {
                         background-color: #5fb878;
                         color: #fff;
+
                         &::after {
                             right: -10px;
                             border-color: #5fb878 transparent transparent;
                         }
                     }
                 }
+
                 img {
                     float: right;
                 }
             }
         }
+
         &.others {
             text-align: left;
+
             .chat-item-wrap {
                 .txt-wrap {
                     padding-left: 60px;
+
                     .chat-text span {
                         background-color: #e2e2e2;
                         color: #000;
+
                         &::after {
                             left: -10px;
                             border-color: #e2e2e2 transparent transparent;
                         }
                     }
                 }
+
                 img {
                     float: left;
                 }
@@ -313,16 +327,20 @@ export default defineComponent({
             font-size: 12px;
             white-space: nowrap;
             color: #999;
+
             > span {
                 margin-right: 10px;
             }
+
             .chat-text {
                 margin-top: 5px;
+
                 span {
                     position: relative;
                     border-radius: 4px;
                     padding: 8px 15px;
                     font-size: 14px;
+
                     &::after {
                         content: "";
                         position: absolute;
@@ -336,6 +354,7 @@ export default defineComponent({
                 }
             }
         }
+
         img {
             width: 40px;
             height: 40px;
@@ -346,10 +365,12 @@ export default defineComponent({
 
 :deep(.form-chat) {
     display: flex;
+
     .form-item--content {
         flex: 1;
         margin: 0 16px 0 0;
     }
+
     .form-item--btn {
         .ant-form-item-control {
             line-height: 1;
@@ -365,7 +386,7 @@ export default defineComponent({
     display: none;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (width >= 768px) {
     :deep(.dropdown-send) {
         display: inline-block;
     }
