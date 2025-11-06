@@ -1,5 +1,15 @@
 # vite-vue3
 
+## 1.1.0
+
+### Minor Changes
+
+-   972ea7a: feat: sentry集成
+
+    fix: 引入 stylelint-config-standard-scss 解决 scss 文件的注释内容 // 报错：Unknown word (CssSyntaxError)
+
+    fix: 引入 postcss-html 解决 vue 文件 import { ref } from "vue" 报错：Unknown word (CssSyntaxError)
+
 ## 1.0.19
 
 ### Patch Changes
