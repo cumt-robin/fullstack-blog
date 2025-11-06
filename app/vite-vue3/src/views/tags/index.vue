@@ -49,27 +49,32 @@ getTagList();
     padding: 24px 18px;
     background-color: #f5f5f5;
 }
+
 :deep(.card-hot) {
     margin: 24px 18px;
 }
+
 h2 {
     margin: 0;
     text-align: center;
 }
+
 :deep(.tagtag) {
     margin-top: 10px;
     padding: 4px 8px;
     font-size: 16px;
     cursor: pointer;
+
     > span {
         vertical-align: middle;
     }
+
     .ant-badge-count {
         background: #348ba9;
     }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
     :deep(.base-layout__main) {
         background-color: transparent;
     }

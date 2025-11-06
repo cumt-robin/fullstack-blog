@@ -16,8 +16,8 @@
                     <card-comment
                         :comment="comment"
                         :is-active="activeId === comment.id"
-                        @userInfoEmpty="onUserInfoEmpty"
-                        @setActive="onSetActive"
+                        @user-info-empty="onUserInfoEmpty"
+                        @set-active="onSetActive"
                     />
                 </li>
             </ul>
@@ -238,7 +238,7 @@ export default defineComponent({
     display: flex;
     align-items: center;
     padding: 12px 20px;
-    box-shadow: 0 -1px 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -1px 10px 0 rgb(0 0 0 / 10%);
     z-index: 2;
 }
 

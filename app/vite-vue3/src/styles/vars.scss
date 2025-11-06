@@ -28,7 +28,6 @@ $color-bg--readonly: #dfdfdf;
 // Border
 // border color
 $color-border--base: #ccc;
-
 $border-base: 1px solid $color-border--base;
 
 // Size
@@ -51,16 +50,18 @@ $border-radius--big: 40px;
 $border-radius--full: 100%;
 
 // box-shadow
-$base-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
-$light-box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-$header-box-shadow: 0 2px 9px 0 rgba(8, 45, 97, 0.24);
+$base-box-shadow:
+    0 2px 4px rgb(0 0 0 / 12%),
+    0 0 6px rgb(0 0 0 / 4%);
+$light-box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+$header-box-shadow: 0 2px 9px 0 rgb(8 45 97 / 24%);
 
 // input
 
 // scrollbar
-$scrollbar-thumb-bg-color: rgba(255, 255, 255, 0.15);
+$scrollbar-thumb-bg-color: rgb(255 255 255 / 15%);
 $scrollbar-track-bg-color: transparent;
-$scrollbar-track-shadow-color: rgba(0, 0, 0, 0.2);
+$scrollbar-track-shadow-color: rgb(0 0 0 / 20%);
 
 :root {
     --color-primary: #3b77e3;

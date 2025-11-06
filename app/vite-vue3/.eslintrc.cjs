@@ -3,6 +3,7 @@ const path = require("path");
 module.exports = {
     root: true,
     env: {
+        browser: true,
         node: true,
     },
     parser: "vue-eslint-parser",
@@ -13,7 +14,7 @@ module.exports = {
     },
     extends: [
         "@fullstack-blog/eslint-config/base.js",
-        "plugin:vue/vue3-strongly-recommended",
+        "plugin:vue/strongly-recommended",
         "@vue/typescript/recommended",
         "@vue/prettier",
         "@vue/prettier/@typescript-eslint",
@@ -26,6 +27,8 @@ module.exports = {
         "import/no-unresolved": 'off',
         // https://eslint.vuejs.org/rules/
         "vue/require-default-prop": 'off',
+        "vue/multi-word-component-names": 'off',
+        'valid-typeof': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
     },
     overrides: [

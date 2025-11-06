@@ -83,10 +83,12 @@ export default defineComponent({
     height: 100%;
     background: #222;
     transform: translate3d(-100%, 0, 0);
+
     &.is-visible {
-        box-shadow: 0 0 30px 0 rgba(27, 14, 14, 0.3);
+        box-shadow: 0 0 30px 0 rgb(27 14 14 / 30%);
     }
 }
+
 .menu__list {
     .icon-svg {
         margin-right: 6px;
@@ -94,46 +96,53 @@ export default defineComponent({
 }
 
 .menu__header {
-    padding: 10px 20px 11px 20px;
+    padding: 10px 20px 11px;
     background-color: #393c3e;
     text-align: center;
+
     > h2 {
-        color: rgba(245, 157, 173, 0.76);
+        color: rgb(245 157 173 / 76%);
         font-weight: 700;
         font-size: 24px;
         margin: 16px 0;
     }
+
     .avatar-wrap {
         position: relative;
         width: 80px;
         height: 80px;
         margin: 0 auto 16px;
     }
+
     .avatar-mask {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(102, 110, 210, 0.29);
+        background-color: rgb(102 110 210 / 29%);
         border-radius: 100%;
     }
+
     .avatar {
         display: block;
         width: 100%;
         border-radius: 100%;
     }
+
     .location {
         font-size: 14px;
         color: #ecc;
         margin: 20px 0;
     }
+
     .social-list {
         .ant-col:hover {
             .icon-svg {
                 color: #fff;
             }
         }
+
         .icon-svg {
             color: #ecc;
             transition: color 0.3s ease-in-out;
@@ -146,18 +155,22 @@ export default defineComponent({
     transition: all 0.3s ease-in-out;
     font-size: 14px;
     line-height: 3;
+
     &:hover {
         border-left-color: #3c8dbc;
         background-color: #312e2e;
+
         > a {
             color: #fff;
         }
     }
+
     > a {
         display: block;
         padding: 0 20px;
         color: #b8c7ce;
         transition: color 0.3s ease-in-out;
+
         &.router-link-active {
             color: #fff;
         }

@@ -47,6 +47,7 @@ const isAdmin = computed(() => route.meta.isAdmin as boolean);
 .hidden-x {
     overflow-x: hidden;
 }
+
 .is-admin {
     height: 100%;
 }

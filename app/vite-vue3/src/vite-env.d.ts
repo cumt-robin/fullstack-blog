@@ -11,6 +11,7 @@ interface ImportMetaEnv {
     readonly VITE_APP_TITLE: string;
     readonly VITE_APP_BASE_API: string;
     readonly VITE_APP_SOCKET_SERVER: string;
+    readonly VITE_APP_SENTRY_DSN: string;
 }
 
 interface ImportMeta {

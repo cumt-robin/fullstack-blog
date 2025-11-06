@@ -144,7 +144,7 @@ hljs.registerLanguage("json", json);
 hljs.registerLanguage("plaintext", plaintext);
 
 export default defineComponent({
-    name: "Article",
+    name: "ArticleDetail",
     components: {
         SwapLeftOutlined,
         SwapRightOutlined,
@@ -339,11 +339,13 @@ export default defineComponent({
     vertical-align: top;
     color: #999;
     font-size: 14px;
+
     .author {
         font-size: 18px;
         font-weight: 700;
         color: #333;
     }
+
     .role-tag {
         margin-left: 6px;
         background: #1989fa;
@@ -354,6 +356,7 @@ export default defineComponent({
         display: inline-block;
         line-height: 1.5;
     }
+
     .read_total {
         margin-left: 8px;
     }
@@ -361,7 +364,7 @@ export default defineComponent({
 
 .article__main {
     > h2 {
-        margin: 0 0 0.6em 0;
+        margin: 0 0 0.6em;
         font-size: 1.8em;
     }
 }
@@ -369,6 +372,7 @@ export default defineComponent({
 .relation {
     &-info {
         padding-bottom: 40px;
+
         .ant-tag {
             cursor: pointer;
             border-radius: 2px;
@@ -385,7 +389,10 @@ export default defineComponent({
     width: 100%;
     height: 200px;
     transition: transform 0.2s ease-in-out;
-    box-shadow: 0 0 6px rgba(109, 43, 43, 0.1), 10px 10px 100px rgba(112, 100, 212, 0.24);
+    box-shadow:
+        0 0 6px rgb(109 43 43 / 10%),
+        10px 10px 100px rgb(112 100 212 / 24%);
+
     &:hover {
         transform: scale(1.01);
     }
@@ -395,29 +402,32 @@ export default defineComponent({
     0% {
         transform: scale(1);
     }
+
     100% {
         transform: scale(1.1);
     }
 }
 
-.anim-pulse {
+%anim-pulse {
     will-change: transform;
     animation: pulse 0.6s ease-in-out infinite alternate;
 }
 
 :deep(.icon-message) {
     > svg {
-        @extend .anim-pulse;
+        @extend %anim-pulse;
     }
 }
 
 .copyright {
     padding: 20px 0;
+
     > p {
         padding: 10px;
         color: $color-black;
         background: $color-bg--secondary;
         border-left: 6px solid $color-black;
+
         > strong {
             font-size: 18px;
             color: $color-primary;
@@ -425,9 +435,11 @@ export default defineComponent({
         }
     }
 }
+
 .reward__wrapper {
     text-align: center;
     padding: 20px 0;
+
     :deep(.ant-btn) {
         width: 48px;
         height: 48px;
@@ -447,6 +459,7 @@ export default defineComponent({
     color: $color-info;
     font-weight: 600;
     padding: 0 24px;
+
     &::before {
         content: "\201C";
         position: absolute;
@@ -455,6 +468,7 @@ export default defineComponent({
         color: #392570;
         font-size: 45px;
     }
+
     &::after {
         content: "\201D";
         position: absolute;
@@ -495,16 +509,17 @@ export default defineComponent({
     margin-top: 36px;
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (width >= 576px) {
     :deep(.article__poster) {
         height: 300px;
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (width >= 1200px) {
     :deep(.base-layout__main) {
         width: 1000px;
     }
+
     :deep(.article__poster) {
         height: 420px;
     }

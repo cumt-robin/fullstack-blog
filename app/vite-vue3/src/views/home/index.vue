@@ -13,7 +13,7 @@
                 <a-pagination
                     class="pagination-common"
                     v-model:current="pageInfo.pageNo"
-                    v-model:pageSize="pageInfo.pageSize"
+                    v-model:page-size="pageInfo.pageSize"
                     :total="total"
                     show-less-items
                     simple
@@ -79,7 +79,7 @@ watch(
     },
     {
         immediate: true,
-    }
+    },
 );
 
 // 分页改变

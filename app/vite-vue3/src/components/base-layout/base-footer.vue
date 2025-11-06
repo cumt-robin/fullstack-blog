@@ -101,10 +101,13 @@ export default defineComponent({
     background-color: #121212;
     color: #ceb8bb;
     padding: 18px 24px;
+
     .footer-column {
         position: relative;
+
         + .footer-column {
             margin-top: 24px;
+
             &::after {
                 content: "";
                 position: absolute;
@@ -115,16 +118,19 @@ export default defineComponent({
                 background-color: #ccc;
             }
         }
+
         > h3 {
             margin: 10px 0;
             font-size: 18px;
             color: #efefef;
             font-weight: 700;
         }
+
         > p {
             margin: 6px 0;
             font-size: 12px;
         }
+
         a {
             font-size: 16px;
             line-height: 1.8;
@@ -158,12 +164,13 @@ export default defineComponent({
 :deep(.qrcode) {
     flex: 1;
     max-width: 200px;
+
     + .qrcode {
         margin-left: 10px;
     }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
     .base-footer__inner {
         width: 800px;
         margin: 0 auto;
