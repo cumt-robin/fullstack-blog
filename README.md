@@ -40,7 +40,7 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 - [x] Vite + Vue3 + Pinia + TypeScript + Sentry: 见目录 app/vite-vue3，线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
 - [x] Vue CLI + Vue3 + Vuex + TypeScript + SCSS: 见目录 app/webpack-vue3
 - [x] CRA + React18 + TypeScript + React-Redux + Redux Toolkit + Tailwindcss + Styled Components: 见目录 app/cra-react18
-- [ ] Vite + React19 + TypeScript + Zustand
+- [ ] Vite + React19 + TypeScript + Zustand + Tailwindcss + Styled Components: 见目录 app/vite-react19
 - [ ] Vite + Nuxt
 
 后端部分：
@@ -71,6 +71,8 @@ pnpm add -g commitizen
 ```
 
 ## git 配置
+
+Git 在提交代码时会将换行符从 CRLF（Windows 风格）转换为 LF（Unix 风格），但在检出（checkout）代码时不进行任何转换。这是一种适用于跨平台开发（Windows、Linux、macOS）的配置，用于在 Git 仓库中始终保持统一的 Unix 风格换行符 (LF)，同时确保本地文件在检出时保留原始的换行符。
 
 ```shell
 git config core.autocrlf input
