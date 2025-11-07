@@ -52,23 +52,23 @@ services:
       - VITE_APP_BACKEND_SERVER=http://172.22.192.1:8012
       - VITE_APP_SOCKET_SERVER=http://172.22.192.1:8012
 
-#   express-server:
-#     restart: always
-#     image: fullstack-blog-express:dev
-#     ports:
-#       - "8002:8002"
-#     volumes:
-#       - ./app/express-server/src:/usr/src/fullstack-blog/app/express-server/src
-#     environment:
-#       - NODE_ENV=development
-#       - PORT=8002
-#       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-#       - MYSQL_DATABASE=${MYSQL_DATABASE}
-#       - WEB_SOCKET_WHITE_LIST=http://localhost:3000
-#     working_dir: /usr/src/fullstack-blog/app/express-server
-#     command: ["pnpm", "docker-dev"]
-#     depends_on:
-#       - mysql
+  express-server:
+    restart: always
+    image: fullstack-blog-express:dev
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./app/express-server/src:/usr/src/fullstack-blog/app/express-server/src
+    environment:
+      - NODE_ENV=development
+      - PORT=8002
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - WEB_SOCKET_WHITE_LIST=http://localhost:3000
+    working_dir: /usr/src/fullstack-blog/app/express-server
+    command: ["pnpm", "docker-dev"]
+    depends_on:
+      - mysql
 
 #   nestjs-server:
 #     restart: always

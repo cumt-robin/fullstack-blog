@@ -5,7 +5,9 @@
             "script": "src/app.js",
             "env": {
                 "NODE_ENV": "development",
-                "PORT": 8002
+                "PORT": 8002,
+                "MYSQL_ROOT_PASSWORD": "jwb*4313139",
+                "MYSQL_DATABASE": "blog_db"
             },
             "watch": true,
             "ignore_watch": ["node_modules", "*.md"]

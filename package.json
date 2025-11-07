@@ -30,6 +30,7 @@
     "webpack-vue3:dev": "pnpm --filter webpack-vue3 dev",
     "vite-vue3:dev": "pnpm --filter vite-vue3 dev",
     "cra-react18:dev": "pnpm --filter cra-react18 dev",
+    "vite-react19:dev": "pnpm --filter vite-react19 dev",
     "nuxt3-web:dev": "pnpm --filter nuxt3-web dev",
     "express-server:dev": "pnpm --filter express-server dev",
     "nest-server:dev": "pnpm --filter nest-server dev",
@@ -60,9 +61,9 @@
   },
   "engines": {
     "pnpm": ">=9.0.0",
-    "node": ">=18.0.0"
+    "node": ">=20.19.0"
   },
   "volta": {
-    "node": "18.20.5"
+    "node": "20.19.5"
   }
 }
