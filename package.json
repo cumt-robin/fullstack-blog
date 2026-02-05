@@ -1,69 +1,79 @@
 {
-  "name": "fullstack-blog",
-  "version": "3.1.0",
-  "type": "module",
-  "private": true,
-  "packageManager": "pnpm@9.4.0",
-  "keywords": [
-    "vue",
-    "vue3",
-    "nodejs",
-    "express",
-    "typescript",
-    "monorepo",
-    "fullstack",
-    "blog"
-  ],
-  "description": "This is a full-stack blog project based on Vue3, typescript, nodejs, express, which uses pnpm monorepo architecture and supports Docker containerization",
-  "author": "Tusi",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cumt-robin/fullstack-blog.git"
-  },
-  "bugs": {
-    "url": "https://github.com/cumt-robin/fullstack-blog/issues"
-  },
-  "homepage": "https://blog.wbjiang.cn/",
-  "scripts": {
-    "changeset": "changeset",
-    "webpack-vue3:dev": "pnpm --filter webpack-vue3 dev",
-    "vite-vue3:dev": "pnpm --filter vite-vue3 dev",
-    "cra-react18:dev": "pnpm --filter cra-react18 dev",
-    "vite-react19:dev": "pnpm --filter vite-react19 dev",
-    "nuxt3-web:dev": "pnpm --filter nuxt3-web dev",
-    "express-server:dev": "pnpm --filter express-server dev",
-    "nest-server:dev": "pnpm --filter nest-server dev",
-    "fullstack:dev": "pnpm --filter vite-vue3 --filter nest-server dev",
-    "webpack-vue3:build": "pnpm --filter webpack-vue3 build",
-    "vite-vue3:build": "pnpm --filter vite-vue3 build",
-    "cra-react18:build": "pnpm --filter cra-react18 build",
-    "nuxt3-web:build": "pnpm --filter nuxt3-web build",
-    "lint-fix": "pnpm --filter ./app/** lint-fix",
-    "lint": "pnpm --filter ./app/** lint",
-    "prepare": "husky",
-    "version-bump": "pnpm changeset version && pnpm install --no-frozen-lockfile",
-    "release": "pnpm changeset tag && git push --follow-tags",
-    "sync-remote-tags": "git tag -l | xargs git tag -d && git pull --tags"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.27.5",
-    "@commitlint/cli": "^19.3.0",
-    "@commitlint/config-conventional": "^19.2.2",
-    "cz-conventional-changelog": "^3.3.0",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+    "name": "fullstack-blog",
+    "version": "3.1.0",
+    "type": "module",
+    "private": true,
+    "packageManager": "pnpm@9.4.0",
+    "keywords": [
+        "vue",
+        "vue3",
+        "react",
+        "nodejs",
+        "nestjs",
+        "express",
+        "vite",
+        "typescript",
+        "monorepo",
+        "fullstack",
+        "blog"
+    ],
+    "description": "This is a full-stack blog project based on Vue3, typescript, nodejs, express, which uses pnpm monorepo architecture and supports Docker containerization",
+    "author": "Tusi",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cumt-robin/fullstack-blog.git"
+    },
+    "bugs": {
+        "url": "https://github.com/cumt-robin/fullstack-blog/issues"
+    },
+    "homepage": "https://blog.wbjiang.cn/",
+    "scripts": {
+        "changeset": "changeset",
+        "webpack-vue3:dev": "pnpm --filter webpack-vue3 dev",
+        "vite-vue3:dev": "pnpm --filter vite-vue3 dev",
+        "cra-react18:dev": "pnpm --filter cra-react18 dev",
+        "vite-react19:dev": "pnpm --filter vite-react19 dev",
+        "nuxt3-web:dev": "pnpm --filter nuxt3-web dev",
+        "express-server:dev": "pnpm --filter express-server dev",
+        "nest-server:dev": "pnpm --filter nest-server dev",
+        "fullstack:dev": "pnpm --filter vite-vue3 --filter nest-server dev",
+        "webpack-vue3:build": "pnpm --filter webpack-vue3 build",
+        "vite-vue3:build": "pnpm --filter vite-vue3 build",
+        "cra-react18:build": "pnpm --filter cra-react18 build",
+        "vite-react19:build": "pnpm --filter vite-react19 build",
+        "nuxt3-web:build": "pnpm --filter nuxt3-web build",
+        "lint-fix": "pnpm --filter ./app/** lint-fix",
+        "lint": "pnpm --filter ./app/** lint",
+        "prepare": "husky",
+        "version-bump": "pnpm changeset version && pnpm install --no-frozen-lockfile",
+        "release": "pnpm changeset tag && git push --follow-tags",
+        "sync-remote-tags": "git tag -l | xargs git tag -d && git pull --tags"
+    },
+    "devDependencies": {
+        "@changesets/cli": "^2.27.5",
+        "@commitlint/cli": "^19.3.0",
+        "@commitlint/config-conventional": "^19.2.2",
+        "cz-conventional-changelog": "^3.3.0",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.7"
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
+        }
+    },
+    "pnpm": {
+        "overrides": {
+            "@types/react": "^19.2.8",
+            "@types/react-dom": "^19.2.3"
+        }
+    },
+    "engines": {
+        "pnpm": ">=9.0.0",
+        "node": ">=20.19.0"
+    },
+    "volta": {
+        "node": "20.19.5"
     }
-  },
-  "engines": {
-    "pnpm": ">=9.0.0",
-    "node": ">=20.19.0"
-  },
-  "volta": {
-    "node": "20.19.5"
-  }
 }
