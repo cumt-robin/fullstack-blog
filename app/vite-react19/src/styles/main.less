@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    .clearfix {
+        &::after,
+        &::before {
+            display: table;
+            content: "";
+        }
+
+        &::after {
+            clear: both;
+        }
+    }
+}
+
+@import "./reset.less";
+@import "./animation.less";
