@@ -2,9 +2,8 @@
  * @author: Tusi
  * @description: 标签服务
  */
-import { ApiService } from "@/services/index";
-import { ArrayResponse, PageResponse, QueryPageModel, QueryTagModel } from "@/bean/xhr";
-import { TagDTO } from "@/bean/dto";
+import { ApiService } from "./core";
+import { ArrayResponse, PageResponse, QueryPageModel, QueryTagModel, TagDTO } from "@fullstack-blog/types";
 
 class TagService extends ApiService {
     public all(params: QueryTagModel) {

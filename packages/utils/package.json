@@ -1,0 +1,32 @@
+{
+  "name": "@fullstack-blog/utils",
+  "version": "0.0.1",
+  "description": "Utility functions for fullstack blog",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "echo \"No build needed for utils package\""
+  },
+  "keywords": [
+    "utils",
+    "fullstack",
+    "blog"
+  ],
+  "author": "Tusi",
+  "license": "MIT",
+  "dependencies": {
+    "bezier-easing": "^2.1.0",
+    "dayjs": "^1.11.7",
+    "lodash-es": "^4.17.21",
+    "mitt": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/lodash-es": "^4.17.12"
+  }
+}

@@ -78,8 +78,7 @@ import io from "socket.io-client";
 import { defineComponent } from "vue";
 import { DownOutlined } from "@ant-design/icons-vue";
 import { Card, Dropdown, Form, Input, Menu, Radio } from "ant-design-vue";
-import { format } from "@/utils/date-utils";
-import { setScrollTop } from "@/utils/dom";
+import { format, setScrollTop } from "@fullstack-blog/utils";
 
 export default defineComponent({
     components: {

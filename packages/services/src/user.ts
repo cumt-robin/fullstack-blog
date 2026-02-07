@@ -2,9 +2,8 @@
  * @author: Tusi
  * @description: 用户服务
  */
-import { ApiService } from "@/services/index";
-import { LoginModel, RecordResponse } from "@/bean/xhr";
-import { UserDTO } from "@/bean/dto";
+import { ApiService } from "./core";
+import { LoginModel, RecordResponse, UserDTO } from "@fullstack-blog/types";
 
 class UserService extends ApiService {
     public login(params: LoginModel) {

@@ -1,12 +1,7 @@
-import { PlainObject } from "@/bean/base";
 import { getType, isArray, isDefined } from "./type";
 
-/**
- * 处理参数对象
- * @param {Object} obj 参数对象
- * @param {options} isArrayToString 是否需要将数组处理成逗号分隔的string
- * @returns {Object} 处理后的参数对象
- */
+type PlainObject<K extends string | number | symbol = string, V = unknown> = Record<K, V>;
+
 export function requestParamsFilter(obj: PlainObject, isArrayToString = false): PlainObject {
     if (isArray(obj)) {
         return obj;

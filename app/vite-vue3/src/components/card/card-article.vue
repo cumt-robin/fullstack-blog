@@ -44,8 +44,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { ArticleDTO } from "@/bean/dto";
-import { format } from "@/utils/date-utils";
+import { ArticleDTO } from "@fullstack-blog/types";
+import { format } from "@fullstack-blog/utils";
 
 export default defineComponent({
     name: "CardArticle",

@@ -2,7 +2,7 @@
  * @author: Tusi
  * @description: 文章服务
  */
-import { ApiService } from "@/services/index";
+import { ApiService } from "./core";
 import {
     ArrayResponse,
     PageResponse,
@@ -12,9 +12,9 @@ import {
     RecordResponse,
     UpdateArticlePrivateModel,
     UpdateArticleDeletedModel,
-} from "@/bean/xhr";
-import { ArticleDTO } from "@/bean/dto";
-import { PlainObject } from "@/bean/base";
+    ArticleDTO,
+    PlainObject,
+} from "@fullstack-blog/types";
 
 class ArticleService extends ApiService {
     public page(params: QueryPageModel) {

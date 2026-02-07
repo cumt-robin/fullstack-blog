@@ -49,8 +49,8 @@ export interface UpdateArticleDeletedModel extends PlainObject {
 
 export interface UpdateCategoryModel extends PlainObject {
     id: number;
-    category_name: string;
-    poster: string;
+    category_name?: string;
+    poster?: string;
 }
 
 // 响应Model

@@ -14,9 +14,11 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
+    "@fullstack-blog/services": "workspace:^",
+    "@fullstack-blog/types": "workspace:^",
+    "@fullstack-blog/utils": "workspace:^",
     "@sentry/vue": "^10.22.0",
     "ant-design-vue": "~4.2.3",
-    "axios": "^1.7.2",
     "bezier-easing": "^2.1.0",
     "dayjs": "~1.11.11",
     "dompurify": "^3.1.5",

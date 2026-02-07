@@ -1,4 +1,6 @@
-import { GeneralFunction, PlainObject } from "@/bean/base";
+type PlainObject<K extends string | number | symbol = string, V = unknown> = Record<K, V>;
+
+type GeneralFunction<T = unknown> = (...args: any[]) => T;
 
 enum DataType {
     Number = "number",
@@ -18,11 +20,6 @@ enum DataType {
     Blob = "blob",
 }
 
-/**
- * 判断变量的数据类型
- * @param {unknown} val 变量值
- * @returns {string} 数据类型
- */
 export function getType(val: unknown): string {
     return Object.prototype.toString
         .call(val)
@@ -30,11 +27,6 @@ export function getType(val: unknown): string {
         .toLowerCase();
 }
 
-/**
- * 判断变量是否有具体定义，即非null,非undefined,非空字符串
- * @param {unknown} val 变量值
- * @returns {boolean} 变量是否有具体定义
- */
 export function isDefined(val: unknown): boolean {
     return val !== null && val !== undefined && val !== "";
 }

@@ -41,7 +41,7 @@
 import { defineComponent, onBeforeUnmount, onMounted, ref } from "vue";
 import { throttle } from "lodash-es";
 import { storeToRefs } from "pinia";
-import { setScrollTop } from "@/utils/dom";
+import { setScrollTop } from "@fullstack-blog/utils";
 import BaseFooter from "./base-footer.vue";
 import BaseMenu from "./base-menu.vue";
 import HotColumn from "./hot-column.vue";

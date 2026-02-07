@@ -2,10 +2,8 @@
  * @author: Tusi
  * @description: 回复服务
  */
-import { ApiService } from "@/services/index";
-import { PlainObject } from "@/bean/base";
-import { PageResponse, QueryPageModel } from "@/bean/xhr";
-import { ReplyDTO } from "@/bean/dto";
+import { ApiService } from "./core";
+import { PlainObject, PageResponse, QueryPageModel, ReplyDTO } from "@fullstack-blog/types";
 
 class ReplyService extends ApiService {
     public add(params: PlainObject) {

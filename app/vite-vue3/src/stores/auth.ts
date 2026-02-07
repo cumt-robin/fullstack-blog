@@ -1,9 +1,8 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
-import { CommentUserInfo, UserDTO } from "@/bean/dto";
-import { getLocalData } from "@/utils/bom";
-import { userService } from "@/services/user";
-import { LoginModel } from "@/bean/xhr";
+import { getLocalData } from "@fullstack-blog/utils";
+import { userService } from "@fullstack-blog/services";
+import { CommentUserInfo, UserDTO, LoginModel } from "@fullstack-blog/types";
 
 export const useAuthStore = defineStore("auth", () => {
     const token = ref(getLocalData({ key: "token" }));

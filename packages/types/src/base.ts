@@ -1,5 +1,3 @@
-import { defineComponent } from "vue";
-
 type IndexType = string | number | symbol;
 
 export type PlainObject<K extends IndexType = string, V = unknown> = Record<K, V>;
@@ -18,5 +16,3 @@ export interface TreeNode extends PlainObject {
 }
 
 export type Lazy<T> = () => Promise<T>;
-
-export type DefineComponentOptions = Parameters<typeof defineComponent>[0];

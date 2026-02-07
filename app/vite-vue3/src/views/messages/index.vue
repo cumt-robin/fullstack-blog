@@ -24,8 +24,8 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import { storeToRefs } from "pinia";
+import { commentService } from "@fullstack-blog/services";
 import Comments from "@/views/article/comments.vue";
-import { commentService } from "@/services/comment";
 import { useAuthStore } from "@/stores/auth";
 
 const { commentUserInfo } = storeToRefs(useAuthStore());

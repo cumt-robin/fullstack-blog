@@ -27,8 +27,8 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { TagDTO } from "@/bean/dto";
-import { tagService } from "@/services/tag";
+import { TagDTO } from "@fullstack-blog/types";
+import { tagService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
 
 const tagList = ref<TagDTO[]>([]);

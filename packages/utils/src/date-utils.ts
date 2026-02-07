@@ -2,9 +2,10 @@ import dayjs, { ManipulateType } from "dayjs";
 import { merge } from "lodash-es";
 import zhCN from "dayjs/locale/zh-cn";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { PlainObject } from "@/bean/base";
 
-export function init(): void {
+type PlainObject<K extends string | number | symbol = string, V = unknown> = Record<K, V>;
+
+export function initDayjs(): void {
     dayjs.locale(zhCN);
     dayjs.extend(relativeTime);
 }
@@ -37,11 +38,6 @@ interface DayjsAddOption extends PlainObject {
     format: string;
 }
 
-/**
- * 根据指定日期和选项获取另一个日期
- * @param {String|Date} date 指定日期
- * @param {Object} options 选项，options.offset大于0则获得更大的日期，否则获取更小的日期，options.unit是时间单位，默认是天('d')，options.format是输出的时间格式
- */
 export function getDateByOffset(date = new Date(), options: DayjsAddOption): string {
     const defaultOptions: DayjsAddOption = {
         offset: 0,
@@ -53,12 +49,6 @@ export function getDateByOffset(date = new Date(), options: DayjsAddOption): str
     return targetDate.format(mergedOptions.format);
 }
 
-/**
- * 获取两个日期间隔
- * @param {String} dateStr1 日期1
- * @param {String} dateStr2 日期2
- * @param {String} unit 结果时间单位
- */
 export function getTimeInterval(dateStr1: string, dateStr2: string, unit: ManipulateType = "minute"): number {
     const date1 = dayjs(dateStr1);
     const date2 = dayjs(dateStr2);
@@ -173,30 +163,23 @@ export function humanizeDuration(seconds: string | number): string {
         return "";
     }
     if (seconds < 60) {
-        // 如果小于1分钟
         return `${seconds}秒`;
     }
     if (seconds >= 60 && seconds < 3600) {
-        // 如果大于1分钟，小于1小时
         const minutes = Math.floor(seconds / 60);
         const remainingSeconds = seconds - minutes * 60;
         const secondsDescription = remainingSeconds > 0 ? `${remainingSeconds}秒` : "";
         return `${minutes}分钟${secondsDescription}`;
     }
     if (seconds >= 3600 && seconds < 86400) {
-        // 如果大于1小时，小于1天
         const hours = Math.floor(seconds / 3600);
         const minutes = Math.floor((seconds - hours * 3600) / 60);
-        // const remainingSeconds = seconds - hours * 3600 - minutes * 60
         const minutesDescription = minutes > 0 ? `${minutes}分钟` : "";
         return `${hours}小时${minutesDescription}`;
     }
     if (seconds >= 86400) {
-        // 如果大于1天
         const days = Math.floor(seconds / 86400);
         const hours = Math.floor((seconds - days * 86400) / 3600);
-        // const minutes = Math.floor((seconds - days * 86400 - hours * 3600) / 60)
-        // const remainingSeconds = seconds - days * 86400 - hours * 3600 - minutes * 60
         const hoursDescription = hours > 0 ? `${hours}小时` : "";
         return `${days}天${hoursDescription}`;
     }

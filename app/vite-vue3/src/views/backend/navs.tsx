@@ -5,7 +5,7 @@
 
 import { BookOutlined, MessageOutlined, CommentOutlined, FolderOutlined, TagOutlined } from "@ant-design/icons-vue";
 import { VNode } from "vue";
-import { TreeNode } from "@/bean/base";
+import { TreeNode } from "@fullstack-blog/types";
 
 export interface NavItem extends TreeNode {
     key: string;

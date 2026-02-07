@@ -32,11 +32,10 @@
 <script lang="tsx" setup>
 import { reactive, ref } from "vue";
 import { message, Modal, Image } from "ant-design-vue";
-import { CommentDTO } from "@/bean/dto";
+import { format, approvedFormatter } from "@fullstack-blog/utils";
+import { commentService } from "@fullstack-blog/services";
+import { CommentDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
-import { commentService } from "@/services/comment";
-import { format } from "@/utils/date-utils";
-import { approvedFormatter } from "@/utils/formatter";
 import CommentAvatarFallback from "@/assets/img/comment-avatar.svg";
 
 const messageList = ref<CommentDTO[]>([]);

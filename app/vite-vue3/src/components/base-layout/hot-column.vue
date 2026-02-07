@@ -30,8 +30,8 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
-import { ArticleDTO } from "@/bean/dto";
-import { articleService } from "@/services/article";
+import { articleService } from "@fullstack-blog/services";
+import { ArticleDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
 
 const hotList = ref<ArticleDTO[]>([]);
