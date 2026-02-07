@@ -1,0 +1,23 @@
+{
+  "name": "@fullstack-blog/types",
+  "version": "0.0.1",
+  "description": "Type definitions for fullstack blog",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "echo \"No build needed for types package\""
+  },
+  "keywords": [
+    "types",
+    "fullstack",
+    "blog"
+  ],
+  "author": "Tusi",
+  "license": "MIT"
+}

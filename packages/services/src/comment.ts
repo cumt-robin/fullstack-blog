@@ -2,10 +2,8 @@
  * @author: Tusi
  * @description: 评论服务
  */
-import { ApiService } from "@/services/index";
-import { PageResponse, PlainResponse, QueryCommentPageModel, QueryPageModel, RecordResponse } from "@/bean/xhr";
-import { CommentDTO } from "@/bean/dto";
-import { PlainObject } from "@/bean/base";
+import { ApiService } from "./core";
+import { PageResponse, PlainResponse, QueryCommentPageModel, QueryPageModel, RecordResponse, CommentDTO, PlainObject } from "@fullstack-blog/types";
 
 class CommentService extends ApiService {
     public page(params: QueryCommentPageModel) {

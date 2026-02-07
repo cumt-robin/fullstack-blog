@@ -13,10 +13,10 @@
 <script lang="tsx" setup>
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { TagDTO } from "@/bean/dto";
-import { tagService } from "@/services/tag";
+import { format } from "@fullstack-blog/utils";
+import { tagService } from "@fullstack-blog/services";
+import { TagDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
-import { format } from "@/utils/date-utils";
 
 const router = useRouter();
 

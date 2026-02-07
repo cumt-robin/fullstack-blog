@@ -1,6 +1,10 @@
-import { TreeNode } from "@/bean/base";
+type PlainObject<K extends string | number | symbol = string, V = unknown> = Record<K, V>;
 
-// overload
+export interface TreeNode extends PlainObject {
+    key: string;
+    children?: this[];
+}
+
 export function tree2Arr<T extends TreeNode>(tree: Array<T>, replaceChildren?: string): Array<T>;
 export function tree2Arr<T extends TreeNode, D = unknown>(
     tree: Array<T>,

@@ -129,10 +129,9 @@ import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from "vue"
 import { maxBy, minBy } from "lodash-es";
 import { SwapLeftOutlined, SwapRightOutlined, EditOutlined } from "@ant-design/icons-vue";
 import { storeToRefs } from "pinia";
-import { setScrollTop } from "@/utils/dom";
-import { articleService } from "@/services/article";
+import { setScrollTop, format } from "@fullstack-blog/utils";
+import { articleService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
-import { format } from "@/utils/date-utils";
 import Comments from "./comments.vue";
 import { useAuthStore } from "@/stores/auth";
 

@@ -26,10 +26,10 @@
 import { reactive, ref } from "vue";
 import { Image } from "ant-design-vue";
 import { useRouter } from "vue-router";
-import { CategoryDTO } from "@/bean/dto";
-import { categoryService } from "@/services/category";
+import { format } from "@fullstack-blog/utils";
+import { categoryService } from "@fullstack-blog/services";
+import { CategoryDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
-import { format } from "@/utils/date-utils";
 import LogoFallback from "@/assets/img/logo2.png";
 import Edit from "./edit.vue";
 

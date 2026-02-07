@@ -1,8 +1,3 @@
-/**
- * @author: Tusi
- * @description: 通用校验
- */
-
 export const REQUIRED_VALIDATOR_BLUR = {
     required: true,
     message: "必填项",

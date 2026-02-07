@@ -2,8 +2,8 @@
  * @author: Tusi
  * @description: 验证码服务
  */
-import { ApiService } from "@/services/index";
-import { PlainResponse } from "@/bean/xhr";
+import { ApiService } from "./core";
+import { PlainResponse } from "@fullstack-blog/types";
 
 class ValidatorService extends ApiService {
     public imgCode() {

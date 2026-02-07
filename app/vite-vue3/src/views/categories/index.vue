@@ -31,8 +31,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { CategoryDTO } from "@/bean/dto";
-import { categoryService } from "@/services/category";
+import { CategoryDTO } from "@fullstack-blog/types";
+import { categoryService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
 import defaultCategoryPoster from "@/assets/img/default_category.svg";
 

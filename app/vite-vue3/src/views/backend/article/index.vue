@@ -39,10 +39,10 @@ import { reactive, ref } from "vue";
 import { message, Modal, Image, Space, Tag } from "ant-design-vue";
 import { RouterLink, useRouter } from "vue-router";
 import type { ColumnType } from "ant-design-vue/lib/table/interface";
-import { ArticleDTO } from "@/bean/dto";
-import { articleService } from "@/services/article";
+import { format } from "@fullstack-blog/utils";
+import { articleService } from "@fullstack-blog/services";
+import { ArticleDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
-import { format } from "@/utils/date-utils";
 import LogoFallback from "@/assets/img/logo2.png";
 import styles from "./index.module.scss";
 

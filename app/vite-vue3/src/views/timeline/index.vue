@@ -43,10 +43,10 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
-import { ArticleDTO } from "@/bean/dto";
-import { articleService } from "@/services/article";
+import { format } from "@fullstack-blog/utils";
+import { articleService } from "@fullstack-blog/services";
+import { ArticleDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
-import { format } from "@/utils/date-utils";
 
 const articleList = ref<ArticleDTO[]>([]);
 

@@ -2,8 +2,8 @@
  * @author: Tusi
  * @description: ChatGPT服务
  */
-import { PlainResponse } from "@/bean/xhr";
-import { ApiService } from "@/services/index";
+import { PlainResponse } from "@fullstack-blog/types";
+import { ApiService } from "./core";
 
 class ChatgptService extends ApiService {
     public feedback(result: string) {

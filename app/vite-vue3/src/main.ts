@@ -1,12 +1,25 @@
 import { createApp } from "vue";
 import "./styles/index.scss";
 import { createPinia } from "pinia";
+import { initDayjs } from "@fullstack-blog/utils";
+import { useAxios } from "@fullstack-blog/services";
+import { message } from "ant-design-vue";
 import App from "./App.vue";
 import router from "./router";
-import { init } from "./utils/date-utils";
 import { sentryPlugin } from "./plugins/sentry";
+import { eventBus } from "./utils/eventbus";
 
-init();
+initDayjs();
+useAxios({
+    baseURL: import.meta.env.VITE_APP_BASE_API,
+    onSessionInvalid: () => {
+        eventBus.emit("sessionInvalid");
+        router.push("/login");
+    },
+    onErrorMsg: (msg) => {
+        message.error(msg);
+    },
+});
 
 const pinia = createPinia();
 

@@ -85,9 +85,8 @@
 <script setup>
 import { watch, ref, reactive, nextTick } from "vue";
 import { message } from "ant-design-vue";
-import { format } from "@/utils/date-utils";
-import { setScrollTop } from "@/utils/dom";
-import { chatgptService } from "@/services/chatgpt";
+import { format, setScrollTop } from "@fullstack-blog/utils";
+import { chatgptService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
 
 const msgList = ref([

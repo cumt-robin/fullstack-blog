@@ -26,8 +26,8 @@
 import { defineComponent, reactive, ref } from "vue";
 import { message } from "ant-design-vue";
 import { storeToRefs } from "pinia";
-import { CommentUserInfo } from "@/bean/dto";
-import { EMAIL_VALIDATOR, REQUIRED_VALIDATOR_BLUR, URL_VALIDATOR } from "@/utils/validator";
+import { EMAIL_VALIDATOR, REQUIRED_VALIDATOR_BLUR, URL_VALIDATOR } from "@fullstack-blog/utils";
+import { CommentUserInfo } from "@fullstack-blog/types";
 import { useAuthStore } from "@/stores/auth";
 
 export default defineComponent({

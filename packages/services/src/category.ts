@@ -2,9 +2,8 @@
  * @author: Tusi
  * @description: 分类服务
  */
-import { ApiService } from "@/services/index";
-import { ArrayResponse, PageResponse, QueryCategoryModel, QueryPageModel, UpdateCategoryModel } from "@/bean/xhr";
-import { CategoryDTO } from "@/bean/dto";
+import { ApiService } from "./core";
+import { ArrayResponse, PageResponse, QueryCategoryModel, QueryPageModel, UpdateCategoryModel, CategoryDTO } from "@fullstack-blog/types";
 
 class CategoryService extends ApiService {
     public all(params?: QueryCategoryModel) {

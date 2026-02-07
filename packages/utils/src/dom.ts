@@ -1,5 +1,6 @@
 import BezierEasing from "bezier-easing";
-import { GeneralFunction } from "@/bean/base";
+
+type GeneralFunction<T = unknown> = (...args: any[]) => T;
 
 interface OffsetResponse {
     offsetLeft: number;
@@ -107,7 +108,6 @@ export function setScrollTop({
     }
 }
 
-// 重新激活动画，需要传入移除动画class的方法，和设置动画class的方法
 export default function triggerC3Animation(removeAnimClass: GeneralFunction, setAnimClass: GeneralFunction): void {
     removeAnimClass();
     window.requestAnimationFrame(() => {
@@ -167,14 +167,3 @@ export function getScrollContainer(el: HTMLElement, direction?: string): HTMLEle
     }
     return parent;
 }
-
-// type WritableCSSProperty = Omit<CSSStyleDeclaration, "length" | "parentRule">;
-// type WritableCSSPropertyKeys = keyof WritableCSSProperty;
-// type WritableCSSPropertyValues = CSSStyleDeclaration[WritableCSSPropertyKeys];
-
-// export function setStyle(el: HTMLElement | string, property: WritableCSSPropertyKeys, val: WritableCSSPropertyValues): void {
-//     const dom: HTMLElement | null = typeof el === "string" ? document.querySelector(el) : el;
-//     if (dom) {
-//         dom.style[property] = val;
-//     }
-// }

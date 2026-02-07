@@ -43,7 +43,7 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined, HomeOutlined } from "@ant-design/icons-vue";
 import { computed, defineComponent, reactive, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { tree2Arr } from "@/utils/tree";
+import { tree2Arr } from "@fullstack-blog/utils";
 import { NavItem, navs } from "./navs.tsx";
 import { useAuthStore } from "@/stores/auth";
 

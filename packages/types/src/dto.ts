@@ -29,11 +29,13 @@ export interface ArticleDTO extends RecordDTO {
 
 export interface CategoryDTO extends RecordDTO {
     category_name: string;
-    poster: string;
+    poster?: string;
+    category_count?: number;
 }
 
 export interface TagDTO extends RecordDTO {
     tag_name: string;
+    tag_count?: number;
 }
 
 export interface ReplyDTO extends RecordDTO {
@@ -60,6 +62,7 @@ export interface CommentDTO extends RecordDTO {
     email: string;
     jump_url: string;
     replies: ReplyDTO[];
+    approved?: 0 | 1 | 2;
 }
 
 export interface CommentUserInfo extends PlainObject {

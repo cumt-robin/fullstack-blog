@@ -39,11 +39,11 @@
 <script lang="ts">
 import { defineComponent, reactive, ref, watch } from "vue";
 import { LocationQuery, useRoute, useRouter } from "vue-router";
-import { ArticleDTO } from "@/bean/dto";
-import { articleService } from "@/services/article";
+import { setScrollTop } from "@fullstack-blog/utils";
+import { articleService } from "@fullstack-blog/services";
+import { ArticleDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
 import CardArticle from "@/components/card/card-article.vue";
-import { setScrollTop } from "@/utils/dom";
 
 export default defineComponent({
     name: "Home",

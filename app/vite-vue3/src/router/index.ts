@@ -3,9 +3,9 @@
  * @description: 路由配置
  */
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { eventBus } from "@/utils/eventbus";
 import { BACKEND_ROUTE } from "./backend";
 import { FALLBACK_ROUTE, NOT_FOUND_ROUTE } from "./not-found";
-import { eventBus } from "@/utils/eventbus";
 
 const routes: Array<RouteRecordRaw> = [
     {
