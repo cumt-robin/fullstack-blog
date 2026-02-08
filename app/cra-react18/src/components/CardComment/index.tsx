@@ -3,18 +3,18 @@ import { Button, Input, InputRef, message, Modal } from "antd";
 import dayjs from "dayjs";
 import DOMPurify from "dompurify";
 import styled from "styled-components";
+import { replyService } from "@fullstack-blog/services";
+import { CommentDTO, ReplyDTO } from "@fullstack-blog/types";
+import { format } from "@fullstack-blog/utils";
 import IconSvg from "../IconSvg";
 import { commentStyleContext } from "./comment-style-context";
 import LazyImage from "@/components/LazyImage";
 import avatarFallback from "@/assets/img/comment-avatar.svg";
 import replyAvatarFallback from "@/assets/img/reply-avatar.svg";
-import { CommentDTO, ReplyDTO } from "@/bean/dto";
 import { useAsyncLoading } from "@/hooks/async";
-import { format } from "@/utils/date-utils";
 import { ellipsis } from "@/styles/styled-mixins/base";
 import { useAppSelector } from "@/store/hooks";
 import { selectCommentUserInfo } from "@/store/slices/auth";
-import { replyService } from "@/services/reply";
 
 interface CardCommentProps {
     comment: CommentDTO;

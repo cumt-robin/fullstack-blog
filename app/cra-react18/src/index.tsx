@@ -1,10 +1,23 @@
 import ReactDOM from "react-dom/client";
 import "./styles/main.less";
+import { useAxios } from "@fullstack-blog/services";
+import { message } from "antd";
+import { initDayjs } from "@fullstack-blog/utils";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { init } from "@/utils/date-utils";
+import { eventBus } from "./utils/eventbus";
 
-init();
+initDayjs();
+// eslint-disable-next-line react-hooks/rules-of-hooks
+useAxios({
+    baseURL: process.env.REACT_APP_BASE_API,
+    onSessionInvalid: () => {
+        eventBus.emit("sessionInvalid");
+    },
+    onErrorMsg: (msg) => {
+        message.error(msg);
+    },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 root.render(<App />);

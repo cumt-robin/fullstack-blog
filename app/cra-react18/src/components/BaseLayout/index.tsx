@@ -3,6 +3,7 @@ import styled, { RuleSet } from "styled-components";
 import classNames from "classnames";
 import { PropsWithChildren, useEffect, useState } from "react";
 import { throttle } from "lodash-es";
+import { setScrollTop } from "@fullstack-blog/utils";
 import IconSvg from "../IconSvg";
 import BaseMenu from "./BaseMenu";
 import BaseFooter from "./BaseFooter";
@@ -11,7 +12,6 @@ import logo from "@/assets/img/logo.png";
 import { useIsAuthed } from "@/store/hooks/auth";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { setIsMenuVisible } from "@/store/slices/ui";
-import { setScrollTop } from "@/utils/dom";
 import { flexCenter } from "@/styles/styled-mixins/base";
 
 const Header = styled.header`

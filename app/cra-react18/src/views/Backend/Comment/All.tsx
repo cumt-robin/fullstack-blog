@@ -3,12 +3,11 @@ import { ColumnType, TablePaginationConfig } from "antd/es/table";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { commentService } from "@fullstack-blog/services";
+import { CommentDTO } from "@fullstack-blog/types";
+import { format, approvedFormatter } from "@fullstack-blog/utils";
 import { useAsyncLoading } from "@/hooks/async";
-import { CommentDTO } from "@/bean/dto";
 import CommentAvatarFallback from "@/assets/img/comment-avatar.svg";
-import { format } from "@/utils/date-utils";
-import { commentService } from "@/services/comment";
-import { approvedFormatter } from "@/utils/formatter";
 
 const Wrapper = styled.section`
     padding: 20px;

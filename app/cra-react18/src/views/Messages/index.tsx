@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
+import { commentService } from "@fullstack-blog/services";
 import BaseLayout from "@/components/BaseLayout";
-import { commentService } from "@/services/comment";
 import { useAppSelector } from "@/store/hooks";
 import Comments, { CommentsRef } from "@/components/Comments";
 import { commentStyleContext } from "@/components/CardComment/comment-style-context";

@@ -1,9 +1,8 @@
 import { createSelector, PayloadAction, buildCreateSlice, asyncThunkCreator } from "@reduxjs/toolkit";
+import { userService } from "@fullstack-blog/services";
+import { getLocalData } from "@fullstack-blog/utils";
+import { CommentUserInfo, UserDTO, LoginModel } from "@fullstack-blog/types";
 import { RootState } from "..";
-import { getLocalData } from "@/utils/bom";
-import { CommentUserInfo, UserDTO } from "@/bean/dto";
-import { LoginModel } from "@/bean/xhr";
-import { userService } from "@/services/user";
 
 interface AuthState {
     token: string | null;

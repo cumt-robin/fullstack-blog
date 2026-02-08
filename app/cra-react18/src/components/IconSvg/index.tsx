@@ -1,7 +1,7 @@
 import { createFromIconfontCN } from "@ant-design/icons";
 import { useMemo } from "react";
 import styled, { css as styledCss } from "styled-components";
-import { isNumber } from "@/utils/type";
+import { isNumber } from "@fullstack-blog/utils";
 
 const Icon = createFromIconfontCN({
     scriptUrl: "//at.alicdn.com/t/font_1570300_zwupv8bc2lp.js",

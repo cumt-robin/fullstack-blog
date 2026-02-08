@@ -31,12 +31,6 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules",
-    "../vite-vue3",
-    "../vite-react19",
-    "../cra-react18",
-    "../express-server",
-    "../nest-server",
-    "../nuxt3-web"
+    "node_modules"
   ]
 }
