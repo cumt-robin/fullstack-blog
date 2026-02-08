@@ -4,9 +4,8 @@
  */
 import { InjectionKey } from "vue";
 import { createStore, Store, ActionContext, useStore } from "vuex";
-import { CommentUserInfo, UserDTO } from "@/bean/dto";
-import { userService } from "@/services/user";
-import { LoginModel } from "@/bean/xhr";
+import { CommentUserInfo, LoginModel, UserDTO } from "@fullstack-blog/types";
+import { userService } from "@fullstack-blog/services";
 import {
     SET_IS_MENU_VISIBLE,
     SET_COMMENT_USER_INFO,

@@ -9,17 +9,17 @@
             <a-form class="form-login" ref="formRef" :model="formModel" :rules="rules" :wrapper-col="{ span: 24 }">
                 <a-form-item name="userName">
                     <a-input v-model:value="formModel.userName" placeholder="用户名" @keyup.enter="onClickLogin">
-                        <template #prefix><UserOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
+                        <template #prefix><UserOutlined style="color: rgb(0 0 0 / 25%)" /></template>
                     </a-input>
                 </a-form-item>
                 <a-form-item name="password">
                     <a-input v-model:value="formModel.password" type="password" placeholder="密码" @keyup.enter="onClickLogin">
-                        <template #prefix><LockOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
+                        <template #prefix><LockOutlined style="color: rgb(0 0 0 / 25%)" /></template>
                     </a-input>
                 </a-form-item>
                 <a-form-item name="captcha">
                     <a-input class="input-code" v-model:value="formModel.captcha" placeholder="验证码" @keyup.enter="onClickLogin">
-                        <template #prefix><LockOutlined style="color: rgba(0, 0, 0, 0.25)" /></template>
+                        <template #prefix><LockOutlined style="color: rgb(0 0 0 / 25%)" /></template>
                         <template #suffix>
                             <div class="verify-code" v-html="svgHtml" @click="getVerifyCode"></div>
                         </template>
@@ -39,9 +39,8 @@ import { defineComponent, reactive, ref } from "vue";
 import { message } from "ant-design-vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { REQUIRED_VALIDATOR_BLUR } from "@/utils/validator";
-import { validatorService } from "@/services/validator";
-import { format } from "@/utils/date-utils";
+import { REQUIRED_VALIDATOR_BLUR, format } from "@fullstack-blog/utils";
+import { validatorService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
 import { key } from "@/store";
 import { LOGIN_ACTION } from "@/store/constants";
@@ -115,6 +114,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .login-page__wrapper {
     position: relative;
+
     > h2 {
         text-align: center;
     }
@@ -131,11 +131,13 @@ export default defineComponent({
 }
 
 $verifyimg-height: 30px;
+
 .verify-code {
     position: absolute;
     right: 0;
     top: 0;
     height: $verifyimg-height;
+
     > :deep(svg) {
         width: 90px;
         height: $verifyimg-height;

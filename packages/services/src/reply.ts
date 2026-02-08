@@ -2,8 +2,8 @@
  * @author: Tusi
  * @description: 回复服务
  */
-import { ApiService } from "./core";
 import { PlainObject, PageResponse, QueryPageModel, ReplyDTO } from "@fullstack-blog/types";
+import { ApiService } from "./core";
 
 class ReplyService extends ApiService {
     public add(params: PlainObject) {

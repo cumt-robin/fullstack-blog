@@ -43,10 +43,10 @@
 
 <script lang="ts">
 import { defineComponent, reactive, ref } from "vue";
-import { ArticleDTO } from "@/bean/dto";
-import { articleService } from "@/services/article";
+import { ArticleDTO } from "@fullstack-blog/types";
+import { articleService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
-import { format } from "@/utils/date-utils";
+import { format } from "@fullstack-blog/utils";
 
 export default defineComponent({
     name: "Timeline",
@@ -102,7 +102,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 :deep(.timeline-card) {
     border: 0;
-    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
 
     .ant-card-body {
         display: flex;

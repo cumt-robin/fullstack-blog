@@ -13,10 +13,10 @@
 <script lang="tsx">
 import { defineComponent, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { TagDTO } from "@/bean/dto";
-import { tagService } from "@/services/tag";
+import { TagDTO } from "@fullstack-blog/types";
+import { tagService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
-import { format } from "@/utils/date-utils";
+import { format } from "@fullstack-blog/utils";
 
 export default defineComponent({
     setup() {

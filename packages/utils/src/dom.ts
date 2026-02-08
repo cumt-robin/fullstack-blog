@@ -1,6 +1,5 @@
 import BezierEasing from "bezier-easing";
-
-type GeneralFunction<T = unknown> = (...args: any[]) => T;
+import { GeneralFunction } from "@fullstack-blog/types";
 
 interface OffsetResponse {
     offsetLeft: number;

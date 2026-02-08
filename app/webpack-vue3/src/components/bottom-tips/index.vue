@@ -47,6 +47,7 @@ export default defineComponent({
     text-align: center;
     overflow: hidden;
 }
+
 .tips {
     position: relative;
     font-size: 12px;

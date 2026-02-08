@@ -4,6 +4,7 @@
     "strict": true,
     "moduleResolution": "node",
     "allowJs": true,
+    "skipLibCheck": true,
     "sourceMap": true,
     "baseUrl": ".",
     "types": [
@@ -30,6 +31,12 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "../vite-vue3",
+    "../vite-react19",
+    "../cra-react18",
+    "../express-server",
+    "../nest-server",
+    "../nuxt3-web"
   ]
 }

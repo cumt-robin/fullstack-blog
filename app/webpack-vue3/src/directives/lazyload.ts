@@ -4,8 +4,8 @@
  */
 
 import { throttle } from "lodash-es";
-import { getOffset } from "@/utils/dom";
-import { GeneralFunction } from "@/bean/base";
+import { getOffset } from "@fullstack-blog/utils";
+import { GeneralFunction } from "@fullstack-blog/types";
 
 function inView(element: HTMLElement) {
     // + 20 是为了防止底部加载不出来，另外也是为了提前一点点加载出来

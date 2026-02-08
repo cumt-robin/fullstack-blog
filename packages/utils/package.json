@@ -22,11 +22,16 @@
   "license": "MIT",
   "dependencies": {
     "bezier-easing": "^2.1.0",
-    "dayjs": "^1.11.7",
+    "dayjs": "^1.11.19",
     "lodash-es": "^4.17.21",
     "mitt": "^3.0.1"
   },
   "devDependencies": {
-    "@types/lodash-es": "^4.17.12"
+    "@fullstack-blog/eslint-config": "workspace:^",
+    "@fullstack-blog/types": "workspace:^",
+    "@types/lodash-es": "^4.17.12",
+    "@typescript-eslint/parser": "^8.54.0",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "eslint": "^8.57.0"
   }
 }

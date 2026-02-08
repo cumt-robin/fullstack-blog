@@ -43,7 +43,7 @@
 import { computed, defineComponent, reactive, ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
-import { tree2Arr } from "@/utils/tree";
+import { tree2Arr } from "@fullstack-blog/utils";
 import { key } from "@/store";
 import { LOGOUT_ACTION } from "@/store/constants";
 import { NavItem, navs } from "./navs";
@@ -85,7 +85,7 @@ export default defineComponent({
             () => menuState.openKeys,
             (val, oldVal) => {
                 menuState.preOpenKeys = oldVal;
-            }
+            },
         );
 
         // 路由的变化会，需要更新openKeys
@@ -93,7 +93,7 @@ export default defineComponent({
             () => route.path,
             () => {
                 menuState.openKeys = calcOpenKeys();
-            }
+            },
         );
 
         // 手动收起/展开菜单
@@ -170,18 +170,21 @@ export default defineComponent({
 }
 
 :deep(.right-header) {
-    background: rgb(255, 255, 255);
+    background: rgb(255 255 255);
     padding: 0;
+
     .anticon {
         font-size: 18px;
         transition: color 0.3s;
+
         &:hover {
             color: #1890ff;
         }
     }
+
     .admin-avatar {
         color: $color-primary;
-        background-color: rgb(253, 227, 207);
+        background-color: rgb(253 227 207);
         float: right;
         margin-right: 24px;
         margin-top: 16px;

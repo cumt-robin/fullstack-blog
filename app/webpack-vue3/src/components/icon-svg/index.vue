@@ -52,6 +52,7 @@ export default defineComponent({
 .icon-svg {
     font-size: 16px;
 }
+
 .icon-svg + .icon-svg {
     margin-left: 10px;
 }

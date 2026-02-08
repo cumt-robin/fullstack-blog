@@ -19,6 +19,7 @@
     "@fullstack-blog/utils": "workspace:^"
   },
   "devDependencies": {
+    "@fullstack-blog/eslint-config": "workspace:^",
     "@types/qs": "^6.9.15"
   },
   "keywords": [

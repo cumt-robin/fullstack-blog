@@ -2,8 +2,16 @@
  * @author: Tusi
  * @description: 评论服务
  */
+import {
+    PageResponse,
+    PlainResponse,
+    QueryCommentPageModel,
+    QueryPageModel,
+    RecordResponse,
+    CommentDTO,
+    PlainObject,
+} from "@fullstack-blog/types";
 import { ApiService } from "./core";
-import { PageResponse, PlainResponse, QueryCommentPageModel, QueryPageModel, RecordResponse, CommentDTO, PlainObject } from "@fullstack-blog/types";
 
 class CommentService extends ApiService {
     public page(params: QueryCommentPageModel) {

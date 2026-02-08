@@ -1,10 +1,9 @@
-export const sleep = (seconds = 0) => {
-    return new Promise((resolve) => {
+export const sleep = (seconds = 0) =>
+    new Promise((resolve) => {
         window.setTimeout(() => {
             resolve(true);
         }, seconds * 1000);
     });
-};
 
 export const getLocalData = <T = string>(option: { key: string; parse?: boolean; defaultValue?: T }) => {
     const { key, parse = false, defaultValue } = option;
@@ -15,5 +14,5 @@ export const getLocalData = <T = string>(option: { key: string; parse?: boolean;
     if (parse) {
         return JSON.parse(lData) as T;
     }
-    return lData as T;
+    return lData as unknown as T;
 };

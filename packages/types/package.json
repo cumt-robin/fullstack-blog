@@ -13,6 +13,12 @@
   "scripts": {
     "build": "echo \"No build needed for types package\""
   },
+  "devDependencies": {
+    "@fullstack-blog/eslint-config": "workspace:^",
+    "@typescript-eslint/parser": "^8.54.0",
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "eslint": "^8.57.0"
+  },
   "keywords": [
     "types",
     "fullstack",

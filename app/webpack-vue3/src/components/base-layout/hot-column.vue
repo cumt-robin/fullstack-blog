@@ -30,8 +30,8 @@
 
 <script lang="ts">
 import { defineComponent, ref } from "vue";
-import { ArticleDTO } from "@/bean/dto";
-import { articleService } from "@/services/article";
+import { ArticleDTO } from "@fullstack-blog/types";
+import { articleService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
 
 export default defineComponent({
@@ -62,35 +62,41 @@ export default defineComponent({
 .card-hot {
     margin: 36px 24px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+
     :deep(.ant-card-head-title) {
         padding: 12px 0;
     }
 }
+
 .hot-list {
     > li + li {
         margin-top: 10px;
     }
 }
+
 :deep(.poster) {
     float: left;
     width: 60px;
     height: 60px;
 }
+
 .text-wrapper {
     margin-left: 70px;
+
     > h3 {
-        margin: 0 0 10px 0;
+        margin: 0 0 10px;
         font-size: 14px;
         color: #333;
         font-weight: 700;
     }
+
     > span {
         font-size: 10px;
         color: #666;
     }
 }
 
-@media screen and (min-width: 992px) {
+@media screen and (width >= 992px) {
     .card-hot {
         width: 800px;
         // 处理 deep 优先问题

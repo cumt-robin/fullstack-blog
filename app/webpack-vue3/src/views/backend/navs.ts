@@ -5,7 +5,7 @@
 
 import { BookOutlined, MessageOutlined, CommentOutlined, FolderOutlined, TagOutlined } from "@ant-design/icons-vue";
 import { app } from "@/main";
-import { TreeNode } from "@/bean/base";
+import { TreeNode } from "@fullstack-blog/types";
 
 const icons = [BookOutlined, MessageOutlined, CommentOutlined, FolderOutlined, TagOutlined];
 

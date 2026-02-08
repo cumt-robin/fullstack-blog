@@ -70,11 +70,11 @@ import dayjs from "dayjs";
 import { useStore } from "vuex";
 import { message, Modal } from "ant-design-vue";
 import DOMPurify from "dompurify";
-import { CommentDTO, ReplyDTO } from "@/bean/dto";
-import { format } from "@/utils/date-utils";
+import { CommentDTO, ReplyDTO } from "@fullstack-blog/types";
+import { format } from "@fullstack-blog/utils";
 import { key } from "@/store";
 import { useAsyncLoading } from "@/hooks/async";
-import { replyService } from "@/services/reply";
+import { replyService } from "@fullstack-blog/services";
 
 export default defineComponent({
     name: "CardComment",
@@ -288,25 +288,30 @@ export default defineComponent({
 :deep(.comment__avatar) {
     width: 40px;
     height: 40px;
+
     > img {
         height: 100%;
         border-radius: 100%;
         object-fit: cover;
     }
 }
+
 .comment__info {
     flex: 1;
     margin-left: 6px;
 }
+
 .comment__user {
     color: #5079b7;
     font-size: 16px;
 }
+
 .comment__time {
     display: block;
     font-size: 12px;
     color: #999;
 }
+
 .comment__content {
     color: #333;
     font-size: 16px;
@@ -317,6 +322,7 @@ export default defineComponent({
     margin-top: 10px;
     border-top: 1px solid #ccc;
 }
+
 .reply__card {
     text-align: left;
     padding: 10px 0;
@@ -330,6 +336,7 @@ export default defineComponent({
 :deep(.reply__avatar) {
     width: 24px;
     height: 24px;
+
     > img {
         height: 100%;
         border-radius: 100%;
@@ -346,6 +353,7 @@ export default defineComponent({
 
 .reply__info {
     flex: 1;
+
     @include one-line-ellipsis;
 }
 

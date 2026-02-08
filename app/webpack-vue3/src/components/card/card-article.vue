@@ -44,8 +44,8 @@
 
 <script lang="ts">
 import { computed, defineComponent, PropType } from "vue";
-import { ArticleDTO } from "@/bean/dto";
-import { format } from "@/utils/date-utils";
+import { ArticleDTO } from "@fullstack-blog/types";
+import { format } from "@fullstack-blog/utils";
 
 export default defineComponent({
     name: "CardArticle",
@@ -70,28 +70,35 @@ export default defineComponent({
     padding-bottom: 30px;
     border-bottom: 1px solid #ccc;
     perspective: 400;
+
     + .article__wrapper {
         margin-top: 30px;
     }
 }
+
 .article__header {
     font-size: 14px;
     color: #7a7a7a;
     font-weight: 700;
+
     .article__infolist {
         > li {
             display: inline-block;
+
             + li {
                 margin-left: 20px;
             }
+
             .category + .category::before {
                 content: ", ";
             }
         }
     }
+
     .icon-svg {
         margin-right: 4px;
     }
+
     h2 {
         color: #333;
         font-size: 1.5em;
@@ -108,11 +115,15 @@ export default defineComponent({
     width: 100%;
     height: 200px;
     transition: transform 0.2s ease-in-out;
-    box-shadow: 0 0 6px rgba(109, 43, 43, 0.1), 10px 10px 100px rgba(112, 100, 212, 0.24);
+    box-shadow:
+        0 0 6px rgb(109 43 43 / 10%),
+        10px 10px 100px rgb(112 100 212 / 24%);
+
     &:hover {
         transform: scale(1.01);
     }
 }
+
 .read-more {
     display: inline-block;
     line-height: 0;
@@ -121,6 +132,7 @@ export default defineComponent({
     padding: 6px 10px;
     background: #eee;
     border-radius: 4px;
+
     > .read-more__text {
         vertical-align: middle;
         font-size: 16px;
@@ -128,7 +140,7 @@ export default defineComponent({
     }
 }
 
-@media screen and (min-width: 576px) {
+@media screen and (width >= 576px) {
     :deep(.article__poster) {
         height: 360px;
     }
