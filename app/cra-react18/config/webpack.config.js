@@ -313,8 +313,29 @@ module.exports = function (webpackEnv) {
                 shouldUseSourceMap && {
                     enforce: "pre",
                     exclude: /@babel(?:\/|\\{1,2})runtime/,
+                    include: paths.appSrc,
                     test: /\.(js|mjs|jsx|ts|tsx|css)$/,
                     loader: require.resolve("source-map-loader"),
+                },
+                // Process workspace packages with Babel (before oneOf)
+                {
+                    test: /\.(js|mjs|jsx|ts|tsx)$/,
+                    include: [/[\\/]node_modules[\\/]@fullstack-blog[\\/]/, /[\\/]packages[\\/]/],
+                    loader: require.resolve("babel-loader"),
+                    options: {
+                        customize: require.resolve("babel-preset-react-app/webpack-overrides"),
+                        presets: [
+                            [
+                                require.resolve("babel-preset-react-app"),
+                                {
+                                    runtime: hasJsxRuntime ? "automatic" : "classic",
+                                },
+                            ],
+                        ],
+                        cacheDirectory: true,
+                        cacheCompression: false,
+                        compact: isEnvProduction,
+                    },
                 },
                 {
                     // "oneOf" will traverse all following loaders until one will
@@ -369,6 +390,26 @@ module.exports = function (webpackEnv) {
                             ],
                             issuer: {
                                 and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
+                            },
+                        },
+                        // Process workspace packages with Babel (no react-refresh)
+                        {
+                            test: /\.(js|mjs|jsx|ts|tsx)$/,
+                            include: /[\\/]node_modules[\\/]@fullstack-blog[\\/]/,
+                            loader: require.resolve("babel-loader"),
+                            options: {
+                                customize: require.resolve("babel-preset-react-app/webpack-overrides"),
+                                presets: [
+                                    [
+                                        require.resolve("babel-preset-react-app"),
+                                        {
+                                            runtime: hasJsxRuntime ? "automatic" : "classic",
+                                        },
+                                    ],
+                                ],
+                                cacheDirectory: true,
+                                cacheCompression: false,
+                                compact: isEnvProduction,
                             },
                         },
                         // Process application JS with Babel.
@@ -602,6 +643,7 @@ module.exports = function (webpackEnv) {
                 shouldUseReactRefresh &&
                 new ReactRefreshWebpackPlugin({
                     overlay: false,
+                    include: paths.appSrc,
                 }),
             // Watcher doesn't work well if you mistype casing in a path so we use
             // a plugin that prints an error when you attempt to do this.

@@ -2,13 +2,13 @@ import { Button, Empty, Input, InputRef, message, Modal, Skeleton } from "antd";
 import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import DOMPurify from "dompurify";
+import { commentService } from "@fullstack-blog/services";
+import { CommentDTO } from "@fullstack-blog/types";
 import CardComment from "../CardComment";
 import BottomTips from "../BottomTips";
 import CommentUserInfoForm from "../CommentUserInfoForm";
 import { useScrollBottom } from "@/hooks/scroll";
 import { useAsyncLoading } from "@/hooks/async";
-import { CommentDTO } from "@/bean/dto";
-import { commentService } from "@/services/comment";
 import { useAppSelector } from "@/store/hooks";
 import { selectCommentUserInfo } from "@/store/slices/auth";
 
@@ -103,7 +103,7 @@ const Comments = forwardRef<CommentsRef, CommentsProps>(({ articleId, topic = "�
     ]);
 
     useScrollBottom({
-        ref: commentsBodyRef,
+        ref: commentsBodyRef as React.RefObject<HTMLDivElement>,
         onBottomReached: () => {
             console.log("到底了");
         },

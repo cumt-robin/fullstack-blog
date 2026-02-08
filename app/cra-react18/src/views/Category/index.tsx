@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { NavLink, useParams, useSearchParams } from "react-router-dom";
 import { Breadcrumb, Divider, Empty, Pagination, Skeleton } from "antd";
+import { articleService } from "@fullstack-blog/services";
+import { ArticleDTO } from "@fullstack-blog/types";
+import { setScrollTop } from "@fullstack-blog/utils";
 import BaseLayout from "@/components/BaseLayout";
-import { ArticleDTO } from "@/bean/dto";
-import { articleService } from "@/services/article";
-import { setScrollTop } from "@/utils/dom";
 import { useAsyncLoading } from "@/hooks/async";
 import CardArticle from "@/components/CardArticle";
 

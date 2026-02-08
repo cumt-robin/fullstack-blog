@@ -1,13 +1,25 @@
 import { RouterProvider } from "react-router-dom";
 import { ConfigProvider, Skeleton } from "antd";
 import { Provider } from "react-redux";
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import zhCN from "antd/locale/zh_CN";
-import { router } from "./router";
 import { store } from "./store";
 import "dayjs/locale/zh-cn";
+import { eventBus } from "./utils/eventbus";
+import { router } from "./router";
 
 function App() {
+    useEffect(() => {
+        const handleSessionInvalid = () => {
+            router.navigate("/login");
+        };
+
+        eventBus.on("sessionInvalid", handleSessionInvalid);
+        return () => {
+            eventBus.off("sessionInvalid", handleSessionInvalid);
+        };
+    }, []);
+
     return (
         <Provider store={store}>
             <ConfigProvider
