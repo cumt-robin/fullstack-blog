@@ -2,8 +2,8 @@
  * @author: Tusi
  * @description: 标签服务
  */
-import { ApiService } from "./core";
 import { ArrayResponse, PageResponse, QueryPageModel, QueryTagModel, TagDTO } from "@fullstack-blog/types";
+import { ApiService } from "./core";
 
 class TagService extends ApiService {
     public all(params: QueryTagModel) {

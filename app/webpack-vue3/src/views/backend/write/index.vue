@@ -136,14 +136,11 @@ import { throttle, debounce } from "lodash-es";
 import { message } from "ant-design-vue";
 import { useStore } from "vuex";
 import { useRoute, useRouter } from "vue-router";
-import { REQUIRED_VALIDATOR_BLUR } from "@/utils/validator";
+import { REQUIRED_VALIDATOR_BLUR, sleep } from "@fullstack-blog/utils";
 import { useAsyncLoading } from "@/hooks/async";
-import { ArticleDTO, CategoryDTO, UserDTO } from "@/bean/dto";
-import { categoryService } from "@/services/category";
+import { ArticleDTO, CategoryDTO, UserDTO } from "@fullstack-blog/types";
+import { categoryService, articleService, tagService } from "@fullstack-blog/services";
 import { key } from "@/store";
-import { articleService } from "@/services/article";
-import { tagService } from "@/services/tag";
-import { sleep } from "@/utils/bom";
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("html", html);
@@ -488,7 +485,7 @@ export default defineComponent({
 
                 // relatedCategoryIDs 存放的是需要新关联的分类关系，即现在勾选了，而开始没勾选的分类
                 const relatedCategoryIDs = relFormModel.oldCategoryIds.filter(
-                    (categoryId) => !originalCategoryIds.value.includes(categoryId)
+                    (categoryId) => !originalCategoryIds.value.includes(categoryId),
                 );
 
                 const params = {
@@ -580,8 +577,10 @@ export default defineComponent({
 :deep(.category-checkbox) {
     display: flex;
     align-items: center;
+
     .ant-checkbox + span {
         flex: 1;
+
         @include one-line-ellipsis;
     }
 }

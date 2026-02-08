@@ -20,8 +20,17 @@ module.exports = {
         "selector-pseudo-class-no-unknown": [
             true,
             {
-                ignorePseudoClasses: ["deep", "global"],
+                "ignorePseudoClasses": ["deep", "global"],
             },
         ],
+        "selector-class-pattern": null,
+        "keyframes-name-pattern": null,
+        "import-notation": null,
     },
+    overrides: [
+        {
+            files: ["**/*.vue"],
+            customSyntax: "postcss-html"
+        }
+    ]
 };

@@ -26,8 +26,8 @@
 import { computed, defineComponent, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import { message } from "ant-design-vue";
-import { CommentUserInfo } from "@/bean/dto";
-import { EMAIL_VALIDATOR, REQUIRED_VALIDATOR_BLUR, URL_VALIDATOR } from "@/utils/validator";
+import { CommentUserInfo } from "@fullstack-blog/types";
+import { EMAIL_VALIDATOR, REQUIRED_VALIDATOR_BLUR, URL_VALIDATOR } from "@fullstack-blog/utils";
 import { key } from "@/store";
 import { SET_COMMENT_USER_INFO } from "@/store/constants";
 
@@ -51,7 +51,7 @@ export default defineComponent({
                 nick_name: "",
                 email: "",
                 site_url: "",
-            }
+            },
         );
 
         const rules = reactive({

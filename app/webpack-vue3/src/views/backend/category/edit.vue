@@ -19,9 +19,9 @@
 import { defineComponent, PropType, reactive } from "vue";
 import { message } from "ant-design-vue";
 import { useAsyncLoading } from "@/hooks/async";
-import { REQUIRED_VALIDATOR_BLUR } from "@/utils/validator";
-import { categoryService } from "@/services/category";
-import { CategoryDTO } from "@/bean/dto";
+import { REQUIRED_VALIDATOR_BLUR } from "@fullstack-blog/utils";
+import { categoryService } from "@fullstack-blog/services";
+import { CategoryDTO } from "@fullstack-blog/types";
 
 export default defineComponent({
     props: {

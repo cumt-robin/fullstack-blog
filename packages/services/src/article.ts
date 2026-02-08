@@ -2,7 +2,6 @@
  * @author: Tusi
  * @description: 文章服务
  */
-import { ApiService } from "./core";
 import {
     ArrayResponse,
     PageResponse,
@@ -15,6 +14,7 @@ import {
     ArticleDTO,
     PlainObject,
 } from "@fullstack-blog/types";
+import { ApiService } from "./core";
 
 class ArticleService extends ApiService {
     public page(params: QueryPageModel) {

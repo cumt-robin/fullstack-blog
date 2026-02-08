@@ -1,5 +1,4 @@
-
-export { useAxios } from './core'
+export { useAxios } from "./core";
 export * from "./article";
 export * from "./category";
 export * from "./chatgpt";

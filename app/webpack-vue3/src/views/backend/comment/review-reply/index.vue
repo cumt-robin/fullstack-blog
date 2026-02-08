@@ -19,10 +19,10 @@
 import { defineComponent, reactive, ref } from "vue";
 import { message, Modal, Image } from "ant-design-vue";
 import { RouterLink } from "vue-router";
-import { ReplyDTO } from "@/bean/dto";
+import { ReplyDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
-import { replyService } from "@/services/reply";
-import { format } from "@/utils/date-utils";
+import { replyService } from "@fullstack-blog/services";
+import { format } from "@fullstack-blog/utils";
 import CommentAvatarFallback from "@/assets/img/comment-avatar.svg";
 
 export default defineComponent({

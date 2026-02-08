@@ -30,7 +30,7 @@
 import { computed, defineComponent, ref } from "vue";
 import { useStore } from "vuex";
 import Comments from "@/views/article/comments.vue";
-import { commentService } from "@/services/comment";
+import { commentService } from "@fullstack-blog/services";
 import { key } from "@/store";
 
 export default defineComponent({

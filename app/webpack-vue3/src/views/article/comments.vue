@@ -55,8 +55,8 @@ import { computed, defineComponent, reactive, ref } from "vue";
 import { useStore } from "vuex";
 import { message } from "ant-design-vue";
 import DOMPurify from "dompurify";
-import { commentService } from "@/services/comment";
-import { CommentDTO } from "@/bean/dto";
+import { commentService } from "@fullstack-blog/services";
+import { CommentDTO } from "@fullstack-blog/types";
 import CardComment from "@/components/card/card-comment.vue";
 import { useAsyncLoading } from "@/hooks/async";
 import { key } from "@/store";
@@ -225,6 +225,7 @@ export default defineComponent({
 
 .comments__list {
     margin-bottom: 20px;
+
     > li + li {
         margin-top: 20px;
     }
@@ -239,7 +240,7 @@ export default defineComponent({
     display: flex;
     align-items: center;
     padding: 12px 20px;
-    box-shadow: 0 -1px 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -1px 10px 0 rgb(0 0 0 / 10%);
     z-index: 2;
 }
 
