@@ -10,7 +10,7 @@ import HotColumn from "./HotColumn";
 import logo from "@/assets/img/logo.png";
 import { useIsAuthed } from "@/store/hooks/auth";
 import { useUIStore } from "@/store";
-import { setScrollTop } from "@/utils/dom";
+import { setScrollTop } from "@fullstack-blog/utils";
 import { flexCenter } from "@/styles/styled-mixins/base";
 
 const Header = styled.header`

@@ -7,8 +7,8 @@ import BottomTips from "../BottomTips";
 import CommentUserInfoForm from "../CommentUserInfoForm";
 import { useScrollBottom } from "@/hooks/scroll";
 import { useAsyncLoading } from "@/hooks/async";
-import { CommentDTO } from "@/bean/dto";
-import { commentService } from "@/services/comment";
+import { CommentDTO } from "@fullstack-blog/types";
+import { commentService } from "@fullstack-blog/services";
 import { useAuthStore, selectCommentUserInfo } from "@/store";
 
 interface CommentsProps {

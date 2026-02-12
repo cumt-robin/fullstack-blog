@@ -3,10 +3,10 @@ import { ColumnType, TablePaginationConfig } from "antd/es/table";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAsyncLoading } from "@/hooks/async";
-import { ReplyDTO } from "@/bean/dto";
+import { ReplyDTO } from "@fullstack-blog/types";
 import CommentAvatarFallback from "@/assets/img/comment-avatar.svg";
-import { format } from "@/utils/date-utils";
-import { replyService } from "@/services/reply";
+import { format } from "@fullstack-blog/utils";
+import { replyService } from "@fullstack-blog/services";
 
 const Wrapper = styled.section`
     padding: 20px;

@@ -3,7 +3,7 @@
  * @description: 异步 Hook，用于 loading, error 等状态反馈
  */
 import { useCallback, useState } from "react";
-import type { GeneralFunction } from "@/bean/base";
+import type { GeneralFunction } from "@fullstack-blog/types";
 
 interface AsyncLoadingResponse {
     trigger: GeneralFunction;

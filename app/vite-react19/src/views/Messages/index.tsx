@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { EditOutlined } from "@ant-design/icons";
 import { useEffect, useRef, useState } from "react";
 import BaseLayout from "@/components/BaseLayout";
-import { commentService } from "@/services/comment";
+import { commentService } from "@fullstack-blog/services";
 import { useAuthStore } from "@/store";
 import Comments, { CommentsRef } from "@/components/Comments";
 import { commentStyleContext } from "@/components/CardComment/comment-style-context";

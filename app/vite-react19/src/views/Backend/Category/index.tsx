@@ -5,10 +5,10 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import Edit from "./Edit";
 import { useAsyncLoading } from "@/hooks/async";
-import { CategoryDTO } from "@/bean/dto";
+import { CategoryDTO } from "@fullstack-blog/types";
 import LogoFallback from "@/assets/img/logo2.png";
-import { format } from "@/utils/date-utils";
-import { categoryService } from "@/services/category";
+import { format } from "@fullstack-blog/utils";
+import { categoryService } from "@fullstack-blog/services";
 
 const Wrapper = styled.section`
     padding: 20px;

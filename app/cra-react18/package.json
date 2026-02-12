@@ -17,8 +17,6 @@
     "@fullstack-blog/utils": "workspace:*",
     "@reduxjs/toolkit": "^2.2.6",
     "antd": "^5.19.2",
-    "axios": "^1.7.2",
-    "bezier-easing": "^2.1.0",
     "classnames": "^2.5.1",
     "dayjs": "~1.11.19",
     "dompurify": "^3.1.6",

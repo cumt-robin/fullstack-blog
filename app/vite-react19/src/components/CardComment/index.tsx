@@ -8,12 +8,12 @@ import { commentStyleContext } from "./comment-style-context";
 import LazyImage from "@/components/LazyImage";
 import avatarFallback from "@/assets/img/comment-avatar.svg";
 import replyAvatarFallback from "@/assets/img/reply-avatar.svg";
-import { CommentDTO, ReplyDTO } from "@/bean/dto";
+import { CommentDTO, ReplyDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
-import { format } from "@/utils/date-utils";
+import { format } from "@fullstack-blog/utils";
 import { ellipsis } from "@/styles/styled-mixins/base";
 import { useAuthStore, selectCommentUserInfo } from "@/store";
-import { replyService } from "@/services/reply";
+import { replyService } from "@fullstack-blog/services";
 
 interface CardCommentProps {
     comment: CommentDTO;
