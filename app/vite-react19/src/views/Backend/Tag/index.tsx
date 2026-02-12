@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useAsyncLoading } from "@/hooks/async";
-import { TagDTO } from "@/bean/dto";
-import { format } from "@/utils/date-utils";
-import { tagService } from "@/services/tag";
+import { TagDTO } from "@fullstack-blog/types";
+import { format } from "@fullstack-blog/utils";
+import { tagService } from "@fullstack-blog/services";
 
 const Wrapper = styled.section`
     padding: 20px;

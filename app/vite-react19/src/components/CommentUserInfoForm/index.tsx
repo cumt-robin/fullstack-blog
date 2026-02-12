@@ -1,7 +1,7 @@
 import { Button, Space, Input, Form, message } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useAuthStore, selectCommentUserInfo } from "@/store";
-import { EMAIL_VALIDATOR, REQUIRED_VALIDATOR_BLUR, URL_VALIDATOR } from "@/utils/validator";
+import { EMAIL_VALIDATOR, REQUIRED_VALIDATOR_BLUR, URL_VALIDATOR } from "@fullstack-blog/utils";
 
 const CommentUserInfoForm: React.FC<{
     topic: string;

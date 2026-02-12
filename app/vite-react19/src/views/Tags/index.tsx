@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { Badge, Empty, Skeleton, Tag } from "antd";
 import { NavLink } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { TagDTO } from "@/bean/dto";
+import { TagDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
 import BaseLayout from "@/components/BaseLayout";
-import { tagService } from "@/services/tag";
+import { tagService } from "@fullstack-blog/services";
 
 const StyledTag = styled(Tag)`
     margin-top: 10px;

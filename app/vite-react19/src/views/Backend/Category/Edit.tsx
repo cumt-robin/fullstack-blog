@@ -1,7 +1,7 @@
 import { Form, Input, Image, Button, message } from "antd";
 import { useWatch } from "antd/es/form/Form";
-import { CategoryDTO } from "@/bean/dto";
-import { categoryService } from "@/services/category";
+import { CategoryDTO } from "@fullstack-blog/types";
+import { categoryService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
 
 const Edit: React.FC<{ row: CategoryDTO; onSuccess: () => void }> = ({ row, onSuccess }) => {

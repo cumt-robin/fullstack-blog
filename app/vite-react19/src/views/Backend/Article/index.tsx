@@ -3,11 +3,11 @@ import { ColumnType, TablePaginationConfig } from "antd/es/table";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { articleService } from "@/services/article";
+import { articleService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
-import { ArticleDTO } from "@/bean/dto";
+import { ArticleDTO } from "@fullstack-blog/types";
 import LogoFallback from "@/assets/img/logo2.png";
-import { format } from "@/utils/date-utils";
+import { format } from "@fullstack-blog/utils";
 
 const Wrapper = styled.section`
     padding: 20px;

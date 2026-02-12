@@ -2,8 +2,8 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import LazyImage from "../LazyImage";
 import IconSvg from "@/components/IconSvg";
-import { format } from "@/utils/date-utils";
-import { ArticleDTO } from "@/bean/dto";
+import { format } from "@fullstack-blog/utils";
+import { ArticleDTO } from "@fullstack-blog/types";
 
 interface CardArticleProps {
     article: ArticleDTO;

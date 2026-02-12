@@ -3,9 +3,9 @@ import { Card, Empty } from "antd";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import LazyImage from "../LazyImage";
-import { ArticleDTO } from "@/bean/dto";
+import { ArticleDTO } from "@fullstack-blog/types";
 import { useAsyncLoading } from "@/hooks/async";
-import { articleService } from "@/services/article";
+import { articleService } from "@fullstack-blog/services";
 
 const StyledCard = styled(Card)`
     margin: 36px 24px;

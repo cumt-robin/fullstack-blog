@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { useAsyncLoading } from "@/hooks/async";
-import { CommentDTO } from "@/bean/dto";
+import { CommentDTO } from "@fullstack-blog/types";
 import CommentAvatarFallback from "@/assets/img/comment-avatar.svg";
-import { format } from "@/utils/date-utils";
-import { commentService } from "@/services/comment";
-import { approvedFormatter } from "@/utils/formatter";
+import { format } from "@fullstack-blog/utils";
+import { commentService } from "@fullstack-blog/services";
+import { approvedFormatter } from "@fullstack-blog/utils";
 
 const Wrapper = styled.section`
     padding: 20px;

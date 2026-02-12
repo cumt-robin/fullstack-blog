@@ -1,8 +1,8 @@
 import { create } from 'zustand'
-import { getLocalData } from '@/utils/bom'
-import type { CommentUserInfo, UserDTO } from '@/bean/dto'
-import type { LoginModel } from '@/bean/xhr'
-import { userService } from '@/services/user'
+import { getLocalData } from '@fullstack-blog/utils'
+import type { CommentUserInfo, UserDTO } from '@fullstack-blog/types'
+import type { LoginModel } from '@fullstack-blog/types'
+import { userService } from '@fullstack-blog/services'
 
 interface AuthState {
   token: string | null

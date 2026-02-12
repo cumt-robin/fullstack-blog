@@ -1,5 +1,5 @@
 import { BookOutlined, CommentOutlined, FolderOutlined, MessageOutlined, TagOutlined } from "@ant-design/icons";
-import { tree2Arr } from "@/utils/tree";
+import { tree2Arr } from "@fullstack-blog/utils";
 
 export const navs = [
     {
