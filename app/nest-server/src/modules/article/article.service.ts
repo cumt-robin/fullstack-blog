@@ -191,7 +191,7 @@ export class ArticleService {
     }
 
     async create(body: CreateArticleDto, authorization: string | undefined) {
-        const { articleTitle, articleText, summary, poster, newCategories, oldCategoryIds, tags } = body;
+        const { articleTitle, articleText, summary, poster, newCategories, oldCategoryIds, tags, private: _private } = body;
 
         const currentUser = await this.authService.getCurrentUser(authorization);
 
@@ -203,6 +203,7 @@ export class ArticleService {
             article.summary = summary;
             article.poster = poster;
             article.author_id = currentUser.id;
+            article.private = _private;
             await manager.save(article);
             const tasks = [];
             // 如果存在新的分类，插入分类表

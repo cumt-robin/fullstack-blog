@@ -78,6 +78,11 @@ export class CreateArticleDto {
     poster: string;
 
     @IsOptional()
+    @IsIn([0, 1, "0", "1"], { message: "必须是0或1" })
+    @Type(() => Number)
+    private: 0 | 1;
+
+    @IsOptional()
     @IsArray()
     newCategories: string[];
 

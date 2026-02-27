@@ -310,13 +310,24 @@ router.post(
         body("summary").notEmpty(),
         body("authorId").isInt(),
         body("poster").notEmpty(),
+        body("private").optional().isIn([0, 1]).default(0),
         body("newCategories").optional().isArray(),
         body("oldCategoryIds").optional().isArray(),
         body("tags").isArray(),
         validateInterceptor,
     ],
     (req, res, next) => {
-        const { articleTitle, articleText, summary, authorId, poster, newCategories, oldCategoryIds, tags } = matchedData(req);
+        const {
+            articleTitle,
+            articleText,
+            summary,
+            authorId,
+            poster,
+            private: _private,
+            newCategories,
+            oldCategoryIds,
+            tags,
+        } = matchedData(req);
         dbUtils.getConnection(res).then((connection) => {
             let articleId;
             let newCategoryIds = [];
@@ -329,7 +340,7 @@ router.post(
                             .query(
                                 {
                                     sql: indexSQL.PublishArticle,
-                                    values: [articleTitle, articleText, summary, authorId, poster],
+                                    values: [articleTitle, articleText, summary, authorId, poster, _private],
                                 },
                                 connection,
                                 false,
