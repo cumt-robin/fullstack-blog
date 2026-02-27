@@ -59,7 +59,7 @@ module.exports = {
         ORDER BY a.create_time desc LIMIT ?, ?;\
     SELECT FOUND_ROWS() AS total;',
     // 发布文章，插入article表
-    PublishArticle: "INSERT INTO article (article_name, article_text, summary, author_id, poster) values (?, ?, ?, ?, ?)",
+    PublishArticle: "INSERT INTO article (article_name, article_text, summary, author_id, poster, private) values (?, ?, ?, ?, ?, ?)",
     // 根据ID更新文章阅读数
     UpdateReadSum: "UPDATE article SET read_num = read_num + 1 WHERE id = ?",
     // 更新文章信息

@@ -37,7 +37,7 @@ export class Article {
     })
     read_num: number | null;
 
-    @Column("int", { name: "like_num", comment: "是否私密", width: 1, default: () => 0 })
+    @Column("int", { name: "like_num", comment: "点赞量", width: 1, default: () => 0 })
     like_num: number;
 
     @Column("varchar", { name: "summary", comment: "摘要", length: 3000 })
