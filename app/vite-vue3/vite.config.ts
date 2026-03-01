@@ -3,6 +3,7 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver, ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import { VitePWA } from "vite-plugin-pwa";
 import path from "node:path";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 
@@ -34,6 +35,44 @@ export default defineConfig(({ mode }) => {
                 org: VITE_APP_SENTRY_ORG,
                 project: VITE_APP_SENTRY_PROJECT,
                 authToken: VITE_APP_SENTRY_TOKEN,
+            }),
+            VitePWA({
+                registerType: "autoUpdate",
+                includeAssets: ["favicon.ico", "apple-touch-icon.png", "masked-icon.svg"],
+                manifest: {
+                    name: "Tusi博客",
+                    short_name: "Tusi博客",
+                    description: "A fullstack blog built with Vue 3 and Vite",
+                    theme_color: "#ffffff",
+                    background_color: "#ffffff",
+                    display: "standalone",
+                    scope: "/",
+                    start_url: "/",
+                    icons: [
+                        {
+                            src: "/pwa-192x192.png",
+                            sizes: "192x192",
+                            type: "image/png",
+                        },
+                        {
+                            src: "/pwa-512x512.png",
+                            sizes: "512x512",
+                            type: "image/png",
+                        },
+                        {
+                            src: "/pwa-512x512.png",
+                            sizes: "512x512",
+                            type: "image/png",
+                            purpose: "any maskable",
+                        },
+                    ],
+                },
+                workbox: {
+                    globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
+                },
+                devOptions: {
+                    enabled: true,
+                },
             }),
         ],
         resolve: {
