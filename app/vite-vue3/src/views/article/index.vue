@@ -23,7 +23,7 @@
                         <h2>
                             {{ article.article_name }}
                         </h2>
-                        <section class="md-preview" v-html="purifiedContent" @click="onClickRichContent"></section>
+                        <section class="md-preview" v-html="purifiedContent" @click="onClickRichContent" @copy="onCopyContent"></section>
                     </main>
 
                     <div class="copyright">
@@ -131,6 +131,7 @@ import { SwapLeftOutlined, SwapRightOutlined, EditOutlined } from "@ant-design/i
 import { storeToRefs } from "pinia";
 import { setScrollTop, format } from "@fullstack-blog/utils";
 import { articleService } from "@fullstack-blog/services";
+import { message } from "ant-design-vue";
 import { useAsyncLoading } from "@/hooks/async";
 import Comments from "./comments.vue";
 import { useAuthStore } from "@/stores/auth";
@@ -262,6 +263,17 @@ export default defineComponent({
             }
         };
 
+        const onCopyContent = (e) => {
+            const selection = window.getSelection();
+            const selectedText = selection.toString();
+            if (selectedText) {
+                const copyrightInfo = `\n\n作者：Tusi\n链接：${window.location.href}\n来源：Tusi博客\n著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。`;
+                e.clipboardData.setData("text/plain", selectedText + copyrightInfo);
+                e.preventDefault();
+                message.success("复制成功");
+            }
+        };
+
         // 前后文章
         const prevArticle = ref();
         const nextArticle = ref();
@@ -318,6 +330,7 @@ export default defineComponent({
             showUserInfoForm,
             goToEdit,
             onClickRichContent,
+            onCopyContent,
             previewImgSrc,
             previewRef,
         };
