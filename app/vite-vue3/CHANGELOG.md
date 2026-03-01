@@ -1,5 +1,13 @@
 # vite-vue3
 
+## 1.3.1
+
+### Patch Changes
+
+- Updated dependencies [7614955]
+    - @fullstack-blog/utils@0.0.3
+    - @fullstack-blog/services@0.0.3
+
 ## 1.3.0
 
 ### Minor Changes
