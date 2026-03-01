@@ -1,5 +1,12 @@
 # @fullstack-blog/services
 
+## 0.0.3
+
+### Patch Changes
+
+- Updated dependencies [7614955]
+    - @fullstack-blog/utils@0.0.3
+
 ## 0.0.2
 
 ### Patch Changes

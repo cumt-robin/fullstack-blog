@@ -1,5 +1,11 @@
 # @fullstack-blog/utils
 
+## 0.0.3
+
+### Patch Changes
+
+- 7614955: test: 增加 utils jest 测试
+
 ## 0.0.2
 
 ### Patch Changes
