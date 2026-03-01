@@ -2,14 +2,16 @@ import { getType, isArray, isDefined } from "./type";
 
 type PlainObject<K extends string | number | symbol = string, V = unknown> = Record<K, V>;
 
-export function requestParamsFilter(obj: PlainObject, isArrayToString = false): PlainObject {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function requestParamsFilter(obj: any, isArrayToString = false): Array<any> | PlainObject<string, any> {
     if (isArray(obj)) {
         return obj;
     }
     if (getType(obj) !== "object") {
         return {};
     }
-    const newObj: PlainObject = {};
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const newObj: PlainObject<string, any> = {};
     Object.keys(obj).forEach((key) => {
         const element = obj[key];
         if (Array.isArray(element)) {

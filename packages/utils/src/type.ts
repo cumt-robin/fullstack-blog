@@ -56,7 +56,7 @@ export function isUndefined(val: unknown): val is undefined {
 }
 
 export function isNull(val: unknown): val is null {
-    return val === DataType.Null;
+    return val === null;
 }
 
 export function isUndefOrNull(val: unknown): val is undefined | null {
@@ -64,7 +64,7 @@ export function isUndefOrNull(val: unknown): val is undefined | null {
 }
 
 export function isFunction(val: unknown): val is GeneralFunction {
-    return getType(val) === DataType.Function;
+    return typeof val === DataType.Function;
 }
 
 export function isSymbol(val: unknown): val is symbol {

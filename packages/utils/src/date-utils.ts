@@ -95,7 +95,7 @@ export function isBefore(date1: Date | string, date2: Date | string): boolean {
 }
 
 export function isSameDay(date1: Date, date2: Date): boolean {
-    return format(date1) === format(date2);
+    return dayjs(date1).format("YYYY-MM-DD") === dayjs(date2).format("YYYY-MM-DD");
 }
 
 export function getWeekStart(date = new Date(), fmt = DATE_STANDARD_FORMAT, offset = 0): string {
@@ -180,8 +180,10 @@ export function humanizeDuration(seconds: string | number): string {
     if (seconds >= 86400) {
         const days = Math.floor(seconds / 86400);
         const hours = Math.floor((seconds - days * 86400) / 3600);
+        const minutes = Math.floor((seconds - days * 86400 - hours * 3600) / 60);
         const hoursDescription = hours > 0 ? `${hours}小时` : "";
-        return `${days}天${hoursDescription}`;
+        const minutesDescription = minutes > 0 ? `${minutes}分钟` : "";
+        return `${days}天${hoursDescription}${minutesDescription}`;
     }
     return "";
 }
