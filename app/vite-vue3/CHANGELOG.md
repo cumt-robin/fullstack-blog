@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.2.0
+
+### Minor Changes
+
+- e7a8bb6: feat: vite-vue3 pwa 支持
+
 ## 1.1.2
 
 ### Patch Changes
