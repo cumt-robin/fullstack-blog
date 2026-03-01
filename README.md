@@ -37,7 +37,7 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 其中前端部分：
 
-- [x] Vite + Vue3 + Pinia + TypeScript + Sentry: 见目录 app/vite-vue3，线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
+- [x] Vite + Vue3 + Pinia + TypeScript + Sentry + PWA: 见目录 app/vite-vue3，线上效果点击[blog.wbjiang.cn](https://blog.wbjiang.cn/)
 - [x] Vue CLI + Vue3 + Vuex + TypeScript + SCSS: 见目录 app/webpack-vue3
 - [x] CRA + React18 + TypeScript + React-Redux + Redux Toolkit + Tailwindcss + Styled Components: 见目录 app/cra-react18
 - [x] Vite + React19 + TypeScript + Antd@6 + Zustand + Tailwindcss + Styled Components: 见目录 app/vite-react19

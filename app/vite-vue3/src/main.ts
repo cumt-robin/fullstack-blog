@@ -8,6 +8,7 @@ import App from "./App.vue";
 import router from "./router";
 import { sentryPlugin } from "./plugins/sentry";
 import { eventBus } from "./utils/eventbus";
+import { usePWA } from "./plugins/pwa";
 
 initDayjs();
 useAxios({
@@ -25,3 +26,5 @@ const pinia = createPinia();
 
 const app = createApp(App);
 app.use(sentryPlugin).use(pinia).use(router).mount("#app");
+
+usePWA();
