@@ -107,7 +107,7 @@ export function setScrollTop({
     }
 }
 
-export default function triggerC3Animation(removeAnimClass: GeneralFunction, setAnimClass: GeneralFunction): void {
+export function triggerC3Animation(removeAnimClass: GeneralFunction, setAnimClass: GeneralFunction): void {
     removeAnimClass();
     window.requestAnimationFrame(() => {
         window.requestAnimationFrame(() => {
@@ -117,7 +117,7 @@ export default function triggerC3Animation(removeAnimClass: GeneralFunction, set
 }
 
 export function addClass(ele: HTMLElement | string, cls: string | Array<string>): void {
-    const element = typeof ele === "string" ? document.querySelector("ele") : ele;
+    const element = typeof ele === "string" ? document.querySelector(ele) : ele;
     if (element !== null) {
         if (typeof cls === "string") {
             element.classList.add(cls);
@@ -130,7 +130,7 @@ export function addClass(ele: HTMLElement | string, cls: string | Array<string>)
 }
 
 export function removeClass(ele: HTMLElement | string, cls: string | Array<string>): void {
-    const element = typeof ele === "string" ? document.querySelector("ele") : ele;
+    const element = typeof ele === "string" ? document.querySelector(ele) : ele;
     if (element !== null) {
         if (typeof cls === "string") {
             element.classList.remove(cls);
@@ -164,5 +164,5 @@ export function getScrollContainer(el: HTMLElement, direction?: string): HTMLEle
         }
         parent = parent.parentNode as HTMLElement;
     }
-    return parent;
+    return document.body;
 }

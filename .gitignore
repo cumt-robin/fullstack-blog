@@ -4,6 +4,7 @@ dist
 .eslintcache
 .stylelintcache
 mysql/init-scripts
+coverage
 
 # local env files
 .env.local
