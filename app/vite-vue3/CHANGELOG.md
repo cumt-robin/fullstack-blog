@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.3.0
+
+### Minor Changes
+
+- 58b87f2: feat: 支持复制博客内容追加版权信息
+
 ## 1.2.0
 
 ### Minor Changes
