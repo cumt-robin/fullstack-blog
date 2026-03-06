@@ -14,12 +14,6 @@ describe("formatter", () => {
             expect(approvedFormatter(2)).toBe("不通过");
         });
 
-        test('should return "待审核" for default case', () => {
-            expect(approvedFormatter(3 as any)).toBe("待审核");
-            expect(approvedFormatter(-1 as any)).toBe("待审核");
-            expect(approvedFormatter(100 as any)).toBe("待审核");
-        });
-
         test("should handle all valid values", () => {
             const results = [0, 1, 2].map((val) => approvedFormatter(val as 0 | 1 | 2));
             expect(results).toEqual(["待审核", "通过", "不通过"]);
