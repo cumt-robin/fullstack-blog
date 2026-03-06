@@ -1,5 +1,13 @@
 # webpack-vue3
 
+## 3.7.11
+
+### Patch Changes
+
+- Updated dependencies [8cd6f45]
+    - @fullstack-blog/utils@0.0.4
+    - @fullstack-blog/services@0.0.4
+
 ## 3.7.10
 
 ### Patch Changes

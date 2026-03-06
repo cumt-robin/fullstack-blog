@@ -1,5 +1,11 @@
 # @fullstack-blog/utils
 
+## 0.0.4
+
+### Patch Changes
+
+- 8cd6f45: test: utils 测试用例优化
+
 ## 0.0.3
 
 ### Patch Changes
