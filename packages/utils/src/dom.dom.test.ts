@@ -83,6 +83,8 @@ describe("dom", () => {
             jest.useFakeTimers();
             setScrollTop({ targetValue: 100, useAnimation: true, duration: 0.5 });
             jest.advanceTimersByTime(600);
+            expect(document.body.scrollTop).toBe(100);
+            expect(document.documentElement.scrollTop).toBe(100);
             jest.useRealTimers();
         });
 
@@ -90,9 +92,12 @@ describe("dom", () => {
             document.body.scrollTop = 100;
             document.documentElement.scrollTop = 100;
 
+            jest.useFakeTimers();
             setScrollTop({ targetValue: 100, useAnimation: true, duration: 0.5 });
+            jest.advanceTimersByTime(600);
             expect(document.body.scrollTop).toBe(100);
             expect(document.documentElement.scrollTop).toBe(100);
+            jest.useRealTimers();
         });
     });
 
@@ -100,10 +105,14 @@ describe("dom", () => {
         test("should trigger animation with requestAnimationFrame", () => {
             const removeAnimClass = jest.fn();
             const setAnimClass = jest.fn();
-
+            jest.useFakeTimers({ legacyFakeTimers: true });
             triggerC3Animation(removeAnimClass, setAnimClass);
-
             expect(removeAnimClass).toHaveBeenCalled();
+            jest.advanceTimersByTime(0);
+            jest.advanceTimersByTime(0);
+            jest.runAllTimers();
+            expect(setAnimClass).toHaveBeenCalled();
+            jest.useRealTimers();
         });
     });
 
