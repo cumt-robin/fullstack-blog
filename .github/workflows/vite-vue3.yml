@@ -5,8 +5,39 @@ on:
     tags:
       - 'vite-vue3@*'
 
+concurrency:
+  group: vite-vue3-${{ github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js 20
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.19.0
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4.0.0
+      with:
+        version: 9.4.0
+
+    - name: Install dependencies
+      run: pnpm install --frozen-lockfile
+
+    - name: Install Playwright browsers
+      run: npx playwright install --with-deps
+
+    - name: Run Playwright tests
+      working-directory: app/vite-vue3
+      run: pnpm test:e2e:ui
+
   build:
+    needs: [test]
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
