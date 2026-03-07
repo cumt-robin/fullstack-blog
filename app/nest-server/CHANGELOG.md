@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.0.6
+
+### Patch Changes
+
+- dbef8d6: refactor: 数据库表设计优化
+
 ## 1.0.5
 
 ### Patch Changes
