@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.0.7
+
+### Patch Changes
+
+- 8f4c153: fix: 加了scripts目录导致dist结构变化，修复此问题
+
 ## 1.0.6
 
 ### Patch Changes
