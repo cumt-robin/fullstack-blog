@@ -1,5 +1,4 @@
-import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-// import { RoleAuth } from "./RoleAuth";
+import { Column, CreateDateColumn, Entity, Index, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./User";
 
 @Index("RoleName", ["roleName"], { unique: true })
@@ -11,8 +10,11 @@ export class Role {
     @Column("varchar", { name: "role_name", unique: true, length: 50 })
     roleName: string;
 
-    // @OneToMany(() => RoleAuth, (roleAuth) => roleAuth.role)
-    // roleAuths: RoleAuth[];
+    @CreateDateColumn({ name: "create_time" })
+    create_time: Date;
+
+    @UpdateDateColumn({ name: "update_time", nullable: true })
+    update_time: Date | null;
 
     @OneToMany(() => User, (user) => user.role)
     users: User[];

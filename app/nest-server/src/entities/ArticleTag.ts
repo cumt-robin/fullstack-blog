@@ -1,4 +1,4 @@
-import { Column, Entity, Index, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Index("article_id", ["article_id"], {})
 @Index("tag_id", ["tag_id"], {})
@@ -12,4 +12,10 @@ export class ArticleTag {
 
     @Column("int", { name: "tag_id" })
     tag_id: number;
+
+    @CreateDateColumn({ name: "create_time" })
+    create_time: Date;
+
+    @UpdateDateColumn({ name: "update_time", nullable: true })
+    update_time: Date | null;
 }

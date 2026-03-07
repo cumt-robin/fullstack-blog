@@ -1,4 +1,14 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    Index,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { Role } from "./Role";
 import { Article } from "./Article";
 
@@ -47,6 +57,12 @@ export class User {
 
     @Column("datetime", { name: "last_login_time", nullable: true })
     last_login_time: Date | null;
+
+    @CreateDateColumn({ name: "create_time" })
+    create_time: Date;
+
+    @UpdateDateColumn({ name: "update_time", nullable: true })
+    update_time: Date | null;
 
     @OneToMany(() => Article, (article) => article.author)
     articles: Article[];

@@ -1,4 +1,15 @@
-import { Column, Entity, Index, JoinColumn, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    Index,
+    JoinColumn,
+    ManyToMany,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { User } from "./User";
 import { Tag } from "./Tag";
 import { Category } from "./Category";
@@ -17,13 +28,10 @@ export class Article {
     @Column("longtext", { name: "article_text", comment: "正文markdown" })
     article_text: string;
 
-    @Column("datetime", {
-        name: "create_time",
-        default: () => "CURRENT_TIMESTAMP",
-    })
+    @CreateDateColumn({ name: "create_time" })
     create_time: Date;
 
-    @Column("datetime", { name: "update_time", nullable: true })
+    @UpdateDateColumn({ name: "update_time", nullable: true })
     update_time: Date | null;
 
     @Column("int", { name: "author_id", comment: "作者id" })

@@ -1,4 +1,14 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    Index,
+    JoinColumn,
+    ManyToOne,
+    OneToMany,
+    PrimaryGeneratedColumn,
+    UpdateDateColumn,
+} from "typeorm";
 import { Reply } from "./Reply";
 import { Article } from "./Article";
 
@@ -17,13 +27,10 @@ export class Comments {
     @Column("varchar", { name: "content", length: 100 })
     content: string;
 
-    @Column("datetime", {
-        name: "create_time",
-        default: () => "CURRENT_TIMESTAMP",
-    })
+    @CreateDateColumn({ name: "create_time" })
     create_time: Date;
 
-    @Column("datetime", { name: "update_time", nullable: true })
+    @UpdateDateColumn({ name: "update_time", nullable: true })
     update_time: Date | null;
 
     @Column("varchar", { name: "site_url", nullable: true, length: 100 })

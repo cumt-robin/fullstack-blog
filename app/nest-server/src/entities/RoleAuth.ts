@@ -1,6 +1,4 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-// import { Role } from "./Role";
-// import { Authority } from "./Authority";
+import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Index("role_auth_ibfk_1", ["roleId"], {})
 @Index("role_auth_ibfk_2", ["authId"], {})
@@ -15,17 +13,9 @@ export class RoleAuth {
     @Column("int", { name: "auth_id" })
     authId: number;
 
-    // @ManyToOne(() => Role, (role) => role.roleAuths, {
-    //     onDelete: "CASCADE",
-    //     onUpdate: "CASCADE",
-    // })
-    // @JoinColumn([{ name: "role_id", referencedColumnName: "id" }])
-    // role: Role;
+    @CreateDateColumn({ name: "create_time" })
+    create_time: Date;
 
-    // @ManyToOne(() => Authority, (authority) => authority.roleAuths, {
-    //     onDelete: "CASCADE",
-    //     onUpdate: "CASCADE",
-    // })
-    // @JoinColumn([{ name: "auth_id", referencedColumnName: "id" }])
-    // auth: Authority;
+    @UpdateDateColumn({ name: "update_time", nullable: true })
+    update_time: Date | null;
 }

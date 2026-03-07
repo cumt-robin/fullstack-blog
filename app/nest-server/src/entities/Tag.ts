@@ -1,4 +1,4 @@
-import { Column, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Article } from "./Article";
 
 @Index("tag_name", ["tag_name"], { unique: true })
@@ -10,13 +10,10 @@ export class Tag {
     @Column("varchar", { name: "tag_name", unique: true, length: 50 })
     tag_name: string;
 
-    @Column("datetime", {
-        name: "create_time",
-        default: () => "CURRENT_TIMESTAMP",
-    })
+    @CreateDateColumn({ name: "create_time" })
     create_time: Date;
 
-    @Column("datetime", { name: "update_time", nullable: true })
+    @UpdateDateColumn({ name: "update_time", nullable: true })
     update_time: Date | null;
 
     @ManyToMany(() => Article, (article) => article.tags)

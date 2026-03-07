@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity("banner", { schema: "blog_db" })
 export class Banner {
@@ -19,4 +19,10 @@ export class Banner {
 
     @Column("varchar", { name: "prefer_position", nullable: true, length: 20 })
     prefer_position: string | null;
+
+    @CreateDateColumn({ name: "create_time" })
+    create_time: Date;
+
+    @UpdateDateColumn({ name: "update_time", nullable: true })
+    update_time: Date | null;
 }
