@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.3.3
+
+### Patch Changes
+
+- af563f2: test: playwright e2e test
+
 ## 1.3.2
 
 ### Patch Changes
