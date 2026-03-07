@@ -43,6 +43,8 @@
         "cra-react18:build": "pnpm --filter cra-react18 build",
         "vite-react19:build": "pnpm --filter vite-react19 build",
         "nuxt3-web:build": "pnpm --filter nuxt3-web build",
+        "vite-vue3:test": "pnpm --filter vite-vue3 test:e2e",
+        "utils:test": "pnpm --filter utils test",
         "lint-fix": "pnpm --filter ./app/** lint-fix",
         "lint": "pnpm --filter ./app/** lint",
         "prepare": "husky",
