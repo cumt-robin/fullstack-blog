@@ -1,6 +1,5 @@
-import { Column, Entity, Index, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, Index, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { Article } from "./Article";
-// import { ArticleCategory } from "./ArticleCategory";
 
 @Index("category_name", ["category_name"], { unique: true })
 @Entity("category", { schema: "blog_db" })
@@ -11,13 +10,10 @@ export class Category {
     @PrimaryGeneratedColumn({ type: "int", name: "id" })
     id: number;
 
-    @Column("datetime", {
-        name: "create_time",
-        default: () => "CURRENT_TIMESTAMP",
-    })
+    @CreateDateColumn({ name: "create_time" })
     create_time: Date;
 
-    @Column("datetime", { name: "update_time", nullable: true })
+    @UpdateDateColumn({ name: "update_time", nullable: true })
     update_time: Date | null;
 
     @Column("varchar", { name: "poster", nullable: true, length: 300 })

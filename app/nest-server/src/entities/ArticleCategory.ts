@@ -1,6 +1,4 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-// import { Article } from "./Article";
-// import { Category } from "./Category";
+import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Index("article_id", ["article_id"], {})
 @Index("category_id", ["category_id"], {})
@@ -15,17 +13,9 @@ export class ArticleCategory {
     @Column("int", { name: "category_id" })
     category_id: number;
 
-    // @ManyToOne(() => Article, (article) => article.articleCategories, {
-    //     onDelete: "CASCADE",
-    //     onUpdate: "CASCADE",
-    // })
-    // @JoinColumn([{ name: "article_id", referencedColumnName: "id" }])
-    // article: Article;
+    @CreateDateColumn({ type: "datetime", name: "create_time" })
+    create_time: Date;
 
-    // @ManyToOne(() => Category, (category) => category.articleCategories, {
-    //     onDelete: "CASCADE",
-    //     onUpdate: "CASCADE",
-    // })
-    // @JoinColumn([{ name: "category_id", referencedColumnName: "id" }])
-    // category: Category;
+    @UpdateDateColumn({ type: "datetime", name: "update_time", nullable: true })
+    update_time: Date | null;
 }

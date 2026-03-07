@@ -45,8 +45,8 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 
 后端部分：
 
-- [x] NestJS + MySQL + TypeORM + class-validator: 见目录 app/nest-server
-- [x] Express + MySQL + express-validator: 见目录 app/express-server
+- [x] NestJS + MySQL + TypeORM + class-validator: 见目录 app/nest-server，目前持续维护
+- [x] Express + MySQL + express-validator: 见目录 app/express-server，不再持续维护
 
 ## Features
 
@@ -62,6 +62,7 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 - OpenAI聊天机器人
 - JWT 认证（新版）
 - Session 认证（旧版）
+- PWA 支持
 - 后台维护功能：文章管理，创作，评论管理及审核，留言管理及审核，分类管理，标签管理
 
 ## 全局依赖

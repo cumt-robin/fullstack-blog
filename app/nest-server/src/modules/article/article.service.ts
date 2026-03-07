@@ -293,7 +293,6 @@ export class ArticleService {
                 summary,
                 poster,
                 private: _private,
-                update_time: new Date(),
             });
 
             const tasks = [];

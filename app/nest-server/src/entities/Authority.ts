@@ -1,5 +1,4 @@
-import { Column, Entity, Index, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-// import { RoleAuth } from "./RoleAuth";
+import { Column, CreateDateColumn, Entity, Index, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Index("AuthName", ["authName"], { unique: true })
 @Entity("authority", { schema: "blog_db" })
@@ -16,6 +15,9 @@ export class Authority {
     @Column("int", { name: "parent_auth_id", nullable: true })
     parentAuthId: number | null;
 
-    // @OneToMany(() => RoleAuth, (roleAuth) => roleAuth.auth)
-    // roleAuths: RoleAuth[];
+    @CreateDateColumn({ name: "create_time" })
+    create_time: Date;
+
+    @UpdateDateColumn({ name: "update_time", nullable: true })
+    update_time: Date | null;
 }
