@@ -15,6 +15,7 @@ import { Tag } from "./Tag";
 import { Category } from "./Category";
 import { Comments } from "./Comments";
 import { Reply } from "./Reply";
+import { ArticleOutline } from "./ArticleOutline";
 
 @Index("author_id", ["author_id"], {})
 @Entity("article", { schema: "blog_db" })
@@ -65,6 +66,14 @@ export class Article {
     @Column("tinyint", { name: "deleted", comment: "是否逻辑删除", width: 1, default: () => 0 })
     deleted: 0 | 1;
 
+    @Column("varchar", {
+        name: "outline_hash",
+        nullable: true,
+        comment: "提纲hash，用于对比避免不必要的重建",
+        length: 64,
+    })
+    outline_hash: string | null;
+
     @ManyToOne(() => User, (user) => user.articles, {
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
@@ -83,4 +92,7 @@ export class Article {
 
     @OneToMany(() => Reply, (reply) => reply.article)
     replies: Reply[];
+
+    @OneToMany(() => ArticleOutline, (outline) => outline.article)
+    outlines: ArticleOutline[];
 }

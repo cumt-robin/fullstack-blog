@@ -1,200 +1,211 @@
 # AGENTS.md
 
-This file contains guidelines and commands for agentic coding agents working in the fullstack-blog repository.
+Guidelines for coding agents working in the `fullstack-blog` monorepo.
 
-## Project Overview
+## 1) Quick Start (Do This First)
 
-This is a full-stack blog monorepo built with:
-- Frontend: Vue 3 (Vite), React 18/19, Nuxt 3
-- Backend: NestJS, Express.js
-- Database: MySQL with TypeORM
-- Package Manager: pnpm (monorepo architecture)
-- Language: TypeScript (strict mode)
-
-## Development Commands
-
-### Root Level Commands
 ```bash
-# Install dependencies
+# install
 pnpm install
 
-# Run specific app in development mode
+# run one target app/service
 pnpm vite-vue3:dev
+pnpm webpack-vue3:dev
 pnpm vite-react19:dev
 pnpm cra-react18:dev
 pnpm nuxt3-web:dev
 pnpm nest-server:dev
 pnpm express-server:dev
 
-# Run full-stack development (Vue3 frontend + NestJS backend)
+# run fullstack (vite-vue3 + nest-server)
 pnpm fullstack:dev
+```
 
-# Build specific apps
+> **fullstack:dev prerequisite**: Requires MySQL. Use local MySQL or run via Docker (see [docker-ops.md](./docker-ops.md)).
+
+For full run setup (Docker, non-container), environment variables (e.g. Sentry for vite-vue3), and CI variables, see [README.md](./README.md), [docker-ops.md](./docker-ops.md), and [legacy-ops.md](./legacy-ops.md).
+
+## 2) Monorepo Layout
+
+```text
+fullstack-blog/
+|- app/
+|  |- vite-vue3
+|  |- webpack-vue3
+|  |- vite-react19
+|  |- cra-react18
+|  |- nuxt3-web
+|  |- nest-server
+|  `- express-server
+`- packages/
+   |- types
+   |- services
+   |- utils
+   `- eslint-config
+```
+
+## 3) Source of Truth for Commands
+
+Priority order:
+1. Package-local `package.json` scripts
+2. Root `package.json` scripts
+3. This document examples
+
+If this document conflicts with scripts, follow actual `package.json` scripts and update this file.
+
+**Further reading**:
+- Full run setup (Docker, non-container): [README.md](./README.md), [docker-ops.md](./docker-ops.md), [legacy-ops.md](./legacy-ops.md)
+- Environment variables (e.g. Sentry for vite-vue3, CI secrets): see README and each app's `.env.example` if present
+
+## 4) Common Commands
+
+### Root scripts (available today)
+
+```bash
+# build (root shortcuts)
 pnpm vite-vue3:build
-pnpm nest-server:build
-# etc.
+pnpm webpack-vue3:build
+pnpm vite-react19:build
+pnpm cra-react18:build
+pnpm nuxt3-web:build
 
-# Linting
-pnpm lint          # Run linting on all apps
-pnpm lint-fix      # Fix linting issues
+# lint app packages only (./app/**)
+pnpm lint
+pnpm lint-fix
+
+# selected tests exposed at root
+pnpm vite-vue3:test
+pnpm utils:test
+
+# version/release
+pnpm version-bump
+pnpm release
 ```
 
-### App-Specific Commands
+### Filtered commands (recommended for precision)
 
-#### Frontend Apps (Vue/React)
 ```bash
-# Example: vite-vue3
-pnpm --filter vite-vue3 dev          # Development server
-pnpm --filter vite-vue3 build         # Production build
-pnpm --filter vite-vue3 preview       # Preview production build
-pnpm --filter vite-vue3 lint          # ESLint
-pnpm --filter vite-vue3 lint-fix      # Auto-fix ESLint
-pnpm --filter vite-vue3 lint-style    # Stylelint
-pnpm --filter vite-vue3 lint-style-fix # Auto-fix Stylelint
+# frontend
+pnpm --filter vite-vue3 dev
+pnpm --filter vite-vue3 test:e2e
+pnpm --filter webpack-vue3 build
+pnpm --filter vite-react19 lint
+pnpm --filter cra-react18 test
+pnpm --filter nuxt3-web dev
+
+# backend
+pnpm --filter nest-server dev
+pnpm --filter nest-server build
+pnpm --filter nest-server test
+pnpm --filter nest-server test:e2e
+pnpm --filter express-server dev
+
+# shared packages
+pnpm --filter @fullstack-blog/utils test
+pnpm --filter @fullstack-blog/services lint
+pnpm --filter @fullstack-blog/types lint
 ```
 
-#### Backend Apps (NestJS)
+### TypeORM migrations (NestJS)
+
 ```bash
-# Example: nest-server
-pnpm --filter nest-server dev          # Development with watch
-pnpm --filter nest-server build        # Production build
-pnpm --filter nest-server start        # Production start
-pnpm --filter nest-server lint         # ESLint
-pnpm --filter nest-server test         # Run all tests
-pnpm --filter nest-server test:watch   # Watch mode testing
-pnpm --filter nest-server test:cov     # Coverage report
-pnpm --filter nest-server test:e2e     # End-to-end tests
-
-# Single test file
-pnpm --filter nest-server test -- article.service.spec.ts
+pnpm --filter nest-server migration:new
+pnpm --filter nest-server migration:run
+pnpm --filter nest-server migration:revert
 ```
 
-## Code Style Guidelines
+## 5) Required Checks Before Commit
 
-### General TypeScript Rules
-- Use strict TypeScript with enabled strict null checks
-- Prefer explicit return types for functions
-- Use interfaces for object shapes, types for unions/primitives
-- Import interfaces and types separately: `import { Type, Interface } from './module'`
+There is no universal root `pnpm test` script. Run checks based on changed scope:
 
-### ESLint Configuration
-Based on Airbnb config with customizations:
-- Console allowed only for `warn` and `error`
-- No plusplus restrictions lifted
-- CamelCase rules disabled for flexibility
-- Prefer default exports disabled (named exports preferred)
-- Extensions in imports disabled
+- Changed only `app/vite-vue3/**`:
+  - `pnpm --filter vite-vue3 lint`
+  - `pnpm --filter vite-vue3 test:e2e` (if behavior/UI changed)
+- Changed only `app/nest-server/**`:
+  - `pnpm --filter nest-server lint`
+  - `pnpm --filter nest-server test`
+  - `pnpm --filter nest-server test:e2e` (if API contract changed)
+- Changed only `packages/utils/**`:
+  - `pnpm --filter @fullstack-blog/utils test`
+- Changed multiple apps/packages:
+  - Run each affected package's lint + tests
+  - At minimum run `pnpm lint` for app-level linting
 
-### Prettier Configuration
-```json
-{
-  "tabs": false,
-  "tabWidth": 4,
-  "endOfLine": "lf",
-  "printWidth": 140
-}
-```
+## 6) Coding Conventions
 
-### File Naming Conventions
+### TypeScript
+
+- Strict mode is expected (including strict null checks)
+- Prefer explicit function return types in public interfaces
+- Use `interface` for object shapes, `type` for unions/primitives
+- Keep imports grouped: external -> workspace packages -> relative
+
+### Naming
+
 - Components: PascalCase (`MyComponent.vue`, `MyButton/`)
-- Services/Utils: kebab-case (`article.service.ts`, `date-utils.ts`)
-- Files with single export: match export name (`ArticleService.ts`)
-- Test files: `.spec.ts` suffix (`article.service.spec.ts`)
+- General files/services/utils: kebab-case (`article.service.ts`, `date-utils.ts`)
+- Class-centric files may use PascalCase when matching exported class name (`ArticleService.ts`)
+- Test files: `.spec.ts` (or existing project convention like `.test.ts`)
 
-### Import Organization
+### Framework conventions
+
+- Vue 3 apps: Composition API + `<script setup>`
+- State:
+  - `vite-vue3`: Pinia
+  - `webpack-vue3`: Vuex
+  - `vite-react19`: Zustand
+  - `cra-react18`: Redux Toolkit
+- NestJS: modular architecture (module/service/controller + DTO + entity)
+
+### Error handling
+
+- Frontend: user-friendly messages, no stack traces in UI
+- Backend: framework-native exceptions with proper HTTP status
+- Logging: `warn` for recoverable, `error` for critical failures
+
+## 7) API/Service Layer Pattern
+
+Use shared service/type packages for frontend API access. Keep service classes focused on endpoint mapping and typed responses.
+
 ```typescript
-// 1. External libraries
-import { createApp } from "vue";
-import axios from "axios";
+import { ApiService } from "@fullstack-blog/services";
+import { ArticleDTO, PageResponse, QueryPageModel, RecordResponse } from "@fullstack-blog/types";
 
-// 2. Internal services/modules
-import { ApiService } from "@/services/index";
-import { ArticleDTO } from "@/bean/dto";
-
-// 3. Relative imports
-import { helper } from "./utils";
-```
-
-### Vue 3 Specific Guidelines
-- Use Composition API with `<script setup>`
-- Pinia for state management
-- Vue Router 4 for routing
-- Use TypeScript with proper component props typing
-- Components should be in `components/` directory with index.vue
-- Views in `views/` directory organized by feature
-
-### NestJS Specific Guidelines
-- Use modular architecture (modules for each feature)
-- Services for business logic, controllers for HTTP handling
-- DTOs for data transfer (validation with class-validator)
-- Entities for database models (TypeORM)
-- Dependency injection pattern throughout
-- Proper error handling with NestJS built-in exceptions
-
-### Testing Guidelines
-- Use Jest for unit/integration tests
-- Test files should be alongside source files with `.spec.ts` suffix
-- Follow AAA pattern: Arrange, Act, Assert
-- Mock external dependencies
-- Aim for meaningful test coverage, not just coverage percentage
-
-### API/Service Layer Pattern
-```typescript
 class ArticleService extends ApiService {
     public page(params: QueryPageModel) {
         return this.$get<PageResponse<ArticleDTO>>("page", params);
     }
-    
+
     public detail(id: number) {
         return this.$get<RecordResponse<ArticleDTO>>("detail", { id });
     }
 }
 ```
 
-### Error Handling
-- Frontend: Use try-catch with user-friendly error messages
-- Backend: Use NestJS built-in exceptions with proper HTTP status codes
-- Log errors appropriately (warn for recoverable, error for critical)
-- Never expose stack traces to end users
+Checklist:
+- Extend `ApiService` for each domain service (`article`, `category`, `tag`, etc.)
+- Keep request/response types in `@fullstack-blog/types`
+- Do not leak transport-layer details into UI components
+- Keep endpoint strings and param shapes explicit
 
-### Git Commit Messages
-Follow conventional commits:
-- `feat:` for new features
-- `fix:` for bug fixes  
-- `docs:` for documentation
-- `style:` for formatting changes
-- `refactor:` for code refactoring
-- `test:` for adding/updating tests
+## 8) Testing Guidelines
 
-## Development Workflow
+- Unit/integration: Jest
+- E2E: Playwright (`vite-vue3`)
+- Prefer AAA pattern (Arrange, Act, Assert)
+- Mock external dependencies and network I/O
+- Add/adjust tests for behavior changes, not only for coverage numbers
 
-1. Always run `pnpm lint` and `pnpm test` before committing
-2. Pre-commit hooks will run lint-staged automatically
-3. Use changesets for version management and changelog generation
-4. Test changes in relevant environments before merging
+## 9) Git and Release
 
-## Technology Stack Details
+- Conventional commits: `feat:`, `fix:`, `docs:`, `style:`, `refactor:`, `test:`
+- Use changesets workflow:
+  - `pnpm version-bump`
+  - `pnpm release`
 
-### Frontend Libraries
-- Vue 3.4+ with Composition API
-- Ant Design Vue / Element Plus for UI components
-- Axios for HTTP requests
-- Pinia for state management
-- Vue Router for navigation
-- Day.js for date handling
-- Marked for markdown processing
+## 10) Tech Stack Snapshot
 
-### Backend Libraries
-- NestJS 10+ with Express
-- TypeORM for database ORM
-- MySQL2 for MySQL connection
-- JWT for authentication
-- Class-validator for DTO validation
-- Socket.io for real-time features
-
-### Development Tools
-- Vite for frontend bundling
-- ESLint + Prettier for code quality
-- Jest for testing
-- Husky for git hooks
-- Changesets for versioning
+- Frontend: Vue 3, React 18/19, Nuxt 3, Ant Design/Element Plus, Tailwind (React apps)
+- Backend: NestJS + Express, TypeORM, MySQL2, JWT, class-validator, socket.io
+- Tooling: pnpm workspace, ESLint, Prettier, Husky, Changesets, Playwright, Jest
+- Observability: Sentry (vite-vue3)

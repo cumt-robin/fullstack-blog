@@ -14,6 +14,16 @@ export interface CategoryCamelCaseDTO extends RecordDTO {
 export interface TagCamelCaseDTO extends RecordDTO {
     tagName: string;
 }
+export interface ArticleOutlineDTO extends PlainObject {
+    id?: number;
+    parent_id?: number | null;
+    title: string;
+    code: string;
+    level: number;
+    order: number;
+    children?: ArticleOutlineDTO[];
+}
+
 export interface ArticleDTO extends RecordDTO {
     article_name: string;
     article_text: string;
@@ -25,6 +35,7 @@ export interface ArticleDTO extends RecordDTO {
     private: 0 | 1;
     tags: TagCamelCaseDTO[];
     categories: CategoryCamelCaseDTO[];
+    outlines?: ArticleOutlineDTO[];
 }
 
 export interface CategoryDTO extends RecordDTO {

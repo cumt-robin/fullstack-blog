@@ -6,59 +6,68 @@
     <base-layout>
         <template #default>
             <a-skeleton :loading="loading" active avatar :paragraph="{ rows: 20 }">
-                <article v-if="article">
-                    <header class="article__header">
-                        <img class="avatar" src="@/assets/img/avatar.jpg" />
-                        <div class="article__infos">
-                            <span class="author">Tusi</span>
-                            <sup class="role-tag">博主</sup>
+                <div class="article-wrapper" v-if="article">
+                    <article>
+                        <header class="article__header">
+                            <img class="avatar" src="@/assets/img/avatar.jpg" />
+                            <div class="article__infos">
+                                <span class="author">Tusi</span>
+                                <sup class="role-tag">博主</sup>
+                                <div>
+                                    <time>发布于{{ formattedTime }}</time>
+                                    <span class="read_total">阅读&nbsp;&nbsp;{{ article.read_num }}</span>
+                                </div>
+                            </div>
+                        </header>
+                        <main class="article__main">
+                            <el-image :src="article.poster" class="article__poster" fit="cover" />
+                            <h2>
+                                {{ article.article_name }}
+                            </h2>
+                            <section
+                                class="md-preview"
+                                v-html="purifiedContent"
+                                @click="onClickRichContent"
+                                @copy="onCopyContent"
+                            ></section>
+                        </main>
+
+                        <div class="copyright">
+                            <p>
+                                本文链接：<a :href="postLink">{{ postLink }}</a>
+                                <br />
+                                版权声明：本文由<strong>Tusi</strong>原创，发表于{{ formattedTime }}，如需转载，请联系作者授权！
+                            </p>
+                        </div>
+
+                        <div class="relation-info">
                             <div>
-                                <time>发布于{{ formattedTime }}</time>
-                                <span class="read_total">阅读&nbsp;&nbsp;{{ article.read_num }}</span>
+                                分类：
+                                <router-link
+                                    v-for="item in article.categories"
+                                    :key="item.id"
+                                    :to="`/category/${encodeURIComponent(item.categoryName)}`"
+                                >
+                                    <a-tag>{{ item.categoryName }}</a-tag>
+                                </router-link>
+                            </div>
+
+                            <div style="margin-top: 20px">
+                                标签：
+                                <router-link v-for="item in article.tags" :key="item.id" :to="`/tag/${encodeURIComponent(item.tagName)}`">
+                                    <a-tag>{{ item.tagName }}</a-tag>
+                                </router-link>
                             </div>
                         </div>
-                    </header>
-                    <main class="article__main">
-                        <el-image :src="article.poster" class="article__poster" fit="cover" />
-                        <h2>
-                            {{ article.article_name }}
-                        </h2>
-                        <section class="md-preview" v-html="purifiedContent" @click="onClickRichContent" @copy="onCopyContent"></section>
-                    </main>
 
-                    <div class="copyright">
-                        <p>
-                            本文链接：<a :href="postLink">{{ postLink }}</a>
-                            <br />
-                            版权声明：本文由<strong>Tusi</strong>原创，发表于{{ formattedTime }}，如需转载，请联系作者授权！
-                        </p>
-                    </div>
-
-                    <div class="relation-info">
-                        <div>
-                            分类：
-                            <router-link
-                                v-for="item in article.categories"
-                                :key="item.id"
-                                :to="`/category/${encodeURIComponent(item.categoryName)}`"
-                            >
-                                <a-tag>{{ item.categoryName }}</a-tag>
-                            </router-link>
+                        <div class="reward__wrapper">
+                            <p class="reward__tips">您的支持将鼓励我继续创作！</p>
+                            <a-button type="primary" @click="isRewardVisible = true">赏</a-button>
                         </div>
+                    </article>
 
-                        <div style="margin-top: 20px">
-                            标签：
-                            <router-link v-for="item in article.tags" :key="item.id" :to="`/tag/${encodeURIComponent(item.tagName)}`">
-                                <a-tag>{{ item.tagName }}</a-tag>
-                            </router-link>
-                        </div>
-                    </div>
-
-                    <div class="reward__wrapper">
-                        <p class="reward__tips">您的支持将鼓励我继续创作！</p>
-                        <a-button type="primary" @click="isRewardVisible = true">赏</a-button>
-                    </div>
-                </article>
+                    <article-toc v-if="article?.outlines?.length" :outlines="article.outlines" />
+                </div>
 
                 <a-empty v-else />
             </a-skeleton>
@@ -110,10 +119,9 @@
     </base-layout>
 </template>
 
-<script>
+<script setup>
 import marked from "marked";
 import mermaid from "mermaid";
-// hljs 按需加载
 import hljs from "highlight.js/lib/core";
 import javascript from "highlight.js/lib/languages/javascript";
 import html from "highlight.js/lib/languages/xml";
@@ -121,11 +129,10 @@ import css from "highlight.js/lib/languages/css";
 import shell from "highlight.js/lib/languages/shell";
 import json from "highlight.js/lib/languages/json";
 import plaintext from "highlight.js/lib/languages/plaintext";
-// 皮肤
 import "highlight.js/styles/atom-one-dark.css";
 import DOMPurify from "dompurify";
 import { useRoute, useRouter } from "vue-router";
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 import { maxBy, minBy } from "lodash-es";
 import { SwapLeftOutlined, SwapRightOutlined, EditOutlined } from "@ant-design/icons-vue";
 import { storeToRefs } from "pinia";
@@ -135,6 +142,11 @@ import { message } from "ant-design-vue";
 import { useAsyncLoading } from "@/hooks/async";
 import Comments from "./comments.vue";
 import { useAuthStore } from "@/stores/auth";
+import ArticleToc from "@/components/article-toc/index.vue";
+
+defineOptions({
+    name: "ArticleDetail",
+});
 
 hljs.registerLanguage("javascript", javascript);
 hljs.registerLanguage("html", html);
@@ -143,199 +155,164 @@ hljs.registerLanguage("shell", shell);
 hljs.registerLanguage("json", json);
 hljs.registerLanguage("plaintext", plaintext);
 
-export default defineComponent({
-    name: "ArticleDetail",
-    components: {
-        SwapLeftOutlined,
-        SwapRightOutlined,
-        EditOutlined,
-        Comments,
-    },
-    setup() {
-        const { isAuthed } = storeToRefs(useAuthStore());
+const { isAuthed } = storeToRefs(useAuthStore());
 
-        // route
-        const route = useRoute();
-        const router = useRouter();
+const route = useRoute();
+const router = useRouter();
 
-        const articleId = computed(() => +route.params.id);
+const articleId = computed(() => +route.params.id);
 
-        const article = ref();
+const article = ref();
 
-        const formattedTime = computed(() => article.value && format(article.value.create_time, "YYYY年M月D日"));
+const formattedTime = computed(() => article.value && format(article.value.create_time, "YYYY年M月D日"));
 
-        const purifiedContent = ref("");
+const purifiedContent = ref("");
 
-        let reportTimer = null;
+let reportTimer = null;
 
-        const getArticleDetail = async () => {
-            const res = await articleService.detail(articleId.value);
+const getArticleDetail = async () => {
+    const res = await articleService.detail(articleId.value);
 
-            article.value = res.data;
+    article.value = res.data;
 
-            const markedContent = marked(res.data.article_text);
+    const markedContent = marked(res.data.article_text);
 
-            // 防XSS
-            purifiedContent.value = DOMPurify.sanitize(markedContent);
+    purifiedContent.value = DOMPurify.sanitize(markedContent);
 
-            startReportTimer();
+    startReportTimer();
 
-            // 此处不能用 await sleep，否则会影响 loading
-            setTimeout(() => {
-                mermaid.initialize({
-                    theme: "default",
-                    startOnLoad: false,
-                });
-
-                mermaid.run();
-            }, 0);
-        };
-
-        const { trigger: getDetail, loading } = useAsyncLoading(getArticleDetail);
-
-        onMounted(() => {
-            setScrollTop();
-            setMarkedOptions();
-            getDetail();
-            getPreAndNexArticle();
+    setTimeout(() => {
+        mermaid.initialize({
+            theme: "default",
+            startOnLoad: false,
         });
 
-        onBeforeUnmount(() => {
-            clearReportTimer();
-        });
+        mermaid.run();
+    }, 0);
+};
 
-        const startReportTimer = () => {
-            reportTimer = setTimeout(() => {
-                articleService.updateReadNum(article.value.id);
-            }, 5000);
-        };
+const { trigger: getDetail, loading } = useAsyncLoading(getArticleDetail);
 
-        const clearReportTimer = () => {
-            if (reportTimer) {
-                clearTimeout(reportTimer);
-                reportTimer = null;
-            }
-        };
-
-        const setMarkedOptions = () => {
-            const renderer = new marked.Renderer();
-            renderer.link = function customLink(href, title, text) {
-                return `<a class="link" rel="nofollow" href="${href}" title="${text}">${text}</a>`;
-            };
-            renderer.image = function customImage(href, title, text) {
-                return `<div class="img-wrapper" title="${text}">
-                    <img src="${href}" alt="${text}">
-                </div>`;
-            };
-            renderer.code = function customCode(code, language) {
-                if (language === "mermaid") {
-                    return `<div class="mermaid">${code}</div>`;
-                }
-                return `<pre><code>${code}</code></pre>`;
-            };
-            marked.setOptions({
-                renderer,
-                highlight(code, lang) {
-                    const language = hljs.getLanguage(lang) ? lang : "plaintext";
-                    return hljs.highlight(code, { language }).value;
-                },
-                pedantic: false,
-                gfm: true,
-                breaks: false,
-                sanitize: false,
-                smartLists: true,
-                smartypants: false,
-                xhtml: false,
-            });
-        };
-
-        const previewImgSrc = ref();
-        const previewRef = ref();
-
-        const onClickRichContent = (e) => {
-            if (e.target.tagName === "A") {
-                e.preventDefault();
-                router.push(`/jumpout/${encodeURIComponent(e.target.href)}`);
-            } else if (e.target.tagName === "IMG") {
-                e.preventDefault();
-                previewImgSrc.value = e.target.src;
-                previewRef.value.$el.nextElementSibling.click();
-            }
-        };
-
-        const onCopyContent = (e) => {
-            const selection = window.getSelection();
-            const selectedText = selection.toString();
-            if (selectedText) {
-                const copyrightInfo = `\n\n作者：Tusi\n链接：${window.location.href}\n来源：Tusi博客\n著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。`;
-                e.clipboardData.setData("text/plain", selectedText + copyrightInfo);
-                e.preventDefault();
-                message.success("复制成功");
-            }
-        };
-
-        // 前后文章
-        const prevArticle = ref();
-        const nextArticle = ref();
-
-        const getPreAndNexArticle = async () => {
-            const res = await articleService.neighbors(articleId.value);
-            const results = res.data;
-            if (results.length > 0) {
-                switch (results.length) {
-                    case 1:
-                        const singleArticle = results[0];
-                        singleArticle.id < articleId.value ? (prevArticle.value = singleArticle) : (nextArticle.value = singleArticle);
-                        break;
-                    case 2:
-                        prevArticle.value = minBy(results, "id");
-                        nextArticle.value = maxBy(results, "id");
-                        break;
-                    default:
-                        break;
-                }
-            }
-        };
-
-        // 赞赏
-        const isRewardVisible = ref(false);
-
-        // 评论
-        const isCommentVisible = ref(false);
-
-        // 修改个人信息
-        const commentsRef = ref();
-        const showUserInfoForm = () => {
-            commentsRef.value.isEditUserInfoVisible = true;
-        };
-
-        // 去编辑页
-        const goToEdit = () => {
-            router.push(`/backend/article/edit/${articleId.value}`);
-        };
-
-        return {
-            isAuthed,
-            article,
-            articleId,
-            purifiedContent,
-            loading,
-            formattedTime,
-            prevArticle,
-            nextArticle,
-            postLink: window.location.href,
-            isRewardVisible,
-            isCommentVisible,
-            commentsRef,
-            showUserInfoForm,
-            goToEdit,
-            onClickRichContent,
-            onCopyContent,
-            previewImgSrc,
-            previewRef,
-        };
-    },
+onMounted(() => {
+    setScrollTop();
+    setMarkedOptions();
+    getDetail();
+    getPreAndNexArticle();
 });
+
+onBeforeUnmount(() => {
+    clearReportTimer();
+});
+
+const startReportTimer = () => {
+    reportTimer = setTimeout(() => {
+        articleService.updateReadNum(article.value.id);
+    }, 5000);
+};
+
+const clearReportTimer = () => {
+    if (reportTimer) {
+        clearTimeout(reportTimer);
+        reportTimer = null;
+    }
+};
+
+const setMarkedOptions = () => {
+    const renderer = new marked.Renderer();
+    renderer.link = function customLink(href, title, text) {
+        return `<a class="link" rel="nofollow" href="${href}" title="${text}">${text}</a>`;
+    };
+    renderer.image = function customImage(href, title, text) {
+        return `<div class="img-wrapper" title="${text}">
+            <img src="${href}" alt="${text}">
+        </div>`;
+    };
+    renderer.code = function customCode(code, language) {
+        if (language === "mermaid") {
+            return `<div class="mermaid">${code}</div>`;
+        }
+        return `<pre><code>${code}</code></pre>`;
+    };
+    renderer.heading = function customHeading(text, level) {
+        return `<h${level} id="${text}">${text}</h${level}>`;
+    };
+    marked.setOptions({
+        renderer,
+        highlight(code, lang) {
+            const language = hljs.getLanguage(lang) ? lang : "plaintext";
+            return hljs.highlight(code, { language }).value;
+        },
+        pedantic: false,
+        gfm: true,
+        breaks: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        xhtml: false,
+    });
+};
+
+const previewImgSrc = ref();
+const previewRef = ref();
+
+const onClickRichContent = (e) => {
+    if (e.target.tagName === "A") {
+        e.preventDefault();
+        router.push(`/jumpout/${encodeURIComponent(e.target.href)}`);
+    } else if (e.target.tagName === "IMG") {
+        e.preventDefault();
+        previewImgSrc.value = e.target.src;
+        previewRef.value.$el.nextElementSibling.click();
+    }
+};
+
+const onCopyContent = (e) => {
+    const selection = window.getSelection();
+    const selectedText = selection.toString();
+    if (selectedText) {
+        const copyrightInfo = `\n\n作者：Tusi\n链接：${window.location.href}\n来源：Tusi博客\n著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。`;
+        e.clipboardData.setData("text/plain", selectedText + copyrightInfo);
+        e.preventDefault();
+        message.success("复制成功");
+    }
+};
+
+const prevArticle = ref();
+const nextArticle = ref();
+
+const getPreAndNexArticle = async () => {
+    const res = await articleService.neighbors(articleId.value);
+    const results = res.data;
+    if (results.length > 0) {
+        switch (results.length) {
+            case 1:
+                const singleArticle = results[0];
+                singleArticle.id < articleId.value ? (prevArticle.value = singleArticle) : (nextArticle.value = singleArticle);
+                break;
+            case 2:
+                prevArticle.value = minBy(results, "id");
+                nextArticle.value = maxBy(results, "id");
+                break;
+            default:
+                break;
+        }
+    }
+};
+
+const isRewardVisible = ref(false);
+
+const isCommentVisible = ref(false);
+
+const commentsRef = ref();
+const showUserInfoForm = () => {
+    commentsRef.value.isEditUserInfoVisible = true;
+};
+
+const goToEdit = () => {
+    router.push(`/backend/article/edit/${articleId.value}`);
+};
+
+const postLink = window.location.href;
 </script>
 
 <style lang="scss" scoped>
@@ -343,6 +320,16 @@ export default defineComponent({
     width: 48px;
     border-radius: 50%;
     vertical-align: middle;
+}
+
+.article-wrapper {
+    display: flex;
+    gap: 24px;
+
+    > article {
+        /* flex项目的默认width是auto，这里设置为0，避免文章内容超出宽度 */
+        min-width: 0;
+    }
 }
 
 .article__infos {
@@ -492,7 +479,7 @@ export default defineComponent({
 }
 
 .pre-next-wrap {
-    margin-top: 10px;
+    margin-top: 48px;
 }
 
 .prev,
@@ -521,19 +508,22 @@ export default defineComponent({
     margin-top: 36px;
 }
 
-@media screen and (width >= 576px) {
+@media screen and (width >=576px) {
     :deep(.article__poster) {
         height: 300px;
     }
 }
 
-@media screen and (width >= 1200px) {
-    :deep(.base-layout__main) {
-        width: 1000px;
-    }
-
+@media screen and (width >=1200px) {
     :deep(.article__poster) {
-        height: 420px;
+        height: 480px;
+    }
+}
+
+@media screen and (width >=1320px) {
+    :deep(.base-layout__main) {
+        width: 1272px;
+        margin: 0 auto;
     }
 }
 </style>
