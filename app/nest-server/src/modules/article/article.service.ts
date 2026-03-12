@@ -1,7 +1,7 @@
 import { Article } from "@/entities/Article";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { DataSource, In, LessThan, Like, MoreThan, Repository } from "typeorm";
+import { DataSource, EntityManager, In, LessThan, Like, MoreThan, Repository } from "typeorm";
 import { GetPageWithKeywordDto, GetPageDto, CreateArticleDto, UpdateArticleDto } from "./dto/article.dto";
 import { InnerException } from "@/exceptions/inner.exception";
 import { AuthService } from "../common/auth.service";
@@ -9,6 +9,8 @@ import { Category } from "@/entities/Category";
 import { ArticleCategory } from "@/entities/ArticleCategory";
 import { Tag } from "@/entities/Tag";
 import { ArticleTag } from "@/entities/ArticleTag";
+import { ArticleOutline } from "@/entities/ArticleOutline";
+import * as crypto from "crypto";
 
 @Injectable()
 export class ArticleService {
@@ -17,6 +19,75 @@ export class ArticleService {
         private readonly authService: AuthService,
         private dataSource: DataSource,
     ) {}
+
+    /**
+     * 计算 outline 的 hash 值
+     */
+    private calculateOutlineHash(outlines: any[]): string {
+        if (!outlines || outlines.length === 0) {
+            return "";
+        }
+        // 将 outlines 序列化为字符串，只包含关键字段用于对比
+        const outlineStr = JSON.stringify(
+            outlines.map((o) => ({
+                title: o.title,
+                code: o.code,
+                level: o.level,
+                order: o.order,
+                parent_id: o.parent_id,
+            })),
+        );
+        return crypto.createHash("md5").update(outlineStr).digest("hex");
+    }
+
+    /**
+     * 保存 outline 数据
+     * 前端传递的 outlines 已经包含 parent_id（使用 order 作为引用），这里需要转换为真实的数据库 ID
+     */
+    private async saveOutlines(manager: EntityManager, articleId: number, outlines: any[]): Promise<void> {
+        if (!outlines || outlines.length === 0) {
+            return;
+        }
+
+        // 先删除该文章的所有旧 outline
+        await manager.delete(ArticleOutline, { article_id: articleId });
+
+        // 按 order 排序，确保按顺序插入
+        const sortedOutlines = [...outlines].sort((a, b) => a.order - b.order);
+        const savedOutlines: ArticleOutline[] = [];
+        const orderToIdMap = new Map<number, number>(); // order -> id 的映射
+
+        // 第一遍：保存所有 outline，parent_id 先设为 null
+        for (const outlineData of sortedOutlines) {
+            const outline = new ArticleOutline();
+            outline.article_id = articleId;
+            outline.title = outlineData.title;
+            outline.code = outlineData.code;
+            outline.level = outlineData.level;
+            outline.order = outlineData.order;
+            outline.parent_id = null; // 先设为 null，第二遍再设置
+
+            const savedOutline = await manager.save(outline);
+            savedOutlines.push(savedOutline);
+            // 建立 order -> id 的映射
+            orderToIdMap.set(outlineData.order, savedOutline.id);
+        }
+
+        // 第二遍：根据前端传递的 parent_id（order 引用）设置真实的 parent_id
+        for (let i = 0; i < savedOutlines.length; i++) {
+            const currentOutline = savedOutlines[i];
+            const outlineData = sortedOutlines[i];
+
+            // 如果前端传递了 parent_id（order 引用），转换为真实的数据库 ID
+            if (outlineData.parent_id !== null && outlineData.parent_id !== undefined) {
+                const parentId = orderToIdMap.get(outlineData.parent_id);
+                if (parentId) {
+                    currentOutline.parent_id = parentId;
+                    await manager.save(currentOutline);
+                }
+            }
+        }
+    }
 
     async getTopRead(count: number) {
         const data = await this.articleRepository.find({
@@ -117,7 +188,18 @@ export class ArticleService {
     async detail(id: number, authorization: string) {
         const data = await this.articleRepository.findOne({
             where: { id },
-            relations: ["categories", "tags", "author"],
+            relations: ["categories", "tags", "author", "outlines"],
+            select: {
+                id: true,
+                article_name: true,
+                article_text: true,
+                create_time: true,
+                update_time: true,
+                read_num: true,
+                like_num: true,
+                summary: true,
+                poster: true,
+            },
         });
         if (!data) {
             throw new InnerException("004001", "文章不存在");
@@ -133,13 +215,27 @@ export class ArticleService {
                 throw new InnerException("000003", "抱歉，您没有权限访问该内容");
             }
         }
+
+        // 直接返回 outlines 的扁平数组，按 order 排序，前端自己处理树形结构
+        const outlines = data.outlines
+            ? [...data.outlines]
+                  .sort((a, b) => a.order - b.order)
+                  .map((outline) => ({
+                      id: outline.id,
+                      title: outline.title,
+                      code: outline.code,
+                      level: outline.level,
+                      parent_id: outline.parent_id,
+                  }))
+            : [];
+
         return {
             data: {
                 ...data,
                 author: data.author.nick_name,
-                author_id: data.author.id,
                 categories: data.categories.map((category) => ({ id: category.id, categoryName: category.category_name })),
                 tags: data.tags.map((tag) => ({ id: tag.id, tagName: tag.tag_name })),
+                outlines,
             },
         };
     }
@@ -191,7 +287,7 @@ export class ArticleService {
     }
 
     async create(body: CreateArticleDto, authorization: string | undefined) {
-        const { articleTitle, articleText, summary, poster, newCategories, oldCategoryIds, tags, private: _private } = body;
+        const { articleTitle, articleText, summary, poster, newCategories, oldCategoryIds, tags, private: _private, outlines } = body;
 
         const currentUser = await this.authService.getCurrentUser(authorization);
 
@@ -204,6 +300,10 @@ export class ArticleService {
             article.poster = poster;
             article.author_id = currentUser.id;
             article.private = _private;
+            // 计算并设置 outline_hash
+            if (outlines && outlines.length > 0) {
+                article.outline_hash = this.calculateOutlineHash(outlines);
+            }
             await manager.save(article);
             const tasks = [];
             // 如果存在新的分类，插入分类表
@@ -261,6 +361,14 @@ export class ArticleService {
                     );
                 });
             }
+
+            // 处理 outline
+            if (outlines && outlines.length > 0) {
+                tasks.push(async () => {
+                    await this.saveOutlines(manager, article.id, outlines);
+                });
+            }
+
             await Promise.all(tasks.map((task) => task()));
         });
     }
@@ -278,6 +386,7 @@ export class ArticleService {
             newTags,
             relatedCategoryIDs,
             private: _private,
+            outlines,
         } = body;
 
         const article = await this.articleRepository.findOneBy({ id });
@@ -286,14 +395,37 @@ export class ArticleService {
         }
 
         await this.dataSource.transaction(async (manager) => {
+            // 检查是否需要更新 outline
+            let needUpdateOutline = false;
+            let newOutlineHash: string | null = null;
+
+            if (outlines && outlines.length > 0) {
+                // 在后端计算 hash
+                newOutlineHash = this.calculateOutlineHash(outlines);
+                // 对比 hash，如果不同则需要更新
+                if (article.outline_hash !== newOutlineHash) {
+                    needUpdateOutline = true;
+                }
+            } else if (outlines && outlines.length === 0) {
+                // 如果 outlines 为空数组，说明要清空
+                if (article.outline_hash) {
+                    needUpdateOutline = true;
+                    newOutlineHash = "";
+                }
+            }
+
             // 更新文章表
-            await manager.update(Article, id, {
+            const updateData: any = {
                 article_name: articleTitle,
                 article_text: articleText,
                 summary,
                 poster,
                 private: _private,
-            });
+            };
+            if (needUpdateOutline) {
+                updateData.outline_hash = newOutlineHash;
+            }
+            await manager.update(Article, id, updateData);
 
             const tasks = [];
 
@@ -361,6 +493,13 @@ export class ArticleService {
                         relatedCategoryIDs.map((id) => ({ article_id: article.id, category_id: id })),
                         ["article_id", "category_id"],
                     );
+                });
+            }
+
+            // 处理 outline（如果需要更新）
+            if (needUpdateOutline) {
+                tasks.push(async () => {
+                    await this.saveOutlines(manager, article.id, outlines || []);
                 });
             }
 
