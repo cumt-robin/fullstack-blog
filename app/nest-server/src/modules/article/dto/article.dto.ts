@@ -1,7 +1,7 @@
 import { Type } from "class-transformer";
 import { BodyPositiveInt } from "@/decorators/body-number.decorator";
 import { QueryPositiveInt } from "@/decorators/query-number.decorator";
-import { ArrayMinSize, IsArray, IsIn, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { ArrayMinSize, IsArray, IsIn, IsNotEmpty, IsOptional, IsString, ValidateNested, IsInt, Min } from "class-validator";
 
 export class GetTopReadDto {
     @QueryPositiveInt()
@@ -60,6 +60,32 @@ export class GetPageWithKeywordDto extends GetPageDto {
     keyword: string;
 }
 
+export class ArticleOutlineDto {
+    @IsOptional()
+    @IsInt()
+    id?: number;
+
+    @IsOptional()
+    @IsInt()
+    parent_id?: number | null;
+
+    @IsString()
+    @IsNotEmpty()
+    title: string;
+
+    @IsString()
+    @IsNotEmpty()
+    code: string;
+
+    @IsInt()
+    @Min(1)
+    level: number;
+
+    @IsInt()
+    @Min(0)
+    order: number;
+}
+
 export class CreateArticleDto {
     @IsString()
     @IsNotEmpty()
@@ -93,6 +119,12 @@ export class CreateArticleDto {
     @IsArray()
     @ArrayMinSize(1)
     tags: string[];
+
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => ArticleOutlineDto)
+    outlines?: ArticleOutlineDto[];
 }
 
 export class UpdateArticleDto {
@@ -143,4 +175,10 @@ export class UpdateArticleDto {
     @IsIn([0, 1, "0", "1"], { message: "必须是0或1" })
     @Type(() => Number)
     private: 0 | 1;
+
+    @IsOptional()
+    @IsArray()
+    @ValidateNested({ each: true })
+    @Type(() => ArticleOutlineDto)
+    outlines?: ArticleOutlineDto[];
 }

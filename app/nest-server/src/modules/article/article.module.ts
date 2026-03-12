@@ -7,9 +7,10 @@ import { Category } from "@/entities/Category";
 import { Tag } from "@/entities/Tag";
 import { ArticleCategory } from "@/entities/ArticleCategory";
 import { ArticleTag } from "@/entities/ArticleTag";
+import { ArticleOutline } from "@/entities/ArticleOutline";
 
 @Module({
-    imports: [TypeOrmModule.forFeature([Article, Category, Tag, ArticleCategory, ArticleTag])],
+    imports: [TypeOrmModule.forFeature([Article, Category, Tag, ArticleCategory, ArticleTag, ArticleOutline])],
     controllers: [ArticleController],
     providers: [ArticleService],
 })

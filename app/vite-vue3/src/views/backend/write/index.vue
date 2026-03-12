@@ -138,7 +138,7 @@ import { message } from "ant-design-vue";
 import { useRoute, useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import { REQUIRED_VALIDATOR_BLUR, sleep } from "@fullstack-blog/utils";
-import { ArticleDTO, CategoryDTO } from "@fullstack-blog/types";
+import { ArticleDTO, CategoryDTO, ArticleOutlineDTO } from "@fullstack-blog/types";
 import { categoryService, articleService, tagService } from "@fullstack-blog/services";
 import { useAsyncLoading } from "@/hooks/async";
 import { useAuthStore } from "@/stores/auth";
@@ -232,14 +232,13 @@ const init = async () => {
             relFormModel.oldCategoryIds = data.categories.map((item) => item.id);
         }
 
-        setTimeout(() => {
-            mermaid.initialize({
-                theme: "default",
-                startOnLoad: false,
-            });
+        await sleep(0);
+        mermaid.initialize({
+            theme: "default",
+            startOnLoad: false,
+        });
 
-            mermaid.run();
-        }, 0);
+        mermaid.run();
     }
 };
 
@@ -248,7 +247,6 @@ const { trigger: triggerInit, loading: initLoading } = useAsyncLoading(init);
 // 直接触发init
 triggerInit();
 
-// markdown处理
 const initMarked = () => {
     // https://marked.js.org/using_advanced
     const renderer = new marked.Renderer();
@@ -302,6 +300,64 @@ const handleRender = async ({ target }: { target: HTMLTextAreaElement }) => {
 };
 
 const onMdContentChange = throttle(handleRender, 300);
+
+// 从 markdown 文本中提取标题并生成 outline（树形结构，扁平化为数组）
+const extractOutlinesFromMarkdown = (markdownText: string): ArticleOutlineDTO[] => {
+    if (!markdownText) {
+        return [];
+    }
+
+    // 使用 marked 的 lexer 拿到 token 流，避免手写正则和代码块误判
+    const tokens = marked.lexer(markdownText);
+    const outlines: ArticleOutlineDTO[] = [];
+    const levelCounters: { [key: number]: number } = {};
+    const parentStack: ArticleOutlineDTO[] = []; // 用于追踪父级
+
+    tokens.forEach((token: { type: string; depth?: number; text?: string }) => {
+        if (token.type === "heading") {
+            const level = token.depth as number; // 1-6
+            const title = (token.text as string).trim();
+
+            // 初始化计数器
+            if (!levelCounters[level]) {
+                levelCounters[level] = 0;
+            }
+            levelCounters[level]++;
+
+            // 重置更深层级的计数器
+            for (let i = level + 1; i <= 6; i++) {
+                levelCounters[i] = 0;
+            }
+
+            // 找到父级：从栈中找到 level 更小的最后一个
+            while (parentStack.length > 0 && parentStack[parentStack.length - 1].level >= level) {
+                parentStack.pop();
+            }
+
+            // order 从 1 开始
+            const currentOrder = outlines.length + 1;
+            const parent = parentStack.length > 0 ? parentStack[parentStack.length - 1] : null;
+
+            // 构建 code：level-sublevel 格式
+            // 例如：1-1, 1-2, 2-1, 2-2, 3-1 等
+            const code = parent ? `${parent.code}-${levelCounters[level]}` : `${level}-${levelCounters[level]}`;
+
+            const outline: ArticleOutlineDTO = {
+                title,
+                code,
+                level,
+                order: currentOrder,
+                // 使用父级的 order 作为临时 parent_id 引用，后端会根据这个来建立关系
+                parent_id: parent !== null ? parent.order : null,
+            };
+
+            outlines.push(outline);
+            parentStack.push(outline);
+        }
+    });
+
+    return outlines;
+};
 
 // 处理关系表
 const isRelationVisible = ref(false);
@@ -462,6 +518,9 @@ const handleConfirmPublish = async () => {
         return Promise.reject(false);
     }
 
+    // 计算 outline
+    const outlines = extractOutlinesFromMarkdown(formModel.articleText);
+
     // 校验通过，开始提交表单
     if (isEdit.value) {
         // 编辑场景
@@ -489,6 +548,7 @@ const handleConfirmPublish = async () => {
             deleteCategoryIDs: deleteCategoryIDs.length > 0 ? deleteCategoryIDs : null,
             newCategories: newCategoryNames.length > 0 ? newCategoryNames : null,
             relatedCategoryIDs: relatedCategoryIDs.length > 0 ? relatedCategoryIDs : null,
+            outlines: outlines.length > 0 ? outlines : null,
         };
         await articleService.update(params);
         message.success("保存成功");
@@ -500,6 +560,7 @@ const handleConfirmPublish = async () => {
             oldCategoryIds: relFormModel.oldCategoryIds.length > 0 ? relFormModel.oldCategoryIds : null,
             tags: tagNames,
             newCategories: newCategoryNames.length > 0 ? newCategoryNames : null,
+            outlines: outlines.length > 0 ? outlines : null,
         };
         await articleService.add(params);
         message.success("创作成功");

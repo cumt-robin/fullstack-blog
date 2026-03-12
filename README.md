@@ -51,7 +51,7 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 ## Features
 
 - 文章分页
-- 文章详情
+- 文章详情，支持TOC目录
 - 热门文章
 - 分类及分类下文章
 - 标签及标签下文章
@@ -63,7 +63,7 @@ Hello，这是[Vue3+TS+Node打造个人博客](https://juejin.cn/column/71774029
 - JWT 认证（新版）
 - Session 认证（旧版）
 - PWA 支持
-- JEST单元测试
+- Jest 单元测试
 - Playwright E2E 测试
 - 后台维护功能：文章管理，创作，评论管理及审核，留言管理及审核，分类管理，标签管理
 
