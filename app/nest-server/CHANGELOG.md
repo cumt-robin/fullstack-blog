@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.1.0
+
+### Minor Changes
+
+- 2caad5f: feat: 支持toc
+
 ## 1.0.7
 
 ### Patch Changes
