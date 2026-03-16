@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.1.2
+
+### Patch Changes
+
+- bad44c0: fix: build deploy报错问题
+
 ## 1.1.1
 
 ### Patch Changes
