@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.4.1
+
+### Patch Changes
+
+- d0acf6e: fix: toc 目录功能 ci actions 修复
+
 ## 1.4.0
 
 ### Minor Changes
