@@ -15,12 +15,14 @@ import { BannerModule } from "./modules/banner/banner.module";
 import { ChatgptModule } from "./modules/chatgpt/chatgpt.module";
 import { ChatModule } from "./modules/chat/chat.module";
 
+const isProduction = process.env.NODE_ENV === "production";
+const migrationExt = isProduction ? "js" : "ts";
+
 @Module({
     imports: [
         CommonModule,
         ConfigModule.forRoot({
             isGlobal: true,
-            // 数组中的第一个文件路径具有最高优先级，依次类推。运行时环境变量优先级更高。
             envFilePath: [".env.development.local", ".env.production.local", ".env"],
         }),
         TypeOrmModule.forRoot({
@@ -31,7 +33,7 @@ import { ChatModule } from "./modules/chat/chat.module";
             password: process.env.MYSQL_ROOT_PASSWORD,
             database: process.env.MYSQL_DATABASE,
             autoLoadEntities: true,
-            migrations: [__dirname + "/migrations/*{.ts,.js}"],
+            migrations: [__dirname + `/migrations/*.${migrationExt}`],
             migrationsRun: true,
         }),
         ArticleModule,

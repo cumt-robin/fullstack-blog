@@ -31,7 +31,7 @@ jobs:
 
     - name: Run Playwright tests
       working-directory: app/vite-vue3
-      run: pnpm test:e2e:ui
+      run: pnpm test:e2e
 
   build:
     needs: [test]

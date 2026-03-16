@@ -2,7 +2,7 @@
     "apps": [
         {
             "name": "blog-nest-server",
-            "script": "dist/src/main.js"
+            "script": "dist/main.js"
         }
     ]
 }

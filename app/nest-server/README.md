@@ -71,7 +71,7 @@ $ pnpm run test:cov
 ### 为什么设计 `typeorm` 基础命令
 
 ```json
-"typeorm": "tsx ./node_modules/typeorm/cli.js --dataSource data-source.ts"
+"typeorm": "tsx ./node_modules/typeorm/cli.js --dataSource src/data-source.ts"
 ```
 
 这个命令设计遵循 **DRY（Don't Repeat Yourself）原则**，作为所有 TypeORM CLI 操作的统一入口。
@@ -84,7 +84,7 @@ $ pnpm run test:cov
 
 2. **简化命令调用**
    - 其他命令通过 `pnpm typeorm` 间接调用，保持简洁
-   - 如 `migration:generate` 实际执行 `tsx ./node_modules/typeorm/cli.js --dataSource data-source.ts migration:generate`
+   - 如 `migration:generate` 实际执行 `tsx ./node_modules/typeorm/cli.js --dataSource src/data-source.ts migration:generate`
 
 3. **便于维护**
    - 修改数据源配置只需改一处
@@ -104,11 +104,11 @@ pnpm migration:generate
     ↓
 调用 "typeorm" 基础命令
     ↓
-tsx ./node_modules/typeorm/cli.js --dataSource data-source.ts
+tsx ./node_modules/typeorm/cli.js --dataSource src/data-source.ts
     ↓
 追加子命令: migration:generate
     ↓
-完整命令: tsx ./node_modules/typeorm/cli.js --dataSource data-source.ts migration:generate
+完整命令: tsx ./node_modules/typeorm/cli.js --dataSource src/data-source.ts migration:generate
 ```
 
 ### 可用命令
