@@ -1,6 +1,6 @@
 {
   "name": "@fullstack-blog/types",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Type definitions for fullstack blog",
   "main": "./src/index.ts",
   "types": "./src/index.ts",

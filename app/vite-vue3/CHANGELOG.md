@@ -1,5 +1,18 @@
 # vite-vue3
 
+## 1.4.0
+
+### Minor Changes
+
+- 2caad5f: feat: 支持toc
+
+### Patch Changes
+
+- Updated dependencies [2caad5f]
+    - @fullstack-blog/types@0.1.0
+    - @fullstack-blog/services@0.0.5
+    - @fullstack-blog/utils@0.0.4
+
 ## 1.3.3
 
 ### Patch Changes

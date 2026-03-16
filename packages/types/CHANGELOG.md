@@ -1,5 +1,11 @@
 # @fullstack-blog/types
 
+## 0.1.0
+
+### Minor Changes
+
+- 2caad5f: feat: 支持toc
+
 ## 0.0.2
 
 ### Patch Changes
