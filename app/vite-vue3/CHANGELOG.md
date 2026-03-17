@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.4.3
+
+### Patch Changes
+
+- f4e468a: fix: 解决nest-server migration问题
+
 ## 1.4.2
 
 ### Patch Changes
