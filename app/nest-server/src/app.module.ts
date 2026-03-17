@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { ConfigModule } from "@nestjs/config";
+import { LoggerOptions } from "typeorm";
 import { TagModule } from "./modules/tag/tag.module";
 import { ArticleModule } from "./modules/article/article.module";
 import { ValidatorModule } from "./modules/validator/validator.module";
@@ -17,13 +18,17 @@ import { ChatModule } from "./modules/chat/chat.module";
 
 const isProduction = process.env.NODE_ENV === "production";
 const migrationExt = isProduction ? "js" : "ts";
+const logging: LoggerOptions = isProduction ? ["error", "warn", "migration"] : ["query", "error", "migration", "warn"];
+const envFilePath = isProduction
+    ? [".env.production.local", ".env.production", ".env"]
+    : [".env.development.local", ".env.development", ".env"];
 
 @Module({
     imports: [
         CommonModule,
         ConfigModule.forRoot({
             isGlobal: true,
-            envFilePath: [".env.development.local", ".env.production.local", ".env"],
+            envFilePath,
         }),
         TypeOrmModule.forRoot({
             type: "mysql",
@@ -35,6 +40,7 @@ const migrationExt = isProduction ? "js" : "ts";
             autoLoadEntities: true,
             migrations: [__dirname + `/migrations/*.${migrationExt}`],
             migrationsRun: true,
+            logging,
         }),
         ArticleModule,
         TagModule,

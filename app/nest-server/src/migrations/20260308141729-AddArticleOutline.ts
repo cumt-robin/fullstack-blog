@@ -82,7 +82,9 @@ export class AddArticleOutline20260308141729 implements MigrationInterface {
         const hasOutlineHashColumn = await queryRunner.query(
             `SELECT COUNT(*) as count FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'article' AND COLUMN_NAME = 'outline_hash'`,
         );
-        if (hasOutlineHashColumn[0].count === 0) {
+        console.log(hasOutlineHashColumn);
+        // 这里的返回值是 [ { count: '0' } ]，需要转换为数字再比较
+        if (Number(hasOutlineHashColumn[0].count) === 0) {
             await queryRunner.query(
                 `ALTER TABLE \`article\` ADD \`outline_hash\` varchar(64) NULL COMMENT '提纲hash，用于对比避免不必要的重建'`,
             );
@@ -91,7 +93,8 @@ export class AddArticleOutline20260308141729 implements MigrationInterface {
         const hasOutlineTable = await queryRunner.query(
             `SELECT COUNT(*) as count FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'article_outline'`,
         );
-        if (hasOutlineTable[0].count === 0) {
+        console.log(hasOutlineTable);
+        if (Number(hasOutlineTable[0].count) === 0) {
             await queryRunner.query(`
                 CREATE TABLE \`article_outline\` (
                     \`id\` int NOT NULL AUTO_INCREMENT,
