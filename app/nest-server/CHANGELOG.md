@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.1.3
+
+### Patch Changes
+
+- f4e468a: fix: 解决nest-server migration问题
+
 ## 1.1.2
 
 ### Patch Changes
