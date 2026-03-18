@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.4.4
+
+### Patch Changes
+
+- ac0225c: fix: e2e测试单独拆分
+
 ## 1.4.3
 
 ### Patch Changes
