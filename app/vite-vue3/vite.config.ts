@@ -4,11 +4,11 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import Components from "unplugin-vue-components/vite";
 import { AntDesignVueResolver, ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { VitePWA } from "vite-plugin-pwa";
-import path from "node:path";
+import { fileURLToPath, URL } from "node:url";
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => {
+export default ({ mode }: { mode: string }) => {
     const { VITE_APP_BASE_API, VITE_APP_BACKEND_SERVER, VITE_APP_SENTRY_ORG, VITE_APP_SENTRY_PROJECT, VITE_APP_SENTRY_TOKEN } = loadEnv(
         mode,
         process.cwd(),
@@ -69,6 +69,53 @@ export default defineConfig(({ mode }) => {
                 },
                 workbox: {
                     globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
+                    runtimeCaching: [
+                        {
+                            urlPattern: /\.(?:js|css|html)$/,
+                            handler: "NetworkFirst",
+                            options: {
+                                cacheName: "static-resources",
+                                networkTimeoutSeconds: 3,
+                                expiration: {
+                                    maxEntries: 100,
+                                    maxAgeSeconds: 60 * 60,
+                                },
+                                cacheableResponse: {
+                                    statuses: [0, 200],
+                                },
+                            },
+                        },
+                        {
+                            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/,
+                            handler: "StaleWhileRevalidate",
+                            options: {
+                                cacheName: "images-cache",
+                                expiration: {
+                                    maxEntries: 200,
+                                    maxAgeSeconds: 60 * 60 * 24 * 7,
+                                },
+                                cacheableResponse: {
+                                    statuses: [0, 200],
+                                },
+                            },
+                        },
+                        {
+                            urlPattern: /\.(?:woff|woff2|ttf|eot)$/,
+                            handler: "CacheFirst",
+                            options: {
+                                cacheName: "fonts-cache",
+                                expiration: {
+                                    maxEntries: 50,
+                                    maxAgeSeconds: 60 * 60 * 24 * 30,
+                                },
+                                cacheableResponse: {
+                                    statuses: [0, 200],
+                                },
+                            },
+                        },
+                    ],
+                    clientsClaim: true,
+                    skipWaiting: true,
                 },
                 devOptions: {
                     enabled: true,
@@ -77,15 +124,11 @@ export default defineConfig(({ mode }) => {
         ],
         resolve: {
             alias: {
-                "@": path.resolve(__dirname, "./src"),
+                "@": fileURLToPath(new URL("./src", import.meta.url)),
             },
         },
         css: {
             preprocessorOptions: {
-                less: {
-                    javascriptEnabled: true,
-                    // additionalData: '@import "@/styles/preload.less";',
-                },
                 scss: {
                     additionalData: '@import "@/styles/preload.scss";',
                 },
@@ -95,4 +138,4 @@ export default defineConfig(({ mode }) => {
             sourcemap: "hidden",
         },
     });
-});
+};

@@ -329,6 +329,7 @@ const postLink = window.location.href;
     > article {
         /* flex项目的默认width是auto，这里设置为0，避免文章内容超出宽度 */
         min-width: 0;
+        flex: 1;
     }
 }
 
@@ -514,7 +515,23 @@ const postLink = window.location.href;
     }
 }
 
+@media screen and (width >= 992px) {
+    :deep(.base-layout__main) {
+        width: 900px;
+    }
+}
+
+@media screen and (width >=1080px) {
+    :deep(.base-layout__main) {
+        width: 980px;
+    }
+}
+
 @media screen and (width >=1200px) {
+    :deep(.base-layout__main) {
+        width: 1080px;
+    }
+
     :deep(.article__poster) {
         height: 480px;
     }
@@ -523,7 +540,6 @@ const postLink = window.location.href;
 @media screen and (width >=1320px) {
     :deep(.base-layout__main) {
         width: 1272px;
-        margin: 0 auto;
     }
 }
 </style>
