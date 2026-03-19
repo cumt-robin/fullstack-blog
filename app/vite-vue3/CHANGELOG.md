@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.4.5
+
+### Patch Changes
+
+- 1f48a61: fix: vite8升级，service worker 缓存优化
+
 ## 1.4.4
 
 ### Patch Changes
