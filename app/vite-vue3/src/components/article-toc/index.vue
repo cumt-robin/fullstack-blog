@@ -131,18 +131,27 @@ onBeforeUnmount(() => {
 .toc-wrapper {
     position: sticky;
     right: 24px;
-    width: 260px;
+    width: 200px;
     flex-shrink: 0;
     max-height: calc(100vh - 120px);
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
     padding: 16px;
+    overflow: auto;
     z-index: 10;
     display: none;
 
     @media screen and (width >= 992px) {
         display: block;
+    }
+
+    @media screen and (width >= 1080px) {
+        width: 248px;
+    }
+
+    @media screen and (width >= 1320px) {
+        width: 260px;
     }
 }
 
