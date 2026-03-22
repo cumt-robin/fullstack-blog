@@ -1,5 +1,11 @@
 # vite-vue3
 
+## 1.5.0
+
+### Minor Changes
+
+- f9d0136: feat: 支持ci环境下执行e2e测试
+
 ## 1.4.5
 
 ### Patch Changes
