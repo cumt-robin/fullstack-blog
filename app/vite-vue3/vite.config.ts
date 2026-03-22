@@ -14,6 +14,16 @@ export default ({ mode }: { mode: string }) => {
         process.cwd(),
     );
     return defineConfig({
+        preview: {
+            proxy: {
+                [VITE_APP_BASE_API]: {
+                    target: VITE_APP_BACKEND_SERVER,
+                    changeOrigin: true,
+                    secure: false,
+                    rewrite: (path) => path.replace(new RegExp(`^${VITE_APP_BASE_API}/`), "/"),
+                },
+            },
+        },
         server: {
             host: "0.0.0.0",
             port: 3000,

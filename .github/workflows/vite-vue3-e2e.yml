@@ -29,8 +29,12 @@ jobs:
       working-directory: app/vite-vue3
       run: npx playwright install --with-deps
 
+    - name: Build for preview
+      working-directory: app/vite-vue3
+      run: pnpm build-for-preview
+
     - name: Run Playwright tests
       working-directory: app/vite-vue3
       env:
         NODE_ENV: production
-      run: pnpm test:e2e
+      run: pnpm test:e2e:ci

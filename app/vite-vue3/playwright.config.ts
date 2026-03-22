@@ -16,14 +16,20 @@ const __dirname = path.dirname(__filename);
  * 3. .env.[mode] - loaded in specific mode (development/production)
  * 4. .env.[mode].local - loaded in specific mode, ignored by git
  */
-const mode = process.env.NODE_ENV || "development";
+const mode = process.env.CI ? "preview" : process.env.NODE_ENV || "development";
 const envFiles = [".env", ".env.local", `.env.${mode}`, `.env.${mode}.local`].filter((file) =>
     fs.existsSync(path.resolve(__dirname, file)),
 );
 
-dotenv.config({
-    path: envFiles.map((file) => path.resolve(__dirname, file)),
+envFiles.forEach((file) => {
+    dotenv.config({
+        path: path.resolve(__dirname, file),
+        override: true,
+    });
 });
+
+// 输出 baseURL
+const port = process.env.CI ? 4173 : 3000;
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -43,10 +49,11 @@ export default defineConfig({
     /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class/testoptions. */
     use: {
         /* Base URL to use in actions like `await page.goto('')`. */
-        baseURL: "http://localhost:3000",
+        baseURL: `http://localhost:${port}`,
 
         /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
         trace: "on-first-retry",
+        serviceWorkers: "block",
     },
 
     /* Configure projects for major browsers */
@@ -59,8 +66,8 @@ export default defineConfig({
 
     /* Run your local dev server before starting the tests */
     webServer: {
-        command: "pnpm dev",
-        url: "http://localhost:3000",
+        command: process.env.CI ? "pnpm preview" : "pnpm dev",
+        port,
         reuseExistingServer: true,
     },
 });
