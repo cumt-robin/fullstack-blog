@@ -1,4 +1,4 @@
-import { Article } from "@/entities/Article";
+﻿import { Article } from "@/entities/Article";
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { DataSource, EntityManager, In, LessThan, Like, MoreThan, Repository } from "typeorm";
@@ -10,6 +10,7 @@ import { ArticleCategory } from "@/entities/ArticleCategory";
 import { Tag } from "@/entities/Tag";
 import { ArticleTag } from "@/entities/ArticleTag";
 import { ArticleOutline } from "@/entities/ArticleOutline";
+import { PushSubscriptionService } from "../push-subscription/push-subscription.service";
 import * as crypto from "crypto";
 
 @Injectable()
@@ -17,17 +18,16 @@ export class ArticleService {
     constructor(
         @InjectRepository(Article) private articleRepository: Repository<Article>,
         private readonly authService: AuthService,
+        private readonly pushSubscriptionService: PushSubscriptionService,
         private dataSource: DataSource,
     ) {}
 
     /**
-     * 计算 outline 的 hash 值
-     */
+     * 璁＄畻 outline 鐨?hash 鍊?     */
     private calculateOutlineHash(outlines: any[]): string {
         if (!outlines || outlines.length === 0) {
             return "";
         }
-        // 将 outlines 序列化为字符串，只包含关键字段用于对比
         const outlineStr = JSON.stringify(
             outlines.map((o) => ({
                 title: o.title,
@@ -41,23 +41,22 @@ export class ArticleService {
     }
 
     /**
-     * 保存 outline 数据
-     * 前端传递的 outlines 已经包含 parent_id（使用 order 作为引用），这里需要转换为真实的数据库 ID
+     * 淇濆瓨 outline 鏁版嵁
+     * 鍓嶇浼犻€掔殑 outlines 宸茬粡鍖呭惈 parent_id锛堜娇鐢?order 浣滀负寮曠敤锛夛紝杩欓噷闇€瑕佽浆鎹负鐪熷疄鐨勬暟鎹簱 ID
      */
     private async saveOutlines(manager: EntityManager, articleId: number, outlines: any[]): Promise<void> {
         if (!outlines || outlines.length === 0) {
             return;
         }
 
-        // 先删除该文章的所有旧 outline
+        // 鍏堝垹闄よ鏂囩珷鐨勬墍鏈夋棫 outline
         await manager.delete(ArticleOutline, { article_id: articleId });
 
-        // 按 order 排序，确保按顺序插入
+        // 鎸?order 鎺掑簭锛岀‘淇濇寜椤哄簭鎻掑叆
         const sortedOutlines = [...outlines].sort((a, b) => a.order - b.order);
         const savedOutlines: ArticleOutline[] = [];
-        const orderToIdMap = new Map<number, number>(); // order -> id 的映射
-
-        // 第一遍：保存所有 outline，parent_id 先设为 null
+        const orderToIdMap = new Map<number, number>(); // order -> id 鐨勬槧灏?
+        // 绗竴閬嶏細淇濆瓨鎵€鏈?outline锛宲arent_id 鍏堣涓?null
         for (const outlineData of sortedOutlines) {
             const outline = new ArticleOutline();
             outline.article_id = articleId;
@@ -65,20 +64,18 @@ export class ArticleService {
             outline.code = outlineData.code;
             outline.level = outlineData.level;
             outline.order = outlineData.order;
-            outline.parent_id = null; // 先设为 null，第二遍再设置
-
+            outline.parent_id = null; // 鍏堣涓?null锛岀浜岄亶鍐嶈缃?
             const savedOutline = await manager.save(outline);
             savedOutlines.push(savedOutline);
-            // 建立 order -> id 的映射
             orderToIdMap.set(outlineData.order, savedOutline.id);
         }
 
-        // 第二遍：根据前端传递的 parent_id（order 引用）设置真实的 parent_id
+        // 绗簩閬嶏細鏍规嵁鍓嶇浼犻€掔殑 parent_id锛坥rder 寮曠敤锛夎缃湡瀹炵殑 parent_id
         for (let i = 0; i < savedOutlines.length; i++) {
             const currentOutline = savedOutlines[i];
             const outlineData = sortedOutlines[i];
 
-            // 如果前端传递了 parent_id（order 引用），转换为真实的数据库 ID
+            // 濡傛灉鍓嶇浼犻€掍簡 parent_id锛坥rder 寮曠敤锛夛紝杞崲涓虹湡瀹炵殑鏁版嵁搴?ID
             if (outlineData.parent_id !== null && outlineData.parent_id !== undefined) {
                 const parentId = orderToIdMap.get(outlineData.parent_id);
                 if (parentId) {
@@ -205,7 +202,7 @@ export class ArticleService {
             throw new InnerException("004001", "文章不存在");
         }
         if (data.private) {
-            // // 如果是私密的，先判断有没有token
+            // // 濡傛灉鏄瀵嗙殑锛屽厛鍒ゆ柇鏈夋病鏈塼oken
             const token = this.authService.extractToken(authorization);
             if (!token) {
                 throw new InnerException("000003", "抱歉，您没有权限访问该内容");
@@ -216,7 +213,6 @@ export class ArticleService {
             }
         }
 
-        // 直接返回 outlines 的扁平数组，按 order 排序，前端自己处理树形结构
         const outlines = data.outlines
             ? [...data.outlines]
                   .sort((a, b) => a.order - b.order)
@@ -290,9 +286,9 @@ export class ArticleService {
         const { articleTitle, articleText, summary, poster, newCategories, oldCategoryIds, tags, private: _private, outlines } = body;
 
         const currentUser = await this.authService.getCurrentUser(authorization);
+        let createdArticleId = 0;
 
         await this.dataSource.transaction(async (manager) => {
-            // 插入文章表
             const article = new Article();
             article.article_name = articleTitle;
             article.article_text = articleText;
@@ -300,15 +296,14 @@ export class ArticleService {
             article.poster = poster;
             article.author_id = currentUser.id;
             article.private = _private;
-            // 计算并设置 outline_hash
             if (outlines && outlines.length > 0) {
                 article.outline_hash = this.calculateOutlineHash(outlines);
             }
             await manager.save(article);
+            createdArticleId = article.id;
             const tasks = [];
-            // 如果存在新的分类，插入分类表
+
             if (newCategories && newCategories.length > 0) {
-                // 插入分类表，得到 ids
                 tasks.push(async () => {
                     const newCategoryIds = await Promise.all(
                         newCategories.map((category) =>
@@ -322,7 +317,6 @@ export class ArticleService {
                             }),
                         ),
                     );
-                    // 插入文章分类关系表
                     await manager.upsert(
                         ArticleCategory,
                         newCategoryIds.map((id) => ({ article_id: article.id, category_id: id })),
@@ -330,7 +324,7 @@ export class ArticleService {
                     );
                 });
             }
-            // 如果选择了旧的分类，插入文章分类关系表
+
             if (oldCategoryIds && oldCategoryIds.length > 0) {
                 tasks.push(async () => {
                     await manager.insert(
@@ -339,7 +333,7 @@ export class ArticleService {
                     );
                 });
             }
-            // 插入标签和关系
+
             if (tags && tags.length > 0) {
                 tasks.push(async () => {
                     const tagIds = await Promise.all(
@@ -362,7 +356,6 @@ export class ArticleService {
                 });
             }
 
-            // 处理 outline
             if (outlines && outlines.length > 0) {
                 tasks.push(async () => {
                     await this.saveOutlines(manager, article.id, outlines);
@@ -370,6 +363,13 @@ export class ArticleService {
             }
 
             await Promise.all(tasks.map((task) => task()));
+        });
+
+        await this.pushSubscriptionService.pushArticle({
+            eventType: "article_created",
+            articleId: createdArticleId,
+            title: articleTitle,
+            summary,
         });
     }
 
@@ -395,26 +395,21 @@ export class ArticleService {
         }
 
         await this.dataSource.transaction(async (manager) => {
-            // 检查是否需要更新 outline
             let needUpdateOutline = false;
             let newOutlineHash: string | null = null;
 
             if (outlines && outlines.length > 0) {
-                // 在后端计算 hash
                 newOutlineHash = this.calculateOutlineHash(outlines);
-                // 对比 hash，如果不同则需要更新
                 if (article.outline_hash !== newOutlineHash) {
                     needUpdateOutline = true;
                 }
             } else if (outlines && outlines.length === 0) {
-                // 如果 outlines 为空数组，说明要清空
                 if (article.outline_hash) {
                     needUpdateOutline = true;
                     newOutlineHash = "";
                 }
             }
 
-            // 更新文章表
             const updateData: any = {
                 article_name: articleTitle,
                 article_text: articleText,
@@ -436,7 +431,6 @@ export class ArticleService {
             }
 
             if (newTags && newTags.length > 0) {
-                // 插入标签和关系
                 tasks.push(async () => {
                     const tagIds = await Promise.all(
                         newTags.map((tag) =>
@@ -496,7 +490,6 @@ export class ArticleService {
                 });
             }
 
-            // 处理 outline（如果需要更新）
             if (needUpdateOutline) {
                 tasks.push(async () => {
                     await this.saveOutlines(manager, article.id, outlines || []);
@@ -504,6 +497,13 @@ export class ArticleService {
             }
 
             await Promise.all(tasks.map((task) => task()));
+        });
+
+        await this.pushSubscriptionService.pushArticle({
+            eventType: "article_updated",
+            articleId: article.id,
+            title: articleTitle || article.article_name,
+            summary: summary || article.summary,
         });
     }
 }

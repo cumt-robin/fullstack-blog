@@ -26,6 +26,13 @@ export class AuthService {
         return payload;
     }
 
+    async verifyIgnoreExpiration(token: string) {
+        return this.jwtService.verifyAsync(token, {
+            secret: this.configService.get("JWT_SECRET"),
+            ignoreExpiration: true,
+        });
+    }
+
     async getCurrentUser(authorization: string | undefined) {
         if (!authorization) {
             throw new ForbiddenException("请先登录");

@@ -15,6 +15,8 @@ import { CommonModule } from "./modules/common/common.module";
 import { BannerModule } from "./modules/banner/banner.module";
 import { ChatgptModule } from "./modules/chatgpt/chatgpt.module";
 import { ChatModule } from "./modules/chat/chat.module";
+import { PushSubscriptionModule } from "./modules/push-subscription/push-subscription.module";
+import { UserSessionModule } from "./modules/user-session/user-session.module";
 
 const isProduction = process.env.NODE_ENV === "production";
 const migrationExt = isProduction ? "js" : "ts";
@@ -52,6 +54,8 @@ const envFilePath = isProduction
         BannerModule,
         ChatgptModule,
         ChatModule,
+        PushSubscriptionModule,
+        UserSessionModule,
     ],
     controllers: [],
     providers: [

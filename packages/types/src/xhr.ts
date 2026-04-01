@@ -37,6 +37,10 @@ export interface LoginModel extends PlainObject {
     captcha: string;
 }
 
+export interface LogoutModel extends PlainObject {
+    // keep empty on purpose, logout now relies on X-Device-Id header
+}
+
 export interface UpdateArticlePrivateModel extends PlainObject {
     id: number;
     private: 0 | 1;
@@ -51,6 +55,25 @@ export interface UpdateCategoryModel extends PlainObject {
     id: number;
     category_name?: string;
     poster?: string;
+}
+
+export type PushPermissionState = "unsupported" | "default" | "denied" | "granted";
+
+export interface PushSubscriptionPayload extends PlainObject {
+    endpoint: string;
+    p256dh: string;
+    auth: string;
+    userAgent?: string;
+}
+
+export interface SubscribePushModel extends PushSubscriptionPayload {}
+
+export interface UnsubscribePushModel extends PlainObject {
+    endpoint: string;
+}
+
+export interface UnbindPushByDeviceModel extends PlainObject {
+    endpoint?: string;
 }
 
 // 响应Model

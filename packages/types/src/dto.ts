@@ -90,3 +90,15 @@ export interface UserDTO extends RecordDTO {
     last_login_time: string;
     token: string;
 }
+
+export type PushEventType = "article_created" | "article_updated";
+
+export interface PushNotificationPayload extends PlainObject {
+    title: string;
+    body: string;
+    url: string;
+    icon?: string;
+    tag?: string;
+    eventType: PushEventType;
+    articleId: number;
+}

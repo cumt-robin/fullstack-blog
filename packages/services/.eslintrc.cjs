@@ -3,6 +3,7 @@ module.exports = {
     env: {
         node: true,
         es6: true,
+        browser: true,
     },
     parser: "@typescript-eslint/parser",
     parserOptions: {
@@ -16,6 +17,15 @@ module.exports = {
         "no-case-declarations": "off",
         "import/order": "warn",
         "import/no-unresolved": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+            "error",
+            {
+                argsIgnorePattern: "^_",
+                varsIgnorePattern: "^_",
+                caughtErrorsIgnorePattern: "^_",
+            },
+        ],
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "@typescript-eslint/no-explicit-any": [2, { ignoreRestArgs: true }],
     },

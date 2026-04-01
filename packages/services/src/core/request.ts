@@ -2,11 +2,12 @@
 /* eslint-disable camelcase */
 import axios from "axios";
 import qs from "qs";
+import { getOrCreateDeviceId } from "./device-id";
 
 enum InnerCode {
     Unauthorized = "000001",
     TokenExpired = "000002",
-    Forbidden = "000003",
+    TokenVerifyFailed = "000004",
 }
 
 export const api = axios.create({
@@ -16,7 +17,7 @@ export const api = axios.create({
 type UseAxiosOptions = {
     baseURL?: string;
     onSessionInvalid?: () => void;
-    onResponseError?: (error: any) => void;
+    onResponseError?: (error: unknown) => void;
     onErrorMsg?: (msg: string) => void;
 };
 
@@ -27,15 +28,17 @@ export const useAxios = (options?: UseAxiosOptions) => {
     }
     // axios初始化配置
     api.defaults.headers.common["Content-Type"] = "application/x-www-form-urlencoded";
-    api.defaults.transformRequest = (data) => {
-        return qs.stringify(data, { encode: true });
-    };
+    api.defaults.transformRequest = (data) => qs.stringify(data, { encode: true });
     api.defaults.withCredentials = true;
 
     api.interceptors.request.use((config) => {
         const token = localStorage.getItem("token");
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
+        }
+        const deviceId = getOrCreateDeviceId();
+        if (deviceId) {
+            config.headers["X-Device-Id"] = deviceId;
         }
         return config;
     });
@@ -53,7 +56,7 @@ export const useAxios = (options?: UseAxiosOptions) => {
             switch (code) {
                 case InnerCode.Unauthorized:
                 case InnerCode.TokenExpired:
-                case InnerCode.Forbidden:
+                case InnerCode.TokenVerifyFailed:
                     onSessionInvalid?.();
                     break;
                 default:
