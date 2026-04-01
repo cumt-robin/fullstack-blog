@@ -78,6 +78,7 @@ export default ({ mode }: { mode: string }) => {
                     ],
                 },
                 workbox: {
+                    importScripts: ["/sw-push.js"],
                     globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
                     runtimeCaching: [
                         {

@@ -6,6 +6,7 @@ import { User } from "@/entities/User";
 import { Role } from "@/entities/Role";
 import { JwtModule } from "@nestjs/jwt";
 import { ConfigService } from "@nestjs/config";
+import { UserSessionModule } from "../user-session/user-session.module";
 
 @Module({
     imports: [
@@ -20,6 +21,7 @@ import { ConfigService } from "@nestjs/config";
                 },
             }),
         }),
+        UserSessionModule,
     ],
     controllers: [UserController],
     providers: [UserService],

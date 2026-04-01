@@ -6,15 +6,17 @@ import { Repository } from "typeorm";
 import { User } from "@/entities/User";
 import { omit } from "lodash";
 import { JwtService } from "@nestjs/jwt";
+import { UserSessionService } from "../user-session/user-session.service";
 
 @Injectable()
 export class UserService {
     constructor(
         @InjectRepository(User) private readonly userRepository: Repository<User>,
         private readonly jwtService: JwtService,
+        private readonly userSessionService: UserSessionService,
     ) {}
 
-    async login(loginDto: LoginDto, sessionCaptcha: string) {
+    async login(loginDto: LoginDto, sessionCaptcha: string, deviceId: string) {
         if (!sessionCaptcha) {
             throw new InnerException("001001", "验证码有误，换一张试试呢");
         }
@@ -39,6 +41,7 @@ export class UserService {
             roleName: user.role.roleName,
         });
         this.userRepository.update(user.id, { last_login_time: new Date() });
+        await this.userSessionService.bindSession(user.id, deviceId);
         return {
             data: {
                 ...omit(user, ["role"]),
@@ -46,5 +49,10 @@ export class UserService {
                 token,
             },
         };
+    }
+
+    async logout(userId: number, deviceId: string) {
+        await this.userSessionService.invalidateByUserAndDevice(userId, deviceId);
+        return {};
     }
 }

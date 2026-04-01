@@ -30,6 +30,7 @@ interface ImportMetaEnv {
     readonly VITE_APP_BASE_API: string;
     readonly VITE_APP_SOCKET_SERVER: string;
     readonly VITE_APP_SENTRY_DSN: string;
+    readonly VITE_APP_WEB_PUSH_PUBLIC_KEY: string;
 }
 
 interface ImportMeta {

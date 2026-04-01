@@ -16,6 +16,9 @@ AUTHOR_EMAIL=xxx
 SITE_URL=https://blog.wbjiang.cn
 OPENAI_API_KEY=xxx
 WEB_SOCKET_WHITE_LIST=http://localhost:3000,http://127.0.0.1:3000
+WEB_PUSH_VAPID_PUBLIC_KEY=xxx
+WEB_PUSH_VAPID_PRIVATE_KEY=xxx
+WEB_PUSH_CONTACT_EMAIL=xxx@example.com
 ```
 
 ## 生产环境见 docker-ops.md

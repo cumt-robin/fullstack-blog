@@ -3,6 +3,7 @@ import { computed, ref } from "vue";
 import { getLocalData } from "@fullstack-blog/utils";
 import { userService } from "@fullstack-blog/services";
 import { CommentUserInfo, UserDTO, LoginModel } from "@fullstack-blog/types";
+import { forceSyncCurrentSubscription } from "@/plugins/push";
 
 export const useAuthStore = defineStore("auth", () => {
     const token = ref(getLocalData({ key: "token" }));
@@ -52,6 +53,11 @@ export const useAuthStore = defineStore("auth", () => {
         const { data } = await userService.login(payload);
         setToken(data.token);
         setUserInfo(data);
+        try {
+            await forceSyncCurrentSubscription();
+        } catch (error) {
+            console.warn("Failed to sync push subscription user after login:", error);
+        }
         return data;
     };
 

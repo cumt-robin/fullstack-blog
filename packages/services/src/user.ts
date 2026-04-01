@@ -2,7 +2,7 @@
  * @author: Tusi
  * @description: 用户服务
  */
-import { LoginModel, RecordResponse, UserDTO } from "@fullstack-blog/types";
+import { LoginModel, LogoutModel, RecordResponse, UserDTO } from "@fullstack-blog/types";
 import { ApiService } from "./core";
 
 class UserService extends ApiService {
@@ -14,8 +14,8 @@ class UserService extends ApiService {
         return this.$get<RecordResponse<UserDTO>>("current");
     }
 
-    public logout() {
-        return this.$put("logout");
+    public logout(params: LogoutModel = {}) {
+        return this.$put("logout", params);
     }
 }
 
