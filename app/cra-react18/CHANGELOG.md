@@ -1,5 +1,14 @@
 # cra-react18
 
+## 1.0.7
+
+### Patch Changes
+
+- Updated dependencies [1d6435f]
+    - @fullstack-blog/services@0.1.0
+    - @fullstack-blog/types@0.2.0
+    - @fullstack-blog/utils@0.0.4
+
 ## 1.0.6
 
 ### Patch Changes

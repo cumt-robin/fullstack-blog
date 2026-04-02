@@ -1,5 +1,17 @@
 # @fullstack-blog/services
 
+## 0.1.0
+
+### Minor Changes
+
+- 1d6435f: add web push subscription support for article notifications
+
+### Patch Changes
+
+- Updated dependencies [1d6435f]
+    - @fullstack-blog/types@0.2.0
+    - @fullstack-blog/utils@0.0.4
+
 ## 0.0.5
 
 ### Patch Changes
