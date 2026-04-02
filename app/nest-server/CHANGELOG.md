@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.2.0
+
+### Minor Changes
+
+- 1d6435f: add web push subscription support for article notifications
+
 ## 1.1.3
 
 ### Patch Changes

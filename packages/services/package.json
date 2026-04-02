@@ -1,6 +1,6 @@
 {
   "name": "@fullstack-blog/services",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "API services for fullstack blog",
   "main": "./src/index.ts",
   "exports": {
