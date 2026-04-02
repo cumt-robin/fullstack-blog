@@ -1,0 +1,4 @@
+﻿interface:
+  display_name: "Changeset Commit Push"
+  short_description: "Create issue branches, changesets, commits, and push."
+  default_prompt: "Use $changeset-cz-push to create issue/<number> from main, infer the changeset and Conventional Commit from the current diff, add fix #<issue>, and push the branch."

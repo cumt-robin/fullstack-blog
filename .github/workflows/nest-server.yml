@@ -4,6 +4,12 @@ on:
   push:
     tags:
       - 'nest-server@*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Nest server image version to deploy, e.g. 1.2.0'
+        required: true
+        type: string
 
 env:
   SSH_PRIVATE_KEY: ${{secrets.SSH_PRIVATE_KEY}}
@@ -16,7 +22,11 @@ jobs:
     steps:
       - id: extract_version
         run: |
-          echo "version=$(echo ${{ github.ref_name }} | sed 's/nest-server@//')" >> $GITHUB_OUTPUT
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=$(echo ${{ github.ref_name }} | sed 's/nest-server@//')" >> $GITHUB_OUTPUT
+          fi
 
   build:
     needs: extract

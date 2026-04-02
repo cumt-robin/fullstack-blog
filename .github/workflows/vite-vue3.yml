@@ -4,10 +4,32 @@ on:
   push:
     tags:
       - 'vite-vue3@*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'vite-vue3 release version to deploy, e.g. 1.6.0'
+        required: true
+        type: string
 
 jobs:
-  build:
+  extract:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.extract_version.outputs.version }}
+    steps:
+      - id: extract_version
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "version=${{ inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=$(echo ${{ github.ref_name }} | sed 's/vite-vue3@//')" >> $GITHUB_OUTPUT
+          fi
+
+  build:
+    needs: extract
+    runs-on: ubuntu-latest
+    env:
+      RELEASE_VERSION: ${{ needs.extract.outputs.version }}
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -29,18 +51,19 @@ jobs:
         VITE_APP_SENTRY_PROJECT: ${{ secrets.VITE_APP_SENTRY_PROJECT }}
         VITE_APP_SENTRY_TOKEN: ${{ secrets.VITE_APP_SENTRY_TOKEN }}
       run: |
+        echo "Building vite-vue3 release ${RELEASE_VERSION}"
         pnpm install --frozen-lockfile
         pnpm vite-vue3:build
 
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: vite-vue3-dist
+        name: vite-vue3-dist-${{ env.RELEASE_VERSION }}
         path: app/vite-vue3/dist
         retention-days: 1
 
   deploy:
-    needs: [build]
+    needs: [extract, build]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -49,7 +72,7 @@ jobs:
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
-          name: vite-vue3-dist
+          name: vite-vue3-dist-${{ needs.extract.outputs.version }}
           path: app/vite-vue3/dist
 
       - name: Upload to Ali OSS
