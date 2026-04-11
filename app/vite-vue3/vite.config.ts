@@ -82,7 +82,8 @@ export default ({ mode }: { mode: string }) => {
                     globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
                     runtimeCaching: [
                         {
-                            urlPattern: /\.(?:js|css|html)$/,
+                            // Keep JS/CSS available via SW without pinning an old HTML entry after deploys.
+                            urlPattern: /\.(?:js|css)$/,
                             handler: "NetworkFirst",
                             options: {
                                 cacheName: "static-resources",
@@ -125,6 +126,7 @@ export default ({ mode }: { mode: string }) => {
                             },
                         },
                     ],
+                    cleanupOutdatedCaches: true,
                     clientsClaim: true,
                     skipWaiting: true,
                 },
