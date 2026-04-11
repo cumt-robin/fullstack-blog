@@ -54,7 +54,7 @@ export class AuthGuard implements CanActivate {
 
         const request = context.switchToHttp().getRequest();
         const deviceId = this.getDeviceId(request);
-        const token = this.authService.extractToken(request.headers.authorization);
+        const token = this.authService.extractTokenFromRequest(request);
 
         if (!token) {
             await this.safeInvalidateByDevice(deviceId);

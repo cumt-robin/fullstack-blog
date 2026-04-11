@@ -21,9 +21,9 @@ const showGuide = computed(() => {
 });
 
 const isPushDebugEnabled = () => {
-    if (!import.meta.env.DEV) {
-        return false;
-    }
+    // if (!import.meta.env.DEV) {
+    //     return false;
+    // }
     return localStorage.getItem(PUSH_DEBUG_FLAG_KEY) === "1";
 };
 

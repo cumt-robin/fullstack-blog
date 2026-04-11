@@ -1,13 +1,17 @@
 import { PublicAccess } from "@/decorators/public-access.decorator";
-import { Body, Controller, Get, Put, Req } from "@nestjs/common";
+import { Body, Controller, Get, Put, Req, Res } from "@nestjs/common";
 import { InnerException } from "@/exceptions/inner.exception";
-import { Request } from "express";
+import { Request, Response } from "express";
 import { LoginDto } from "./dto/login.dto";
 import { UserService } from "./user.service";
+import { AuthService } from "../common/auth.service";
 
 @Controller("user")
 export class UserController {
-    constructor(private readonly userService: UserService) {}
+    constructor(
+        private readonly userService: UserService,
+        private readonly authService: AuthService,
+    ) {}
 
     private getDeviceId(req: Request) {
         const headerValue = req.headers["x-device-id"];
@@ -20,14 +24,21 @@ export class UserController {
 
     @PublicAccess()
     @Put("/login")
-    login(@Body() loginDto: LoginDto, @Req() req: Request) {
+    async login(@Body() loginDto: LoginDto, @Req() req: Request, @Res({ passthrough: true }) res: Response) {
         const sessionCaptcha = req.session.captcha;
-        return this.userService.login(loginDto, sessionCaptcha, this.getDeviceId(req));
+        const result = await this.userService.login(loginDto, sessionCaptcha, this.getDeviceId(req));
+        res.cookie(this.authService.getCookieName(), result.data.token, this.authService.getCookieOptions());
+        return result;
     }
 
     @Put("/logout")
-    logout(@Req() req: Request) {
-        return this.userService.logout(req.currentUser.id, this.getDeviceId(req));
+    async logout(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+        const result = await this.userService.logout(req.currentUser.id, this.getDeviceId(req));
+        res.clearCookie(this.authService.getCookieName(), {
+            ...this.authService.getCookieOptions(),
+            maxAge: undefined,
+        });
+        return result;
     }
 
     @Get("/current")

@@ -6,6 +6,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import * as webpush from "web-push";
 import { Repository } from "typeorm";
 import { SubscribePushDto } from "./dto/push-subscription.dto";
+import { Request } from "express";
 
 export type PushEventType = "article_created" | "article_updated";
 
@@ -50,8 +51,8 @@ export class PushSubscriptionService {
         this.logger.warn("Web Push VAPID env is missing. Push delivery is disabled.");
     }
 
-    private async getOptionalUserId(authorization?: string): Promise<number | null> {
-        const token = this.authService.extractToken(authorization ?? "");
+    private async getOptionalUserId(request: Request): Promise<number | null> {
+        const token = this.authService.extractTokenFromRequest(request);
         if (!token) {
             return null;
         }
@@ -64,8 +65,8 @@ export class PushSubscriptionService {
         }
     }
 
-    async subscribe(body: SubscribePushDto, authorization: string | undefined, deviceId: string) {
-        const userId = await this.getOptionalUserId(authorization);
+    async subscribe(body: SubscribePushDto, request: Request, deviceId: string) {
+        const userId = await this.getOptionalUserId(request);
         const payload = {
             endpoint: body.endpoint,
             p256dh: body.p256dh,

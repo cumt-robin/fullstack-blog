@@ -1,8 +1,9 @@
 import { PublicAccess } from "@/decorators/public-access.decorator";
 import { InnerException } from "@/exceptions/inner.exception";
-import { Body, Controller, Get, Headers, Post, Query } from "@nestjs/common";
+import { Body, Controller, Get, Headers, Post, Query, Req } from "@nestjs/common";
 import { PushSubscriptionAdminPageDto, SubscribePushDto, UnbindPushByDeviceDto, UnsubscribePushDto } from "./dto/push-subscription.dto";
 import { PushSubscriptionService } from "./push-subscription.service";
+import { Request } from "express";
 
 @Controller("push-subscription")
 export class PushSubscriptionController {
@@ -20,10 +21,10 @@ export class PushSubscriptionController {
     @Post("subscribe")
     subscribe(
         @Body() body: SubscribePushDto,
-        @Headers("authorization") authorization: string | undefined,
+        @Req() req: Request,
         @Headers("x-device-id") deviceIdHeader: string | string[] | undefined,
     ) {
-        return this.pushSubscriptionService.subscribe(body, authorization, this.getDeviceId(deviceIdHeader));
+        return this.pushSubscriptionService.subscribe(body, req, this.getDeviceId(deviceIdHeader));
     }
 
     @PublicAccess()

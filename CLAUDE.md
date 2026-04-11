@@ -56,7 +56,7 @@ This is a **pnpm monorepo** (pnpm 9.4.0, Node >=20.19.0) with multiple frontend 
 | `vite-react19` | React 19 + Zustand + Ant Design + Tailwind | Active |
 | `webpack-vue3` | Vue 3 + Webpack + Vuex + SCSS | Alternative |
 | `cra-react18` | React 18 + Redux Toolkit + Tailwind | Alternative |
-| `nuxt3-web` | Nuxt 3 | Experimental |
+| `nuxt4-web` | Nuxt 4 | Experimental |
 | `express-server` | Express | Legacy, not maintained |
 
 ### Shared Packages (`packages/`)

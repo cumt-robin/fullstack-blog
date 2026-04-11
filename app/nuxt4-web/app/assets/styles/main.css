@@ -1,0 +1,233 @@
+:root {
+    --bg: #f6f3eb;
+    --bg-soft: #fffdf8;
+    --surface: #ffffff;
+    --surface-alt: #f1ece1;
+    --text: #24303a;
+    --muted: #62707d;
+    --primary: #0e7490;
+    --primary-strong: #155e75;
+    --border: rgba(36, 48, 58, 0.12);
+    --shadow: 0 18px 40px rgba(27, 39, 49, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background:
+        radial-gradient(circle at top, rgba(14, 116, 144, 0.12), transparent 28%),
+        linear-gradient(180deg, #f8f6f0 0%, #f1ede3 100%);
+    color: var(--text);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+.container {
+    width: min(1100px, calc(100vw - 32px));
+    margin: 0 auto;
+}
+
+.panel {
+    background: color-mix(in srgb, var(--surface) 92%, white);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+
+.muted {
+    color: var(--muted);
+}
+
+.eyebrow {
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: var(--primary);
+}
+
+.empty-state {
+    padding: 48px 20px;
+    text-align: center;
+    color: var(--muted);
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 0;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition:
+        transform 0.16s ease,
+        background 0.16s ease;
+}
+
+.button:hover {
+    background: var(--primary-strong);
+    transform: translateY(-1px);
+}
+
+.button.secondary {
+    background: transparent;
+    color: var(--primary-strong);
+    border: 1px solid color-mix(in srgb, var(--primary) 36%, white);
+}
+
+.field,
+.textarea {
+    width: 100%;
+    border-radius: 16px;
+    border: 1px solid color-mix(in srgb, var(--border) 84%, white);
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--text);
+}
+
+.textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.stack {
+    display: grid;
+    gap: 18px;
+}
+
+.article-grid {
+    display: grid;
+    gap: 20px;
+}
+
+.breadcrumbs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.breadcrumbs span::after {
+    content: "/";
+    margin-left: 8px;
+}
+
+.breadcrumbs span:last-child::after {
+    content: "";
+    margin: 0;
+}
+
+@media (width <= 768px) {
+    .container {
+        width: min(100vw - 20px, 1100px);
+    }
+}
+
+.backend-layout {
+    display: grid;
+    gap: 20px;
+}
+
+.backend-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 14px 18px;
+    align-items: center;
+}
+
+.backend-nav a {
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: color-mix(in srgb, var(--surface-alt) 80%, white);
+    font-size: 14px;
+}
+
+.backend-nav a.router-link-active {
+    background: rgba(14, 116, 144, 0.18);
+    color: var(--primary-strong);
+}
+
+.admin-page-wrapper {
+    padding: 8px 0 24px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--surface);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+}
+
+.data-table th,
+.data-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+}
+
+.data-table th {
+    background: var(--surface-alt);
+    font-weight: 600;
+}
+
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.admin-pagination {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 16px;
+    font-size: 14px;
+}
+
+.button--small {
+    padding: 6px 10px;
+    font-size: 13px;
+}
+
+.button--danger {
+    color: #b91c1c;
+    border-color: rgba(185, 28, 28, 0.35);
+}

@@ -98,6 +98,7 @@ VITE_APP_SENTRY_DSN=https://xxxxx.ingest.us.sentry.io/xxxxx
 VITE_APP_SENTRY_ORG=xxx
 VITE_APP_SENTRY_PROJECT=xxx
 VITE_APP_SENTRY_TOKEN=xxx
+VITE_APP_WEB_PUSH_PUBLIC_KEY=xxx
 ```
 
 项目打包时，如果是在本地打包，由于可以读取到 .env.local 文件，不需要再另外处理；
