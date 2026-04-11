@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.3.0
+
+### Minor Changes
+
+- d2fd4aa: feat: nuxt4 版本；支持 cookie auth
+
 ## 1.2.0
 
 ### Minor Changes
