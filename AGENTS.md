@@ -13,7 +13,7 @@ pnpm vite-vue3:dev
 pnpm webpack-vue3:dev
 pnpm vite-react19:dev
 pnpm cra-react18:dev
-pnpm nuxt3-web:dev
+pnpm nuxt4-web:dev
 pnpm nest-server:dev
 pnpm express-server:dev
 
@@ -34,7 +34,7 @@ fullstack-blog/
 |  |- webpack-vue3
 |  |- vite-react19
 |  |- cra-react18
-|  |- nuxt3-web
+|  |- nuxt4-web
 |  |- nest-server
 |  `- express-server
 `- packages/
@@ -67,7 +67,7 @@ pnpm vite-vue3:build
 pnpm webpack-vue3:build
 pnpm vite-react19:build
 pnpm cra-react18:build
-pnpm nuxt3-web:build
+pnpm nuxt4-web:build
 
 # lint app packages only (./app/**)
 pnpm lint
@@ -91,7 +91,7 @@ pnpm --filter vite-vue3 test:e2e
 pnpm --filter webpack-vue3 build
 pnpm --filter vite-react19 lint
 pnpm --filter cra-react18 test
-pnpm --filter nuxt3-web dev
+pnpm --filter nuxt4-web dev
 
 # backend
 pnpm --filter nest-server dev
@@ -205,7 +205,7 @@ Checklist:
 
 ## 10) Tech Stack Snapshot
 
-- Frontend: Vue 3, React 18/19, Nuxt 3, Ant Design/Element Plus, Tailwind (React apps)
+- Frontend: Vue 3, React 18/19, Nuxt 4, Ant Design/Element Plus, Tailwind (React apps)
 - Backend: NestJS + Express, TypeORM, MySQL2, JWT, class-validator, socket.io
 - Tooling: pnpm workspace, ESLint, Prettier, Husky, Changesets, Playwright, Jest
 - Observability: Sentry (vite-vue3)

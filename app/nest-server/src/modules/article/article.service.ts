@@ -12,6 +12,7 @@ import { ArticleTag } from "@/entities/ArticleTag";
 import { ArticleOutline } from "@/entities/ArticleOutline";
 import { PushSubscriptionService } from "../push-subscription/push-subscription.service";
 import * as crypto from "crypto";
+import { Request } from "express";
 
 @Injectable()
 export class ArticleService {
@@ -182,7 +183,7 @@ export class ArticleService {
         await this.articleRepository.delete(id);
     }
 
-    async detail(id: number, authorization: string) {
+    async detail(id: number, request: Request) {
         const data = await this.articleRepository.findOne({
             where: { id },
             relations: ["categories", "tags", "author", "outlines"],
@@ -203,7 +204,7 @@ export class ArticleService {
         }
         if (data.private) {
             // // 濡傛灉鏄瀵嗙殑锛屽厛鍒ゆ柇鏈夋病鏈塼oken
-            const token = this.authService.extractToken(authorization);
+            const token = this.authService.extractTokenFromRequest(request);
             if (!token) {
                 throw new InnerException("000003", "抱歉，您没有权限访问该内容");
             }

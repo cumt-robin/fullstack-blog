@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, Headers, Post, Put, Query } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Delete, Get, Headers, Post, Put, Query, Req } from "@nestjs/common";
 import { ArticleService } from "./article.service";
 import {
     DeleteDto,
@@ -14,6 +14,7 @@ import {
     UpdateArticleDto,
 } from "./dto/article.dto";
 import { PublicAccess } from "@/decorators/public-access.decorator";
+import { Request } from "express";
 
 @Controller("article")
 export class ArticleController {
@@ -65,8 +66,8 @@ export class ArticleController {
 
     @PublicAccess()
     @Get("/detail")
-    detail(@Query() query: DetailDto, @Headers("authorization") authorization: string | undefined) {
-        return this.articleService.detail(query.id, authorization);
+    detail(@Query() query: DetailDto, @Req() req: Request) {
+        return this.articleService.detail(query.id, req);
     }
 
     @PublicAccess()
