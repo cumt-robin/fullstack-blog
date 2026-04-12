@@ -50,6 +50,7 @@ jobs:
         VITE_APP_SENTRY_ORG: ${{ secrets.VITE_APP_SENTRY_ORG }}
         VITE_APP_SENTRY_PROJECT: ${{ secrets.VITE_APP_SENTRY_PROJECT }}
         VITE_APP_SENTRY_TOKEN: ${{ secrets.VITE_APP_SENTRY_TOKEN }}
+        VITE_APP_WEB_PUSH_PUBLIC_KEY: ${{ secrets.VITE_APP_WEB_PUSH_PUBLIC_KEY }}
       run: |
         echo "Building vite-vue3 release ${RELEASE_VERSION}"
         pnpm install --frozen-lockfile
