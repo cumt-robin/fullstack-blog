@@ -163,8 +163,8 @@ export class PushSubscriptionService {
     }
 
     private toNotificationPayload(payload: PushArticlePayload): PushNotificationPayload {
-        const title = payload.eventType === "article_created" ? `�����·�����${payload.title}` : `�����Ѹ��£�${payload.title}`;
-        const body = payload.summary || "����鿴��������";
+        const title = payload.eventType === "article_created" ? `新文章发布：${payload.title}` : `文章更新：${payload.title}`;
+        const body = payload.summary || "点击查看详情";
         return {
             title,
             body,

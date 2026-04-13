@@ -24,7 +24,8 @@ export class ArticleService {
     ) {}
 
     /**
-     * 璁＄畻 outline 鐨?hash 鍊?     */
+     * 计算 outline 的 hash 值
+     */
     private calculateOutlineHash(outlines: any[]): string {
         if (!outlines || outlines.length === 0) {
             return "";
@@ -42,22 +43,22 @@ export class ArticleService {
     }
 
     /**
-     * 淇濆瓨 outline 鏁版嵁
-     * 鍓嶇浼犻€掔殑 outlines 宸茬粡鍖呭惈 parent_id锛堜娇鐢?order 浣滀负寮曠敤锛夛紝杩欓噷闇€瑕佽浆鎹负鐪熷疄鐨勬暟鎹簱 ID
+     * 保存 outline 数据
+     * 前端传递的 outlines 已经包含 parent_id（使用 order 作为临时值），这里需要转换为实际的数据库 ID
      */
     private async saveOutlines(manager: EntityManager, articleId: number, outlines: any[]): Promise<void> {
         if (!outlines || outlines.length === 0) {
             return;
         }
 
-        // 鍏堝垹闄よ鏂囩珷鐨勬墍鏈夋棫 outline
+        // 先删除该文章的所有旧 outline
         await manager.delete(ArticleOutline, { article_id: articleId });
 
-        // 鎸?order 鎺掑簭锛岀‘淇濇寜椤哄簭鎻掑叆
+        // 按 order 排序，确保按顺序插入
         const sortedOutlines = [...outlines].sort((a, b) => a.order - b.order);
         const savedOutlines: ArticleOutline[] = [];
-        const orderToIdMap = new Map<number, number>(); // order -> id 鐨勬槧灏?
-        // 绗竴閬嶏細淇濆瓨鎵€鏈?outline锛宲arent_id 鍏堣涓?null
+        const orderToIdMap = new Map<number, number>(); // order -> id 的映射
+        // 第一轮：保存所有 outline，parent_id 先设为 null
         for (const outlineData of sortedOutlines) {
             const outline = new ArticleOutline();
             outline.article_id = articleId;
@@ -65,18 +66,18 @@ export class ArticleService {
             outline.code = outlineData.code;
             outline.level = outlineData.level;
             outline.order = outlineData.order;
-            outline.parent_id = null; // 鍏堣涓?null锛岀浜岄亶鍐嶈缃?
+            outline.parent_id = null; // 先设为 null，第二轮再设置
             const savedOutline = await manager.save(outline);
             savedOutlines.push(savedOutline);
             orderToIdMap.set(outlineData.order, savedOutline.id);
         }
 
-        // 绗簩閬嶏細鏍规嵁鍓嶇浼犻€掔殑 parent_id锛坥rder 寮曠敤锛夎缃湡瀹炵殑 parent_id
+        // 第二轮：根据前端传递的 parent_id（使用 order 临时值）设置实际的 parent_id
         for (let i = 0; i < savedOutlines.length; i++) {
             const currentOutline = savedOutlines[i];
             const outlineData = sortedOutlines[i];
 
-            // 濡傛灉鍓嶇浼犻€掍簡 parent_id锛坥rder 寮曠敤锛夛紝杞崲涓虹湡瀹炵殑鏁版嵁搴?ID
+            // 如果前端传递了 parent_id（使用 order 临时值），转换为实际的数据库 ID
             if (outlineData.parent_id !== null && outlineData.parent_id !== undefined) {
                 const parentId = orderToIdMap.get(outlineData.parent_id);
                 if (parentId) {
@@ -203,7 +204,7 @@ export class ArticleService {
             throw new InnerException("004001", "文章不存在");
         }
         if (data.private) {
-            // // 濡傛灉鏄瀵嗙殑锛屽厛鍒ゆ柇鏈夋病鏈塼oken
+            // 如果是私密的，先判断有没有token
             const token = this.authService.extractTokenFromRequest(request);
             if (!token) {
                 throw new InnerException("000003", "抱歉，您没有权限访问该内容");
@@ -366,12 +367,18 @@ export class ArticleService {
             await Promise.all(tasks.map((task) => task()));
         });
 
-        await this.pushSubscriptionService.pushArticle({
-            eventType: "article_created",
-            articleId: createdArticleId,
-            title: articleTitle,
-            summary,
-        });
+        // 异步执行推送，不阻塞接口响应
+        this.pushSubscriptionService
+            .pushArticle({
+                eventType: "article_created",
+                articleId: createdArticleId,
+                title: articleTitle,
+                summary,
+            })
+            .catch((error) => {
+                // 记录错误但不影响接口响应
+                console.error("Push notification failed:", error);
+            });
     }
 
     async update(body: UpdateArticleDto) {
@@ -500,11 +507,17 @@ export class ArticleService {
             await Promise.all(tasks.map((task) => task()));
         });
 
-        await this.pushSubscriptionService.pushArticle({
-            eventType: "article_updated",
-            articleId: article.id,
-            title: articleTitle || article.article_name,
-            summary: summary || article.summary,
-        });
+        // 异步执行推送，不阻塞接口响应
+        this.pushSubscriptionService
+            .pushArticle({
+                eventType: "article_updated",
+                articleId: article.id,
+                title: articleTitle || article.article_name,
+                summary: summary || article.summary,
+            })
+            .catch((error) => {
+                // 记录错误但不影响接口响应
+                console.error("Push notification failed:", error);
+            });
     }
 }
