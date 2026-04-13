@@ -1,5 +1,11 @@
 # nest-server
 
+## 1.3.1
+
+### Patch Changes
+
+- 5d1b9fe: fix: 修复乱码问题
+
 ## 1.3.0
 
 ### Minor Changes
