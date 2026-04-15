@@ -1,5 +1,12 @@
 # nest-server
 
+## 1.3.2
+
+### Patch Changes
+
+- d0151da: fix: 修复乱码问题
+- 09aa7ae: fix: 补充日志观察
+
 ## 1.3.1
 
 ### Patch Changes
