@@ -182,6 +182,11 @@ export class PushSubscriptionService {
     }
 
     private async sendWithRetry(target: PushSubscription, payload: string): Promise<void> {
+        const isChrome = target.endpoint.includes("fcm.googleapis.com");
+        const endpointPreview = target.endpoint.substring(0, 50);
+
+        this.logger.log(`Sending push to ${isChrome ? "Chrome" : "Other browser"}: ${endpointPreview}...`);
+
         try {
             await webpush.sendNotification(
                 {
@@ -193,6 +198,9 @@ export class PushSubscriptionService {
                 },
                 payload,
             );
+
+            this.logger.log(`Push sent successfully to ${isChrome ? "Chrome" : "Other browser"}: ${endpointPreview}...`);
+
             await this.pushSubscriptionRepository.update(
                 { id: target.id },
                 {
@@ -204,7 +212,14 @@ export class PushSubscriptionService {
             );
         } catch (error) {
             const statusCode = (error as { statusCode?: number })?.statusCode;
+            const errorMessage = (error as Error)?.message || "unknown_error";
+
+            this.logger.warn(
+                `Push failed for ${isChrome ? "Chrome" : "Other browser"}: ${errorMessage} (statusCode: ${statusCode || "N/A"}) for ${endpointPreview}...`,
+            );
+
             if (statusCode === 404 || statusCode === 410) {
+                this.logger.warn(`Invalid endpoint for ${isChrome ? "Chrome" : "Other browser"}: ${endpointPreview}...`);
                 await this.pushSubscriptionRepository.update(
                     { id: target.id },
                     {
@@ -217,6 +232,7 @@ export class PushSubscriptionService {
             }
 
             if (this.shouldRetry(error)) {
+                this.logger.log(`Retrying push for ${isChrome ? "Chrome" : "Other browser"}: ${endpointPreview}...`);
                 await new Promise((resolve) => setTimeout(resolve, 1000));
                 try {
                     await webpush.sendNotification(
@@ -229,6 +245,9 @@ export class PushSubscriptionService {
                         },
                         payload,
                     );
+
+                    this.logger.log(`Retry push succeeded for ${isChrome ? "Chrome" : "Other browser"}: ${endpointPreview}...`);
+
                     await this.pushSubscriptionRepository.update(
                         { id: target.id },
                         {
@@ -240,23 +259,43 @@ export class PushSubscriptionService {
                     );
                     return;
                 } catch (retryError) {
-                    this.logger.warn(`Retry send push failed: ${(retryError as Error).message}`);
+                    const retryStatusCode = (retryError as { statusCode?: number })?.statusCode;
+                    const retryErrorMessage = (retryError as Error)?.message || "unknown_error";
+                    this.logger.warn(
+                        `Retry send push failed for ${isChrome ? "Chrome" : "Other browser"}: ${retryErrorMessage} (statusCode: ${retryStatusCode || "N/A"}) for ${endpointPreview}...`,
+                    );
                     await this.pushSubscriptionRepository.update(
                         { id: target.id },
                         {
                             last_error_at: new Date(),
-                            error_reason: `retry_failed_${(retryError as { statusCode?: number })?.statusCode || "unknown"}`,
+                            error_reason: `retry_failed_${retryStatusCode || "unknown"}`,
                         },
                     );
                     return;
                 }
             }
 
+            // 提供更具体的错误原因
+            let errorReason: string;
+            if (statusCode) {
+                errorReason = `send_failed_${statusCode}`;
+            } else if (errorMessage.includes("network")) {
+                errorReason = "send_failed_network";
+            } else if (errorMessage.includes("timeout")) {
+                errorReason = "send_failed_timeout";
+            } else if (errorMessage.includes("permission")) {
+                errorReason = "send_failed_permission";
+            } else {
+                errorReason = "send_failed_unknown";
+            }
+
+            this.logger.warn(`Final push error for ${isChrome ? "Chrome" : "Other browser"}: ${errorReason} for ${endpointPreview}...`);
+
             await this.pushSubscriptionRepository.update(
                 { id: target.id },
                 {
                     last_error_at: new Date(),
-                    error_reason: `send_failed_${statusCode || "unknown"}`,
+                    error_reason: errorReason,
                 },
             );
         }
@@ -264,17 +303,30 @@ export class PushSubscriptionService {
 
     async pushArticle(payload: PushArticlePayload) {
         if (!this.isWebPushConfigured) {
+            this.logger.log("Web push not configured, skipping push");
             return;
         }
+
         const targets = await this.pushSubscriptionRepository.find({
             where: { status: 1 },
             select: ["id", "endpoint", "p256dh", "auth"],
         });
+
+        this.logger.log(`Found ${targets.length} active push subscriptions`);
+
         if (targets.length === 0) {
+            this.logger.log("No active push subscriptions, skipping push");
             return;
         }
 
         const notificationPayload = JSON.stringify(this.toNotificationPayload(payload));
-        await Promise.allSettled(targets.map((target) => this.sendWithRetry(target, notificationPayload)));
+        this.logger.log(`Sending push notification for ${payload.eventType} event: ${payload.title}`);
+
+        const results = await Promise.allSettled(targets.map((target) => this.sendWithRetry(target, notificationPayload)));
+
+        const successCount = results.filter((result) => result.status === "fulfilled").length;
+        const failureCount = results.filter((result) => result.status === "rejected").length;
+
+        this.logger.log(`Push completed: ${successCount} success, ${failureCount} failure`);
     }
 }

@@ -19,11 +19,7 @@ export class PushSubscriptionController {
 
     @PublicAccess()
     @Post("subscribe")
-    subscribe(
-        @Body() body: SubscribePushDto,
-        @Req() req: Request,
-        @Headers("x-device-id") deviceIdHeader: string | string[] | undefined,
-    ) {
+    subscribe(@Body() body: SubscribePushDto, @Req() req: Request, @Headers("x-device-id") deviceIdHeader: string | string[] | undefined) {
         return this.pushSubscriptionService.subscribe(body, req, this.getDeviceId(deviceIdHeader));
     }
 
