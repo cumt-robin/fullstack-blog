@@ -197,6 +197,9 @@ export class PushSubscriptionService {
                     },
                 },
                 payload,
+                {
+                    TTL: 3600,
+                },
             );
 
             this.logger.log(`Push sent successfully to ${isChrome ? "Chrome" : "Other browser"}: ${endpointPreview}...`);
@@ -213,10 +216,17 @@ export class PushSubscriptionService {
         } catch (error) {
             const statusCode = (error as { statusCode?: number })?.statusCode;
             const errorMessage = (error as Error)?.message || "unknown_error";
+            const errorStack = (error as Error)?.stack || "";
+            const errorBody = (error as { body?: string })?.body || "";
 
             this.logger.warn(
                 `Push failed for ${isChrome ? "Chrome" : "Other browser"}: ${errorMessage} (statusCode: ${statusCode || "N/A"}) for ${endpointPreview}...`,
             );
+
+            if (isChrome) {
+                this.logger.warn(`Chrome push error details - body: ${errorBody}`);
+                this.logger.warn(`Chrome push error stack: ${errorStack}`);
+            }
 
             if (statusCode === 404 || statusCode === 410) {
                 this.logger.warn(`Invalid endpoint for ${isChrome ? "Chrome" : "Other browser"}: ${endpointPreview}...`);
@@ -244,6 +254,9 @@ export class PushSubscriptionService {
                             },
                         },
                         payload,
+                        {
+                            TTL: 3600,
+                        },
                     );
 
                     this.logger.log(`Retry push succeeded for ${isChrome ? "Chrome" : "Other browser"}: ${endpointPreview}...`);
